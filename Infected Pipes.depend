@@ -18,7 +18,7 @@
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1378050750 source:c:\users\xaychru04\desktop\infected pipes\ip.cpp
+1378067005 source:c:\users\xaychru04\desktop\infected pipes\ip.cpp
 	"IP.h"
 	"Renderer.h"
 	"TextureLoader.h"
@@ -39,7 +39,7 @@
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1378060031 source:c:\users\xaychru04\desktop\infected pipes\map.cpp
+1378065275 source:c:\users\xaychru04\desktop\infected pipes\map.cpp
 	"Map.h"
 	"IP.h"
 	"TextureLoader.h"
@@ -91,27 +91,28 @@
 	"GameEntity.h"
 	"Map.h"
 
-1378057496 source:c:\users\xaychru04\desktop\infected pipes\player.cpp
+1378066913 source:c:\users\xaychru04\desktop\infected pipes\player.cpp
 	"Player.h"
 	"IP.h"
 	"Character.h"
 	"Renderer.h"
 	"Map.h"
+	"MathHelper.h"
 
 1378042646 c:\users\xaychru04\desktop\infected pipes\player.h
 	<iostream>
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1378041661 c:\users\xaychru04\desktop\infected pipes\mathhelper.h
+1378066726 c:\users\xaychru04\desktop\infected pipes\mathhelper.h
 	<iostream>
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1378041661 source:c:\users\xaychru04\desktop\infected pipes\mathhelper.cpp
+1378066726 source:c:\users\xaychru04\desktop\infected pipes\mathhelper.cpp
 	"MathHelper.h"
 
-1378060138 source:c:\users\xaychru04\desktop\infected pipes\level.cpp
+1378065244 source:c:\users\xaychru04\desktop\infected pipes\level.cpp
 	"Level.h"
 	"IP.h"
 	"Map.h"

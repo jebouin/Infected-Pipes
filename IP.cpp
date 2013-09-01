@@ -20,10 +20,10 @@ IP::IP() {
             if(e.type == sf::Event::Closed) {
                 _window->close();
             }
-            if(e.type == sf::Event::Resized) {
+            /*if(e.type == sf::Event::Resized) {
                 _renderer = new Renderer(sf::Vector2i(sf::Vector2f(e.size.width, e.size.height)/4.f), 4);
                 _player->SetView(sf::View(sf::FloatRect(0, 0, _renderer->GetTexture().getSize().x, _renderer->GetTexture().getSize().y)));
-            }
+            }*/
         }
 
         Update();

@@ -34,8 +34,20 @@ Map::~Map() {
 void Map::Draw(IP& ip) {
     for(int i=0 ; i<_size.x ; i++) {
         for(int j=0 ; j<_size.y ; j++) {
+            sf::Vector2i pos(i, j);
+            int tileX = 0;
+            if(GetTile(pos) == 1) {
+                if(GetTile(sf::Vector2i(pos.x, pos.y-1)) == 2) {
+                    tileX = 1;
+                    if(GetTile(sf::Vector2i(pos.x+1, pos.y-1)) == 1) {
+                        tileX = 3;
+                    } else if(GetTile(sf::Vector2i(pos.x-1, pos.y-1)) == 1) {
+                        tileX = 2;
+                    }
+                }
+            }
             _tileset.setPosition(sf::Vector2f(i, j)*16.f);
-            _tileset.setTextureRect(sf::IntRect(0, GetTile(sf::Vector2i(i, j))*16, 16, 16));
+            _tileset.setTextureRect(sf::IntRect(tileX*16, GetTile(pos)*16, 16, 16));
             ip._renderer->Draw(_tileset);
         }
     }

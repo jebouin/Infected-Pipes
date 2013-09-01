@@ -15,6 +15,7 @@ class MathHelper {
     static int RandInt(int min, int max);
     static float RandFloat(float min, float max);
     static vector<sf::Vector2f> Rect2Corners(sf::FloatRect rect);
+    static sf::FloatRect View2Rect(sf::View& view);
 };
 
 #endif // MATHHELPER_H_INCLUDED

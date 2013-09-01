@@ -15,6 +15,8 @@ Level::Level(IP& ip) {
                 _map->SetTile(pos, 0);
             } else if(c == sf::Color(122, 137, 60)) {
                 _map->SetTile(pos, 1);
+            } else if(c == sf::Color(104, 99, 46)) {
+                _map->SetTile(pos, 2);
             }
         }
     }
