@@ -1,0 +1,45 @@
+# depslib dependency file v1.0
+1377984451 source:c:\users\xaychru04\desktop\infected pipes\main.cpp
+	<iostream>
+	"ctime"
+	"cstdlib"
+	"SFML/Graphics.hpp"
+	"SFML/System.hpp"
+	"IP.h"
+
+1378022512 source:c:\users\xaychru04\desktop\infected pipes\renderer.cpp
+	"Renderer.h"
+
+1378017110 c:\users\xaychru04\desktop\infected pipes\renderer.h
+	"SFML/Graphics.hpp"
+	"SFML/System.hpp"
+
+1378021523 c:\users\xaychru04\desktop\infected pipes\ip.h
+	"SFML/Graphics.hpp"
+	"SFML/System.hpp"
+
+1378022435 source:c:\users\xaychru04\desktop\infected pipes\ip.cpp
+	"IP.h"
+	"Renderer.h"
+	"TextureLoader.h"
+	"Map.h"
+
+1378021701 source:c:\users\xaychru04\desktop\infected pipes\textureloader.cpp
+	"TextureLoader.h"
+
+1378019896 c:\users\xaychru04\desktop\infected pipes\textureloader.h
+	<map>
+	"SFML/Graphics.hpp"
+	"SFML/System.hpp"
+
+1378021530 c:\users\xaychru04\desktop\infected pipes\map.h
+	<vector>
+	"SFML/Graphics.hpp"
+	"SFML/System.hpp"
+
+1378021582 source:c:\users\xaychru04\desktop\infected pipes\map.cpp
+	"Map.h"
+	"IP.h"
+	"TextureLoader.h"
+	"Renderer.h"
+
