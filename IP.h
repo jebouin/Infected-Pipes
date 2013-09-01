@@ -6,7 +6,7 @@
 
 class Renderer;
 class TextureLoader;
-class Map;
+class Level;
 class EntityManager;
 class Player;
 
@@ -23,7 +23,7 @@ class IP {
     private:
     sf::Clock _clock;
     sf::RenderWindow *_window;
-    Map *_map;
+    Level *_level;
     EntityManager *_entityManager;
     Player *_player;
 };

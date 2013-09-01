@@ -40,7 +40,7 @@ Renderer::~Renderer() {
 }
 
 void Renderer::Clear() {
-    _texture->clear();
+    _texture->clear(sf::Color(31, 23, 53));
 }
 
 void Renderer::Draw(const sf::Drawable& drawable) {

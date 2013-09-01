@@ -3,6 +3,8 @@
 TextureLoader::TextureLoader() {
     AddTexture("tileset.png", "tileset");
     AddTexture("character.png", "character");
+    AddTexture("level.png", "level");
+    AddTexture("pipe.png", "pipe");
 }
 
 TextureLoader::~TextureLoader() {

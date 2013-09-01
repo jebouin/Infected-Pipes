@@ -5,9 +5,9 @@
 #include "MathHelper.h"
 #include "MovingSprite.h"
 
-Map::Map(IP& ip) {
+Map::Map(IP& ip, sf::Vector2i size) {
     _tileset.setTexture(ip._textureLoader->GetTexture("tileset"));
-    _size = sf::Vector2i(16, 16);
+    _size = size;
     _tiles = vector<vector<int> >(_size.x, vector<int>(_size.y, 0));
     for(int i=0 ; i<_size.x ; i++) {
         for(int j=0 ; j<_size.y ; j++) {
@@ -52,6 +52,10 @@ int Map::GetTile(sf::Vector2i pos) {
     return _tiles[pos.x][pos.y];
 }
 
+sf::Vector2i Map::GetSize() {
+    return _size;
+}
+
 void Map::SetTile(sf::Vector2i pos, int id) {
     if(!IsOnMap(pos)) {
         return;
@@ -61,10 +65,29 @@ void Map::SetTile(sf::Vector2i pos, int id) {
 
 bool Map::IsCollided(sf::FloatRect rect) {
     vector<sf::Vector2f> corners = MathHelper::Rect2Corners(rect);
-    for(int i=0 ; i<4 ; i++) {
+    /*for(int i=0 ; i<4 ; i++) {
         if(GetTile(sf::Vector2i(corners[i]/16.f)) == 1) {
             return true;
         }
+    }*/
+    for(float i=corners[0].x ; i<corners[1].x ; i+=8) {
+        if(GetTile(sf::Vector2i(sf::Vector2f(i, corners[0].y)/16.f)) == 1) {
+            return true;
+        }
+        if(GetTile(sf::Vector2i(sf::Vector2f(i, corners[2].y)/16.f)) == 1) {
+            return true;
+        }
+    }
+    for(float i=corners[0].y ; i<corners[2].y ; i+=8) {
+        if(GetTile(sf::Vector2i(sf::Vector2f(corners[0].x, i)/16.f)) == 1) {
+            return true;
+        }
+        if(GetTile(sf::Vector2i(sf::Vector2f(corners[2].x, i)/16.f)) == 1) {
+            return true;
+        }
+    }
+    if(GetTile(sf::Vector2i(sf::Vector2f(corners[2])/16.f)) == 1) {
+        return true;
     }
     return false;
 }
@@ -75,4 +98,16 @@ bool Map::IsCollided(MovingSprite& sprite, sf::Vector2f pos) {
 
 bool Map::IsCollided(MovingSprite& sprite) {
     return IsCollided(sprite.getGlobalBounds());
+}
+
+bool Map::IsOnGround(MovingSprite& sprite) {
+    for(float i=0 ; i<sprite.getGlobalBounds().width ; i+=8) {
+        if(GetTile(sf::Vector2i(sf::Vector2f(sprite.getGlobalBounds().left+i, sprite.getGlobalBounds().top+sprite.getGlobalBounds().height+1)/16.f)) == 1) {
+            return true;
+        }
+    }
+    if(GetTile(sf::Vector2i(sf::Vector2f(sprite.getGlobalBounds().left+sprite.getGlobalBounds().width, sprite.getGlobalBounds().top+sprite.getGlobalBounds().height+1)/16.f)) == 1) {
+        return true;
+    }
+    return false;
 }

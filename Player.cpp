@@ -18,16 +18,13 @@ Player::~Player() {
 void Player::Update(IP& ip, float eTime, Map& map) {
     float speed = 0.0005f;
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-        _character->Accelerate(sf::Vector2f(speed, 0), eTime);
+        _character->GoRight(eTime);
     }
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Q)) {
-        _character->Accelerate(sf::Vector2f(-speed, 0), eTime);
+        _character->GoLeft(eTime);
     }
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Z)) {
-        _character->Accelerate(sf::Vector2f(0, -speed), eTime);
-    }
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
-        _character->Accelerate(sf::Vector2f(0, speed), eTime);
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+        _character->Jump(map);
     }
 
     _character->Update(ip, eTime, map);

@@ -1,7 +1,7 @@
 #include "IP.h"
 #include "Renderer.h"
 #include "TextureLoader.h"
-#include "Map.h"
+#include "Level.h"
 #include "EntityManager.h"
 #include "Player.h"
 
@@ -10,7 +10,7 @@ IP::IP() {
     _window->setVerticalSyncEnabled(true);
     _renderer = new Renderer(sf::Vector2i(sf::Vector2f(_window->getSize())/4.f), 4);
     _textureLoader = new TextureLoader();
-    _map = new Map(*this);
+    _level = new Level(*this);
     _entityManager = new EntityManager();
     _player = new Player(*this, *_entityManager);
 
@@ -35,15 +35,15 @@ IP::~IP() {
     delete _window;
     delete _renderer;
     delete _textureLoader;
-    delete _map;
+    delete _level;
     delete _entityManager;
     delete _player;
 }
 
 void IP::Update() {
     float eTime = _clock.restart().asMilliseconds();
-    _entityManager->Update(*this, eTime, *_map);
-    _player->Update(*this, eTime, *_map);
+    _entityManager->Update(*this, eTime, _level->GetMap());
+    _player->Update(*this, eTime, _level->GetMap());
 }
 
 void IP::Draw() {
@@ -55,8 +55,8 @@ void IP::Draw() {
     _renderer->Clear();
 
     _entityManager->Draw(*this);
-    _map->Draw(*this);
     _player->Draw(*this);
+    _level->Draw(*this);
 
     _renderer->DrawToWindow(*_window);
     _window->display();
