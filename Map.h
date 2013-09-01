@@ -9,6 +9,7 @@
 using namespace std;
 
 class IP;
+class MovingSprite;
 
 class Map {
     public:
@@ -18,6 +19,9 @@ class Map {
     bool IsOnMap(sf::Vector2i pos);
     int GetTile(sf::Vector2i pos);
     void SetTile(sf::Vector2i pos, int id);
+    bool IsCollided(sf::FloatRect rect);
+    bool IsCollided(MovingSprite& sprite, sf::Vector2f pos);
+    bool IsCollided(MovingSprite& sprite);
 
     private:
     sf::Vector2i _size;

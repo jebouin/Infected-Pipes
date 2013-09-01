@@ -2,6 +2,8 @@
 #include "IP.h"
 #include "TextureLoader.h"
 #include "Renderer.h"
+#include "MathHelper.h"
+#include "MovingSprite.h"
 
 Map::Map(IP& ip) {
     _tileset.setTexture(ip._textureLoader->GetTexture("tileset"));
@@ -11,6 +13,17 @@ Map::Map(IP& ip) {
         for(int j=0 ; j<_size.y ; j++) {
             SetTile(sf::Vector2i(i, j), (rand()%4==0?1:0));
         }
+    }
+    for(int i=0 ; i<_size.x ; i++) {
+        SetTile(sf::Vector2i(i, 0), 1);
+        SetTile(sf::Vector2i(i, _size.y-1), 1);
+    }
+    for(int i=0 ; i<_size.y ; i++) {
+        SetTile(sf::Vector2i(0, i), 1);
+        SetTile(sf::Vector2i(_size.x-1, i), 1);
+    }
+    for(int i=0 ; i<25 ; i++) {
+        SetTile(sf::Vector2i(i%5+1, i/5+1), 0);
     }
 }
 
@@ -44,4 +57,22 @@ void Map::SetTile(sf::Vector2i pos, int id) {
         return;
     }
     _tiles[pos.x][pos.y] = id;
+}
+
+bool Map::IsCollided(sf::FloatRect rect) {
+    vector<sf::Vector2f> corners = MathHelper::Rect2Corners(rect);
+    for(int i=0 ; i<4 ; i++) {
+        if(GetTile(sf::Vector2i(corners[i]/16.f)) == 1) {
+            return true;
+        }
+    }
+    return false;
+}
+
+bool Map::IsCollided(MovingSprite& sprite, sf::Vector2f pos) {
+    return IsCollided(sf::FloatRect(pos, sf::Vector2f(sprite.getGlobalBounds().width, sprite.getGlobalBounds().height)));
+}
+
+bool Map::IsCollided(MovingSprite& sprite) {
+    return IsCollided(sprite.getGlobalBounds());
 }

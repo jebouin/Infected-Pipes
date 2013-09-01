@@ -7,24 +7,26 @@
 	"SFML/System.hpp"
 	"IP.h"
 
-1378022512 source:c:\users\xaychru04\desktop\infected pipes\renderer.cpp
+1378042062 source:c:\users\xaychru04\desktop\infected pipes\renderer.cpp
 	"Renderer.h"
 
-1378017110 c:\users\xaychru04\desktop\infected pipes\renderer.h
+1378042062 c:\users\xaychru04\desktop\infected pipes\renderer.h
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1378021523 c:\users\xaychru04\desktop\infected pipes\ip.h
+1378027703 c:\users\xaychru04\desktop\infected pipes\ip.h
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1378022435 source:c:\users\xaychru04\desktop\infected pipes\ip.cpp
+1378042726 source:c:\users\xaychru04\desktop\infected pipes\ip.cpp
 	"IP.h"
 	"Renderer.h"
 	"TextureLoader.h"
 	"Map.h"
+	"EntityManager.h"
+	"Player.h"
 
-1378021701 source:c:\users\xaychru04\desktop\infected pipes\textureloader.cpp
+1378023638 source:c:\users\xaychru04\desktop\infected pipes\textureloader.cpp
 	"TextureLoader.h"
 
 1378019896 c:\users\xaychru04\desktop\infected pipes\textureloader.h
@@ -32,14 +34,80 @@
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1378021530 c:\users\xaychru04\desktop\infected pipes\map.h
+1378039914 c:\users\xaychru04\desktop\infected pipes\map.h
 	<vector>
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1378021582 source:c:\users\xaychru04\desktop\infected pipes\map.cpp
+1378039914 source:c:\users\xaychru04\desktop\infected pipes\map.cpp
 	"Map.h"
 	"IP.h"
 	"TextureLoader.h"
 	"Renderer.h"
+	"MathHelper.h"
+	"MovingSprite.h"
+
+1378041901 source:c:\users\xaychru04\desktop\infected pipes\movingsprite.cpp
+	"MovingSprite.h"
+	"IP.h"
+	"Map.h"
+	"TextureLoader.h"
+	"MathHelper.h"
+
+1378041661 c:\users\xaychru04\desktop\infected pipes\movingsprite.h
+	<vector>
+	"SFML/Graphics.hpp"
+	"SFML/System.hpp"
+
+1378026977 source:c:\users\xaychru04\desktop\infected pipes\character.cpp
+	"Character.h"
+	"IP.h"
+
+1378026965 c:\users\xaychru04\desktop\infected pipes\character.h
+	<vector>
+	"SFML/Graphics.hpp"
+	"SFML/System.hpp"
+	"GameEntity.h"
+
+1378039504 c:\users\xaychru04\desktop\infected pipes\gameentity.h
+	<vector>
+	"SFML/Graphics.hpp"
+	"SFML/System.hpp"
+	"MovingSprite.h"
+
+1378039542 source:c:\users\xaychru04\desktop\infected pipes\entitymanager.cpp
+	"EntityManager.h"
+	"IP.h"
+	"Renderer.h"
+	"GameEntity.h"
+	"Map.h"
+
+1378039542 c:\users\xaychru04\desktop\infected pipes\entitymanager.h
+	<iostream>
+	"SFML/Graphics.hpp"
+	"SFML/System.hpp"
+
+1378039592 source:c:\users\xaychru04\desktop\infected pipes\gameentity.cpp
+	"GameEntity.h"
+	"Map.h"
+
+1378042646 source:c:\users\xaychru04\desktop\infected pipes\player.cpp
+	"Player.h"
+	"IP.h"
+	"Character.h"
+	"Renderer.h"
+	"Map.h"
+
+1378042646 c:\users\xaychru04\desktop\infected pipes\player.h
+	<iostream>
+	"SFML/Graphics.hpp"
+	"SFML/System.hpp"
+
+1378041661 c:\users\xaychru04\desktop\infected pipes\mathhelper.h
+	<iostream>
+	"SFML/Graphics.hpp"
+	"SFML/System.hpp"
+
+1378041661 source:c:\users\xaychru04\desktop\infected pipes\mathhelper.cpp
+	"MathHelper.h"
 

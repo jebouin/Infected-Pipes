@@ -11,6 +11,7 @@ class Renderer {
     void Clear();
     void Draw(const sf::Drawable& drawable);
     void DrawToWindow(sf::RenderWindow& window);
+    sf::RenderTexture& GetTexture();
 
     public:
     sf::RenderTexture *_texture;

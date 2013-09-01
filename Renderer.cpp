@@ -52,3 +52,7 @@ void Renderer::DrawToWindow(sf::RenderWindow& window) {
     window.draw(_sprite);
     window.draw(_mosaic);
 }
+
+sf::RenderTexture& Renderer::GetTexture() {
+    return *_texture;
+}

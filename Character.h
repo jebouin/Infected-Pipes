@@ -1,0 +1,23 @@
+#ifndef CHARACTER_H_INCLUDED
+#define CHARACTER_H_INCLUDED
+
+#include <vector>
+
+#include "SFML/Graphics.hpp"
+#include "SFML/System.hpp"
+#include "GameEntity.h"
+
+using namespace std;
+
+class IP;
+
+class Character : public GameEntity {
+    public:
+    Character(IP& ip);
+    ~Character();
+
+    private:
+
+};
+
+#endif // CHARACTER_H_INCLUDED

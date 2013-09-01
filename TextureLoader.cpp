@@ -2,6 +2,7 @@
 
 TextureLoader::TextureLoader() {
     AddTexture("tileset.png", "tileset");
+    AddTexture("character.png", "character");
 }
 
 TextureLoader::~TextureLoader() {

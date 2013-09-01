@@ -7,6 +7,8 @@
 class Renderer;
 class TextureLoader;
 class Map;
+class EntityManager;
+class Player;
 
 class IP {
     public:
@@ -19,8 +21,11 @@ class IP {
     TextureLoader *_textureLoader;
 
     private:
+    sf::Clock _clock;
     sf::RenderWindow *_window;
     Map *_map;
+    EntityManager *_entityManager;
+    Player *_player;
 };
 
 #endif // IP_H_INCLUDED
