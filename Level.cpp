@@ -3,6 +3,8 @@
 #include "Map.h"
 #include "TextureLoader.h"
 #include "Renderer.h"
+#include "Pipe.h"
+#include "EntityManager.h"
 
 Level::Level(IP& ip) {
     _levelImage = sf::Image(ip._textureLoader->GetImage("level"));
@@ -21,16 +23,20 @@ Level::Level(IP& ip) {
         }
     }
 
-    _pipe.setTexture(ip._textureLoader->GetTexture("pipe"));
-    _pipe.setPosition(_map->GetSize().x*16-48, _map->GetSize().y*16-48);
+    _pipe = new Pipe(ip, sf::Vector2f(_map->GetSize().x*16-48, _map->GetSize().y*16-48));
 }
 
 Level::~Level() {
     delete _map;
+    delete _pipe;
+}
+
+void Level::Update(IP& ip, EntityManager& eManager) {
+    _pipe->Update(ip, eManager);
 }
 
 void Level::Draw(IP& ip) {
-    ip._renderer->Draw(_pipe);
+    ip._renderer->Draw(*_pipe);
     _map->Draw(ip);
 }
 

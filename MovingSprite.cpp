@@ -9,6 +9,15 @@ MovingSprite::MovingSprite(IP& ip, string name) : sf::Sprite() {
     _rotVel = 0;
     setTexture(ip._textureLoader->GetTexture(name));
     setOrigin(sf::Vector2f(getTextureRect().width, getTextureRect().height)/2.f);
+    _hitbox = getTextureRect();
+}
+
+MovingSprite::MovingSprite(IP& ip, string name, sf::IntRect hitbox) {
+    _vel = sf::Vector2f(0, 0);
+    _rotVel = 0;
+    setTexture(ip._textureLoader->GetTexture(name));
+    setOrigin(sf::Vector2f(getTextureRect().width, getTextureRect().height)/2.f);
+    _hitbox = hitbox;
 }
 
 MovingSprite::~MovingSprite() {
@@ -58,6 +67,10 @@ sf::Vector2f MovingSprite::GetUpperLeftPos() {
     return sf::Vector2f(getGlobalBounds().left, getGlobalBounds().top);
 }
 
+sf::IntRect MovingSprite::GetHitbox() {
+    return _hitbox;
+}
+
 void MovingSprite::SetVel(sf::Vector2f vel) {
     _vel = vel;
 }
@@ -68,4 +81,8 @@ void MovingSprite::Accelerate(sf::Vector2f vec, float eTime) {
 
 void MovingSprite::SetRotVel(float rotVel) {
     _rotVel = rotVel;
+}
+
+void MovingSprite::SetHitbox(sf::IntRect rect) {
+    _hitbox = rect;
 }

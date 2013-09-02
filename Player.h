@@ -17,7 +17,7 @@ class Player {
     public:
     Player(IP& ip, EntityManager& eManager);
     ~Player();
-    void Update(IP& ip, float eTime, Map& map);
+    void Update(IP& ip, float eTime, Map& map, EntityManager& eManager);
     void Draw(IP& ip);
     sf::View& GetView();
     Character& GetCharacter();

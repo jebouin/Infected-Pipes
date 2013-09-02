@@ -14,6 +14,7 @@ class Map;
 class MovingSprite : public sf::Sprite {
     public:
     MovingSprite(IP& ip, string name);
+    MovingSprite(IP& ip, string name, sf::IntRect hitbox);
     ~MovingSprite();
     void Update(IP& ip, float eTime);
     void Update(IP& ip, float eTime, Map& map);
@@ -21,11 +22,14 @@ class MovingSprite : public sf::Sprite {
     sf::Vector2f GetVel();
     float GetRotVel();
     sf::Vector2f GetUpperLeftPos();
+    sf::IntRect GetHitbox();
     void SetVel(sf::Vector2f vel);
     void Accelerate(sf::Vector2f vec, float eTime);
     void SetRotVel(float rotVel);
+    void SetHitbox(sf::IntRect rect);
 
     private:
+    sf::IntRect _hitbox;
     sf::Vector2f _vel;
     float _rotVel;
 };

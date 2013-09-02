@@ -11,6 +11,7 @@ using namespace std;
 class MathHelper {
     public:
     static float ABS(float n);
+    static sf::Vector2f ABS(sf::Vector2f v);
     static float SGN(float n);
     static int RandInt(int min, int max);
     static float RandFloat(float min, float max);

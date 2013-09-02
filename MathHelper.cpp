@@ -4,6 +4,10 @@ float MathHelper::ABS(float n) {
     return (n<0 ? -n : n);
 }
 
+sf::Vector2f MathHelper::ABS(sf::Vector2f v) {
+    return sf::Vector2f(ABS(v.x), ABS(v.y));
+}
+
 float MathHelper::SGN(float n) {
     return (n==0 ? 0 : n/ABS(n));
 }

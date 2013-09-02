@@ -8,18 +8,21 @@ using namespace std;
 
 class IP;
 class Map;
+class Pipe;
+class EntityManager;
 
 class Level {
     public:
     Level(IP& ip);
     ~Level();
+    void Update(IP& ip, EntityManager& eManager);
     void Draw(IP& ip);
     Map& GetMap();
 
     private:
     Map *_map;
     sf::Image _levelImage;
-    sf::Sprite _pipe;
+    Pipe *_pipe;
 };
 
 #endif // LEVEL_H_INCLUDED

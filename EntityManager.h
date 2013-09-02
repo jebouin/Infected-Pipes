@@ -8,22 +8,23 @@
 
 using namespace std;
 
-class GameEntity;
 class IP;
 class Map;
+class Ennemy;
+class Character;
 
 class EntityManager {
     public:
     EntityManager();
     ~EntityManager();
-    void Update(IP& ip, float eTime, Map& map);
+    void Update(IP& ip, float eTime, Map& map, Character& character);
     void Draw(IP& ip);
-    void Add(GameEntity *entity);
-    int GetNbEntities();
-    GameEntity& GetEntity(int id);
+    void Add(Ennemy *e);
+    int GetNbEnnemies();
+    Ennemy* GetEnnemy(int id);
 
     private:
-    vector<GameEntity*> _entities;
+    vector<Ennemy*> _ennemies;
 };
 
 #endif // ENTITYMANAGER_H_INCLUDED

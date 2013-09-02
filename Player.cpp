@@ -16,7 +16,7 @@ Player::~Player() {
     delete _character;
 }
 
-void Player::Update(IP& ip, float eTime, Map& map) {
+void Player::Update(IP& ip, float eTime, Map& map, EntityManager& eManager) {
     float speed = 0.0005f;
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
         _character->GoRight(eTime);
@@ -28,7 +28,7 @@ void Player::Update(IP& ip, float eTime, Map& map) {
         _character->Jump(map);
     }
 
-    _character->Update(ip, eTime, map);
+    _character->Update(ip, eTime, map, eManager);
     _view->setCenter(_character->getPosition());
 
     sf::FloatRect vrect = MathHelper::View2Rect(*_view);

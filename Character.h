@@ -10,11 +10,14 @@
 using namespace std;
 
 class IP;
+class Map;
+class EntityManager;
 
 class Character : public GameEntity {
     public:
     Character(IP& ip);
     ~Character();
+    void Update(IP& ip, float eTime, Map& map, EntityManager& eManager);
 
     private:
 
