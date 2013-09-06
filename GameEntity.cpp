@@ -6,7 +6,7 @@
 GameEntity::GameEntity(IP& ip, string name, sf::IntRect hitbox, int hp) : MovingSprite(ip, name, hitbox) {
     _jumpPower = 0.7;
     _speed = 0.003;
-    _weight = 0.1;
+    _weight = 0.3;
     _alive = true;
     _hpMax = hp;
     _hp = _hpMax;
@@ -75,7 +75,7 @@ void GameEntity::Hit(GameEntity *other) {
     sf::Vector2f c(MathHelper::GetCenter(GetGlobalHitbox()));
     sf::Vector2f oc(MathHelper::GetCenter(other->GetGlobalHitbox()));
     sf::Vector2f dir = MathHelper::Normalize(sf::Vector2f(oc.x-c.x, 0));
-    other->SetVel(other->GetVel() + sf::Vector2f(dir.x, 0)*1.f);
+    other->SetVel(other->GetVel() + sf::Vector2f(dir.x, 0)*0.07f/other->GetWeight());
 }
 
 void GameEntity::SetJumpPower(float p) {

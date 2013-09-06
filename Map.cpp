@@ -37,7 +37,7 @@ void Map::Draw(IP& ip) {
             sf::Vector2i pos(i, j);
             int tileX = 0;
             if(GetTile(pos) == 1) {
-                if(GetTile(sf::Vector2i(pos.x, pos.y-1)) == 2) {
+                if(GetTile(sf::Vector2i(pos.x, pos.y-1)) == 0) {
                     tileX = 1;
                     if(GetTile(sf::Vector2i(pos.x+1, pos.y-1)) == 1) {
                         tileX = 3;

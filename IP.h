@@ -10,6 +10,7 @@ class Level;
 class EntityManager;
 class Player;
 class Background;
+class Grass;
 
 class IP {
     public:
@@ -28,6 +29,7 @@ class IP {
     EntityManager *_entityManager;
     Player *_player;
     Background *_background;
+    Grass *_grass;
 };
 
 #endif // IP_H_INCLUDED

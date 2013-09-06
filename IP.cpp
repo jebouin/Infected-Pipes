@@ -5,6 +5,7 @@
 #include "EntityManager.h"
 #include "Player.h"
 #include "Background.h"
+#include "Grass.h"
 
 IP::IP() {
     _window = new sf::RenderWindow(sf::VideoMode(960, 704, 32), "Infected Pipes");
@@ -15,6 +16,7 @@ IP::IP() {
     _entityManager = new EntityManager();
     _player = new Player(*this, *_entityManager);
     _background = new Background(*this);
+    _grass = new Grass(*this, *_level);
 
     while(_window->isOpen()) {
         sf::Event e;
@@ -41,6 +43,7 @@ IP::~IP() {
     delete _entityManager;
     delete _player;
     delete _background;
+    delete _grass;
 }
 
 void IP::Update() {
@@ -48,6 +51,7 @@ void IP::Update() {
     _entityManager->Update(*this, eTime, _level->GetMap(), _player->GetCharacter());
     _player->Update(*this, eTime, _level->GetMap(), *_entityManager);
     _level->Update(*this, *_entityManager);
+    _grass->Update(*this);
 }
 
 void IP::Draw() {
@@ -62,6 +66,7 @@ void IP::Draw() {
     _entityManager->Draw(*this);
     _player->Draw(*this);
     _level->Draw(*this);
+    _grass->Draw(*this);
 
     _renderer->DrawToWindow(*_window);
     _window->display();
