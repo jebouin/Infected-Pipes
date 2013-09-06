@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_layout_file>
+	<ActiveTarget name="Debug" />
+	<File name="Character.cpp" open="1" top="1" tabpos="17">
+		<Cursor position="328" topLine="0" />
+	</File>
+	<File name="Ennemy.cpp" open="1" top="0" tabpos="13">
+		<Cursor position="766" topLine="0" />
+	</File>
+	<File name="Ennemy.h" open="1" top="0" tabpos="12">
+		<Cursor position="410" topLine="0" />
+	</File>
+	<File name="EntityManager.cpp" open="1" top="0" tabpos="15">
+		<Cursor position="521" topLine="5" />
+	</File>
+	<File name="EntityManager.h" open="1" top="0" tabpos="14">
+		<Cursor position="474" topLine="0" />
+	</File>
+	<File name="GameEntity.cpp" open="1" top="0" tabpos="11">
+		<Cursor position="259" topLine="0" />
+	</File>
+	<File name="IP.cpp" open="1" top="0" tabpos="3">
+		<Cursor position="1491" topLine="25" />
+	</File>
+	<File name="IP.h" open="1" top="0" tabpos="2">
+		<Cursor position="439" topLine="0" />
+	</File>
+	<File name="Level.cpp" open="1" top="0" tabpos="7">
+		<Cursor position="1067" topLine="6" />
+	</File>
+	<File name="Level.h" open="1" top="0" tabpos="6">
+		<Cursor position="112" topLine="0" />
+	</File>
+	<File name="Map.cpp" open="1" top="0" tabpos="5">
+		<Cursor position="3001" topLine="77" />
+	</File>
+	<File name="Map.h" open="1" top="0" tabpos="4">
+		<Cursor position="510" topLine="0" />
+	</File>
+	<File name="MathHelper.cpp" open="1" top="0" tabpos="23">
+		<Cursor position="1098" topLine="0" />
+	</File>
+	<File name="MathHelper.h" open="1" top="0" tabpos="22">
+		<Cursor position="539" topLine="0" />
+	</File>
+	<File name="MovingSprite.cpp" open="1" top="0" tabpos="9">
+		<Cursor position="2141" topLine="49" />
+	</File>
+	<File name="MovingSprite.h" open="1" top="0" tabpos="8">
+		<Cursor position="635" topLine="0" />
+	</File>
+	<File name="Pipe.cpp" open="1" top="0" tabpos="21">
+		<Cursor position="773" topLine="0" />
+	</File>
+	<File name="Player.cpp" open="1" top="0" tabpos="19">
+		<Cursor position="872" topLine="0" />
+	</File>
+	<File name="Player.h" open="1" top="0" tabpos="18">
+		<Cursor position="389" topLine="0" />
+	</File>
+	<File name="Renderer.cpp" open="0" top="0" tabpos="0">
+		<Cursor position="836" topLine="0" />
+	</File>
+	<File name="Renderer.h" open="0" top="0" tabpos="0">
+		<Cursor position="184" topLine="0" />
+	</File>
+	<File name="TextureLoader.cpp" open="0" top="0" tabpos="0">
+		<Cursor position="486" topLine="0" />
+	</File>
+	<File name="TextureLoader.h" open="0" top="0" tabpos="0">
+		<Cursor position="358" topLine="0" />
+	</File>
+	<File name="main.cpp" open="1" top="0" tabpos="1">
+		<Cursor position="59" topLine="0" />
+	</File>
+</CodeBlocks_layout_file>

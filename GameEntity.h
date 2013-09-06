@@ -16,22 +16,30 @@ class EntityManager;
 
 class GameEntity : public MovingSprite {
     public:
-    GameEntity(IP& ip, string name, sf::IntRect hitbox);
+    GameEntity(IP& ip, string name, sf::IntRect hitbox, int hp);
     ~GameEntity();
     void Update(IP& ip, float elapsedTime, Map& map, EntityManager& eManager);
     void Collide(GameEntity* other);
     void GoLeft(float eTime);
     void GoRight(float eTime);
     void Jump(Map& map);
+    void Damage(int dmg);
+    void Hit(GameEntity *other);
     void SetJumpPower(float p);
     void SetSpeed(float s);
     void SetWeight(float w);
     float GetWeight();
+    bool IsAlive();
+    int GetHp();
+    int GetHpMax();
 
     private:
     float _jumpPower;
     float _speed;
     float _weight;
+    bool _alive;
+    int _hpMax;
+    int _hp;
 };
 
 #endif // GAMEENTITY_H_INCLUDED

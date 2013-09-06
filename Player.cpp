@@ -32,11 +32,11 @@ void Player::Update(IP& ip, float eTime, Map& map, EntityManager& eManager) {
     _view->setCenter(_character->getPosition());
 
     sf::FloatRect vrect = MathHelper::View2Rect(*_view);
-    if(vrect.left < 0) {
-        _view->setCenter(sf::Vector2f(_view->getSize().x/2.f, _view->getCenter().y));
+    if(vrect.left < 16) {
+        _view->setCenter(sf::Vector2f(_view->getSize().x/2.f+16, _view->getCenter().y));
     }
-    if(vrect.left+vrect.width > map.GetSize().x*16.f) {
-        _view->setCenter(sf::Vector2f(map.GetSize().x*16.f - _view->getSize().x/2.f, _view->getCenter().y));
+    if(vrect.left+vrect.width > map.GetSize().x*16.f-16) {
+        _view->setCenter(sf::Vector2f(map.GetSize().x*16.f - _view->getSize().x/2.f - 16, _view->getCenter().y));
     }
     if(vrect.top < 0) {
         _view->setCenter(sf::Vector2f(_view->getCenter().x, _view->getSize().y/2.f));

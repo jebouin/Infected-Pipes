@@ -3,10 +3,13 @@
 #include "MathHelper.h"
 #include "EntityManager.h"
 
-GameEntity::GameEntity(IP& ip, string name, sf::IntRect hitbox) : MovingSprite(ip, name, hitbox) {
+GameEntity::GameEntity(IP& ip, string name, sf::IntRect hitbox, int hp) : MovingSprite(ip, name, hitbox) {
     _jumpPower = 0.7;
     _speed = 0.003;
-    _weight = 0.05;
+    _weight = 0.1;
+    _alive = true;
+    _hpMax = hp;
+    _hp = _hpMax;
 }
 
 GameEntity::~GameEntity() {
@@ -30,16 +33,16 @@ void GameEntity::Update(IP& ip, float elapsedTime, Map& map, EntityManager& eMan
 }
 
 void GameEntity::Collide(GameEntity* other) {
-    sf::FloatRect r = getGlobalBounds();
-    sf::FloatRect r2 = other->getGlobalBounds();
+    sf::FloatRect r = GetGlobalHitbox();
+    sf::FloatRect r2 = other->GetGlobalHitbox();
     if(!r.intersects(r2)) {
         return;
     }
-    sf::Vector2f dist = /*MathHelper::ABS(*/getPosition()-other->getPosition()/*)*/;
+    sf::Vector2f c = MathHelper::GetCenter(r);
+    sf::Vector2f c2 = MathHelper::GetCenter(r2);
+    sf::Vector2f dist = MathHelper::ABS(sf::Vector2f(c-c2));
     float rx = (r.width/2.f + r2.width/2.f - dist.x) / (r.width/2.f + r2.width/2.f);
-    float dx = rx*MathHelper::SGN(dist.x);
-    float ry = (r.height/2.f + r2.height/2.f - dist.y) / (r.height/2.f + r2.height/2.f);
-    float dy = ry*MathHelper::SGN(dist.y);
+    float dx = rx*MathHelper::SGN(sf::Vector2f(c-c2).x);
 
     SetVel(GetVel() + sf::Vector2f(dx, 0)*other->GetWeight());
     other->SetVel(other->GetVel() - sf::Vector2f(dx, 0)*GetWeight());
@@ -60,6 +63,21 @@ void GameEntity::Jump(Map& map) {
     SetVel(sf::Vector2f(GetVel().x, -_jumpPower));
 }
 
+void GameEntity::Damage(int dmg) {
+    _hp -= dmg;
+        if(_hp <= 0) {
+        _alive = false;
+    }
+}
+
+void GameEntity::Hit(GameEntity *other) {
+    other->Damage(5);
+    sf::Vector2f c(MathHelper::GetCenter(GetGlobalHitbox()));
+    sf::Vector2f oc(MathHelper::GetCenter(other->GetGlobalHitbox()));
+    sf::Vector2f dir = MathHelper::Normalize(sf::Vector2f(oc.x-c.x, 0));
+    other->SetVel(other->GetVel() + sf::Vector2f(dir.x, 0)*1.f);
+}
+
 void GameEntity::SetJumpPower(float p) {
     _jumpPower = p;
 }
@@ -74,4 +92,16 @@ void GameEntity::SetWeight(float w) {
 
 float GameEntity::GetWeight() {
     return _weight;
+}
+
+bool GameEntity::IsAlive() {
+    return _alive;
+}
+
+int GameEntity::GetHp() {
+    return _hp;
+}
+
+int GameEntity::GetHpMax() {
+    return _hpMax;
 }

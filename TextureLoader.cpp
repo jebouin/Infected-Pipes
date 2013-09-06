@@ -6,6 +6,7 @@ TextureLoader::TextureLoader() {
     AddTexture("level.png", "level");
     AddTexture("pipe.png", "pipe");
     AddTexture("zombie.png", "zombie");
+    AddTexture("background.png", "background");
 }
 
 TextureLoader::~TextureLoader() {

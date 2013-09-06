@@ -4,15 +4,17 @@
 #include "Level.h"
 #include "EntityManager.h"
 #include "Player.h"
+#include "Background.h"
 
 IP::IP() {
-    _window = new sf::RenderWindow(sf::VideoMode(960, 680, 32), "Infected Pipes");
+    _window = new sf::RenderWindow(sf::VideoMode(960, 704, 32), "Infected Pipes");
     _window->setVerticalSyncEnabled(true);
     _renderer = new Renderer(sf::Vector2i(sf::Vector2f(_window->getSize())/4.f), 4);
     _textureLoader = new TextureLoader();
     _level = new Level(*this);
     _entityManager = new EntityManager();
     _player = new Player(*this, *_entityManager);
+    _background = new Background(*this);
 
     while(_window->isOpen()) {
         sf::Event e;
@@ -38,6 +40,7 @@ IP::~IP() {
     delete _level;
     delete _entityManager;
     delete _player;
+    delete _background;
 }
 
 void IP::Update() {
@@ -55,6 +58,7 @@ void IP::Draw() {
     _window->clear();
     _renderer->Clear();
 
+    _background->Draw(*this, _player->GetView());
     _entityManager->Draw(*this);
     _player->Draw(*this);
     _level->Draw(*this);

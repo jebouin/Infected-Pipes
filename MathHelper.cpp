@@ -32,3 +32,15 @@ vector<sf::Vector2f> MathHelper::Rect2Corners(sf::FloatRect rect) {
 sf::FloatRect MathHelper::View2Rect(sf::View& view) {
     return sf::FloatRect(sf::Vector2f(view.getCenter()-view.getSize()/2.f), sf::Vector2f(view.getSize()));
 }
+
+sf::Vector2f MathHelper::GetCenter(sf::FloatRect rect) {
+    return sf::Vector2f(rect.left, rect.top) + sf::Vector2f(rect.width, rect.height)/2.f;
+}
+
+float MathHelper::GetVecLength(sf::Vector2f vec) {
+    return sqrt(vec.x*vec.x + vec.y*vec.y);
+}
+
+sf::Vector2f MathHelper::Normalize(sf::Vector2f vec) {
+    return vec/GetVecLength(vec);
+}

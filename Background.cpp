@@ -1,0 +1,20 @@
+#include "Background.h"
+#include "IP.h"
+#include "TextureLoader.h"
+#include "Renderer.h"
+
+Background::Background(IP& ip) {
+    _back.setTexture(ip._textureLoader->GetTexture("background"));
+    _view = sf::View(sf::FloatRect(0, 0, ip._renderer->GetTexture().getSize().x, ip._renderer->GetTexture().getSize().y));
+}
+
+Background::~Background() {
+
+}
+
+void Background::Draw(IP& ip, sf::View& prevView) {
+    sf::RenderTexture& t(ip._renderer->GetTexture());
+    t.setView(t.getDefaultView());
+    ip._renderer->Draw(_back);
+    t.setView(prevView);
+}

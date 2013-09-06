@@ -13,7 +13,7 @@ Level::Level(IP& ip) {
         for(int j=0 ; j<_levelImage.getSize().y ; j++) {
             sf::Vector2i pos(i, j);
             sf::Color c = _levelImage.getPixel(i, j);
-            if(c == sf::Color(31, 23, 53)) {
+            if(c == sf::Color(0, 0, 0)) {
                 _map->SetTile(pos, 0);
             } else if(c == sf::Color(122, 137, 60)) {
                 _map->SetTile(pos, 1);

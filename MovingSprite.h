@@ -10,6 +10,7 @@ using namespace std;
 
 class IP;
 class Map;
+class AnimationTable;
 
 class MovingSprite : public sf::Sprite {
     public:
@@ -23,12 +24,16 @@ class MovingSprite : public sf::Sprite {
     float GetRotVel();
     sf::Vector2f GetUpperLeftPos();
     sf::IntRect GetHitbox();
+    sf::FloatRect GetGlobalHitbox();
+    AnimationTable& GetAnims();
     void SetVel(sf::Vector2f vel);
     void Accelerate(sf::Vector2f vec, float eTime);
     void SetRotVel(float rotVel);
     void SetHitbox(sf::IntRect rect);
 
     private:
+    AnimationTable *_animTable;
+
     sf::IntRect _hitbox;
     sf::Vector2f _vel;
     float _rotVel;

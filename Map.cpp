@@ -77,11 +77,6 @@ void Map::SetTile(sf::Vector2i pos, int id) {
 
 bool Map::IsCollided(sf::FloatRect rect) {
     vector<sf::Vector2f> corners = MathHelper::Rect2Corners(rect);
-    /*for(int i=0 ; i<4 ; i++) {
-        if(GetTile(sf::Vector2i(corners[i]/16.f)) == 1) {
-            return true;
-        }
-    }*/
     for(float i=corners[0].x ; i<corners[1].x ; i+=8) {
         if(GetTile(sf::Vector2i(sf::Vector2f(i, corners[0].y)/16.f)) == 1) {
             return true;
@@ -105,20 +100,21 @@ bool Map::IsCollided(sf::FloatRect rect) {
 }
 
 bool Map::IsCollided(MovingSprite& sprite, sf::Vector2f pos) {
-    return IsCollided(sf::FloatRect(pos, sf::Vector2f(sprite.getGlobalBounds().width, sprite.getGlobalBounds().height)));
+    return IsCollided(sf::FloatRect(sf::Vector2f(sprite.GetHitbox().left, sprite.GetHitbox().top)+pos, sf::Vector2f(sprite.GetHitbox().width, sprite.GetHitbox().height)));
 }
 
 bool Map::IsCollided(MovingSprite& sprite) {
-    return IsCollided(sprite.getGlobalBounds());
+    return IsCollided(sprite.GetGlobalHitbox());
 }
 
 bool Map::IsOnGround(MovingSprite& sprite) {
-    for(float i=0 ; i<sprite.getGlobalBounds().width ; i+=8) {
-        if(GetTile(sf::Vector2i(sf::Vector2f(sprite.getGlobalBounds().left+i, sprite.getGlobalBounds().top+sprite.getGlobalBounds().height+1)/16.f)) == 1) {
+    sf::FloatRect rect = sprite.GetGlobalHitbox();
+    for(float i=0 ; i<rect.width ; i+=8) {
+        if(GetTile(sf::Vector2i(sf::Vector2f(rect.left+i, rect.top+rect.height+1)/16.f)) == 1) {
             return true;
         }
     }
-    if(GetTile(sf::Vector2i(sf::Vector2f(sprite.getGlobalBounds().left+sprite.getGlobalBounds().width, sprite.getGlobalBounds().top+sprite.getGlobalBounds().height+1)/16.f)) == 1) {
+    if(GetTile(sf::Vector2i(sf::Vector2f(rect.left+rect.width, rect.top+rect.height+1)/16.f)) == 1) {
         return true;
     }
     return false;

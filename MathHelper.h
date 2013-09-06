@@ -2,6 +2,7 @@
 #define MATHHELPER_H_INCLUDED
 
 #include <iostream>
+#include <cmath>
 
 #include "SFML/Graphics.hpp"
 #include "SFML/System.hpp"
@@ -17,6 +18,9 @@ class MathHelper {
     static float RandFloat(float min, float max);
     static vector<sf::Vector2f> Rect2Corners(sf::FloatRect rect);
     static sf::FloatRect View2Rect(sf::View& view);
+    static sf::Vector2f GetCenter(sf::FloatRect rect);
+    static float GetVecLength(sf::Vector2f vec);
+    static sf::Vector2f Normalize(sf::Vector2f vec);
 };
 
 #endif // MATHHELPER_H_INCLUDED

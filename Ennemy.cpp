@@ -5,7 +5,7 @@
 #include "MathHelper.h"
 #include "EntityManager.h"
 
-Ennemy::Ennemy(IP& ip) : GameEntity(ip, "zombie", sf::IntRect(1, 0, 5, 20)) {
+Ennemy::Ennemy(IP& ip) : GameEntity(ip, "zombie", sf::IntRect(1, 0, 5, 20), 60) {
     SetSpeed(MathHelper::RandFloat(0.0005, 0.001));
     SetJumpPower(0.6);
 }
@@ -23,7 +23,7 @@ void Ennemy::Update(IP& ip, float eTime, Map& map, Character& character, EntityM
 
     GameEntity::Update(ip, eTime, map, eManager);
 
-    /*if(MathHelper::ABS(GetVel().x) < 0.01 && MathHelper::ABS(getPosition().x-character.getPosition().x) > 16) {
+    if(/*MathHelper::ABS(GetVel().x) < 0.01 && MathHelper::ABS(getPosition().x-character.getPosition().x) > 16*/0) {
         Jump(map);
-    }*/
+    }
 }

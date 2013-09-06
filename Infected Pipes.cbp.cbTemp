@@ -32,32 +32,6 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
-		<Unit filename="Character.cpp" />
-		<Unit filename="Character.h" />
-		<Unit filename="Ennemy.cpp" />
-		<Unit filename="Ennemy.h" />
-		<Unit filename="EntityManager.cpp" />
-		<Unit filename="EntityManager.h" />
-		<Unit filename="GameEntity.cpp" />
-		<Unit filename="GameEntity.h" />
-		<Unit filename="IP.cpp" />
-		<Unit filename="IP.h" />
-		<Unit filename="Level.cpp" />
-		<Unit filename="Level.h" />
-		<Unit filename="Map.cpp" />
-		<Unit filename="Map.h" />
-		<Unit filename="MathHelper.cpp" />
-		<Unit filename="MathHelper.h" />
-		<Unit filename="MovingSprite.cpp" />
-		<Unit filename="MovingSprite.h" />
-		<Unit filename="Pipe.cpp" />
-		<Unit filename="Pipe.h" />
-		<Unit filename="Player.cpp" />
-		<Unit filename="Player.h" />
-		<Unit filename="Renderer.cpp" />
-		<Unit filename="Renderer.h" />
-		<Unit filename="TextureLoader.cpp" />
-		<Unit filename="TextureLoader.h" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<code_completion />

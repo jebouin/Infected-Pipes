@@ -9,6 +9,7 @@ class TextureLoader;
 class Level;
 class EntityManager;
 class Player;
+class Background;
 
 class IP {
     public:
@@ -26,6 +27,7 @@ class IP {
     Level *_level;
     EntityManager *_entityManager;
     Player *_player;
+    Background *_background;
 };
 
 #endif // IP_H_INCLUDED
