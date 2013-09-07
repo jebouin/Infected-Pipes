@@ -23,7 +23,7 @@ MovingSprite::MovingSprite(IP& ip, string name, sf::IntRect hitbox) {
     _vel = sf::Vector2f(0, 0);
     _rotVel = 0;
     setTexture(ip._textureLoader->GetTexture(name));
-    setOrigin(sf::Vector2f(getTextureRect().width, getTextureRect().height)/2.f);
+    setOrigin(MathHelper::GetCenter(sf::FloatRect(hitbox)));
     _hitbox = hitbox;
     _animTable = new AnimationTable();
     _animTable->AddAnimation("base", new Animation(1, 1000, sf::Vector2i(0, 0), sf::Vector2i(getTextureRect().width, getTextureRect().height), false));

@@ -5,6 +5,7 @@
 #include "Level.h"
 #include "Map.h"
 #include "MathHelper.h"
+#include "AnimationTable.h"
 
 Player::Player(IP& ip, EntityManager& eManager) {
     _character = new Character(ip);
@@ -22,9 +23,11 @@ void Player::Update(IP& ip, float eTime, Level& level, EntityManager& eManager) 
     Map& map(level.GetMap());
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
         _character->GoRight(eTime);
+        //_character->GetAnims().SetAnimation("idle");
     }
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Q)) {
         _character->GoLeft(eTime);
+        //_character->GetAnims().SetAnimation("idle");
     }
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
         _character->Jump(level);

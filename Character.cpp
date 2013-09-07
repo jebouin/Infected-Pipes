@@ -1,6 +1,7 @@
 #include "Character.h"
 #include "IP.h"
 #include "Animation.h"
+#include "Ennemy.h"
 #include "AnimationTable.h"
 #include "EntityManager.h"
 
@@ -23,7 +24,15 @@ void Character::Update(IP& ip, float eTime, Level& level, EntityManager& eManage
         if(sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
             GetAnims().SetAnimation("attack");
             for(int i=0 ; i<eManager.GetNbEnnemies() ; i++) {
-                Hit((GameEntity*)eManager.GetEnnemy(i));
+                sf::FloatRect attackRect;
+                if(GetDir()) {
+                    attackRect = sf::FloatRect(GetGlobalHitbox().left+GetGlobalHitbox().width, GetGlobalHitbox().top, 16, GetGlobalHitbox().height);
+                } else {
+                    attackRect = sf::FloatRect(GetGlobalHitbox().left-16, GetGlobalHitbox().top, 16, GetGlobalHitbox().height);
+                }
+                if(eManager.GetEnnemy(i)->GetGlobalHitbox().intersects(attackRect)) {
+                    Hit((GameEntity*)eManager.GetEnnemy(i));
+                }
             }
         }
     } else {

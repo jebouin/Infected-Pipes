@@ -24,6 +24,7 @@ class GameEntity : public MovingSprite {
     void Collide(GameEntity* other);
     void GoLeft(float eTime);
     void GoRight(float eTime);
+    void ChangeDir();
     void Jump(Level& level);
     void Damage(int dmg);
     void Hit(GameEntity *other);
@@ -34,8 +35,10 @@ class GameEntity : public MovingSprite {
     bool IsAlive();
     int GetHp();
     int GetHpMax();
+    bool GetDir();
 
     private:
+    bool _dir;
     float _jumpPower;
     float _speed;
     float _weight;

@@ -12,6 +12,7 @@ GameEntity::GameEntity(IP& ip, string name, sf::IntRect hitbox, int hp) : Moving
     _alive = true;
     _hpMax = hp;
     _hp = _hpMax;
+    _dir = true;
 }
 
 GameEntity::~GameEntity() {
@@ -56,10 +57,26 @@ void GameEntity::Collide(GameEntity* other) {
 
 void GameEntity::GoLeft(float eTime) {
     Accelerate(sf::Vector2f(-_speed, 0), eTime);
+    if(_dir == true) {
+        ChangeDir();
+    }
 }
 
 void GameEntity::GoRight(float eTime) {
     Accelerate(sf::Vector2f(_speed, 0), eTime);
+    if(_dir == false) {
+        ChangeDir();
+    }
+}
+
+void GameEntity::ChangeDir() {
+    _dir = _dir == false;
+    if(_dir) {
+        setScale(1, 1);
+    } else {
+        setScale(-1, 1);
+    }
+    SetHitbox(sf::IntRect(getLocalBounds().width-GetHitbox().left-GetHitbox().width, getLocalBounds().height-GetHitbox().top-GetHitbox().height, GetHitbox().width, GetHitbox().height));
 }
 
 void GameEntity::Jump(Level& level) {
@@ -110,4 +127,8 @@ int GameEntity::GetHp() {
 
 int GameEntity::GetHpMax() {
     return _hpMax;
+}
+
+bool GameEntity::GetDir() {
+    return _dir;
 }
