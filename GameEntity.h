@@ -11,6 +11,7 @@
 using namespace std;
 
 class IP;
+class Level;
 class Map;
 class EntityManager;
 
@@ -18,11 +19,12 @@ class GameEntity : public MovingSprite {
     public:
     GameEntity(IP& ip, string name, sf::IntRect hitbox, int hp);
     ~GameEntity();
-    void Update(IP& ip, float elapsedTime, Map& map, EntityManager& eManager);
+    void Update(IP& ip, float elapsedTime, Level& level, EntityManager& eManager);
+    void Update(IP& ip, float elapsedTime);
     void Collide(GameEntity* other);
     void GoLeft(float eTime);
     void GoRight(float eTime);
-    void Jump(Map& map);
+    void Jump(Level& level);
     void Damage(int dmg);
     void Hit(GameEntity *other);
     void SetJumpPower(float p);

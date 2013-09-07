@@ -9,7 +9,7 @@
 using namespace std;
 
 class IP;
-class Map;
+class Level;
 class AnimationTable;
 
 class MovingSprite : public sf::Sprite {
@@ -18,8 +18,8 @@ class MovingSprite : public sf::Sprite {
     MovingSprite(IP& ip, string name, sf::IntRect hitbox);
     ~MovingSprite();
     void Update(IP& ip, float eTime);
-    void Update(IP& ip, float eTime, Map& map);
-    bool TryMove(sf::Vector2f delta, Map& map);
+    void Update(IP& ip, float eTime, Level& level);
+    bool TryMove(sf::Vector2f delta, Level& level);
     sf::Vector2f GetVel();
     float GetRotVel();
     sf::Vector2f GetUpperLeftPos();

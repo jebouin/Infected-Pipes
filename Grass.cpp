@@ -12,7 +12,7 @@ Grass::Grass(IP& ip, Level& level) {
         for(int j=0 ; j<map.GetSize().y ; j++) {
             if(map.GetTile(sf::Vector2i(i, j)) == 0 && map.GetTile(sf::Vector2i(i, j+1)) == 1) {
                 for(int p=0 ; p<32 ; p++) {
-                    sf::Color c(101, MathHelper::RandFloat(80, 150), MathHelper::RandFloat(59, 80));
+                    sf::Color c(78, MathHelper::RandFloat(60, 80), MathHelper::RandFloat(40, 58));
                     sf::Vector2f pos(i*16+p/2.f, j*16+16 + MathHelper::RandFloat(0, 2));
                     _blades.push_back(GrassBlade{pos, MathHelper::RandInt(2, 8), -90});
                     _grass.append(sf::Vertex(pos, c));

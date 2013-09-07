@@ -48,8 +48,8 @@ IP::~IP() {
 
 void IP::Update() {
     float eTime = _clock.restart().asMilliseconds();
-    _entityManager->Update(*this, eTime, _level->GetMap(), _player->GetCharacter());
-    _player->Update(*this, eTime, _level->GetMap(), *_entityManager);
+    _entityManager->Update(*this, eTime, *_level, _player->GetCharacter());
+    _player->Update(*this, eTime, *_level, *_entityManager);
     _level->Update(*this, *_entityManager);
     _grass->Update(*this);
 }

@@ -2,6 +2,7 @@
 #include "IP.h"
 #include "Character.h"
 #include "Renderer.h"
+#include "Level.h"
 #include "Map.h"
 #include "MathHelper.h"
 
@@ -16,8 +17,9 @@ Player::~Player() {
     delete _character;
 }
 
-void Player::Update(IP& ip, float eTime, Map& map, EntityManager& eManager) {
+void Player::Update(IP& ip, float eTime, Level& level, EntityManager& eManager) {
     float speed = 0.0005f;
+    Map& map(level.GetMap());
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
         _character->GoRight(eTime);
     }
@@ -25,10 +27,10 @@ void Player::Update(IP& ip, float eTime, Map& map, EntityManager& eManager) {
         _character->GoLeft(eTime);
     }
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
-        _character->Jump(map);
+        _character->Jump(level);
     }
 
-    _character->Update(ip, eTime, map, eManager);
+    _character->Update(ip, eTime, level, eManager);
     _view->setCenter(_character->getPosition());
 
     sf::FloatRect vrect = MathHelper::View2Rect(*_view);

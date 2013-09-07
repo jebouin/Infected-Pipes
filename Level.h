@@ -8,7 +8,7 @@ using namespace std;
 
 class IP;
 class Map;
-class Pipe;
+class Spawner;
 class EntityManager;
 
 class Level {
@@ -18,11 +18,12 @@ class Level {
     void Update(IP& ip, EntityManager& eManager);
     void Draw(IP& ip);
     Map& GetMap();
+    Spawner& GetSpawner();
 
     private:
     Map *_map;
     sf::Image _levelImage;
-    Pipe *_pipe;
+    Spawner *_spawner;
 };
 
 #endif // LEVEL_H_INCLUDED

@@ -1,6 +1,8 @@
 #include "MovingSprite.h"
 #include "IP.h"
 #include "Map.h"
+#include "Level.h"
+#include "Spawner.h"
 #include "TextureLoader.h"
 #include "MathHelper.h"
 #include "Animation.h"
@@ -39,17 +41,17 @@ void MovingSprite::Update(IP& ip, float eTime) {
     setTextureRect(_animTable->GetRect());
 }
 
-void MovingSprite::Update(IP& ip, float eTime, Map& map) {
+void MovingSprite::Update(IP& ip, float eTime, Level& level) {
     sf::Vector2f delta = GetVel()*eTime;
-    if(!TryMove(delta, map)) {
+    if(!TryMove(delta, level)) {
         for(float i=0.1f ; i<MathHelper::ABS(delta.x)-0.1f ; i+=0.1f) {
-            if(!TryMove(sf::Vector2f(MathHelper::SGN(delta.x)/10.f, 0), map)) {
+            if(!TryMove(sf::Vector2f(MathHelper::SGN(delta.x)/10.f, 0), level)) {
                 SetVel(sf::Vector2f(0, GetVel().y));
                 break;
             }
         }
         for(float i=0.1f ; i<MathHelper::ABS(delta.y)-0.1f ; i+=0.1f) {
-            if(!TryMove(sf::Vector2f(0, MathHelper::SGN(delta.y)/10.f), map)) {
+            if(!TryMove(sf::Vector2f(0, MathHelper::SGN(delta.y)/10.f), level)) {
                 SetVel(sf::Vector2f(GetVel().x, 0));
                 break;
             }
@@ -59,8 +61,8 @@ void MovingSprite::Update(IP& ip, float eTime, Map& map) {
     setTextureRect(_animTable->GetRect());
 }
 
-bool MovingSprite::TryMove(sf::Vector2f delta, Map& map) {
-    if(map.IsCollided(*this, GetUpperLeftPos()+delta)) {
+bool MovingSprite::TryMove(sf::Vector2f delta, Level& level) {
+    if(level.GetMap().IsCollided(*this, GetUpperLeftPos()+delta) || level.GetSpawner().IsCollided(*this, GetUpperLeftPos()+delta)) {
         return false;
     }
     setPosition(getPosition() + delta);

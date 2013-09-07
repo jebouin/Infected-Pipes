@@ -13,8 +13,11 @@ Background::~Background() {
 }
 
 void Background::Draw(IP& ip, sf::View& prevView) {
+    /*float scrollFact = 6.f;
+    _view.setCenter(sf::Vector2f(prevView.getCenter().x/scrollFact, prevView.getCenter().y));
+    _back.setPosition(-prevView.getSize().x/scrollFact - 57, 0);*/
     sf::RenderTexture& t(ip._renderer->GetTexture());
-    t.setView(t.getDefaultView());
+    t.setView(_view);
     ip._renderer->Draw(_back);
     t.setView(prevView);
 }

@@ -11,13 +11,13 @@ using namespace std;
 class IP;
 class Character;
 class EntityManager;
-class Map;
+class Level;
 
 class Player {
     public:
     Player(IP& ip, EntityManager& eManager);
     ~Player();
-    void Update(IP& ip, float eTime, Map& map, EntityManager& eManager);
+    void Update(IP& ip, float eTime, Level& level, EntityManager& eManager);
     void Draw(IP& ip);
     sf::View& GetView();
     Character& GetCharacter();

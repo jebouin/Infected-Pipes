@@ -16,8 +16,8 @@ Character::~Character() {
 
 }
 
-void Character::Update(IP& ip, float eTime, Map& map, EntityManager& eManager) {
-    GameEntity::Update(ip, eTime, map, eManager);
+void Character::Update(IP& ip, float eTime, Level& level, EntityManager& eManager) {
+    GameEntity::Update(ip, eTime, level, eManager);
 
     if(GetAnims().GetAnimationName()=="idle") {
         if(sf::Mouse::isButtonPressed(sf::Mouse::Left)) {

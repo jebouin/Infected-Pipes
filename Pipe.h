@@ -12,9 +12,9 @@ class IP;
 class Map;
 class EntityManager;
 
-class Pipe : public sf::Sprite{
+class Pipe : public sf::Sprite {
     public:
-    Pipe(IP& ip, sf::Vector2f pos);
+    Pipe(IP& ip, sf::Vector2f pos, float angle);
     ~Pipe();
     void Update(IP& ip, EntityManager& eManager);
     void Spawn(IP& ip, EntityManager& eManager);

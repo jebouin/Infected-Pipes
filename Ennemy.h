@@ -8,7 +8,7 @@
 using namespace std;
 
 class IP;
-class Map;
+class Level;
 class Character;
 class EntityManager;
 
@@ -16,10 +16,10 @@ class Ennemy : public GameEntity {
     public:
     Ennemy(IP& ip);
     ~Ennemy();
-    void Update(IP& ip, float eTime, Map& map, Character& character, EntityManager& eManager);
+    void Update(IP& ip, float eTime, Level& level, Character& character, EntityManager& eManager);
 
     private:
-
+    bool _inPipe;
 };
 
 #endif // ENNEMY_H_INCLUDED

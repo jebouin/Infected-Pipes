@@ -1,7 +1,9 @@
 #include "GameEntity.h"
+#include "Level.h"
 #include "Map.h"
 #include "MathHelper.h"
 #include "EntityManager.h"
+#include "Spawner.h"
 
 GameEntity::GameEntity(IP& ip, string name, sf::IntRect hitbox, int hp) : MovingSprite(ip, name, hitbox) {
     _jumpPower = 0.7;
@@ -16,7 +18,7 @@ GameEntity::~GameEntity() {
 
 }
 
-void GameEntity::Update(IP& ip, float elapsedTime, Map& map, EntityManager& eManager) {
+void GameEntity::Update(IP& ip, float elapsedTime, Level& level, EntityManager& eManager) {
     SetVel(sf::Vector2f(GetVel().x / 1.2f, GetVel().y));
     Accelerate(sf::Vector2f(0, 0.003), elapsedTime);
 
@@ -29,7 +31,11 @@ void GameEntity::Update(IP& ip, float elapsedTime, Map& map, EntityManager& eMan
         Collide((GameEntity*)e);
     }
 
-    MovingSprite::Update(ip, elapsedTime, map);
+    MovingSprite::Update(ip, elapsedTime, level);
+}
+
+void GameEntity::Update(IP& ip, float elapsedTime) {
+    MovingSprite::Update(ip, elapsedTime);
 }
 
 void GameEntity::Collide(GameEntity* other) {
@@ -56,8 +62,8 @@ void GameEntity::GoRight(float eTime) {
     Accelerate(sf::Vector2f(_speed, 0), eTime);
 }
 
-void GameEntity::Jump(Map& map) {
-    if(!map.IsOnGround(*this)) {
+void GameEntity::Jump(Level& level) {
+    if(!level.GetSpawner().IsOnGround(*this) && !level.GetMap().IsOnGround(*this)) {
         return;
     }
     SetVel(sf::Vector2f(GetVel().x, -_jumpPower));
