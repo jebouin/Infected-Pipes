@@ -12,6 +12,10 @@ float MathHelper::SGN(float n) {
     return (n==0 ? 0 : n/ABS(n));
 }
 
+float MathHelper::Interpolate(float x, float y0, float y1) {
+    return x*(y1-y0) + y0;
+}
+
 int MathHelper::RandInt(int min, int max) {
     return rand()%(max-min) + min;
 }
@@ -43,4 +47,58 @@ float MathHelper::GetVecLength(sf::Vector2f vec) {
 
 sf::Vector2f MathHelper::Normalize(sf::Vector2f vec) {
     return vec/GetVecLength(vec);
+}
+
+float MathHelper::Deg2Rad(float deg) {
+    return deg*PI/180.f;
+}
+
+float MathHelper::Rad2Deg(float rad) {
+    return rad*180.f/PI;
+}
+
+sf::Vector2f MathHelper::Ang2Vec(float angle) {
+    return sf::Vector2f(cos(angle), sin(angle));
+}
+
+float MathHelper::Vec2Ang(sf::Vector2f vec) {
+    return atan2(vec.y, vec.x);
+}
+
+vector<float> MathHelper::GetNoise(float width) {
+    vector<float> noise(width, 0);
+    for(int i=0 ; i<width ; i++) {
+        noise[i] = MathHelper::RandFloat(0, 1);
+    }
+    return noise;
+}
+
+vector<float> MathHelper::GetInterplatedNoise(float width, int waveLength) {
+    vector<float> baseNoise = GetNoise(width/waveLength);
+    vector<float> noise(width, 0);
+    for(int i=0 ; i<width ; i++) {
+        noise[i] = MathHelper::Interpolate(float(i%waveLength)/(float(waveLength)), baseNoise[i/waveLength], baseNoise[(i/waveLength+1)%int(width/waveLength)]);
+    }
+    return noise;
+}
+
+vector<float> MathHelper::GetPerlin(float width) {
+    int nbOctaves = 7;
+    float p = 1.f;
+    float m = 0.5f;
+    float totalP = 0.f;
+    vector<float> perlin(width, 0);
+    for(int o=0 ; o<nbOctaves ; o++) {
+        vector<float> curNoise = GetInterplatedNoise(width, pow(2, nbOctaves-1-o));
+        for(int i=0 ; i<width ; i++) {
+            perlin[i] += curNoise[i]*p;
+        }
+        totalP += p;
+        p *= m;
+    }
+
+    for(int i=0 ; i<width ; i++) {
+        perlin[i] /= totalP;
+    }
+    return perlin;
 }
