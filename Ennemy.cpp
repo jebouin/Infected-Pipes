@@ -6,6 +6,7 @@
 #include "MathHelper.h"
 #include "EntityManager.h"
 #include "Spawner.h"
+#include "ParticleManager.h"
 
 Ennemy::Ennemy(IP& ip) : GameEntity(ip, "zombie", sf::IntRect(1, 0, 5, 20), 60) {
     SetSpeed(MathHelper::RandFloat(0.0005, 0.001));
@@ -17,7 +18,7 @@ Ennemy::~Ennemy() {
 
 }
 
-void Ennemy::Update(IP& ip, float eTime, Level& level, Character& character, EntityManager& eManager) {
+void Ennemy::Update(IP& ip, float eTime, Level& level, Character& character, EntityManager& eManager, ParticleManager& pManager) {
     if(getPosition().x < character.getPosition().x) {
         GoRight(eTime);
     } else if(getPosition().x > character.getPosition().x) {
@@ -30,7 +31,7 @@ void Ennemy::Update(IP& ip, float eTime, Level& level, Character& character, Ent
             _inPipe = false;
         }
     } else {
-        GameEntity::Update(ip, eTime, level, eManager);
+        GameEntity::Update(ip, eTime, level, eManager, pManager);
     }
 
     if(/*MathHelper::ABS(GetVel().x) < 0.01 && MathHelper::ABS(getPosition().x-character.getPosition().x) > 16*/0) {

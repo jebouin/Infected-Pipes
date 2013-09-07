@@ -12,12 +12,13 @@ class IP;
 class Level;
 class Ennemy;
 class Character;
+class ParticleManager;
 
 class EntityManager {
     public:
     EntityManager();
     ~EntityManager();
-    void Update(IP& ip, float eTime, Level& level, Character& character);
+    void Update(IP& ip, float eTime, Level& level, Character& character, ParticleManager& pManager);
     void Draw(IP& ip);
     void Add(Ennemy *e);
     int GetNbEnnemies();

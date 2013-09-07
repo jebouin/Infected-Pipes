@@ -4,6 +4,10 @@
 #include "MathHelper.h"
 #include "EntityManager.h"
 #include "Spawner.h"
+#include "ParticleManager.h"
+#include "Animation.h"
+#include "AnimationTable.h"
+#include "Particle.h"
 
 GameEntity::GameEntity(IP& ip, string name, sf::IntRect hitbox, int hp) : MovingSprite(ip, name, hitbox) {
     _jumpPower = 0.7;
@@ -19,7 +23,7 @@ GameEntity::~GameEntity() {
 
 }
 
-void GameEntity::Update(IP& ip, float elapsedTime, Level& level, EntityManager& eManager) {
+void GameEntity::Update(IP& ip, float elapsedTime, Level& level, EntityManager& eManager, ParticleManager& pManager) {
     SetVel(sf::Vector2f(GetVel().x / 1.2f, GetVel().y));
     Accelerate(sf::Vector2f(0, 0.003), elapsedTime);
 
@@ -93,12 +97,44 @@ void GameEntity::Damage(int dmg) {
     }
 }
 
-void GameEntity::Hit(GameEntity *other) {
+void GameEntity::Hit(GameEntity *other, IP& ip, ParticleManager& pManager) {
     other->Damage(5);
     sf::Vector2f c(MathHelper::GetCenter(GetGlobalHitbox()));
     sf::Vector2f oc(MathHelper::GetCenter(other->GetGlobalHitbox()));
     sf::Vector2f dir = MathHelper::Normalize(sf::Vector2f(oc.x-c.x, 0));
     other->SetVel(other->GetVel() + sf::Vector2f(dir.x, 0)*0.07f/other->GetWeight());
+
+    for(int i=0 ; i<5 ; i++) {
+        Particle *p = new Particle(ip, "blood1",
+                                   sf::Vector2f(other->GetGlobalHitbox().left+other->GetGlobalHitbox().width/2.f, other->GetGlobalHitbox().top+MathHelper::RandFloat(other->GetGlobalHitbox().height/2.f, other->GetGlobalHitbox().height/4.f)),
+                                   (dir - sf::Vector2f(0, MathHelper::RandFloat(0.4, 1))) * MathHelper::RandFloat(0.1, 0.2),
+                                   0,
+                                   350,
+                                   sf::Vector2f(1, 1),
+                                   sf::Vector2f(1, 1),
+                                   true,
+                                   true,
+                                   sf::IntRect(2, 2, 2, 2));
+        p->GetAnims().AddAnimation("base", new Animation(7, 50, sf::Vector2i(0, 0), sf::Vector2i(6, 6), false));
+        p->GetAnims().SetAnimation("base");
+        pManager.AddParticle(p);
+    }
+
+    for(int i=0 ; i<10 ; i++) {
+        Particle *p = new Particle(ip, "blood0",
+                                   sf::Vector2f(other->GetGlobalHitbox().left+other->GetGlobalHitbox().width/2.f, other->GetGlobalHitbox().top+MathHelper::RandFloat(other->GetGlobalHitbox().height/2.f, other->GetGlobalHitbox().height/4.f)),
+                                   (dir - sf::Vector2f(0, MathHelper::RandFloat(0.6, 1.2))) * MathHelper::RandFloat(0.1, 0.2),
+                                   0,
+                                   300,
+                                   sf::Vector2f(1, 1),
+                                   sf::Vector2f(1, 1),
+                                   true,
+                                   true,
+                                   sf::IntRect(1, 1, 2, 2));
+        p->GetAnims().AddAnimation("base", new Animation(6, 50, sf::Vector2i(0, 0), sf::Vector2i(4, 4), false));
+        p->GetAnims().SetAnimation("base");
+        pManager.AddParticle(p);
+    }
 }
 
 void GameEntity::SetJumpPower(float p) {

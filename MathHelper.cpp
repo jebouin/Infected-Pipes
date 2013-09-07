@@ -16,6 +16,10 @@ float MathHelper::Interpolate(float x, float y0, float y1) {
     return x*(y1-y0) + y0;
 }
 
+sf::Vector2f MathHelper::Interpolate(float x, sf::Vector2f v0, sf::Vector2f v1) {
+    return sf::Vector2f(Interpolate(x, v0.x, v1.x), Interpolate(x, v0.y, v1.y));
+}
+
 int MathHelper::RandInt(int min, int max) {
     return rand()%(max-min) + min;
 }

@@ -7,6 +7,8 @@ TextureLoader::TextureLoader() {
     AddTexture("pipe.png", "pipe");
     AddTexture("zombie.png", "zombie");
     AddTexture("background.png", "background");
+    AddTexture("blood0.png", "blood0");
+    AddTexture("blood1.png", "blood1");
 }
 
 TextureLoader::~TextureLoader() {

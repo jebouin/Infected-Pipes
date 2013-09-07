@@ -17,6 +17,7 @@ class MathHelper {
     static sf::Vector2f ABS(sf::Vector2f v);
     static float SGN(float n);
     static float Interpolate(float x, float y0, float y1);
+    static sf::Vector2f Interpolate(float x, sf::Vector2f v0, sf::Vector2f v1);
     static int RandInt(int min, int max);
     static float RandFloat(float min, float max);
     static vector<sf::Vector2f> Rect2Corners(sf::FloatRect rect);

@@ -11,12 +11,13 @@ class IP;
 class Level;
 class Character;
 class EntityManager;
+class ParticleManager;
 
 class Ennemy : public GameEntity {
     public:
     Ennemy(IP& ip);
     ~Ennemy();
-    void Update(IP& ip, float eTime, Level& level, Character& character, EntityManager& eManager);
+    void Update(IP& ip, float eTime, Level& level, Character& character, EntityManager& eManager, ParticleManager& pManager);
 
     private:
     bool _inPipe;

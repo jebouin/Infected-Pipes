@@ -4,6 +4,7 @@
 #include "Ennemy.h"
 #include "Level.h"
 #include "Character.h"
+#include "ParticleManager.h"
 
 EntityManager::EntityManager() {
 
@@ -16,9 +17,9 @@ EntityManager::~EntityManager() {
     }
 }
 
-void EntityManager::Update(IP& ip, float eTime, Level& level, Character& character) {
+void EntityManager::Update(IP& ip, float eTime, Level& level, Character& character, ParticleManager& pManager) {
     for(int i=0 ; i<_ennemies.size() ; i++) {
-        _ennemies[i]->Update(ip, eTime, level, character, *this);
+        _ennemies[i]->Update(ip, eTime, level, character, *this, pManager);
         if(!_ennemies[i]->IsAlive()) {
             delete _ennemies[i];
             _ennemies.erase(_ennemies.begin() + i);

@@ -59,6 +59,7 @@ void MovingSprite::Update(IP& ip, float eTime, Level& level) {
     }
     _animTable->Update();
     setTextureRect(_animTable->GetRect());
+    setRotation(getRotation() + GetRotVel()*eTime);
 }
 
 bool MovingSprite::TryMove(sf::Vector2f delta, Level& level) {

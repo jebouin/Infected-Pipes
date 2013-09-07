@@ -4,6 +4,7 @@
 #include "Ennemy.h"
 #include "AnimationTable.h"
 #include "EntityManager.h"
+#include "ParticleManager.h"
 
 Character::Character(IP& ip) : GameEntity(ip, "character", sf::IntRect(2, 0, 7, 26), 10) {
     SetWeight(0.5f);
@@ -17,8 +18,8 @@ Character::~Character() {
 
 }
 
-void Character::Update(IP& ip, float eTime, Level& level, EntityManager& eManager) {
-    GameEntity::Update(ip, eTime, level, eManager);
+void Character::Update(IP& ip, float eTime, Level& level, EntityManager& eManager, ParticleManager& pManager) {
+    GameEntity::Update(ip, eTime, level, eManager, pManager);
 
     if(GetAnims().GetAnimationName()=="idle") {
         if(sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
@@ -31,7 +32,7 @@ void Character::Update(IP& ip, float eTime, Level& level, EntityManager& eManage
                     attackRect = sf::FloatRect(GetGlobalHitbox().left-16, GetGlobalHitbox().top, 16, GetGlobalHitbox().height);
                 }
                 if(eManager.GetEnnemy(i)->GetGlobalHitbox().intersects(attackRect)) {
-                    Hit((GameEntity*)eManager.GetEnnemy(i));
+                    Hit((GameEntity*)eManager.GetEnnemy(i), ip, pManager);
                 }
             }
         }

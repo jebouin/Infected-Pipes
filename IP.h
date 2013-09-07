@@ -11,6 +11,7 @@ class EntityManager;
 class Player;
 class Background;
 class Grass;
+class ParticleManager;
 
 class IP {
     public:
@@ -21,6 +22,7 @@ class IP {
 
     Renderer *_renderer;
     TextureLoader *_textureLoader;
+    sf::Font _font;
 
     private:
     sf::Clock _clock;
@@ -30,6 +32,7 @@ class IP {
     Player *_player;
     Background *_background;
     Grass *_grass;
+    ParticleManager *_particleManager;
 };
 
 #endif // IP_H_INCLUDED

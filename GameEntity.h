@@ -14,12 +14,13 @@ class IP;
 class Level;
 class Map;
 class EntityManager;
+class ParticleManager;
 
 class GameEntity : public MovingSprite {
     public:
     GameEntity(IP& ip, string name, sf::IntRect hitbox, int hp);
     ~GameEntity();
-    void Update(IP& ip, float elapsedTime, Level& level, EntityManager& eManager);
+    void Update(IP& ip, float elapsedTime, Level& level, EntityManager& eManager, ParticleManager& pManager);
     void Update(IP& ip, float elapsedTime);
     void Collide(GameEntity* other);
     void GoLeft(float eTime);
@@ -27,7 +28,7 @@ class GameEntity : public MovingSprite {
     void ChangeDir();
     void Jump(Level& level);
     void Damage(int dmg);
-    void Hit(GameEntity *other);
+    void Hit(GameEntity *other, IP& ip, ParticleManager& pManager);
     void SetJumpPower(float p);
     void SetSpeed(float s);
     void SetWeight(float w);

@@ -13,12 +13,13 @@ class IP;
 class Map;
 class Level;
 class EntityManager;
+class ParticleManager;
 
 class Character : public GameEntity {
     public:
     Character(IP& ip);
     ~Character();
-    void Update(IP& ip, float eTime, Level& level, EntityManager& eManager);
+    void Update(IP& ip, float eTime, Level& level, EntityManager& eManager, ParticleManager& pManager);
 
     private:
 

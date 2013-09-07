@@ -6,6 +6,7 @@
 #include "Map.h"
 #include "MathHelper.h"
 #include "AnimationTable.h"
+#include "ParticleManager.h"
 
 Player::Player(IP& ip, EntityManager& eManager) {
     _character = new Character(ip);
@@ -18,7 +19,7 @@ Player::~Player() {
     delete _character;
 }
 
-void Player::Update(IP& ip, float eTime, Level& level, EntityManager& eManager) {
+void Player::Update(IP& ip, float eTime, Level& level, EntityManager& eManager, ParticleManager& pManager) {
     float speed = 0.0005f;
     Map& map(level.GetMap());
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
@@ -33,7 +34,7 @@ void Player::Update(IP& ip, float eTime, Level& level, EntityManager& eManager) 
         _character->Jump(level);
     }
 
-    _character->Update(ip, eTime, level, eManager);
+    _character->Update(ip, eTime, level, eManager, pManager);
     _view->setCenter(_character->getPosition());
 
     sf::FloatRect vrect = MathHelper::View2Rect(*_view);

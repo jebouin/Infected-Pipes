@@ -6,17 +6,24 @@
 #include "Player.h"
 #include "Background.h"
 #include "Grass.h"
+#include "ParticleManager.h"
+#include "Particle.h"
+#include "MathHelper.h"
+#include "Animation.h"
+#include "AnimationTable.h"
 
 IP::IP() {
     _window = new sf::RenderWindow(sf::VideoMode(960, 704, 32), "Infected Pipes");
     _window->setVerticalSyncEnabled(true);
     _renderer = new Renderer(sf::Vector2i(sf::Vector2f(_window->getSize())/4.f), 4);
     _textureLoader = new TextureLoader();
+    _font.loadFromFile("font/font.ttf");
     _level = new Level(*this);
     _entityManager = new EntityManager();
     _player = new Player(*this, *_entityManager);
     _background = new Background(*this);
     _grass = new Grass(*this, *_level);
+    _particleManager = new ParticleManager();
 
     while(_window->isOpen()) {
         sf::Event e;
@@ -44,14 +51,16 @@ IP::~IP() {
     delete _player;
     delete _background;
     delete _grass;
+    delete _particleManager;
 }
 
 void IP::Update() {
     float eTime = _clock.restart().asMilliseconds();
-    _entityManager->Update(*this, eTime, *_level, _player->GetCharacter());
-    _player->Update(*this, eTime, *_level, *_entityManager);
+    _entityManager->Update(*this, eTime, *_level, _player->GetCharacter(), *_particleManager);
+    _player->Update(*this, eTime, *_level, *_entityManager, *_particleManager);
     _level->Update(*this, *_entityManager);
     _grass->Update(*this);
+    _particleManager->Update(*this, eTime, *_level);
 }
 
 void IP::Draw() {
@@ -67,6 +76,7 @@ void IP::Draw() {
     _player->Draw(*this);
     _level->Draw(*this);
     _grass->Draw(*this);
+    _particleManager->Draw(*this);
 
     _renderer->DrawToWindow(*_window);
     _window->display();
