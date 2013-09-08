@@ -27,7 +27,7 @@ class GameEntity : public MovingSprite {
     void GoRight(float eTime);
     void ChangeDir();
     void Jump(Level& level);
-    void Damage(int dmg);
+    void Damage(int dmg, IP& ip, ParticleManager& pManager);
     void Hit(GameEntity *other, IP& ip, ParticleManager& pManager);
     void SetJumpPower(float p);
     void SetSpeed(float s);

@@ -8,8 +8,9 @@
 #include "Animation.h"
 #include "AnimationTable.h"
 #include "Particle.h"
+#include "DamageParticle.h"
 
-GameEntity::GameEntity(IP& ip, string name, sf::IntRect hitbox, int hp) : MovingSprite(ip, name, hitbox) {
+GameEntity::GameEntity(IP& ip, string name, sf::IntRect hitbox, int hp) : MovingSprite(ip, name, hitbox, true) {
     _jumpPower = 0.7;
     _speed = 0.003;
     _weight = 0.3;
@@ -84,21 +85,31 @@ void GameEntity::ChangeDir() {
 }
 
 void GameEntity::Jump(Level& level) {
-    if(!level.GetSpawner().IsOnGround(*this) && !level.GetMap().IsOnGround(*this)) {
+    if(!level.GetSpawner().IsOnGround(*this) && !level.GetMap().IsOnTileType(*this, Map::WALL)) {
         return;
     }
     SetVel(sf::Vector2f(GetVel().x, -_jumpPower));
 }
 
-void GameEntity::Damage(int dmg) {
+void GameEntity::Damage(int dmg, IP& ip, ParticleManager& pManager) {
     _hp -= dmg;
-        if(_hp <= 0) {
+    if(_hp <= 0) {
         _alive = false;
     }
+
+    pManager.AddParticle(new DamageParticle(ip,
+                                            dmg,
+                                            getPosition(),
+                                            /*sf::Vector2f(0, -0.1)*/MathHelper::Ang2Vec(MathHelper::Deg2Rad(MathHelper::RandFloat(250, 290))) * MathHelper::RandFloat(0.2, 0.4),
+                                            2000,
+                                            sf::Vector2f(1, 1),
+                                            sf::Vector2f(1, 1),
+                                            true,
+                                            true));
 }
 
 void GameEntity::Hit(GameEntity *other, IP& ip, ParticleManager& pManager) {
-    other->Damage(5);
+    other->Damage(8+MathHelper::RandInt(0, 4), ip, pManager);
     sf::Vector2f c(MathHelper::GetCenter(GetGlobalHitbox()));
     sf::Vector2f oc(MathHelper::GetCenter(other->GetGlobalHitbox()));
     sf::Vector2f dir = MathHelper::Normalize(sf::Vector2f(oc.x-c.x, 0));
@@ -112,9 +123,12 @@ void GameEntity::Hit(GameEntity *other, IP& ip, ParticleManager& pManager) {
                                    350,
                                    sf::Vector2f(1, 1),
                                    sf::Vector2f(1, 1),
+                                   255,
+                                   255,
                                    true,
                                    true,
-                                   sf::IntRect(2, 2, 2, 2));
+                                   true,
+                                   sf::IntRect(3, 2, 1, 2));
         p->GetAnims().AddAnimation("base", new Animation(7, 50, sf::Vector2i(0, 0), sf::Vector2i(6, 6), false));
         p->GetAnims().SetAnimation("base");
         pManager.AddParticle(p);
@@ -128,9 +142,12 @@ void GameEntity::Hit(GameEntity *other, IP& ip, ParticleManager& pManager) {
                                    300,
                                    sf::Vector2f(1, 1),
                                    sf::Vector2f(1, 1),
+                                   255,
+                                   255,
                                    true,
                                    true,
-                                   sf::IntRect(1, 1, 2, 2));
+                                   true,
+                                   sf::IntRect(2, 1, 1, 2));
         p->GetAnims().AddAnimation("base", new Animation(6, 50, sf::Vector2i(0, 0), sf::Vector2i(4, 4), false));
         p->GetAnims().SetAnimation("base");
         pManager.AddParticle(p);

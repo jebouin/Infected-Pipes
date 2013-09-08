@@ -10,7 +10,7 @@ class IP;
 
 class Background {
     public:
-    Background(IP& ip);
+    Background(IP& ip, string name);
     ~Background();
     void Draw(IP& ip, sf::View& prevView);
 

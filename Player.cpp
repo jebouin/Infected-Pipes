@@ -10,7 +10,7 @@
 
 Player::Player(IP& ip, EntityManager& eManager) {
     _character = new Character(ip);
-    _character->setPosition(sf::Vector2f(32, 32));
+    _character->setPosition(sf::Vector2f(48, 32));
     _view = new sf::View(sf::FloatRect(0, 0, ip._renderer->GetTexture().getSize().x, ip._renderer->GetTexture().getSize().y));
 }
 

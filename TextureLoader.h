@@ -8,9 +8,11 @@
 
 using namespace std;
 
+class IP;
+
 class TextureLoader {
     public:
-    TextureLoader();
+    TextureLoader(IP& ip);
     ~TextureLoader();
     void AddTexture(string path, string name);
     sf::Texture& GetTexture(string name);

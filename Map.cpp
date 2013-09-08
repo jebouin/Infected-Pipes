@@ -9,22 +9,10 @@ Map::Map(IP& ip, sf::Vector2i size) {
     _tileset.setTexture(ip._textureLoader->GetTexture("tileset"));
     _size = size;
     _tiles = vector<vector<int> >(_size.x, vector<int>(_size.y, 0));
-    for(int i=0 ; i<_size.x ; i++) {
-        for(int j=0 ; j<_size.y ; j++) {
-            SetTile(sf::Vector2i(i, j), (rand()%4==0?1:0));
-        }
-    }
-    for(int i=0 ; i<_size.x ; i++) {
-        SetTile(sf::Vector2i(i, 0), 1);
-        SetTile(sf::Vector2i(i, _size.y-1), 1);
-    }
-    for(int i=0 ; i<_size.y ; i++) {
-        SetTile(sf::Vector2i(0, i), 1);
-        SetTile(sf::Vector2i(_size.x-1, i), 1);
-    }
-    for(int i=0 ; i<25 ; i++) {
-        SetTile(sf::Vector2i(i%5+1, i/5+1), 0);
-    }
+    _tileTypes.push_back(VOID);
+    _tileTypes.push_back(WALL);
+    _tileTypes.push_back(WALL);
+    _tileTypes.push_back(WALL);
 }
 
 Map::~Map() {
@@ -75,46 +63,46 @@ void Map::SetTile(sf::Vector2i pos, int id) {
     _tiles[pos.x][pos.y] = id;
 }
 
-bool Map::IsCollided(sf::FloatRect rect) {
+bool Map::IsCollided(sf::FloatRect rect, TileType type) {
     vector<sf::Vector2f> corners = MathHelper::Rect2Corners(rect);
     for(float i=corners[0].x ; i<corners[1].x ; i+=8) {
-        if(GetTile(sf::Vector2i(sf::Vector2f(i, corners[0].y)/16.f)) == 1) {
+        if(_tileTypes[GetTile(sf::Vector2i(sf::Vector2f(i, corners[0].y)/16.f))] == type) {
             return true;
         }
-        if(GetTile(sf::Vector2i(sf::Vector2f(i, corners[2].y)/16.f)) == 1) {
+        if(_tileTypes[GetTile(sf::Vector2i(sf::Vector2f(i, corners[2].y)/16.f))] == type) {
             return true;
         }
     }
     for(float i=corners[0].y ; i<corners[2].y ; i+=8) {
-        if(GetTile(sf::Vector2i(sf::Vector2f(corners[0].x, i)/16.f)) == 1) {
+        if(_tileTypes[GetTile(sf::Vector2i(sf::Vector2f(corners[0].x, i)/16.f))] == type) {
             return true;
         }
-        if(GetTile(sf::Vector2i(sf::Vector2f(corners[2].x, i)/16.f)) == 1) {
+        if(_tileTypes[GetTile(sf::Vector2i(sf::Vector2f(corners[2].x, i)/16.f))] == type) {
             return true;
         }
     }
-    if(GetTile(sf::Vector2i(sf::Vector2f(corners[2])/16.f)) == 1) {
+    if(_tileTypes[GetTile(sf::Vector2i(sf::Vector2f(corners[2])/16.f))] == type) {
         return true;
     }
     return false;
 }
 
-bool Map::IsCollided(MovingSprite& sprite, sf::Vector2f pos) {
-    return IsCollided(sf::FloatRect(sf::Vector2f(sprite.GetHitbox().left, sprite.GetHitbox().top)+pos, sf::Vector2f(sprite.GetHitbox().width, sprite.GetHitbox().height)));
+bool Map::IsCollided(MovingSprite& sprite, sf::Vector2f pos, TileType type) {
+    return IsCollided(sf::FloatRect(sf::Vector2f(sprite.GetHitbox().left, sprite.GetHitbox().top)+pos, sf::Vector2f(sprite.GetHitbox().width, sprite.GetHitbox().height)), type);
 }
 
-bool Map::IsCollided(MovingSprite& sprite) {
-    return IsCollided(sprite.GetGlobalHitbox());
+bool Map::IsCollided(MovingSprite& sprite, TileType type) {
+    return IsCollided(sprite.GetGlobalHitbox(), type);
 }
 
-bool Map::IsOnGround(MovingSprite& sprite) {
+bool Map::IsOnTileType(MovingSprite& sprite, TileType type) {
     sf::FloatRect rect = sprite.GetGlobalHitbox();
     for(float i=0 ; i<rect.width ; i+=8) {
-        if(GetTile(sf::Vector2i(sf::Vector2f(rect.left+i, rect.top+rect.height+1)/16.f)) == 1) {
+        if(_tileTypes[GetTile(sf::Vector2i(sf::Vector2f(rect.left+i, rect.top+rect.height+1)/16.f))] == type) {
             return true;
         }
     }
-    if(GetTile(sf::Vector2i(sf::Vector2f(rect.left+rect.width, rect.top+rect.height+1)/16.f)) == 1) {
+    if(_tileTypes[GetTile(sf::Vector2i(sf::Vector2f(rect.left+rect.width, rect.top+rect.height+1)/16.f))] == type) {
         return true;
     }
     return false;

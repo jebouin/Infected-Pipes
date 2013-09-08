@@ -3,8 +3,8 @@
 #include "TextureLoader.h"
 #include "Renderer.h"
 
-Background::Background(IP& ip) {
-    _back.setTexture(ip._textureLoader->GetTexture("background"));
+Background::Background(IP& ip, string name) {
+    _back.setTexture(ip._textureLoader->GetTexture(name));
     _view = sf::View(sf::FloatRect(0, 0, ip._renderer->GetTexture().getSize().x, ip._renderer->GetTexture().getSize().y));
 }
 

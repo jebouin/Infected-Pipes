@@ -13,6 +13,8 @@ class MovingSprite;
 
 class Map {
     public:
+    enum TileType {VOID, WALL};
+
     Map(IP& ip, sf::Vector2i size);
     ~Map();
     void Draw(IP& ip);
@@ -20,15 +22,16 @@ class Map {
     int GetTile(sf::Vector2i pos);
     sf::Vector2i GetSize();
     void SetTile(sf::Vector2i pos, int id);
-    bool IsCollided(sf::FloatRect rect);
-    bool IsCollided(MovingSprite& sprite, sf::Vector2f pos);
-    bool IsCollided(MovingSprite& sprite);
-    bool IsOnGround(MovingSprite& sprite);
+    bool IsCollided(sf::FloatRect rect, TileType type);
+    bool IsCollided(MovingSprite& sprite, sf::Vector2f pos, TileType type);
+    bool IsCollided(MovingSprite& sprite, TileType type);
+    bool IsOnTileType(MovingSprite& sprite, TileType type);
 
     private:
     sf::Vector2i _size;
     sf::Sprite _tileset;
     vector<vector<int> > _tiles;
+    vector<TileType> _tileTypes;
 };
 
 #endif // MAP_H_INCLUDED

@@ -10,7 +10,7 @@ Character::Character(IP& ip) : GameEntity(ip, "character", sf::IntRect(2, 0, 7, 
     SetWeight(0.5f);
     AnimationTable& t(GetAnims());
     t.AddAnimation("idle", new Animation(1, 1000, sf::Vector2i(0, 0), sf::Vector2i(22, 26), true));
-    t.AddAnimation("attack", new Animation(1, 200, sf::Vector2i(0, 26), sf::Vector2i(22, 26), false));
+    t.AddAnimation("attack", new Animation(1, 50, sf::Vector2i(0, 26), sf::Vector2i(22, 26), false));
     t.SetAnimation("idle");
 }
 

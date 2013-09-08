@@ -14,7 +14,7 @@ class Level;
 
 class Particle : public MovingSprite {
     public:
-    Particle(IP& ip, string name, sf::Vector2f pos, sf::Vector2f velocity, float rotVel, float lifeTime, sf::Vector2f startScale, sf::Vector2f endScale, bool gravity, bool collision, sf::IntRect hitbox);
+    Particle(IP& ip, string name, sf::Vector2f pos, sf::Vector2f velocity, float rotVel, float lifeTime, sf::Vector2f startScale, sf::Vector2f endScale, float startAlpha, float endAlpha, bool gravity, bool collision, bool animated, sf::IntRect hitbox);
     ~Particle();
     void Update(IP& ip, float eTime, Level& level);
     bool IsAlive();
@@ -24,6 +24,8 @@ class Particle : public MovingSprite {
     float _lifeTime;
     sf::Vector2f _startScale;
     sf::Vector2f _endScale;
+    float _startAlpha;
+    float _endAlpha;
     sf::Clock _timer;
     bool _gravity;
     bool _collision;

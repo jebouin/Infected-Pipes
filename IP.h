@@ -30,8 +30,6 @@ class IP {
     Level *_level;
     EntityManager *_entityManager;
     Player *_player;
-    Background *_background;
-    Grass *_grass;
     ParticleManager *_particleManager;
 };
 

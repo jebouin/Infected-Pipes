@@ -1,12 +1,14 @@
 #include "TextureLoader.h"
+#include "IP.h"
 
-TextureLoader::TextureLoader() {
+TextureLoader::TextureLoader(IP& ip) {
     AddTexture("tileset.png", "tileset");
     AddTexture("character.png", "character");
-    AddTexture("level.png", "level");
+    AddTexture("level0.png", "level0");
+    AddTexture("level1.png", "level1");
     AddTexture("pipe.png", "pipe");
     AddTexture("zombie.png", "zombie");
-    AddTexture("background.png", "background");
+    AddTexture("nightBackground.png", "nightBackground");
     AddTexture("blood0.png", "blood0");
     AddTexture("blood1.png", "blood1");
 }

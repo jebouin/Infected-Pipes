@@ -14,8 +14,8 @@ class AnimationTable;
 
 class MovingSprite : public sf::Sprite {
     public:
-    MovingSprite(IP& ip, string name);
-    MovingSprite(IP& ip, string name, sf::IntRect hitbox);
+    MovingSprite(IP& ip, string name, bool animated=true);
+    MovingSprite(IP& ip, string name, sf::IntRect hitbox, bool animated=true);
     ~MovingSprite();
     void Update(IP& ip, float eTime);
     void Update(IP& ip, float eTime, Level& level);
@@ -37,6 +37,7 @@ class MovingSprite : public sf::Sprite {
     sf::IntRect _hitbox;
     sf::Vector2f _vel;
     float _rotVel;
+    bool _animated;
 };
 
 #endif // MOVINGSPRITE_H_INCLUDED

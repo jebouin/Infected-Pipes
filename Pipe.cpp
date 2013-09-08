@@ -5,7 +5,7 @@
 #include "TextureLoader.h"
 #include "MathHelper.h"
 
-Pipe::Pipe(IP& ip, sf::Vector2f pos, float angle) {
+Pipe::Pipe(IP& ip, sf::Vector2f pos, float angle) : sf::Sprite() {
     setTexture(ip._textureLoader->GetTexture("pipe"));
     setOrigin(sf::Vector2f(getTextureRect().width, getTextureRect().height/2.f));
     setPosition(pos);

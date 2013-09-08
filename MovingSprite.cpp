@@ -8,7 +8,7 @@
 #include "Animation.h"
 #include "AnimationTable.h"
 
-MovingSprite::MovingSprite(IP& ip, string name) : sf::Sprite() {
+MovingSprite::MovingSprite(IP& ip, string name, bool animated) : sf::Sprite() {
     _vel = sf::Vector2f(0, 0);
     _rotVel = 0;
     setTexture(ip._textureLoader->GetTexture(name));
@@ -17,9 +17,10 @@ MovingSprite::MovingSprite(IP& ip, string name) : sf::Sprite() {
     _animTable = new AnimationTable();
     _animTable->AddAnimation("base", new Animation(1, 1000, sf::Vector2i(0, 0), sf::Vector2i(getTextureRect().width, getTextureRect().height), false));
     _animTable->SetAnimation("base");
+    _animated = animated;
 }
 
-MovingSprite::MovingSprite(IP& ip, string name, sf::IntRect hitbox) {
+MovingSprite::MovingSprite(IP& ip, string name, sf::IntRect hitbox, bool animated) {
     _vel = sf::Vector2f(0, 0);
     _rotVel = 0;
     setTexture(ip._textureLoader->GetTexture(name));
@@ -28,6 +29,7 @@ MovingSprite::MovingSprite(IP& ip, string name, sf::IntRect hitbox) {
     _animTable = new AnimationTable();
     _animTable->AddAnimation("base", new Animation(1, 1000, sf::Vector2i(0, 0), sf::Vector2i(getTextureRect().width, getTextureRect().height), false));
     _animTable->SetAnimation("base");
+    _animated = animated;
 }
 
 MovingSprite::~MovingSprite() {
@@ -37,8 +39,10 @@ MovingSprite::~MovingSprite() {
 void MovingSprite::Update(IP& ip, float eTime) {
     setPosition(getPosition() + GetVel()*eTime);
     setRotation(getRotation() + GetRotVel()*eTime);
-    _animTable->Update();
-    setTextureRect(_animTable->GetRect());
+    if(_animated) {
+        _animTable->Update();
+        setTextureRect(_animTable->GetRect());
+    }
 }
 
 void MovingSprite::Update(IP& ip, float eTime, Level& level) {
@@ -57,13 +61,15 @@ void MovingSprite::Update(IP& ip, float eTime, Level& level) {
             }
         }
     }
-    _animTable->Update();
-    setTextureRect(_animTable->GetRect());
+    if(_animated) {
+        _animTable->Update();
+        setTextureRect(_animTable->GetRect());
+    }
     setRotation(getRotation() + GetRotVel()*eTime);
 }
 
 bool MovingSprite::TryMove(sf::Vector2f delta, Level& level) {
-    if(level.GetMap().IsCollided(*this, GetUpperLeftPos()+delta) || level.GetSpawner().IsCollided(*this, GetUpperLeftPos()+delta)) {
+    if(level.GetMap().IsCollided(*this, GetUpperLeftPos()+delta, Map::WALL) || level.GetSpawner().IsCollided(*this, GetUpperLeftPos()+delta)) {
         return false;
     }
     setPosition(getPosition() + delta);
