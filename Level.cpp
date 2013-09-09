@@ -12,7 +12,7 @@
 Level::Level(IP& ip) {
     _levelInfos["intro"] = LevelInfo{"level0", "nightBackground"};
     _levelInfos["rockyCave"] = LevelInfo{"level1", "nightBackground"};
-    Load(ip, "rockyCave");
+    Load(ip, "intro");
 }
 
 Level::~Level() {

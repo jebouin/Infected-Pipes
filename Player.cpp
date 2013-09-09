@@ -50,6 +50,7 @@ void Player::Update(IP& ip, float eTime, Level& level, EntityManager& eManager, 
     if(vrect.top+vrect.height > map.GetSize().y*16.f) {
         _view->setCenter(sf::Vector2f(_view->getCenter().x, map.GetSize().y*16.f - _view->getSize().y/2.f));
     }
+    _view->setCenter(sf::Vector2f(sf::Vector2i(_view->getCenter())));
 
     ip._renderer->GetTexture().setView(*_view);
 }
