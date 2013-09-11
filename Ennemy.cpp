@@ -8,7 +8,7 @@
 #include "Spawner.h"
 #include "ParticleManager.h"
 
-Ennemy::Ennemy(IP& ip) : GameEntity(ip, "zombie", sf::IntRect(1, 0, 5, 20), 1500) {
+Ennemy::Ennemy(IP& ip) : GameEntity(ip, "zombie", sf::IntRect(1, 0, 5, 20), 10) {
     SetSpeed(MathHelper::RandFloat(0.0005, 0.001));
     SetJumpPower(0.6);
     _inPipe = true;
@@ -25,6 +25,10 @@ void Ennemy::Update(IP& ip, float eTime, Level& level, Character& character, Ent
         GoLeft(eTime);
     }
 
+    if(/*MathHelper::ABS(GetVel().x) < 0.01 && MathHelper::ABS(getPosition().x-character.getPosition().x) > 16*/0) {
+        Jump(level);
+    }
+
     if(_inPipe) {
         GameEntity::Update(ip, eTime);
         if(!level.GetSpawner().IsCollided(*this)) {
@@ -32,9 +36,5 @@ void Ennemy::Update(IP& ip, float eTime, Level& level, Character& character, Ent
         }
     } else {
         GameEntity::Update(ip, eTime, level, eManager, pManager);
-    }
-
-    if(/*MathHelper::ABS(GetVel().x) < 0.01 && MathHelper::ABS(getPosition().x-character.getPosition().x) > 16*/0) {
-        Jump(level);
     }
 }

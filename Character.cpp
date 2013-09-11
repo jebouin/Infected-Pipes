@@ -5,6 +5,8 @@
 #include "AnimationTable.h"
 #include "EntityManager.h"
 #include "ParticleManager.h"
+#include "Level.h"
+#include "Spawner.h"
 
 Character::Character(IP& ip) : GameEntity(ip, "character", sf::IntRect(2, 0, 7, 26), 10) {
     SetWeight(0.5f);
@@ -12,6 +14,7 @@ Character::Character(IP& ip) : GameEntity(ip, "character", sf::IntRect(2, 0, 7, 
     t.AddAnimation("idle", new Animation(1, 1000, sf::Vector2i(0, 0), sf::Vector2i(22, 26), true));
     t.AddAnimation("attack", new Animation(1, 50, sf::Vector2i(0, 26), sf::Vector2i(22, 26), false));
     t.SetAnimation("idle");
+    _enteringPipe = false;
 }
 
 Character::~Character() {
@@ -19,7 +22,10 @@ Character::~Character() {
 }
 
 void Character::Update(IP& ip, float eTime, Level& level, EntityManager& eManager, ParticleManager& pManager) {
-    GameEntity::Update(ip, eTime, level, eManager, pManager);
+    if(_enteringPipe) {
+        MovingSprite::Update(ip, eTime);
+        return;
+    }
 
     if(GetAnims().GetAnimationName()=="idle") {
         if(sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
@@ -41,4 +47,19 @@ void Character::Update(IP& ip, float eTime, Level& level, EntityManager& eManage
             GetAnims().SetAnimation("idle");
         }
     }
+
+    GameEntity::Update(ip, eTime, level, eManager, pManager);
+}
+
+void Character::EnterPipe(Level& level) {
+    Spawner& s(level.GetSpawner());
+    if(!s.CanEnterPipe(*(MovingSprite*)this)) {
+        return;
+    }
+    SetVel(sf::Vector2f(0, 0.05));
+    _enteringPipe = true;
+}
+
+bool Character::EnteringPipe() {
+    return _enteringPipe;
 }

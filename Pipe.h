@@ -20,7 +20,7 @@ class Pipe : public sf::Sprite {
     void Spawn(IP& ip, EntityManager& eManager);
 
     private:
-    sf::Clock c;
+
 };
 
 #endif // PIPE_H_INCLUDED

@@ -15,6 +15,7 @@
 IP::IP() {
     _window = new sf::RenderWindow(sf::VideoMode(960, 704, 32), "Infected Pipes");
     _window->setVerticalSyncEnabled(true);
+    _window->setFramerateLimit(60);
     _renderer = new Renderer(sf::Vector2i(sf::Vector2f(_window->getSize())/4.f), 4);
     _font.loadFromFile("font/font.ttf");
     for(int i=0 ; i<10 ; i++) {

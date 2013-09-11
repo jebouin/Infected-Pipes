@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <vector>
+#include <cmath>
 
 #include "SFML/Graphics.hpp"
 #include "SFML/System.hpp"
@@ -22,7 +23,7 @@ class GameEntity : public MovingSprite {
     ~GameEntity();
     void Update(IP& ip, float elapsedTime, Level& level, EntityManager& eManager, ParticleManager& pManager);
     void Update(IP& ip, float elapsedTime);
-    void Collide(GameEntity* other);
+    void Collide(GameEntity* other, float elapsedTime);
     void GoLeft(float eTime);
     void GoRight(float eTime);
     void ChangeDir();
@@ -46,6 +47,8 @@ class GameEntity : public MovingSprite {
     bool _alive;
     int _hpMax;
     int _hp;
+
+    sf::Vector2f _prevPos;
 };
 
 #endif // GAMEENTITY_H_INCLUDED

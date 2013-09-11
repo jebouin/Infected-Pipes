@@ -17,10 +17,7 @@ Pipe::~Pipe() {
 }
 
 void Pipe::Update(IP& ip, EntityManager& eManager) {
-    if(c.getElapsedTime().asMilliseconds() > 500 && eManager.GetNbEnnemies() < 1) {
-        Spawn(ip, eManager);
-        c.restart();
-    }
+
 }
 
 void Pipe::Spawn(IP& ip, EntityManager& eManager) {

@@ -34,6 +34,11 @@ void Map::Draw(IP& ip) {
                     }
                 }
             }
+
+            if(GetTile(pos) == 3) {
+                tileX = GetNbDirNeigboursCode(pos);
+            }
+
             _tileset.setPosition(sf::Vector2f(i, j)*16.f);
             _tileset.setTextureRect(sf::IntRect(tileX*16, GetTile(pos)*16, 16, 16));
             ip._renderer->Draw(_tileset);
@@ -54,6 +59,28 @@ int Map::GetTile(sf::Vector2i pos) {
 
 sf::Vector2i Map::GetSize() {
     return _size;
+}
+
+int Map::GetNbNeighbours(sf::Vector2i pos) {
+    static sf::Vector2i dirs[8] = {sf::Vector2i(-1, -1), sf::Vector2i(0, -1), sf::Vector2i(1, -1), sf::Vector2i(-1, 0), sf::Vector2i(1, 0), sf::Vector2i(-1, 1), sf::Vector2i(0, 1), sf::Vector2i(1, 1)};
+    int nb=0, id=GetTile(pos);
+    for(int i=0 ; i<8 ; i++) {
+        if(GetTile(pos+dirs[i]) == id) {
+            nb++;
+        }
+    }
+    return nb;
+}
+
+int Map::GetNbDirNeigboursCode(sf::Vector2i pos) {
+    static sf::Vector2i dirs[4] = {sf::Vector2i(0, -1), sf::Vector2i(1, 0), sf::Vector2i(0, 1), sf::Vector2i(-1, 0)};
+    int nb=0, id=GetTile(pos);
+    for(int i=0 ; i<4 ; i++) {
+        if(GetTile(pos+dirs[i]) == id) {
+            nb+=pow(2, i);
+        }
+    }
+    return nb;
 }
 
 void Map::SetTile(sf::Vector2i pos, int id) {

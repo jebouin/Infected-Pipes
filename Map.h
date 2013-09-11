@@ -21,6 +21,8 @@ class Map {
     bool IsOnMap(sf::Vector2i pos);
     int GetTile(sf::Vector2i pos);
     sf::Vector2i GetSize();
+    int GetNbNeighbours(sf::Vector2i pos);
+    int GetNbDirNeigboursCode(sf::Vector2i pos);
     void SetTile(sf::Vector2i pos, int id);
     bool IsCollided(sf::FloatRect rect, TileType type);
     bool IsCollided(MovingSprite& sprite, sf::Vector2f pos, TileType type);

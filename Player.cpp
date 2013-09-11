@@ -22,16 +22,19 @@ Player::~Player() {
 void Player::Update(IP& ip, float eTime, Level& level, EntityManager& eManager, ParticleManager& pManager) {
     float speed = 0.0005f;
     Map& map(level.GetMap());
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-        _character->GoRight(eTime);
-        //_character->GetAnims().SetAnimation("idle");
-    }
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Q)) {
-        _character->GoLeft(eTime);
-        //_character->GetAnims().SetAnimation("idle");
-    }
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
-        _character->Jump(level);
+    if(!_character->EnteringPipe()) {
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
+            _character->GoRight(eTime);
+        }
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Q)) {
+            _character->GoLeft(eTime);
+        }
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
+            _character->EnterPipe(level);
+        }
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+            _character->Jump(level);
+        }
     }
 
     _character->Update(ip, eTime, level, eManager, pManager);

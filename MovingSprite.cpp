@@ -47,6 +47,21 @@ void MovingSprite::Update(IP& ip, float eTime) {
 
 void MovingSprite::Update(IP& ip, float eTime, Level& level) {
     sf::Vector2f delta = GetVel()*eTime;
+    MoveCollidingMap(delta, level);
+    if(_animated) {
+        _animTable->Update();
+        setTextureRect(_animTable->GetRect());
+    }
+    setRotation(getRotation() + GetRotVel()*eTime);
+}
+
+void MovingSprite::MoveCollidingMap(sf::Vector2f delta, Level& level) {
+    //cout << delta.x << " " << delta.y << endl;
+    if(MathHelper::GetVecLength(delta) > 16) {
+        for(int i=0 ; i<2 ; i++)
+            MoveCollidingMap(delta/2.f, level);
+        return;
+    }
     if(!TryMove(delta, level)) {
         for(float i=0.1f ; i<MathHelper::ABS(delta.x)-0.1f ; i+=0.1f) {
             if(!TryMove(sf::Vector2f(MathHelper::SGN(delta.x)/10.f, 0), level)) {
@@ -61,11 +76,6 @@ void MovingSprite::Update(IP& ip, float eTime, Level& level) {
             }
         }
     }
-    if(_animated) {
-        _animTable->Update();
-        setTextureRect(_animTable->GetRect());
-    }
-    setRotation(getRotation() + GetRotVel()*eTime);
 }
 
 bool MovingSprite::TryMove(sf::Vector2f delta, Level& level) {

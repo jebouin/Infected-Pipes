@@ -49,7 +49,7 @@ void Level::Load(IP& ip, string name) {
     LevelInfo& info(_levelInfos[name]);
     _levelImage = sf::Image(ip._textureLoader->GetImage(info._imageName));
     _map = new Map(ip, sf::Vector2i(_levelImage.getSize()));
-    _spawner = new Spawner(ip);
+    _spawner = new Spawner(ip, 2);
     for(int i=0 ; i<_levelImage.getSize().x ; i++) {
         for(int j=0 ; j<_levelImage.getSize().y ; j++) {
             sf::Vector2i pos(i, j);
@@ -67,7 +67,7 @@ void Level::Load(IP& ip, string name) {
             }
 
             if(c.r == 127 && c.g == 127 && c.b == 127 && c.a != 0) {
-                Pipe *p = new Pipe(ip, sf::Vector2f(pos)*16.f, c.a*360.f/256.f);
+                Pipe *p = new Pipe(ip, sf::Vector2f(pos)*16.f, c.a*2.f);
                 _spawner->AddPipe(p);
             }
         }

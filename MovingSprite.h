@@ -19,6 +19,7 @@ class MovingSprite : public sf::Sprite {
     ~MovingSprite();
     void Update(IP& ip, float eTime);
     void Update(IP& ip, float eTime, Level& level);
+    void MoveCollidingMap(sf::Vector2f delta, Level& level);
     bool TryMove(sf::Vector2f delta, Level& level);
     sf::Vector2f GetVel();
     float GetRotVel();

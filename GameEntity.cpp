@@ -25,8 +25,9 @@ GameEntity::~GameEntity() {
 }
 
 void GameEntity::Update(IP& ip, float elapsedTime, Level& level, EntityManager& eManager, ParticleManager& pManager) {
-    SetVel(sf::Vector2f(GetVel().x / 1.2f, GetVel().y));
+    //SetVel(sf::Vector2f(GetVel().x / 1.2f, GetVel().y));
     Accelerate(sf::Vector2f(0, 0.003), elapsedTime);
+    Accelerate(sf::Vector2f(-0.008*GetVel().x, 0), elapsedTime);
 
     for(int i=0 ; i<eManager.GetNbEnnemies() ; i++) {
         Ennemy* e = eManager.GetEnnemy(i);
@@ -34,7 +35,7 @@ void GameEntity::Update(IP& ip, float elapsedTime, Level& level, EntityManager& 
             continue;
         }
         //if(MathHelper::ABS(e.getPosition().x-getPosition().x) > 42)
-        Collide((GameEntity*)e);
+        Collide((GameEntity*)e, elapsedTime);
     }
 
     MovingSprite::Update(ip, elapsedTime, level);
@@ -44,31 +45,48 @@ void GameEntity::Update(IP& ip, float elapsedTime) {
     MovingSprite::Update(ip, elapsedTime);
 }
 
-void GameEntity::Collide(GameEntity* other) {
-    sf::FloatRect r = GetGlobalHitbox();
-    sf::FloatRect r2 = other->GetGlobalHitbox();
-    if(!r.intersects(r2)) {
+void GameEntity::Collide(GameEntity* other, float elapsedTime) {
+    sf::Vector2f delta = -GetVel()*elapsedTime;
+    float vecLength = MathHelper::GetVecLength(delta);
+    sf::Vector2f dir = MathHelper::Normalize(delta);
+    //cout << vecLength << endl;
+    for(float i=0 ; i<vecLength ; i++) {
+        sf::Vector2f curPos = GetUpperLeftPos() - delta-(i*dir);
+        sf::FloatRect r = sf::FloatRect(GetHitbox().left+curPos.x, GetHitbox().top+curPos.y, GetHitbox().width, GetHitbox().height);
+        sf::FloatRect r2 = other->GetGlobalHitbox();
+
+        if(!r.intersects(r2)) {
+            continue;
+        }
+
+        sf::Vector2f c = MathHelper::GetCenter(r);
+        sf::Vector2f c2 = MathHelper::GetCenter(r2);
+        sf::Vector2f dist = MathHelper::ABS(sf::Vector2f(c-c2));
+        float rx = (r.width/2.f + r2.width/2.f - dist.x) / (r.width/2.f + r2.width/2.f);
+        float dx = rx*MathHelper::SGN(sf::Vector2f(c-c2).x);
+
+        SetVel(GetVel() + sf::Vector2f(dx, 0)*other->GetWeight());
+        other->SetVel(other->GetVel() - sf::Vector2f(dx, 0)*GetWeight());
+
         return;
     }
-    sf::Vector2f c = MathHelper::GetCenter(r);
-    sf::Vector2f c2 = MathHelper::GetCenter(r2);
-    sf::Vector2f dist = MathHelper::ABS(sf::Vector2f(c-c2));
-    float rx = (r.width/2.f + r2.width/2.f - dist.x) / (r.width/2.f + r2.width/2.f);
-    float dx = rx*MathHelper::SGN(sf::Vector2f(c-c2).x);
-
-    SetVel(GetVel() + sf::Vector2f(dx, 0)*other->GetWeight());
-    other->SetVel(other->GetVel() - sf::Vector2f(dx, 0)*GetWeight());
 }
 
 void GameEntity::GoLeft(float eTime) {
-    Accelerate(sf::Vector2f(-_speed, 0), eTime);
+    float acc = -_speed - 0.007*GetVel().x;
+    if(acc < 0) {
+        Accelerate(sf::Vector2f(acc, 0), eTime);
+    }
     if(_dir == true) {
         ChangeDir();
     }
 }
 
 void GameEntity::GoRight(float eTime) {
-    Accelerate(sf::Vector2f(_speed, 0), eTime);
+    float acc = _speed - 0.007*GetVel().x;
+    if(acc > 0) {
+        Accelerate(sf::Vector2f(acc, 0), eTime);
+    }
     if(_dir == false) {
         ChangeDir();
     }

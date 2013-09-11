@@ -20,9 +20,11 @@ class Character : public GameEntity {
     Character(IP& ip);
     ~Character();
     void Update(IP& ip, float eTime, Level& level, EntityManager& eManager, ParticleManager& pManager);
+    void EnterPipe(Level& level);
+    bool EnteringPipe();
 
     private:
-
+    bool _enteringPipe;
 };
 
 #endif // CHARACTER_H_INCLUDED

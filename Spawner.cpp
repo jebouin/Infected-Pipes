@@ -4,9 +4,17 @@
 #include "MovingSprite.h"
 #include "Pipe.h"
 #include "Renderer.h"
+#include "MathHelper.h"
 
-Spawner::Spawner(IP& ip) {
+Spawner::Spawner(IP& ip, int nbWaves) {
+    _curWave = 0;
+    _difficulty = 2;
+    _nbWaves = nbWaves;
+    _spawning = true;
+    _nbToSpawn = 16;
+    _finished = false;
 
+    NextWave();
 }
 
 Spawner::~Spawner() {
@@ -17,9 +25,39 @@ Spawner::~Spawner() {
 }
 
 void Spawner::Update(IP& ip, EntityManager& eManager) {
+    if(_spawning) {
+        if(_clock.getElapsedTime().asMilliseconds() > 500) {
+            _pipes[0]->Spawn(ip, eManager);
+            _nbToSpawn--;
+            _clock.restart();
+
+            if(_nbToSpawn == 0) {
+                _spawning = false;
+            }
+        }
+    }
+
+    if(eManager.GetNbEnnemies() == 0 && !_finished && !_spawning) {
+        NextWave();
+    }
+
     for(int i=0 ; i<_pipes.size() ; i++) {
         _pipes[i]->Update(ip, eManager);
     }
+}
+
+void Spawner::NextWave() {
+    _curWave++;
+    if(_curWave > _nbWaves) {
+        _finished = true;
+        _spawning = false;
+        cout << "Finished!" << endl;
+        return;
+    }
+    _nbToSpawn = /*_difficulty*/pow(2, _curWave);
+    _spawning = true;
+    _clock.restart();
+    cout << "Wave: " << _curWave << endl;
 }
 
 void Spawner::Draw(IP& ip) {
@@ -30,6 +68,27 @@ void Spawner::Draw(IP& ip) {
 
 void Spawner::AddPipe(Pipe *p) {
     _pipes.push_back(p);
+}
+
+bool Spawner::IsFinished() {
+    return _finished;
+}
+
+bool Spawner::CanEnterPipe(MovingSprite& s) {
+    if(!IsOnGround(s) /*|| !IsFinished()*/) {
+        return false;
+    }
+    sf::FloatRect sr(s.GetGlobalHitbox().left, s.GetGlobalHitbox().top+1, s.GetGlobalHitbox().width, s.GetGlobalHitbox().height);
+    for(int i=0 ; i<_pipes.size() ; i++) {
+        if(sr.intersects(_pipes[i]->getGlobalBounds())) {
+            float pipeX = _pipes[i]->getPosition().x;
+            float dist = MathHelper::ABS(s.getPosition().x-pipeX);
+            if(dist < 5) {
+                return true;
+            }
+        }
+    }
+    return false;
 }
 
 bool Spawner::IsCollided(sf::FloatRect rect) {
