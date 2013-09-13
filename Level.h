@@ -14,6 +14,7 @@ class Spawner;
 class EntityManager;
 class Background;
 class Grass;
+class Character;
 
 struct LevelInfo {
     string _imageName;
@@ -22,14 +23,15 @@ struct LevelInfo {
 
 class Level {
     public:
-    Level(IP& ip);
+    Level(IP& ip, Character& character);
     ~Level();
     void Update(IP& ip, EntityManager& eManager);
     void DrawBack(IP& ip, sf::View& prevView);
     void DrawFront(IP& ip);
     Map& GetMap();
     Spawner& GetSpawner();
-    void Load(IP& ip, string name);
+    void Load(IP& ip, string name, Character& character);
+    void NextLevel(IP& ip, EntityManager& eManager, Character& character);
 
     private:
     Map *_map;
@@ -37,6 +39,7 @@ class Level {
     Spawner *_spawner;
     Grass *_grass;
     Background *_background;
+    string _curLevel;
     map<string, LevelInfo> _levelInfos;
 };
 

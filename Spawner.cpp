@@ -5,6 +5,7 @@
 #include "Pipe.h"
 #include "Renderer.h"
 #include "MathHelper.h"
+#include "Character.h"
 
 Spawner::Spawner(IP& ip, int nbWaves) {
     _curWave = 0;
@@ -26,14 +27,17 @@ Spawner::~Spawner() {
 
 void Spawner::Update(IP& ip, EntityManager& eManager) {
     if(_spawning) {
-        if(_clock.getElapsedTime().asMilliseconds() > 500) {
-            _pipes[0]->Spawn(ip, eManager);
-            _nbToSpawn--;
-            _clock.restart();
+        if(_clock.getElapsedTime().asMilliseconds() > 100) {
+            for(int i=0 ; i<_pipes.size() ; i++) {
+                _pipes[i]->Spawn(ip, eManager);
+                _nbToSpawn--;
 
-            if(_nbToSpawn == 0) {
-                _spawning = false;
+                if(_nbToSpawn == 0) {
+                    _spawning = false;
+                    break;
+                }
             }
+            _clock.restart();
         }
     }
 
@@ -64,6 +68,21 @@ void Spawner::Draw(IP& ip) {
     for(int i=0 ; i<_pipes.size() ; i++) {
         ip._renderer->Draw(*_pipes[i]);
     }
+}
+
+bool Spawner::SpawnCharacter(Character& character) {
+    vector<int> cp;
+    for(int i=0 ; i<_pipes.size() ; i++) {
+        if(_pipes[i]->getRotation() == 90) {
+            cp.push_back(i);
+        }
+    }
+    if(cp.size()==0) {
+        return false;
+    }
+    int pid=rand()%cp.size();
+    character.setPosition(_pipes[cp[pid]]->getPosition());
+    return true;
 }
 
 void Spawner::AddPipe(Pipe *p) {

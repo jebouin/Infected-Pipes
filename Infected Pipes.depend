@@ -18,7 +18,7 @@
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1378916874 source:c:\users\xaychru04\desktop\infected pipes\ip.cpp
+1378919724 source:c:\users\xaychru04\desktop\infected pipes\ip.cpp
 	"IP.h"
 	"Renderer.h"
 	"TextureLoader.h"
@@ -33,7 +33,7 @@
 	"Animation.h"
 	"AnimationTable.h"
 
-1378656619 source:c:\users\xaychru04\desktop\infected pipes\textureloader.cpp
+1379101221 source:c:\users\xaychru04\desktop\infected pipes\textureloader.cpp
 	"TextureLoader.h"
 	"IP.h"
 
@@ -71,7 +71,7 @@
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1378919128 source:c:\users\xaychru04\desktop\infected pipes\character.cpp
+1379101591 source:c:\users\xaychru04\desktop\infected pipes\character.cpp
 	"Character.h"
 	"IP.h"
 	"Animation.h"
@@ -82,7 +82,7 @@
 	"Level.h"
 	"Spawner.h"
 
-1378919128 c:\users\xaychru04\desktop\infected pipes\character.h
+1379090261 c:\users\xaychru04\desktop\infected pipes\character.h
 	<vector>
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
@@ -96,7 +96,7 @@
 	"SFML/System.hpp"
 	"MovingSprite.h"
 
-1378584315 source:c:\users\xaychru04\desktop\infected pipes\entitymanager.cpp
+1378919482 source:c:\users\xaychru04\desktop\infected pipes\entitymanager.cpp
 	"EntityManager.h"
 	"IP.h"
 	"Renderer.h"
@@ -105,12 +105,12 @@
 	"Character.h"
 	"ParticleManager.h"
 
-1378584315 c:\users\xaychru04\desktop\infected pipes\entitymanager.h
+1378919482 c:\users\xaychru04\desktop\infected pipes\entitymanager.h
 	<iostream>
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1378916639 source:c:\users\xaychru04\desktop\infected pipes\gameentity.cpp
+1379101999 source:c:\users\xaychru04\desktop\infected pipes\gameentity.cpp
 	"GameEntity.h"
 	"Level.h"
 	"Map.h"
@@ -148,7 +148,7 @@
 1378573883 source:c:\users\xaychru04\desktop\infected pipes\mathhelper.cpp
 	"MathHelper.h"
 
-1378918156 source:c:\users\xaychru04\desktop\infected pipes\level.cpp
+1379101755 source:c:\users\xaychru04\desktop\infected pipes\level.cpp
 	"Level.h"
 	"IP.h"
 	"Map.h"
@@ -159,8 +159,9 @@
 	"EntityManager.h"
 	"Background.h"
 	"Grass.h"
+	"Character.h"
 
-1378656452 c:\users\xaychru04\desktop\infected pipes\level.h
+1379101187 c:\users\xaychru04\desktop\infected pipes\level.h
 	<map>
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
@@ -233,13 +234,13 @@
 	"Renderer.h"
 	"MathHelper.h"
 
-1378918264 c:\users\xaychru04\desktop\infected pipes\spawner.h
+1378925346 c:\users\xaychru04\desktop\infected pipes\spawner.h
 	<iostream>
 	<cmath>
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1378919128 source:c:\users\xaychru04\desktop\infected pipes\spawner.cpp
+1379101999 source:c:\users\xaychru04\desktop\infected pipes\spawner.cpp
 	"Spawner.h"
 	"IP.h"
 	"EntityManager.h"
@@ -247,6 +248,7 @@
 	"Pipe.h"
 	"Renderer.h"
 	"MathHelper.h"
+	"Character.h"
 
 1378573983 c:\users\xaychru04\desktop\infected pipes\particlemanager.h
 	<iostream>

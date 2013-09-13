@@ -15,6 +15,7 @@ Character::Character(IP& ip) : GameEntity(ip, "character", sf::IntRect(2, 0, 7, 
     t.AddAnimation("attack", new Animation(1, 50, sf::Vector2i(0, 26), sf::Vector2i(22, 26), false));
     t.SetAnimation("idle");
     _enteringPipe = false;
+    _leavingPipe = false;
 }
 
 Character::~Character() {
@@ -23,7 +24,22 @@ Character::~Character() {
 
 void Character::Update(IP& ip, float eTime, Level& level, EntityManager& eManager, ParticleManager& pManager) {
     if(_enteringPipe) {
+        SetVel(sf::Vector2f(0, 0.1));
         MovingSprite::Update(ip, eTime);
+        if(_enterTimer.getElapsedTime().asMilliseconds() > 500) {
+            _enteringPipe = false;
+            level.NextLevel(ip, eManager, *this);
+            _leavingPipe = true;
+            _enterTimer.restart();
+        }
+        return;
+    } else if (_leavingPipe) {
+        SetVel(sf::Vector2f(0, 0.1));
+        MovingSprite::Update(ip, eTime);
+        if(!level.GetSpawner().IsCollided(*this)) {
+            _enterTimer.restart();
+            _leavingPipe = false;
+        }
         return;
     }
 
@@ -56,8 +72,9 @@ void Character::EnterPipe(Level& level) {
     if(!s.CanEnterPipe(*(MovingSprite*)this)) {
         return;
     }
-    SetVel(sf::Vector2f(0, 0.05));
+    SetVel(sf::Vector2f(0, 0.1));
     _enteringPipe = true;
+    _enterTimer.restart();
 }
 
 bool Character::EnteringPipe() {

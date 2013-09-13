@@ -6,6 +6,7 @@ TextureLoader::TextureLoader(IP& ip) {
     AddTexture("character.png", "character");
     AddTexture("level0.png", "level0");
     AddTexture("level1.png", "level1");
+    AddTexture("level2.png", "level2");
     AddTexture("pipe.png", "pipe");
     AddTexture("zombie.png", "zombie");
     AddTexture("nightBackground.png", "nightBackground");

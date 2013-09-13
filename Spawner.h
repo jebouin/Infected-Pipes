@@ -13,6 +13,7 @@ class Pipe;
 class IP;
 class EntityManager;
 class MovingSprite;
+class Character;
 
 class Spawner {
     public:
@@ -20,6 +21,7 @@ class Spawner {
     ~Spawner();
     void Update(IP& ip, EntityManager& eManager);
     void Draw(IP& ip);
+    bool SpawnCharacter(Character& character);
     void AddPipe(Pipe *p);
     bool IsFinished();
     bool CanEnterPipe(MovingSprite& s);

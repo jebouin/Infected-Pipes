@@ -25,6 +25,8 @@ class Character : public GameEntity {
 
     private:
     bool _enteringPipe;
+    bool _leavingPipe;
+    sf::Clock _enterTimer;
 };
 
 #endif // CHARACTER_H_INCLUDED

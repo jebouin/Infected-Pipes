@@ -24,7 +24,7 @@ IP::IP() {
     _textureLoader = new TextureLoader(*this);
     _entityManager = new EntityManager();
     _player = new Player(*this, *_entityManager);
-    _level = new Level(*this);
+    _level = new Level(*this, _player->GetCharacter());
     _particleManager = new ParticleManager();
 
     while(_window->isOpen()) {

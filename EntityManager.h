@@ -21,6 +21,7 @@ class EntityManager {
     void Update(IP& ip, float eTime, Level& level, Character& character, ParticleManager& pManager);
     void Draw(IP& ip);
     void Add(Ennemy *e);
+    void Clear();
     int GetNbEnnemies();
     Ennemy* GetEnnemy(int id);
 

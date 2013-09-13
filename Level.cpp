@@ -8,11 +8,13 @@
 #include "EntityManager.h"
 #include "Background.h"
 #include "Grass.h"
+#include "Character.h"
 
-Level::Level(IP& ip) {
+Level::Level(IP& ip, Character& character) {
     _levelInfos["intro"] = LevelInfo{"level0", "nightBackground"};
     _levelInfos["rockyCave"] = LevelInfo{"level1", "nightBackground"};
-    Load(ip, "intro");
+    _levelInfos["rockyCave2"] = LevelInfo{"level2", "nightBackground"};
+    Load(ip, "intro", character);
 }
 
 Level::~Level() {
@@ -45,11 +47,13 @@ Spawner& Level::GetSpawner() {
     return *_spawner;
 }
 
-void Level::Load(IP& ip, string name) {
+void Level::Load(IP& ip, string name, Character& character) {
+    _curLevel = name;
     LevelInfo& info(_levelInfos[name]);
     _levelImage = sf::Image(ip._textureLoader->GetImage(info._imageName));
     _map = new Map(ip, sf::Vector2i(_levelImage.getSize()));
-    _spawner = new Spawner(ip, 2);
+    _spawner = new Spawner(ip, 10);
+    sf::Vector2f charPos;
     for(int i=0 ; i<_levelImage.getSize().x ; i++) {
         for(int j=0 ; j<_levelImage.getSize().y ; j++) {
             sf::Vector2i pos(i, j);
@@ -62,6 +66,8 @@ void Level::Load(IP& ip, string name) {
                 _map->SetTile(pos, 2);
             } else if(c == sf::Color(85, 85, 85)) {
                 _map->SetTile(pos, 3);
+            } else if(c == sf::Color(255, 255, 255)) {
+                charPos = sf::Vector2f(pos)*16.f;
             } else {
                 _map->SetTile(pos, 0);
             }
@@ -72,6 +78,21 @@ void Level::Load(IP& ip, string name) {
             }
         }
     }
+
+    if(!_spawner->SpawnCharacter(character)) {
+        character.setPosition(charPos);
+    }
+
     _background = new Background(ip, _levelInfos[name]._backgroundName);
     _grass = new Grass(ip, *this);
+}
+
+void Level::NextLevel(IP& ip, EntityManager& eManager, Character& character) {
+    /*if(_curLevel == "rockyCave") {
+        Load(ip, "rockyCave2", character);
+    } else {
+        Load(ip, "rockyCave", character);
+    }*/
+    Load(ip, "rockyCave", character);
+    eManager.Clear();
 }

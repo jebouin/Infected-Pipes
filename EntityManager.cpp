@@ -38,6 +38,13 @@ void EntityManager::Add(Ennemy *e) {
     _ennemies.push_back(e);
 }
 
+void EntityManager::Clear() {
+    for(int i=0 ; i<_ennemies.size() ; i++) {
+        delete _ennemies[0];
+        _ennemies.erase(_ennemies.begin());
+    }
+}
+
 int EntityManager::GetNbEnnemies() {
     return _ennemies.size();
 }

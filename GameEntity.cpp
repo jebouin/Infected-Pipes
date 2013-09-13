@@ -64,6 +64,7 @@ void GameEntity::Collide(GameEntity* other, float elapsedTime) {
         sf::Vector2f dist = MathHelper::ABS(sf::Vector2f(c-c2));
         float rx = (r.width/2.f + r2.width/2.f - dist.x) / (r.width/2.f + r2.width/2.f);
         float dx = rx*MathHelper::SGN(sf::Vector2f(c-c2).x);
+        dx = max(-0.5f, min(dx, 0.5f));
 
         SetVel(GetVel() + sf::Vector2f(dx, 0)*other->GetWeight());
         other->SetVel(other->GetVel() - sf::Vector2f(dx, 0)*GetWeight());
