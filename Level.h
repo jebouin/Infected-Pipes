@@ -19,6 +19,7 @@ class Character;
 struct LevelInfo {
     string _imageName;
     string _backgroundName;
+    float _backgroundZoom;
 };
 
 class Level {

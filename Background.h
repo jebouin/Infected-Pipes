@@ -1,6 +1,8 @@
 #ifndef BACKGROUND_H_INCLUDED
 #define BACKGROUND_H_INCLUDED
 
+#include <iostream>
+
 #include "SFML/Graphics.hpp"
 #include "SFML/System.hpp"
 
@@ -10,13 +12,14 @@ class IP;
 
 class Background {
     public:
-    Background(IP& ip, string name);
+    Background(IP& ip, string name, float zoom);
     ~Background();
     void Draw(IP& ip, sf::View& prevView);
 
     private:
     sf::Sprite _back;
     sf::View _view;
+    float _zoom;
 };
 
 #endif // BACKGROUND_H_INCLUDED

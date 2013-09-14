@@ -11,9 +11,9 @@
 #include "Character.h"
 
 Level::Level(IP& ip, Character& character) {
-    _levelInfos["intro"] = LevelInfo{"level0", "nightBackground"};
-    _levelInfos["rockyCave"] = LevelInfo{"level1", "nightBackground"};
-    _levelInfos["rockyCave2"] = LevelInfo{"level2", "nightBackground"};
+    _levelInfos["intro"] = LevelInfo{"level0", "nightBackground", 0.0001f};
+    _levelInfos["rockyCave"] = LevelInfo{"level1", "rockyBackground", 0.5f};
+    _levelInfos["rockyCave2"] = LevelInfo{"level2", "rockyBackground", 0.5f};
     Load(ip, "intro", character);
 }
 
@@ -83,7 +83,7 @@ void Level::Load(IP& ip, string name, Character& character) {
         character.setPosition(charPos);
     }
 
-    _background = new Background(ip, _levelInfos[name]._backgroundName);
+    _background = new Background(ip, _levelInfos[name]._backgroundName, _levelInfos[name]._backgroundZoom);
     _grass = new Grass(ip, *this);
 }
 

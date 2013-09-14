@@ -52,7 +52,7 @@ bool Map::IsOnMap(sf::Vector2i pos) {
 
 int Map::GetTile(sf::Vector2i pos) {
     if(!IsOnMap(pos)) {
-        return 0;
+        return 1;
     }
     return _tiles[pos.x][pos.y];
 }

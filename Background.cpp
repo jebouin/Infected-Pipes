@@ -3,9 +3,10 @@
 #include "TextureLoader.h"
 #include "Renderer.h"
 
-Background::Background(IP& ip, string name) {
+Background::Background(IP& ip, string name, float zoom) {
     _back.setTexture(ip._textureLoader->GetTexture(name));
     _view = sf::View(sf::FloatRect(0, 0, ip._renderer->GetTexture().getSize().x, ip._renderer->GetTexture().getSize().y));
+    _zoom = zoom;
 }
 
 Background::~Background() {
@@ -13,11 +14,15 @@ Background::~Background() {
 }
 
 void Background::Draw(IP& ip, sf::View& prevView) {
-    /*float scrollFact = 6.f;
-    _view.setCenter(sf::Vector2f(prevView.getCenter().x/scrollFact, prevView.getCenter().y));
-    _back.setPosition(-prevView.getSize().x/scrollFact - 57, 0);*/
+    _view = sf::View(sf::FloatRect(0, 0, ip._renderer->GetTexture().getSize().x, ip._renderer->GetTexture().getSize().y));
+    _view.setCenter(prevView.getCenter()*_zoom + sf::Vector2f(ip._renderer->GetTexture().getSize().x, ip._renderer->GetTexture().getSize().y)/2.f);
     sf::RenderTexture& t(ip._renderer->GetTexture());
     t.setView(_view);
-    ip._renderer->Draw(_back);
+    for(int i=-1 ; i<2 ; i++) {
+        for(int j=-1 ; j<2 ; j++) {
+            _back.setPosition(sf::Vector2f(_back.getTextureRect().width*i, _back.getTextureRect().height*j));
+            ip._renderer->Draw(_back);
+        }
+    }
     t.setView(prevView);
 }
