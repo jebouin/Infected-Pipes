@@ -2,6 +2,7 @@
 #include "IP.h"
 #include "EntityManager.h"
 #include "Ennemy.h"
+#include "Spiderock.h"
 #include "TextureLoader.h"
 #include "MathHelper.h"
 
@@ -21,7 +22,7 @@ void Pipe::Update(IP& ip, EntityManager& eManager) {
 }
 
 void Pipe::Spawn(IP& ip, EntityManager& eManager) {
-    Ennemy *e = new Ennemy(ip);
+    Spiderock *e = new Spiderock(ip);
     e->setPosition(sf::Vector2f(getPosition().x, getPosition().y));
     e->SetVel(MathHelper::Ang2Vec(MathHelper::Deg2Rad(getRotation())) * MathHelper::RandFloat(0.4f, 0.6f));
     eManager.Add(e);

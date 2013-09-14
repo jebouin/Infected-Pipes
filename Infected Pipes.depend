@@ -33,7 +33,7 @@
 	"Animation.h"
 	"AnimationTable.h"
 
-1379101221 source:c:\users\xaychru04\desktop\infected pipes\textureloader.cpp
+1379152516 source:c:\users\xaychru04\desktop\infected pipes\textureloader.cpp
 	"TextureLoader.h"
 	"IP.h"
 
@@ -71,7 +71,7 @@
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1379101591 source:c:\users\xaychru04\desktop\infected pipes\character.cpp
+1379145644 source:c:\users\xaychru04\desktop\infected pipes\character.cpp
 	"Character.h"
 	"IP.h"
 	"Animation.h"
@@ -110,7 +110,7 @@
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1379101999 source:c:\users\xaychru04\desktop\infected pipes\gameentity.cpp
+1379169360 source:c:\users\xaychru04\desktop\infected pipes\gameentity.cpp
 	"GameEntity.h"
 	"Level.h"
 	"Map.h"
@@ -166,7 +166,7 @@
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1378914991 source:c:\users\xaychru04\desktop\infected pipes\ennemy.cpp
+1379152516 source:c:\users\xaychru04\desktop\infected pipes\ennemy.cpp
 	"Ennemy.h"
 	"IP.h"
 	"Map.h"
@@ -177,7 +177,7 @@
 	"Spawner.h"
 	"ParticleManager.h"
 
-1378584269 c:\users\xaychru04\desktop\infected pipes\ennemy.h
+1379152516 c:\users\xaychru04\desktop\infected pipes\ennemy.h
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 	"GameEntity.h"
@@ -187,11 +187,12 @@
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1378917180 source:c:\users\xaychru04\desktop\infected pipes\pipe.cpp
+1379152548 source:c:\users\xaychru04\desktop\infected pipes\pipe.cpp
 	"Pipe.h"
 	"IP.h"
 	"EntityManager.h"
 	"Ennemy.h"
+	"Spiderock.h"
 	"TextureLoader.h"
 	"MathHelper.h"
 
@@ -288,4 +289,20 @@
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 	"Particle.h"
+
+1379152516 c:\users\xaychru04\desktop\infected pipes\ennemies\spiderock.h
+	"SFML/Graphics.hpp"
+	"SFML/System.hpp"
+	"Ennemy.h"
+
+1379152516 source:c:\users\xaychru04\desktop\infected pipes\ennemies\spiderock.cpp
+	"Spiderock.h"
+	"IP.h"
+	"Map.h"
+	"Level.h"
+	"Character.h"
+	"MathHelper.h"
+	"EntityManager.h"
+	"Spawner.h"
+	"ParticleManager.h"
 

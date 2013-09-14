@@ -8,7 +8,7 @@
 #include "Spawner.h"
 #include "ParticleManager.h"
 
-Ennemy::Ennemy(IP& ip) : GameEntity(ip, "zombie", sf::IntRect(1, 0, 5, 20), 10) {
+Ennemy::Ennemy(IP& ip, string name, sf::IntRect hitbox, int hp) : GameEntity(ip, name, hitbox, hp) {
     SetSpeed(MathHelper::RandFloat(0.0005, 0.001));
     SetJumpPower(0.6);
     _inPipe = true;
