@@ -15,6 +15,11 @@ Renderer::Renderer(sf::Vector2i size, int scale) {
         }
         pixels[i*4+3] = 0;
     }
+    /*for(int i=0 ; i<4 ; i++) {
+        for(int j=0 ; j<4 ; j++) {
+            pixels[(j*4+i)*4+3] = 16;
+        }
+    }*/
     pixels[4+3] = 16;
     pixels[8+3] = 16;
     /*int max = 40;

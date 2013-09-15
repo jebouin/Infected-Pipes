@@ -8,7 +8,7 @@
 #include "Spawner.h"
 #include "ParticleManager.h"
 
-Spiderock::Spiderock(IP& ip) : Ennemy(ip, "spiderock", sf::IntRect(3, 0, 13, 18), 10) {
+Spiderock::Spiderock(IP& ip) : Ennemy(ip, "spiderock", sf::IntRect(3, 0, 13, 18), 10, 1) {
 
 }
 

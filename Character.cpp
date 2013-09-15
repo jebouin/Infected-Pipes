@@ -16,6 +16,10 @@ Character::Character(IP& ip) : GameEntity(ip, "character", sf::IntRect(2, 0, 7, 
     t.SetAnimation("idle");
     _enteringPipe = false;
     _leavingPipe = false;
+
+    _level = 0;
+    _xp = 0;
+    _nextXP = 10;
 }
 
 Character::~Character() {
@@ -54,7 +58,7 @@ void Character::Update(IP& ip, float eTime, Level& level, EntityManager& eManage
                     attackRect = sf::FloatRect(GetGlobalHitbox().left-16, GetGlobalHitbox().top, 16, GetGlobalHitbox().height);
                 }
                 if(eManager.GetEnnemy(i)->GetGlobalHitbox().intersects(attackRect)) {
-                    Hit((GameEntity*)eManager.GetEnnemy(i), ip, pManager);
+                    Hit(eManager.GetEnnemy(i), ip, pManager);
                 }
             }
         }
@@ -79,4 +83,26 @@ void Character::EnterPipe(Level& level) {
 
 bool Character::EnteringPipe() {
     return _enteringPipe;
+}
+
+void Character::Hit(Ennemy *other, IP& ip, ParticleManager& pManager) {
+    GameEntity::Hit((GameEntity*)other, ip, pManager);
+    if(!other->IsAlive()) {
+        EarnXP(other->GetXP());
+    }
+}
+
+void Character::EarnXP(int amount) {
+    _xp += amount;
+    if(_xp >= _nextXP) {
+        LevelUp();
+    }
+    cout << _xp << "/" << _nextXP << "XP" << endl;
+}
+
+void Character::LevelUp() {
+    _level++;
+    _xp -= _nextXP;
+    _nextXP *= 1.3f;
+    cout << "Level up! Level " << _level << endl;
 }

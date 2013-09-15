@@ -14,6 +14,7 @@ class Map;
 class Level;
 class EntityManager;
 class ParticleManager;
+class Ennemy;
 
 class Character : public GameEntity {
     public:
@@ -22,8 +23,14 @@ class Character : public GameEntity {
     void Update(IP& ip, float eTime, Level& level, EntityManager& eManager, ParticleManager& pManager);
     void EnterPipe(Level& level);
     bool EnteringPipe();
+    void Hit(Ennemy *other, IP& ip, ParticleManager& pManager);
+    void EarnXP(int amount);
+    void LevelUp();
 
     private:
+    int _level;
+    int _xp;
+    int _nextXP;
     bool _enteringPipe;
     bool _leavingPipe;
     sf::Clock _enterTimer;

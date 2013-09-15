@@ -11,10 +11,10 @@ EntityManager::EntityManager() {
 }
 
 EntityManager::~EntityManager() {
-    for(int i=0 ; i<_ennemies.size() ; i++) {
+   for(int i=0 ; i<_ennemies.size() ; i++) {
         delete _ennemies[i];
-        _ennemies[i] = NULL;
     }
+    _ennemies.clear();
 }
 
 void EntityManager::Update(IP& ip, float eTime, Level& level, Character& character, ParticleManager& pManager) {
@@ -40,9 +40,9 @@ void EntityManager::Add(Ennemy *e) {
 
 void EntityManager::Clear() {
     for(int i=0 ; i<_ennemies.size() ; i++) {
-        delete _ennemies[0];
-        _ennemies.erase(_ennemies.begin());
+        delete _ennemies[i];
     }
+    _ennemies.clear();
 }
 
 int EntityManager::GetNbEnnemies() {

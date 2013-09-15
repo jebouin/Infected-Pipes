@@ -24,7 +24,8 @@ void Map::Draw(IP& ip) {
         for(int j=0 ; j<_size.y ; j++) {
             sf::Vector2i pos(i, j);
             int tileX = 0;
-            if(GetTile(pos) == 1) {
+            int tileId = GetTile(pos);
+            if(tileId == 1) {
                 if(GetTile(sf::Vector2i(pos.x, pos.y-1)) == 0) {
                     tileX = 1;
                     if(GetTile(sf::Vector2i(pos.x+1, pos.y-1)) == 1) {
@@ -35,7 +36,7 @@ void Map::Draw(IP& ip) {
                 }
             }
 
-            if(GetTile(pos) == 3) {
+            if(tileId == 2 || tileId == 3) {
                 tileX = GetNbDirNeigboursCode(pos);
             }
 
@@ -74,9 +75,9 @@ int Map::GetNbNeighbours(sf::Vector2i pos) {
 
 int Map::GetNbDirNeigboursCode(sf::Vector2i pos) {
     static sf::Vector2i dirs[4] = {sf::Vector2i(0, -1), sf::Vector2i(1, 0), sf::Vector2i(0, 1), sf::Vector2i(-1, 0)};
-    int nb=0, id=GetTile(pos);
+    int nb=0, id=_tileTypes[GetTile(pos)];
     for(int i=0 ; i<4 ; i++) {
-        if(GetTile(pos+dirs[i]) == id) {
+        if(_tileTypes[GetTile(pos+dirs[i])] == id) {
             nb+=pow(2, i);
         }
     }

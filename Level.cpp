@@ -12,8 +12,8 @@
 
 Level::Level(IP& ip, Character& character) {
     _levelInfos["intro"] = LevelInfo{"level0", "nightBackground", 0.0001f};
-    _levelInfos["rockyCave"] = LevelInfo{"level1", "rockyBackground", 0.5f};
-    _levelInfos["rockyCave2"] = LevelInfo{"level2", "rockyBackground", 0.5f};
+    _levelInfos["rockyCave"] = LevelInfo{"level1", "rockyBackground", 0.2f};
+    _levelInfos["rockyCave2"] = LevelInfo{"level2", "rockyBackground", 0.2f};
     Load(ip, "intro", character);
 }
 
@@ -63,9 +63,7 @@ void Level::Load(IP& ip, string name, Character& character) {
             } else if(c == sf::Color(122, 137, 60)) {
                 _map->SetTile(pos, 1);
             } else if(c == sf::Color(80, 80, 80)) {
-                _map->SetTile(pos, 2);
-            } else if(c == sf::Color(85, 85, 85)) {
-                _map->SetTile(pos, 3);
+                _map->SetTile(pos, rand()%2+1);
             } else if(c == sf::Color(255, 255, 255)) {
                 charPos = sf::Vector2f(pos)*16.f;
             } else {
