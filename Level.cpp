@@ -36,7 +36,7 @@ void Level::DrawBack(IP& ip, sf::View& prevView) {
 void Level::DrawFront(IP& ip) {
     _spawner->Draw(ip);
     _map->Draw(ip);
-    _grass->Draw(ip);
+    //_grass->Draw(ip);
 }
 
 Map& Level::GetMap() {
@@ -63,7 +63,7 @@ void Level::Load(IP& ip, string name, Character& character) {
             } else if(c == sf::Color(122, 137, 60)) {
                 _map->SetTile(pos, 1);
             } else if(c == sf::Color(80, 80, 80)) {
-                _map->SetTile(pos, rand()%2+1);
+                _map->SetTile(pos, rand()%2+2);
             } else if(c == sf::Color(255, 255, 255)) {
                 charPos = sf::Vector2f(pos)*16.f;
             } else {

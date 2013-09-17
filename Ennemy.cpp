@@ -20,12 +20,6 @@ Ennemy::~Ennemy() {
 }
 
 void Ennemy::Update(IP& ip, float eTime, Level& level, Character& character, EntityManager& eManager, ParticleManager& pManager) {
-    if(getPosition().x < character.getPosition().x) {
-        GoRight(eTime);
-    } else if(getPosition().x > character.getPosition().x) {
-        GoLeft(eTime);
-    }
-
     if(/*MathHelper::ABS(GetVel().x) < 0.01 && MathHelper::ABS(getPosition().x-character.getPosition().x) > 16*/0) {
         Jump(level);
     }

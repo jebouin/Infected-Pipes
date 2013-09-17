@@ -20,6 +20,8 @@ class Map {
     void Draw(IP& ip);
     bool IsOnMap(sf::Vector2i pos);
     int GetTile(sf::Vector2i pos);
+    int GetTileType(int tileId);
+    int GetTileType(sf::Vector2i pos);
     sf::Vector2i GetSize();
     int GetNbNeighbours(sf::Vector2i pos);
     int GetNbDirNeigboursCode(sf::Vector2i pos);

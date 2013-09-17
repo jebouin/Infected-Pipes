@@ -17,7 +17,7 @@ class Ennemy : public GameEntity {
     public:
     Ennemy(IP& ip, string name, sf::IntRect hitbox, int hpn, int xp);
     ~Ennemy();
-    void Update(IP& ip, float eTime, Level& level, Character& character, EntityManager& eManager, ParticleManager& pManager);
+    virtual void Update(IP& ip, float eTime, Level& level, Character& character, EntityManager& eManager, ParticleManager& pManager);
     int GetXP();
 
     private:

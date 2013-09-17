@@ -100,7 +100,8 @@ void GameEntity::ChangeDir() {
     } else {
         setScale(-1, 1);
     }
-    SetHitbox(sf::IntRect(getLocalBounds().width-GetHitbox().left-GetHitbox().width, getLocalBounds().height-GetHitbox().top-GetHitbox().height, GetHitbox().width, GetHitbox().height));
+    sf::Vector2f frameSize(GetAnims().GetAnimation().GetRect().width, GetAnims().GetAnimation().GetRect().height);
+    SetHitbox(sf::IntRect(frameSize.x-GetHitbox().left-GetHitbox().width, frameSize.y-GetHitbox().top-GetHitbox().height, GetHitbox().width, GetHitbox().height));
 }
 
 void GameEntity::Jump(Level& level) {

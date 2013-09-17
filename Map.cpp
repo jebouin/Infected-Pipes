@@ -58,6 +58,14 @@ int Map::GetTile(sf::Vector2i pos) {
     return _tiles[pos.x][pos.y];
 }
 
+int Map::GetTileType(int tileId) {
+    return _tileTypes[tileId];
+}
+
+int Map::GetTileType(sf::Vector2i pos) {
+    return GetTileType(GetTile(pos));
+}
+
 sf::Vector2i Map::GetSize() {
     return _size;
 }
