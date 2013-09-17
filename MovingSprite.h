@@ -30,6 +30,7 @@ class MovingSprite : public sf::Sprite {
     void SetVel(sf::Vector2f vel);
     void Accelerate(sf::Vector2f vec, float eTime);
     void SetRotVel(float rotVel);
+    void SetUpperLeftCorner(sf::Vector2f pos);
     void SetHitbox(sf::IntRect rect);
 
     private:

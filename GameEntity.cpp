@@ -18,6 +18,7 @@ GameEntity::GameEntity(IP& ip, string name, sf::IntRect hitbox, int hp) : Moving
     _hpMax = hp;
     _hp = _hpMax;
     _dir = true;
+    _pushable = true;
 }
 
 GameEntity::~GameEntity() {
@@ -66,8 +67,8 @@ void GameEntity::Collide(GameEntity* other, float elapsedTime) {
         float dx = rx*MathHelper::SGN(sf::Vector2f(c-c2).x);
         dx = max(-0.5f, min(dx, 0.5f));
 
-        SetVel(GetVel() + sf::Vector2f(dx, 0)*other->GetWeight());
-        other->SetVel(other->GetVel() - sf::Vector2f(dx, 0)*GetWeight());
+        if(IsPushable()) SetVel(GetVel() + sf::Vector2f(dx, 0)*other->GetWeight());
+        if(other->IsPushable()) other->SetVel(other->GetVel() - sf::Vector2f(dx, 0)*GetWeight());
 
         return;
     }
@@ -119,9 +120,8 @@ void GameEntity::Damage(int dmg, IP& ip, ParticleManager& pManager) {
 
     pManager.AddParticle(new DamageParticle(ip,
                                             dmg,
-                                            getPosition(),
+                                            sf::Vector2f(getPosition().x, getPosition().y-20),
                                             /*sf::Vector2f(0, -0.1)*/MathHelper::Ang2Vec(MathHelper::Deg2Rad(MathHelper::RandFloat(250, 290))) * MathHelper::RandFloat(0.2, 0.4),
-                                            2000,
                                             sf::Vector2f(1, 1),
                                             sf::Vector2f(1, 1),
                                             true,
@@ -129,7 +129,7 @@ void GameEntity::Damage(int dmg, IP& ip, ParticleManager& pManager) {
 }
 
 void GameEntity::Hit(GameEntity *other, IP& ip, ParticleManager& pManager) {
-    other->Damage(8+MathHelper::RandInt(0, 4), ip, pManager);
+    other->Damage((rand()%10==0 ? 42*1000 : 0), ip, pManager);
     sf::Vector2f c(MathHelper::GetCenter(GetGlobalHitbox()));
     sf::Vector2f oc(MathHelper::GetCenter(other->GetGlobalHitbox()));
     sf::Vector2f dir = MathHelper::Normalize(sf::Vector2f(oc.x-c.x, 0));
@@ -186,6 +186,10 @@ void GameEntity::SetWeight(float w) {
     _weight = w;
 }
 
+void GameEntity::SetPushable(bool p) {
+    _pushable = p;
+}
+
 float GameEntity::GetWeight() {
     return _weight;
 }
@@ -204,4 +208,8 @@ int GameEntity::GetHpMax() {
 
 bool GameEntity::GetDir() {
     return _dir;
+}
+
+bool GameEntity::IsPushable() {
+    return _pushable;
 }

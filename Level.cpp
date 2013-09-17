@@ -25,7 +25,7 @@ Level::~Level() {
 }
 
 void Level::Update(IP& ip, EntityManager& eManager) {
-    _spawner->Update(ip, eManager);
+    _spawner->Update(ip, eManager, *this);
     _grass->Update(ip);
 }
 

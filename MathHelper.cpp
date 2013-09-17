@@ -21,11 +21,28 @@ sf::Vector2f MathHelper::Interpolate(float x, sf::Vector2f v0, sf::Vector2f v1) 
 }
 
 int MathHelper::RandInt(int min, int max) {
-    return rand()%(max-min) + min;
+    return rand()%(max-min+1) + min;
 }
 
 float MathHelper::RandFloat(float min, float max) {
     return float(rand())/float(RAND_MAX)*(max-min) + min;
+}
+
+string MathHelper::NbToStringWithUnit(int nb) {
+    static string symb = "kMGT";
+    string s;
+    int e=-1;
+    while(pow(1000, e+2) <= nb) {
+        e++;
+    }
+    nb = nb/pow(1000, e+1);
+    ostringstream os;
+    os << nb;
+    s = os.str();
+    if(e >= 0) {
+        s += symb[e];
+    }
+    return s;
 }
 
 vector<sf::Vector2f> MathHelper::Rect2Corners(sf::FloatRect rect) {

@@ -33,11 +33,13 @@ class GameEntity : public MovingSprite {
     void SetJumpPower(float p);
     void SetSpeed(float s);
     void SetWeight(float w);
+    void SetPushable(bool p);
     float GetWeight();
     bool IsAlive();
     int GetHp();
     int GetHpMax();
     bool GetDir();
+    bool IsPushable();
 
     private:
     bool _dir;
@@ -45,6 +47,7 @@ class GameEntity : public MovingSprite {
     float _speed;
     float _weight;
     bool _alive;
+    bool _pushable;
     int _hpMax;
     int _hp;
 

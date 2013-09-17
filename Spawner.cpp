@@ -6,6 +6,8 @@
 #include "Renderer.h"
 #include "MathHelper.h"
 #include "Character.h"
+#include "RockWorm.h"
+#include "Level.h"
 
 Spawner::Spawner(IP& ip, int nbWaves) {
     _curWave = 0;
@@ -25,18 +27,10 @@ Spawner::~Spawner() {
     }
 }
 
-void Spawner::Update(IP& ip, EntityManager& eManager) {
+void Spawner::Update(IP& ip, EntityManager& eManager, Level& level) {
     if(_spawning) {
         if(_clock.getElapsedTime().asMilliseconds() > 100) {
-            for(int i=0 ; i<_pipes.size() ; i++) {
-                _pipes[i]->Spawn(ip, eManager);
-                _nbToSpawn--;
-
-                if(_nbToSpawn == 0) {
-                    _spawning = false;
-                    break;
-                }
-            }
+            Spawn(ip, eManager, level);
             _clock.restart();
         }
     }
@@ -47,6 +41,25 @@ void Spawner::Update(IP& ip, EntityManager& eManager) {
 
     for(int i=0 ; i<_pipes.size() ; i++) {
         _pipes[i]->Update(ip, eManager);
+    }
+}
+
+void Spawner::Spawn(IP& ip, EntityManager& eManager, Level& level) {
+    if(rand()%2) {
+        int pipeId = rand()%_pipes.size();
+        _pipes[pipeId]->Spawn(ip, eManager);
+    } else {
+        RockWorm *r = new RockWorm(ip);
+        if(!r->AutoSpawn(ip, level)) {
+            return;
+        }
+        eManager.Add(r);
+    }
+
+
+    _nbToSpawn--;
+    if(_nbToSpawn == 0) {
+        _spawning = false;
     }
 }
 

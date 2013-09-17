@@ -10,6 +10,7 @@ TextureLoader::TextureLoader(IP& ip) {
     AddTexture("pipe.png", "pipe");
     AddTexture("zombie.png", "zombie");
     AddTexture("spiderock.png", "spiderock");
+    AddTexture("rockWorm.png", "rockWorm");
     AddTexture("nightBackground.png", "nightBackground");
     AddTexture("rockyBackground.png", "rockyBackground");
     AddTexture("blood0.png", "blood0");

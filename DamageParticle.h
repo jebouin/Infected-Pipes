@@ -13,7 +13,7 @@ class IP;
 
 class DamageParticle : public Particle {
     public:
-    DamageParticle(IP& ip, int damage, sf::Vector2f pos, sf::Vector2f velocity, float lifeTime, sf::Vector2f startScale, sf::Vector2f endScale, bool gravity, bool collision);
+    DamageParticle(IP& ip, int damage, sf::Vector2f pos, sf::Vector2f velocity, sf::Vector2f startScale, sf::Vector2f endScale, bool gravity, bool collision);
     ~DamageParticle();
 
     private:

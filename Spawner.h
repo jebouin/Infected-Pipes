@@ -14,12 +14,14 @@ class IP;
 class EntityManager;
 class MovingSprite;
 class Character;
+class Level;
 
 class Spawner {
     public:
     Spawner(IP& ip, int nbWaves);
     ~Spawner();
-    void Update(IP& ip, EntityManager& eManager);
+    void Update(IP& ip, EntityManager& eManager, Level& level);
+    void Spawn(IP& ip, EntityManager& eManager, Level& level);
     void Draw(IP& ip);
     bool SpawnCharacter(Character& character);
     void AddPipe(Pipe *p);

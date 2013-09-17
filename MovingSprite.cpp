@@ -122,6 +122,11 @@ void MovingSprite::SetRotVel(float rotVel) {
     _rotVel = rotVel;
 }
 
+void MovingSprite::SetUpperLeftCorner(sf::Vector2f pos) {
+    sf::Vector2f delta = getPosition() - GetUpperLeftPos();
+    setPosition(pos + delta);
+}
+
 void MovingSprite::SetHitbox(sf::IntRect rect) {
     _hitbox = rect;
 }

@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <cmath>
+#include <sstream>
 
 #include "SFML/Graphics.hpp"
 #include "SFML/System.hpp"
@@ -20,6 +21,7 @@ class MathHelper {
     static sf::Vector2f Interpolate(float x, sf::Vector2f v0, sf::Vector2f v1);
     static int RandInt(int min, int max);
     static float RandFloat(float min, float max);
+    static string NbToStringWithUnit(int nb);
     static vector<sf::Vector2f> Rect2Corners(sf::FloatRect rect);
     static sf::FloatRect View2Rect(sf::View& view);
     static sf::Vector2f GetCenter(sf::FloatRect rect);
