@@ -14,6 +14,7 @@ RockWorm::RockWorm(IP& ip) : Ennemy(ip, "rockWorm", sf::IntRect(1, 0, 7, 19), 7,
     AnimationTable& t(GetAnims());
     t.AddAnimation("spawn", new Animation(4, 60, sf::Vector2i(0, 0), sf::Vector2i(9, 20), false));
     t.AddAnimation("idle", new Animation(4, 200, sf::Vector2i(0, 20), sf::Vector2i(9, 20), true));
+    t.AddAnimation("attack", new Animation(4, 80, sf::Vector2i(0, 40), sf::Vector2i(15, 20), false));
     t.AddAnimation("despawn", new Animation(4, 60, sf::Vector2i(0, 60), sf::Vector2i(9, 20), false));
     t.SetAnimation("spawn");
     SetSpeed(0);
@@ -26,6 +27,9 @@ RockWorm::~RockWorm() {
 }
 
 bool RockWorm::AutoSpawn(IP& ip, Level& level, EntityManager& eManager, Character& character) {
+    _outTime = MathHelper::RandFloat(3000, 8000);
+    _outTimer.restart();
+
     Map& map(level.GetMap());
     bool possible = false;
     for(int i=0 ; i<map.GetSize().x ; i++) {
@@ -40,7 +44,9 @@ bool RockWorm::AutoSpawn(IP& ip, Level& level, EntityManager& eManager, Characte
     }
 
     bool correctPos = false;
+    int tries = 0;
     while(!correctPos) {
+        tries++;
         correctPos = true;
         sf::Vector2i curPos(-1, -1);
         while(!(map.GetTileType(curPos) == Map::VOID && map.GetTileType(curPos + sf::Vector2i(0, 1)) == Map::WALL)) {
@@ -53,6 +59,9 @@ bool RockWorm::AutoSpawn(IP& ip, Level& level, EntityManager& eManager, Characte
             correctPos = false;
         }
         for(int i=0 ; i<eManager.GetNbEnnemies() ; i++) {  //in ennemy?
+            if(eManager.GetEnnemy(i) == this) {
+                continue;
+            }
             if(GetGlobalHitbox().intersects(eManager.GetEnnemy(i)->GetGlobalHitbox())) {
                 correctPos = false;
                 break;
@@ -61,10 +70,11 @@ bool RockWorm::AutoSpawn(IP& ip, Level& level, EntityManager& eManager, Characte
         if(abs(rc.x-MathHelper::GetCenter(character.GetGlobalHitbox()).x) < 42) {   //near to player?
             correctPos = false;
         }
-    }
 
-    _outTime = MathHelper::RandFloat(3000, 8000);
-    _outTimer.restart();
+        if(tries > 1000) {
+            return false;
+        }
+    }
     return true;
 }
 
@@ -76,10 +86,22 @@ void RockWorm::Update(IP& ip, float eTime, Level& level, Character& character, E
     if(anims.GetAnimationName() == "despawn" && anims.GetAnimation().IsFinished()) {
         AutoSpawn(ip, level, eManager, character);
         anims.SetAnimation("spawn");
-    } else if(anims.GetAnimationName() != "despawn") {
+    } else if(anims.GetAnimationName() == "idle") {
         if(_outTimer.getElapsedTime().asMilliseconds() >= _outTime) {
             anims.SetAnimation("despawn");
         }
+    }
+
+    if(anims.GetAnimationName() == "idle") { //start attack
+        if(_attackTimer.getElapsedTime().asMilliseconds() > 1200) {
+            _attackTimer.restart();
+            anims.SetAnimation("attack");
+        }
+    }
+
+    if(anims.GetAnimationName() == "attack" && anims.GetAnimation().IsFinished()) { //attack finished
+        _attackTimer.restart();
+        anims.SetAnimation("idle");
     }
 
     sf::FloatRect r(GetGlobalHitbox());
