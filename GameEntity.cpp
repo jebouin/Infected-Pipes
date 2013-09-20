@@ -129,7 +129,7 @@ void GameEntity::Damage(int dmg, IP& ip, ParticleManager& pManager) {
 }
 
 void GameEntity::Hit(GameEntity *other, IP& ip, ParticleManager& pManager) {
-    other->Damage((rand()%10==0 ? 42*1000 : 0), ip, pManager);
+    other->Damage(MathHelper::RandInt(2, 5), ip, pManager);
     sf::Vector2f c(MathHelper::GetCenter(GetGlobalHitbox()));
     sf::Vector2f oc(MathHelper::GetCenter(other->GetGlobalHitbox()));
     sf::Vector2f dir = MathHelper::Normalize(sf::Vector2f(oc.x-c.x, 0));

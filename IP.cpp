@@ -56,7 +56,7 @@ IP::~IP() {
 
 void IP::Update() {
     float eTime = _clock.restart().asMilliseconds();
-    _level->Update(*this, *_entityManager);
+    _level->Update(*this, *_entityManager, _player->GetCharacter());
     _entityManager->Update(*this, eTime, *_level, _player->GetCharacter(), *_particleManager);
     _player->Update(*this, eTime, *_level, *_entityManager, *_particleManager);
     _particleManager->Update(*this, eTime, *_level);

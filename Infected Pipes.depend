@@ -7,7 +7,7 @@
 	"SFML/System.hpp"
 	"IP.h"
 
-1379237983 source:c:\users\xaychru04\desktop\infected pipes\renderer.cpp
+1379522777 source:c:\users\xaychru04\desktop\infected pipes\renderer.cpp
 	"Renderer.h"
 
 1378042062 c:\users\xaychru04\desktop\infected pipes\renderer.h
@@ -18,7 +18,7 @@
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1379263261 source:c:\users\xaychru04\desktop\infected pipes\ip.cpp
+1379694514 source:c:\users\xaychru04\desktop\infected pipes\ip.cpp
 	"IP.h"
 	"Renderer.h"
 	"TextureLoader.h"
@@ -110,7 +110,7 @@
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1379445297 source:c:\users\xaychru04\desktop\infected pipes\gameentity.cpp
+1379691807 source:c:\users\xaychru04\desktop\infected pipes\gameentity.cpp
 	"GameEntity.h"
 	"Level.h"
 	"Map.h"
@@ -149,7 +149,7 @@
 1379445336 source:c:\users\xaychru04\desktop\infected pipes\mathhelper.cpp
 	"MathHelper.h"
 
-1379435664 source:c:\users\xaychru04\desktop\infected pipes\level.cpp
+1379694503 source:c:\users\xaychru04\desktop\infected pipes\level.cpp
 	"Level.h"
 	"IP.h"
 	"Map.h"
@@ -162,7 +162,7 @@
 	"Grass.h"
 	"Character.h"
 
-1379178754 c:\users\xaychru04\desktop\infected pipes\level.h
+1379694503 c:\users\xaychru04\desktop\infected pipes\level.h
 	<map>
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
@@ -197,11 +197,12 @@
 	"TextureLoader.h"
 	"MathHelper.h"
 
-1379180460 source:c:\users\xaychru04\desktop\infected pipes\background.cpp
+1379691698 source:c:\users\xaychru04\desktop\infected pipes\background.cpp
 	"Background.h"
 	"IP.h"
 	"TextureLoader.h"
 	"Renderer.h"
+	"MathHelper.h"
 
 1379178940 c:\users\xaychru04\desktop\infected pipes\background.h
 	<iostream>
@@ -237,13 +238,13 @@
 	"Renderer.h"
 	"MathHelper.h"
 
-1379435702 c:\users\xaychru04\desktop\infected pipes\spawner.h
+1379694460 c:\users\xaychru04\desktop\infected pipes\spawner.h
 	<iostream>
 	<cmath>
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1379436640 source:c:\users\xaychru04\desktop\infected pipes\spawner.cpp
+1379694460 source:c:\users\xaychru04\desktop\infected pipes\spawner.cpp
 	"Spawner.h"
 	"IP.h"
 	"EntityManager.h"
@@ -300,7 +301,7 @@
 	"SFML/System.hpp"
 	"Ennemy.h"
 
-1379309926 source:c:\users\xaychru04\desktop\infected pipes\ennemies\spiderock.cpp
+1379691974 source:c:\users\xaychru04\desktop\infected pipes\ennemies\spiderock.cpp
 	"Spiderock.h"
 	"IP.h"
 	"Map.h"
@@ -313,12 +314,12 @@
 	"AnimationTable.h"
 	"Animation.h"
 
-1379436640 c:\users\xaychru04\desktop\infected pipes\ennemies\rockworm.h
+1379694409 c:\users\xaychru04\desktop\infected pipes\ennemies\rockworm.h
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 	"Ennemy.h"
 
-1379438416 source:c:\users\xaychru04\desktop\infected pipes\ennemies\rockworm.cpp
+1379694535 source:c:\users\xaychru04\desktop\infected pipes\ennemies\rockworm.cpp
 	"RockWorm.h"
 	"IP.h"
 	"Map.h"

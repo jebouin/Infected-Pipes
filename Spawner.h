@@ -20,8 +20,8 @@ class Spawner {
     public:
     Spawner(IP& ip, int nbWaves);
     ~Spawner();
-    void Update(IP& ip, EntityManager& eManager, Level& level);
-    void Spawn(IP& ip, EntityManager& eManager, Level& level);
+    void Update(IP& ip, EntityManager& eManager, Level& level, Character& character);
+    void Spawn(IP& ip, EntityManager& eManager, Level& level, Character& character);
     void Draw(IP& ip);
     bool SpawnCharacter(Character& character);
     void AddPipe(Pipe *p);

@@ -27,10 +27,10 @@ Spawner::~Spawner() {
     }
 }
 
-void Spawner::Update(IP& ip, EntityManager& eManager, Level& level) {
+void Spawner::Update(IP& ip, EntityManager& eManager, Level& level, Character& character) {
     if(_spawning) {
         if(_clock.getElapsedTime().asMilliseconds() > 100) {
-            Spawn(ip, eManager, level);
+            Spawn(ip, eManager, level, character);
             _clock.restart();
         }
     }
@@ -44,13 +44,13 @@ void Spawner::Update(IP& ip, EntityManager& eManager, Level& level) {
     }
 }
 
-void Spawner::Spawn(IP& ip, EntityManager& eManager, Level& level) {
-    if(rand()%2) {
+void Spawner::Spawn(IP& ip, EntityManager& eManager, Level& level, Character& character) {
+    if(rand()%2==-1) {
         int pipeId = rand()%_pipes.size();
         _pipes[pipeId]->Spawn(ip, eManager);
     } else {
         RockWorm *r = new RockWorm(ip);
-        if(!r->AutoSpawn(ip, level)) {
+        if(!r->AutoSpawn(ip, level, eManager, character)) {
             return;
         }
         eManager.Add(r);

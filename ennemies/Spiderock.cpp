@@ -31,17 +31,15 @@ void Spiderock::Update(IP& ip, float eTime, Level& level, Character& character, 
         if(level.GetMap().GetTileType(sf::Vector2i(sf::Vector2f(r.left+r.width+1, r.top+r.height+1)/16.f)) == Map::VOID && c.y - 20 > cc.y) {
             Jump(level);
         }
-        if(level.GetMap().GetTileType(sf::Vector2i(sf::Vector2f(r.left+r.width+1, r.top+r.height)/16.f)) == Map::WALL) {
-            Jump(level);
-        }
     } else if(c.x > cc.x) {
         GoLeft(eTime);
         if(level.GetMap().GetTileType(sf::Vector2i(sf::Vector2f(r.left-1, r.top+r.height+1)/16.f)) == Map::VOID && c.y - 20 > cc.y) {
             Jump(level);
         }
-        if(level.GetMap().GetTileType(sf::Vector2i(sf::Vector2f(r.left-1, r.top+r.height)/16.f)) == Map::WALL) {
-            Jump(level);
-        }
+    }
+
+    if(abs(GetVel().x) < 0.02) {
+        Jump(level);
     }
 
     Ennemy::Update(ip, eTime, level, character, eManager, pManager);

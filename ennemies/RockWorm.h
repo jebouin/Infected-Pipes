@@ -17,11 +17,12 @@ class RockWorm : public Ennemy {
     public:
     RockWorm(IP& ip);
     ~RockWorm();
-    bool AutoSpawn(IP& ip, Level& level);
+    bool AutoSpawn(IP& ip, Level& level, EntityManager& eManager, Character& character);
     void Update(IP& ip, float eTime, Level& level, Character& character, EntityManager& eManager, ParticleManager& pManager);
 
     private:
-
+    float _outTime;
+    sf::Clock _outTimer;
 };
 
 #endif // ENNEMY_H_INCLUDED

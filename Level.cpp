@@ -24,8 +24,8 @@ Level::~Level() {
     delete _background;
 }
 
-void Level::Update(IP& ip, EntityManager& eManager) {
-    _spawner->Update(ip, eManager, *this);
+void Level::Update(IP& ip, EntityManager& eManager, Character& character) {
+    _spawner->Update(ip, eManager, *this, character);
     _grass->Update(ip);
 }
 

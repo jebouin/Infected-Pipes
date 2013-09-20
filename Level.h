@@ -26,7 +26,7 @@ class Level {
     public:
     Level(IP& ip, Character& character);
     ~Level();
-    void Update(IP& ip, EntityManager& eManager);
+    void Update(IP& ip, EntityManager& eManager, Character& character);
     void DrawBack(IP& ip, sf::View& prevView);
     void DrawFront(IP& ip);
     Map& GetMap();
