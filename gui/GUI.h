@@ -14,6 +14,7 @@ class TextureLoader;
 class Character;
 class XPBar;
 class LevelIndicator;
+class Cursor;
 
 class GUI {
     public:
@@ -26,6 +27,7 @@ class GUI {
     LifeBar *_lifeBar;
     XPBar *_xpBar;
     LevelIndicator *_levelIndicator;
+    Cursor *_cursor;
 };
 
 #endif // GUI_H_INCLUDED

@@ -55,7 +55,7 @@ bool RockWorm::AutoSpawn(IP& ip, Level& level, EntityManager& eManager, Characte
         while(!(map.GetTileType(curPos) == Map::VOID && map.GetTileType(curPos + sf::Vector2i(0, 1)) == Map::WALL)) {
             curPos = sf::Vector2i(MathHelper::RandInt(0, map.GetSize().x), MathHelper::RandInt(0, map.GetSize().y));
         }
-        SetUpperLeftCorner(sf::Vector2f(curPos.x*16+MathHelper::RandInt(0, 9), curPos.y*16+16-GetGlobalHitbox().height));
+        SetUpperLeftCorner(sf::Vector2f(curPos.x*16+MathHelper::RandInt(1, 8), curPos.y*16+16-GetGlobalHitbox().height));
         sf::Vector2f rc = MathHelper::GetCenter(GetGlobalHitbox());
 
         if(level.GetSpawner().IsCollided(*this)) {  //in pipe?

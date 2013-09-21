@@ -14,9 +14,11 @@
 #include "GUI.h"
 
 IP::IP() {
-    _window = new sf::RenderWindow(sf::VideoMode(960, 704, 32), "Infected Pipes");
+    //_window = new sf::RenderWindow(sf::VideoMode(960, 704, 32), "Infected Pipes");
+    _window = new sf::RenderWindow(sf::VideoMode::getFullscreenModes()[0], "Infected Pipes", sf::Style::None);
     _window->setVerticalSyncEnabled(true);
     _window->setFramerateLimit(60);
+    _window->setMouseCursorVisible(false);
     _renderer = new Renderer(sf::Vector2i(sf::Vector2f(_window->getSize())/4.f));
 
     _font.loadFromFile("font/font.ttf");
@@ -36,7 +38,7 @@ IP::IP() {
     while(_window->isOpen()) {
         sf::Event e;
         while(_window->pollEvent(e)) {
-            if(e.type == sf::Event::Closed) {
+            if(e.type == sf::Event::Closed || sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
                 _window->close();
             }
             /*if(e.type == sf::Event::Resized) {

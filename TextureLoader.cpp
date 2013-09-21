@@ -20,6 +20,7 @@ TextureLoader::TextureLoader(IP& ip) {
     AddTexture("xpBar.png", "xpBar");
     AddTexture("xpBarBorder.png", "xpBarBorder");
     AddTexture("levelIndicator.png", "levelIndicator");
+    AddTexture("cursor.png", "cursor");
 }
 
 TextureLoader::~TextureLoader() {

@@ -23,11 +23,11 @@ class IP {
 
     Renderer *_renderer;
     TextureLoader *_textureLoader;
+    sf::RenderWindow *_window;
     sf::Font _font;
 
     private:
     sf::Clock _clock;
-    sf::RenderWindow *_window;
     Level *_level;
     EntityManager *_entityManager;
     Player *_player;
