@@ -26,6 +26,9 @@ class Character : public GameEntity {
     void Hit(Ennemy *other, IP& ip, ParticleManager& pManager);
     void EarnXP(int amount);
     void LevelUp();
+    int GetXP() const;
+    int GetNextXP() const;
+    int GetLevel() const;
 
     private:
     int _level;

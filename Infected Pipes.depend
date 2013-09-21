@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1377984451 source:c:\users\xaychru04\desktop\infected pipes\main.cpp
+1379754508 source:c:\users\xaychru04\desktop\infected pipes\main.cpp
 	<iostream>
 	"ctime"
 	"cstdlib"
@@ -7,18 +7,19 @@
 	"SFML/System.hpp"
 	"IP.h"
 
-1379522777 source:c:\users\xaychru04\desktop\infected pipes\renderer.cpp
+1379708778 source:c:\users\xaychru04\desktop\infected pipes\renderer.cpp
 	"Renderer.h"
 
-1378042062 c:\users\xaychru04\desktop\infected pipes\renderer.h
+1379708392 c:\users\xaychru04\desktop\infected pipes\renderer.h
+	<iostream>
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1378656039 c:\users\xaychru04\desktop\infected pipes\ip.h
+1379752498 c:\users\xaychru04\desktop\infected pipes\ip.h
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1379694514 source:c:\users\xaychru04\desktop\infected pipes\ip.cpp
+1379755418 source:c:\users\xaychru04\desktop\infected pipes\ip.cpp
 	"IP.h"
 	"Renderer.h"
 	"TextureLoader.h"
@@ -32,8 +33,9 @@
 	"MathHelper.h"
 	"Animation.h"
 	"AnimationTable.h"
+	"GUI.h"
 
-1379435664 source:c:\users\xaychru04\desktop\infected pipes\textureloader.cpp
+1379754190 source:c:\users\xaychru04\desktop\infected pipes\textureloader.cpp
 	"TextureLoader.h"
 	"IP.h"
 
@@ -71,7 +73,7 @@
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1379232631 source:c:\users\xaychru04\desktop\infected pipes\character.cpp
+1379757547 source:c:\users\xaychru04\desktop\infected pipes\character.cpp
 	"Character.h"
 	"IP.h"
 	"Animation.h"
@@ -82,13 +84,13 @@
 	"Level.h"
 	"Spawner.h"
 
-1379232631 c:\users\xaychru04\desktop\infected pipes\character.h
+1379754190 c:\users\xaychru04\desktop\infected pipes\character.h
 	<vector>
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 	"GameEntity.h"
 
-1379437269 c:\users\xaychru04\desktop\infected pipes\gameentity.h
+1379753076 c:\users\xaychru04\desktop\infected pipes\gameentity.h
 	<iostream>
 	<vector>
 	<cmath>
@@ -110,7 +112,7 @@
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1379691807 source:c:\users\xaychru04\desktop\infected pipes\gameentity.cpp
+1379753076 source:c:\users\xaychru04\desktop\infected pipes\gameentity.cpp
 	"GameEntity.h"
 	"Level.h"
 	"Map.h"
@@ -139,17 +141,17 @@
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1379444523 c:\users\xaychru04\desktop\infected pipes\mathhelper.h
+1379755896 c:\users\xaychru04\desktop\infected pipes\mathhelper.h
 	<iostream>
 	<cmath>
 	<sstream>
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1379445336 source:c:\users\xaychru04\desktop\infected pipes\mathhelper.cpp
+1379755896 source:c:\users\xaychru04\desktop\infected pipes\mathhelper.cpp
 	"MathHelper.h"
 
-1379694503 source:c:\users\xaychru04\desktop\infected pipes\level.cpp
+1379702085 source:c:\users\xaychru04\desktop\infected pipes\level.cpp
 	"Level.h"
 	"IP.h"
 	"Map.h"
@@ -244,7 +246,7 @@
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1379694460 source:c:\users\xaychru04\desktop\infected pipes\spawner.cpp
+1379748216 source:c:\users\xaychru04\desktop\infected pipes\spawner.cpp
 	"Spawner.h"
 	"IP.h"
 	"EntityManager.h"
@@ -283,7 +285,7 @@
 	"Particle.h"
 	"Renderer.h"
 
-1379444869 source:c:\users\xaychru04\desktop\infected pipes\damageparticle.cpp
+1379759329 source:c:\users\xaychru04\desktop\infected pipes\damageparticle.cpp
 	"DamageParticle.h"
 	"IP.h"
 	"Animation.h"
@@ -301,7 +303,7 @@
 	"SFML/System.hpp"
 	"Ennemy.h"
 
-1379691974 source:c:\users\xaychru04\desktop\infected pipes\ennemies\spiderock.cpp
+1379748419 source:c:\users\xaychru04\desktop\infected pipes\ennemies\spiderock.cpp
 	"Spiderock.h"
 	"IP.h"
 	"Map.h"
@@ -314,12 +316,12 @@
 	"AnimationTable.h"
 	"Animation.h"
 
-1379697183 c:\users\xaychru04\desktop\infected pipes\ennemies\rockworm.h
+1379706028 c:\users\xaychru04\desktop\infected pipes\ennemies\rockworm.h
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 	"Ennemy.h"
 
-1379698646 source:c:\users\xaychru04\desktop\infected pipes\ennemies\rockworm.cpp
+1379747566 source:c:\users\xaychru04\desktop\infected pipes\ennemies\rockworm.cpp
 	"RockWorm.h"
 	"IP.h"
 	"Map.h"
@@ -331,4 +333,44 @@
 	"ParticleManager.h"
 	"AnimationTable.h"
 	"Animation.h"
+
+1379754190 c:\users\xaychru04\desktop\infected pipes\gui\gui.h
+	<iostream>
+	"SFML/Graphics.hpp"
+	"SFML/System.hpp"
+
+1379754190 source:c:\users\xaychru04\desktop\infected pipes\gui\gui.cpp
+	"GUI.h"
+	"IP.h"
+	"Character.h"
+	"TextureLoader.h"
+	"MathHelper.h"
+	"LifeBar.h"
+	"XPBar.h"
+
+1379755418 c:\users\xaychru04\desktop\infected pipes\gui\lifebar.h
+	<iostream>
+	"SFML/Graphics.hpp"
+	"SFML/System.hpp"
+
+1379759509 source:c:\users\xaychru04\desktop\infected pipes\gui\lifebar.cpp
+	"LifeBar.h"
+	"IP.h"
+	"Character.h"
+	"TextureLoader.h"
+	"MathHelper.h"
+	"Renderer.h"
+
+1379754190 c:\users\xaychru04\desktop\infected pipes\gui\xpbar.h
+	<iostream>
+	"SFML/Graphics.hpp"
+	"SFML/System.hpp"
+
+1379754190 source:c:\users\xaychru04\desktop\infected pipes\gui\xpbar.cpp
+	"XPBar.h"
+	"IP.h"
+	"Character.h"
+	"TextureLoader.h"
+	"MathHelper.h"
+	"Renderer.h"
 

@@ -36,8 +36,8 @@ class GameEntity : public MovingSprite {
     void SetPushable(bool p);
     float GetWeight();
     bool IsAlive();
-    int GetHp();
-    int GetHpMax();
+    int GetHp() const;
+    int GetHpMax() const;
     bool GetDir();
     bool IsPushable();
 

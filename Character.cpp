@@ -8,7 +8,7 @@
 #include "Level.h"
 #include "Spawner.h"
 
-Character::Character(IP& ip) : GameEntity(ip, "character", sf::IntRect(2, 0, 7, 26), 10) {
+Character::Character(IP& ip) : GameEntity(ip, "character", sf::IntRect(2, 0, 7, 26), 256) {
     SetWeight(0.5f);
     AnimationTable& t(GetAnims());
     t.AddAnimation("idle", new Animation(1, 1000, sf::Vector2i(0, 0), sf::Vector2i(22, 26), true));
@@ -68,6 +68,8 @@ void Character::Update(IP& ip, float eTime, Level& level, EntityManager& eManage
         }
     }
 
+    if(rand()%30==0) Damage(3, ip, pManager);
+
     GameEntity::Update(ip, eTime, level, eManager, pManager);
 }
 
@@ -105,4 +107,16 @@ void Character::LevelUp() {
     _xp -= _nextXP;
     _nextXP *= 1.3f;
     cout << "Level up! Level " << _level << endl;
+}
+
+int Character::GetXP() const {
+    return _xp;
+}
+
+int Character::GetNextXP() const {
+    return _nextXP;
+}
+
+int Character::GetLevel() const {
+    return _level;
 }

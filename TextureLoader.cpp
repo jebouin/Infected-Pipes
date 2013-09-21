@@ -15,6 +15,10 @@ TextureLoader::TextureLoader(IP& ip) {
     AddTexture("rockyBackground.png", "rockyBackground");
     AddTexture("blood0.png", "blood0");
     AddTexture("blood1.png", "blood1");
+    AddTexture("lifeBar.png", "lifeBar");
+    AddTexture("lifeBarBorder.png", "lifeBarBorder");
+    AddTexture("xpBar.png", "xpBar");
+    AddTexture("xpBarBorder.png", "xpBarBorder");
 }
 
 TextureLoader::~TextureLoader() {

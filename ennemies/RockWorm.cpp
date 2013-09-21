@@ -11,6 +11,9 @@
 #include "Animation.h"
 
 RockWorm::RockWorm(IP& ip) : Ennemy(ip, "rockWorm", sf::IntRect(1, 0, 7, 19), 7, 2) {
+    _littleHitBox = sf::IntRect(1, 0, 7, 19);
+    _bigHitBox = sf::IntRect(3, 0, 9, 20);
+
     AnimationTable& t(GetAnims());
     t.AddAnimation("spawn", new Animation(4, 60, sf::Vector2i(0, 0), sf::Vector2i(9, 20), false));
     t.AddAnimation("idle", new Animation(4, 200, sf::Vector2i(0, 20), sf::Vector2i(9, 20), true));
@@ -67,7 +70,8 @@ bool RockWorm::AutoSpawn(IP& ip, Level& level, EntityManager& eManager, Characte
                 break;
             }
         }
-        if(abs(rc.x-MathHelper::GetCenter(character.GetGlobalHitbox()).x) < 42) {   //near to player?
+        float distFromCharacter = MathHelper::GetVecLength(rc-MathHelper::GetCenter(character.GetGlobalHitbox()));
+        if(distFromCharacter < 42 || distFromCharacter > 800) {   //near to player?
             correctPos = false;
         }
 
@@ -95,6 +99,8 @@ void RockWorm::Update(IP& ip, float eTime, Level& level, Character& character, E
     if(anims.GetAnimationName() == "idle") { //start attack
         if(_attackTimer.getElapsedTime().asMilliseconds() > 1200) {
             _attackTimer.restart();
+            SetHitbox(_bigHitBox);
+            move(sf::Vector2f(GetDir() ? -3 : 3, 0));
             anims.SetAnimation("attack");
         }
     }
@@ -102,15 +108,19 @@ void RockWorm::Update(IP& ip, float eTime, Level& level, Character& character, E
     if(anims.GetAnimationName() == "attack" && anims.GetAnimation().IsFinished()) { //attack finished
         _attackTimer.restart();
         anims.SetAnimation("idle");
+        SetHitbox(_littleHitBox);
+        move(sf::Vector2f(GetDir() ? 3 : -3, 0));
     }
 
     sf::FloatRect r(GetGlobalHitbox());
     sf::Vector2f c(MathHelper::GetCenter(r));
     sf::Vector2f cc(MathHelper::GetCenter(character.GetGlobalHitbox()));
-    if(c.x < cc.x) {
-        GoRight(eTime);
-    } else if(c.x > cc.x) {
-        GoLeft(eTime);
+    if(abs(c.x - cc.x) > 10) {
+        if(c.x < cc.x) {
+            GoRight(eTime);
+        } else if(c.x > cc.x) {
+            GoLeft(eTime);
+        }
     }
 
     Ennemy::Update(ip, eTime, level, character, eManager, pManager);

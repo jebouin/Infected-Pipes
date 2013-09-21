@@ -11,21 +11,25 @@
 #include "MathHelper.h"
 #include "Animation.h"
 #include "AnimationTable.h"
+#include "GUI.h"
 
 IP::IP() {
     _window = new sf::RenderWindow(sf::VideoMode(960, 704, 32), "Infected Pipes");
     _window->setVerticalSyncEnabled(true);
     _window->setFramerateLimit(60);
-    _renderer = new Renderer(sf::Vector2i(sf::Vector2f(_window->getSize())/4.f), 4);
+    _renderer = new Renderer(sf::Vector2i(sf::Vector2f(_window->getSize())/4.f));
+
     _font.loadFromFile("font/font.ttf");
     for(int i=0 ; i<10 ; i++) {
         const sf::Glyph& g(_font.getGlyph('0'+i, 10, false));
     }
+
     _textureLoader = new TextureLoader(*this);
     _entityManager = new EntityManager();
     _player = new Player(*this, *_entityManager);
     _level = new Level(*this, _player->GetCharacter());
     _particleManager = new ParticleManager();
+    _gui = new GUI(*this, *_textureLoader, _player->GetCharacter());
 
     while(_window->isOpen()) {
         sf::Event e;
@@ -52,6 +56,7 @@ IP::~IP() {
     delete _entityManager;
     delete _player;
     delete _particleManager;
+    delete _gui;
 }
 
 void IP::Update() {
@@ -60,6 +65,7 @@ void IP::Update() {
     _entityManager->Update(*this, eTime, *_level, _player->GetCharacter(), *_particleManager);
     _player->Update(*this, eTime, *_level, *_entityManager, *_particleManager);
     _particleManager->Update(*this, eTime, *_level);
+    _gui->Update(*this);
 }
 
 void IP::Draw() {
@@ -75,6 +81,10 @@ void IP::Draw() {
     _player->Draw(*this);
     _particleManager->Draw(*this);
     _level->DrawFront(*this);
+
+    _renderer->GetTexture().setView(_renderer->GetTexture().getDefaultView());
+    _gui->Draw(*this);
+    _renderer->GetTexture().setView(_player->GetView());
 
     _renderer->DrawToWindow(*_window);
     _window->display();

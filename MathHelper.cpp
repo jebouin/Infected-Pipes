@@ -45,6 +45,12 @@ string MathHelper::NbToStringWithUnit(int nb) {
     return s;
 }
 
+string MathHelper::IntToString(int nb) {
+    ostringstream os;
+    os << nb;
+    return os.str();
+}
+
 vector<sf::Vector2f> MathHelper::Rect2Corners(sf::FloatRect rect) {
     static sf::Vector2i CPOS[4] = {sf::Vector2i(0, 0), sf::Vector2i(1, 0), sf::Vector2i(1, 1), sf::Vector2i(0, 1)};
     vector<sf::Vector2f> corners;

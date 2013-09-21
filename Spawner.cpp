@@ -45,7 +45,7 @@ void Spawner::Update(IP& ip, EntityManager& eManager, Level& level, Character& c
 }
 
 void Spawner::Spawn(IP& ip, EntityManager& eManager, Level& level, Character& character) {
-    if(rand()%2==-1) {
+    if(rand()%2) {
         int pipeId = rand()%_pipes.size();
         _pipes[pipeId]->Spawn(ip, eManager);
     } else {

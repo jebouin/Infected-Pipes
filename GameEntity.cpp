@@ -198,11 +198,11 @@ bool GameEntity::IsAlive() {
     return _alive;
 }
 
-int GameEntity::GetHp() {
+int GameEntity::GetHp() const {
     return _hp;
 }
 
-int GameEntity::GetHpMax() {
+int GameEntity::GetHpMax() const {
     return _hpMax;
 }
 

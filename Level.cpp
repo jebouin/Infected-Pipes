@@ -36,7 +36,7 @@ void Level::DrawBack(IP& ip, sf::View& prevView) {
 void Level::DrawFront(IP& ip) {
     _spawner->Draw(ip);
     _map->Draw(ip);
-    _grass->Draw(ip);
+    //_grass->Draw(ip);
 }
 
 Map& Level::GetMap() {

@@ -22,6 +22,7 @@ class MathHelper {
     static int RandInt(int min, int max);
     static float RandFloat(float min, float max);
     static string NbToStringWithUnit(int nb);
+    static string IntToString(int nb);
     static vector<sf::Vector2f> Rect2Corners(sf::FloatRect rect);
     static sf::FloatRect View2Rect(sf::View& view);
     static sf::Vector2f GetCenter(sf::FloatRect rect);

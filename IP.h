@@ -12,6 +12,7 @@ class Player;
 class Background;
 class Grass;
 class ParticleManager;
+class GUI;
 
 class IP {
     public:
@@ -31,6 +32,7 @@ class IP {
     EntityManager *_entityManager;
     Player *_player;
     ParticleManager *_particleManager;
+    GUI *_gui;
 };
 
 #endif // IP_H_INCLUDED

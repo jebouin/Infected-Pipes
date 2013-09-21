@@ -38,7 +38,7 @@ void Spiderock::Update(IP& ip, float eTime, Level& level, Character& character, 
         }
     }
 
-    if(abs(GetVel().x) < 0.02) {
+    if(abs(GetVel().x) < 0.02 && MathHelper::GetVecLength(c-cc) > 16) {
         Jump(level);
     }
 

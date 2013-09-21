@@ -24,6 +24,9 @@ class RockWorm : public Ennemy {
     float _outTime;
     sf::Clock _outTimer;
     sf::Clock _attackTimer;
+
+    sf::IntRect _littleHitBox;
+    sf::IntRect _bigHitBox;
 };
 
 #endif // ENNEMY_H_INCLUDED
