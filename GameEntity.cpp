@@ -116,6 +116,7 @@ void GameEntity::Damage(int dmg, IP& ip, ParticleManager& pManager) {
     _hp -= dmg;
     if(_hp <= 0) {
         _alive = false;
+        _hp = 0;
     }
 
     pManager.AddParticle(new DamageParticle(ip,
@@ -190,6 +191,14 @@ void GameEntity::SetPushable(bool p) {
     _pushable = p;
 }
 
+void GameEntity::SetHP(int hp) {
+    _hp = max(min(hp, _hpMax), 0);
+}
+
+void GameEntity::SetHPMax(int hpMax) {
+    _hpMax = max(hpMax, 0);
+}
+
 float GameEntity::GetWeight() {
     return _weight;
 }
@@ -198,11 +207,11 @@ bool GameEntity::IsAlive() {
     return _alive;
 }
 
-int GameEntity::GetHp() const {
+int GameEntity::GetHP() const {
     return _hp;
 }
 
-int GameEntity::GetHpMax() const {
+int GameEntity::GetHPMax() const {
     return _hpMax;
 }
 

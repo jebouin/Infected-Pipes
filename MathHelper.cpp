@@ -129,3 +129,57 @@ vector<float> MathHelper::GetPerlin(float width) {
     }
     return perlin;
 }
+
+HSV MathHelper::RGBToHSV(sf::Color rgb) {
+    HSV c;
+    float r=rgb.r, g=rgb.g, b=rgb.b;
+    r/=255; g/=255, b/=255;
+    float maxi = max(max(r, g), b);
+    float mini = min(min(r, g), b);
+    c.v = maxi;
+    float d = maxi-mini;
+    c.s = ((maxi == 0) ? 0 : d / maxi);
+    if(maxi == mini) {
+        c.h = 0;
+    } else {
+        if(maxi == r)
+            c.h = (g - b) / d + (g < b ? 6.f : 0.f);
+        else if(maxi == g)
+            c.h = (b - r) / d + 2.f;
+        else if(maxi == b)
+            c.h = (r - g) / d + 4.f;
+        c.h /= 6.f;
+    }
+    c.h *= 100.f;
+    c.s *= 100.f;
+    c.v *= 100.f;
+    return c;
+}
+
+sf::Color MathHelper::HSVToRGB(HSV c) {
+    float r, g, b;
+    c.h /= 100.f;
+    c.s /= 100.f;
+    c.v /= 100.f;
+
+    int i = floor(c.h * 6);
+    float f = c.h * 6.f - i;
+    float p = c.v * (1.f - c.s);
+    float q = c.v * (1.f - f * c.s);
+    float t = c.v * (1.f - (1.f - f) * c.s);
+
+    switch(i % 6) {
+        case 0: r = c.v, g = t, b = p; break;
+        case 1: r = q, g = c.v, b = p; break;
+        case 2: r = p, g = c.v, b = t; break;
+        case 3: r = p, g = q, b = c.v; break;
+        case 4: r = t, g = p, b = c.v; break;
+        case 5: r = c.v, g = p, b = q; break;
+    }
+    r*=255;
+    g*=255;
+    b*=255;
+
+    sf::Color rc(r, g, b);
+    return rc;
+}

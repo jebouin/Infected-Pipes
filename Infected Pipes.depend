@@ -19,7 +19,7 @@
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1379755418 source:c:\users\xaychru04\desktop\infected pipes\ip.cpp
+1379772939 source:c:\users\xaychru04\desktop\infected pipes\ip.cpp
 	"IP.h"
 	"Renderer.h"
 	"TextureLoader.h"
@@ -35,7 +35,7 @@
 	"AnimationTable.h"
 	"GUI.h"
 
-1379754190 source:c:\users\xaychru04\desktop\infected pipes\textureloader.cpp
+1379772286 source:c:\users\xaychru04\desktop\infected pipes\textureloader.cpp
 	"TextureLoader.h"
 	"IP.h"
 
@@ -73,7 +73,7 @@
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1379757547 source:c:\users\xaychru04\desktop\infected pipes\character.cpp
+1379775596 source:c:\users\xaychru04\desktop\infected pipes\character.cpp
 	"Character.h"
 	"IP.h"
 	"Animation.h"
@@ -90,7 +90,7 @@
 	"SFML/System.hpp"
 	"GameEntity.h"
 
-1379753076 c:\users\xaychru04\desktop\infected pipes\gameentity.h
+1379775477 c:\users\xaychru04\desktop\infected pipes\gameentity.h
 	<iostream>
 	<vector>
 	<cmath>
@@ -112,7 +112,7 @@
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1379753076 source:c:\users\xaychru04\desktop\infected pipes\gameentity.cpp
+1379775482 source:c:\users\xaychru04\desktop\infected pipes\gameentity.cpp
 	"GameEntity.h"
 	"Level.h"
 	"Map.h"
@@ -141,14 +141,14 @@
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1379755896 c:\users\xaychru04\desktop\infected pipes\mathhelper.h
+1379774724 c:\users\xaychru04\desktop\infected pipes\mathhelper.h
 	<iostream>
 	<cmath>
 	<sstream>
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1379755896 source:c:\users\xaychru04\desktop\infected pipes\mathhelper.cpp
+1379774735 source:c:\users\xaychru04\desktop\infected pipes\mathhelper.cpp
 	"MathHelper.h"
 
 1379702085 source:c:\users\xaychru04\desktop\infected pipes\level.cpp
@@ -334,12 +334,12 @@
 	"AnimationTable.h"
 	"Animation.h"
 
-1379754190 c:\users\xaychru04\desktop\infected pipes\gui\gui.h
+1379772536 c:\users\xaychru04\desktop\infected pipes\gui\gui.h
 	<iostream>
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1379754190 source:c:\users\xaychru04\desktop\infected pipes\gui\gui.cpp
+1379772536 source:c:\users\xaychru04\desktop\infected pipes\gui\gui.cpp
 	"GUI.h"
 	"IP.h"
 	"Character.h"
@@ -347,13 +347,14 @@
 	"MathHelper.h"
 	"LifeBar.h"
 	"XPBar.h"
+	"LevelIndicator.h"
 
 1379755418 c:\users\xaychru04\desktop\infected pipes\gui\lifebar.h
 	<iostream>
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1379759509 source:c:\users\xaychru04\desktop\infected pipes\gui\lifebar.cpp
+1379775493 source:c:\users\xaychru04\desktop\infected pipes\gui\lifebar.cpp
 	"LifeBar.h"
 	"IP.h"
 	"Character.h"
@@ -366,8 +367,21 @@
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1379754190 source:c:\users\xaychru04\desktop\infected pipes\gui\xpbar.cpp
+1379771967 source:c:\users\xaychru04\desktop\infected pipes\gui\xpbar.cpp
 	"XPBar.h"
+	"IP.h"
+	"Character.h"
+	"TextureLoader.h"
+	"MathHelper.h"
+	"Renderer.h"
+
+1379772739 c:\users\xaychru04\desktop\infected pipes\gui\levelindicator.h
+	<iostream>
+	"SFML/Graphics.hpp"
+	"SFML/System.hpp"
+
+1379773521 source:c:\users\xaychru04\desktop\infected pipes\gui\levelindicator.cpp
+	"LevelIndicator.h"
 	"IP.h"
 	"Character.h"
 	"TextureLoader.h"

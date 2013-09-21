@@ -12,8 +12,15 @@
 
 using namespace std;
 
+struct HSV {
+    float h;
+    float s;
+    float v;
+};
+
 class MathHelper {
     public:
+    //single numbers manipulation
     static float ABS(float n);
     static sf::Vector2f ABS(sf::Vector2f v);
     static float SGN(float n);
@@ -23,18 +30,28 @@ class MathHelper {
     static float RandFloat(float min, float max);
     static string NbToStringWithUnit(int nb);
     static string IntToString(int nb);
+
+    //rectangles and vector manipulation
     static vector<sf::Vector2f> Rect2Corners(sf::FloatRect rect);
     static sf::FloatRect View2Rect(sf::View& view);
     static sf::Vector2f GetCenter(sf::FloatRect rect);
     static float GetVecLength(sf::Vector2f vec);
     static sf::Vector2f Normalize(sf::Vector2f vec);
+
+    //trigonometry
     static float Deg2Rad(float deg);
     static float Rad2Deg(float rad);
     static sf::Vector2f Ang2Vec(float angle);
     static float Vec2Ang(sf::Vector2f vec);
+
+    //noises
     static vector<float> GetNoise(float width);
     static vector<float> GetInterplatedNoise(float width, int waveLength);
     static vector<float> GetPerlin(float width);
+
+    //color manipulation
+    static HSV RGBToHSV(sf::Color rgb);
+    static sf::Color HSVToRGB(HSV hsv);
 };
 
 #endif // MATHHELPER_H_INCLUDED

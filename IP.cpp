@@ -23,6 +23,8 @@ IP::IP() {
     for(int i=0 ; i<10 ; i++) {
         const sf::Glyph& g(_font.getGlyph('0'+i, 10, false));
     }
+    const_cast<sf::Texture&>(_font.getTexture(8)).setSmooth(false);
+    const_cast<sf::Texture&>(_font.getTexture(16)).setSmooth(false);
 
     _textureLoader = new TextureLoader(*this);
     _entityManager = new EntityManager();
