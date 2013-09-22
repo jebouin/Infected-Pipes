@@ -119,14 +119,14 @@ void GameEntity::Damage(int dmg, IP& ip, ParticleManager& pManager) {
         _hp = 0;
     }
 
-    /*pManager.AddParticle(new DamageParticle(ip,
+    pManager.AddParticle(new DamageParticle(ip,
                                             dmg,
                                             sf::Vector2f(getPosition().x, getPosition().y-20),
                                             MathHelper::Ang2Vec(MathHelper::Deg2Rad(MathHelper::RandFloat(250, 290))) * MathHelper::RandFloat(0.2, 0.4),
                                             sf::Vector2f(1, 1),
                                             sf::Vector2f(1, 1),
                                             true,
-                                            true));*/
+                                            true));
 }
 
 void GameEntity::Hit(GameEntity *other, IP& ip, ParticleManager& pManager) {

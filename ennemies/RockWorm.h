@@ -12,13 +12,14 @@ class Level;
 class Character;
 class EntityManager;
 class ParticleManager;
+class BulletManager;
 
 class RockWorm : public Ennemy {
     public:
     RockWorm(IP& ip);
     ~RockWorm();
     bool AutoSpawn(IP& ip, Level& level, EntityManager& eManager, Character& character);
-    void Update(IP& ip, float eTime, Level& level, Character& character, EntityManager& eManager, ParticleManager& pManager);
+    void Update(IP& ip, float eTime, Level& level, Character& character, EntityManager& eManager, ParticleManager& pManager, BulletManager& bManager);
 
     private:
     float _outTime;
@@ -27,6 +28,7 @@ class RockWorm : public Ennemy {
 
     sf::IntRect _littleHitBox;
     sf::IntRect _bigHitBox;
+    bool _shot;
 };
 
 #endif // ENNEMY_H_INCLUDED

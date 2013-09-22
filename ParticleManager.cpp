@@ -10,16 +10,17 @@ ParticleManager::ParticleManager() {
 
 ParticleManager::~ParticleManager() {
     for(int i=0 ; i<_particles.size() ; i++) {
-        delete _particles[0];
-        _particles.erase(_particles.begin());
+        delete _particles[i];
     }
+    _particles.clear();
 }
 
 void ParticleManager::Update(IP& ip, float elapsedTime, Level& level) {
     for(int i=0 ; i<_particles.size() ; i++) {
         _particles[i]->Update(ip, elapsedTime, level);
         if(!_particles[i]->IsAlive()) {
-            delete _particles[i];
+            //delete _particles[i];
+            //_particles[i] = NULL;
             _particles.erase(_particles.begin() + i);
             i--;
         }
@@ -28,6 +29,9 @@ void ParticleManager::Update(IP& ip, float elapsedTime, Level& level) {
 
 void ParticleManager::Draw(IP& ip) {
     for(int i=0 ; i<_particles.size() ; i++) {
+        if(!_particles[i]->IsAlive()) {
+            continue;
+        }
         ip._renderer->Draw(*_particles[i]);
     }
 }

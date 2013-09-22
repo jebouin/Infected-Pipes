@@ -76,6 +76,10 @@ sf::Vector2f MathHelper::Normalize(sf::Vector2f vec) {
     return vec/GetVecLength(vec);
 }
 
+sf::Vector2f MathHelper::GetMousePos(sf::RenderWindow& window) {
+    return sf::Vector2f(sf::Mouse::getPosition(window)) / 4.f;
+}
+
 float MathHelper::Deg2Rad(float deg) {
     return deg*PI/180.f;
 }

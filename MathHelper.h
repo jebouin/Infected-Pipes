@@ -37,6 +37,7 @@ class MathHelper {
     static sf::Vector2f GetCenter(sf::FloatRect rect);
     static float GetVecLength(sf::Vector2f vec);
     static sf::Vector2f Normalize(sf::Vector2f vec);
+    static sf::Vector2f GetMousePos(sf::RenderWindow& window);
 
     //trigonometry
     static float Deg2Rad(float deg);

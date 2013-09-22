@@ -13,12 +13,13 @@ class Level;
 class Ennemy;
 class Character;
 class ParticleManager;
+class BulletManager;
 
 class EntityManager {
     public:
     EntityManager();
     ~EntityManager();
-    void Update(IP& ip, float eTime, Level& level, Character& character, ParticleManager& pManager);
+    void Update(IP& ip, float eTime, Level& level, Character& character, ParticleManager& pManager, BulletManager& bManager);
     void Draw(IP& ip);
     void Add(Ennemy *e);
     void Clear();

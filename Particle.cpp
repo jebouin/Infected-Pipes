@@ -29,6 +29,9 @@ void Particle::Update(IP& ip, float eTime, Level& level) {
     if(lifePos >= 1) {
         _alive = false;
     }
+    if(!_alive) {
+        return;
+    }
     setScale(MathHelper::Interpolate(lifePos, _startScale, _endScale));
     setColor(sf::Color(getColor().r, getColor().g, getColor().b, MathHelper::Interpolate(lifePos, _startAlpha, _endAlpha)));
     if(_collision) {

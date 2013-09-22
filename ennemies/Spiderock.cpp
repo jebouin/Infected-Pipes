@@ -9,6 +9,7 @@
 #include "ParticleManager.h"
 #include "AnimationTable.h"
 #include "Animation.h"
+#include "BulletManager.h"
 
 Spiderock::Spiderock(IP& ip) : Ennemy(ip, "spiderock", sf::IntRect(3, 0, 13, 18), 10, 1) {
     AnimationTable& t(GetAnims());
@@ -22,7 +23,7 @@ Spiderock::~Spiderock() {
 
 }
 
-void Spiderock::Update(IP& ip, float eTime, Level& level, Character& character, EntityManager& eManager, ParticleManager& pManager) {
+void Spiderock::Update(IP& ip, float eTime, Level& level, Character& character, EntityManager& eManager, ParticleManager& pManager, BulletManager& bManager) {
     sf::FloatRect r(GetGlobalHitbox());
     sf::Vector2f c(MathHelper::GetCenter(r));
     sf::Vector2f cc(MathHelper::GetCenter(character.GetGlobalHitbox()));
@@ -42,5 +43,5 @@ void Spiderock::Update(IP& ip, float eTime, Level& level, Character& character, 
         Jump(level);
     }
 
-    Ennemy::Update(ip, eTime, level, character, eManager, pManager);
+    Ennemy::Update(ip, eTime, level, character, eManager, pManager, bManager);
 }

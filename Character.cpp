@@ -5,8 +5,12 @@
 #include "AnimationTable.h"
 #include "EntityManager.h"
 #include "ParticleManager.h"
+#include "BulletManager.h"
+#include "Bullet.h"
 #include "Level.h"
 #include "Spawner.h"
+#include "MathHelper.h"
+#include "Renderer.h"
 
 Character::Character(IP& ip) : GameEntity(ip, "character", sf::IntRect(2, 0, 7, 26), 10) {
     SetWeight(0.5f);
@@ -26,13 +30,13 @@ Character::~Character() {
 
 }
 
-void Character::Update(IP& ip, float eTime, Level& level, EntityManager& eManager, ParticleManager& pManager) {
+void Character::Update(IP& ip, float eTime, Level& level, EntityManager& eManager, ParticleManager& pManager, BulletManager& bManager) {
     if(_enteringPipe) {
         SetVel(sf::Vector2f(0, 0.1));
         MovingSprite::Update(ip, eTime);
         if(_enterTimer.getElapsedTime().asMilliseconds() > 500) {
             _enteringPipe = false;
-            level.NextLevel(ip, eManager, *this);
+            level.NextLevel(ip, eManager, bManager, *this);
             _leavingPipe = true;
             _enterTimer.restart();
         }
@@ -50,6 +54,12 @@ void Character::Update(IP& ip, float eTime, Level& level, EntityManager& eManage
     if(GetAnims().GetAnimationName()=="idle") {
         if(sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
             GetAnims().SetAnimation("attack");
+            /*Bullet *b = new Bullet(ip, "littleRockBullet", sf::IntRect(0, 0, 5, 5),
+                                   MathHelper::GetCenter(GetGlobalHitbox()),
+                                   MathHelper::Ang2Vec(MathHelper::Vec2Ang(sf::Vector2f(ip._renderer->GetTexture().convertCoords(sf::Vector2i(MathHelper::GetMousePos(*(ip._window))))) - MathHelper::GetCenter(GetGlobalHitbox()))) * MathHelper::RandFloat(0.4, 0.6),
+                                   false);
+            bManager.AddBullet(b);*/
+
             for(int i=0 ; i<eManager.GetNbEnnemies() ; i++) {
                 sf::FloatRect attackRect;
                 if(GetDir()) {

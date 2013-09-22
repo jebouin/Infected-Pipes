@@ -6,6 +6,7 @@
 #include "Pipe.h"
 #include "Spawner.h"
 #include "EntityManager.h"
+#include "BulletManager.h"
 #include "Background.h"
 #include "Grass.h"
 #include "Character.h"
@@ -85,7 +86,7 @@ void Level::Load(IP& ip, string name, Character& character) {
     _grass = new Grass(ip, *this);
 }
 
-void Level::NextLevel(IP& ip, EntityManager& eManager, Character& character) {
+void Level::NextLevel(IP& ip, EntityManager& eManager, BulletManager& bManager, Character& character) {
     /*if(_curLevel == "rockyCave") {
         Load(ip, "rockyCave2", character);
     } else {
@@ -93,4 +94,5 @@ void Level::NextLevel(IP& ip, EntityManager& eManager, Character& character) {
     }*/
     Load(ip, "rockyCave", character);
     eManager.Clear();
+    bManager.Clear();
 }

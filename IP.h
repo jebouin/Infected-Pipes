@@ -13,6 +13,7 @@ class Background;
 class Grass;
 class ParticleManager;
 class GUI;
+class BulletManager;
 
 class IP {
     public:
@@ -30,6 +31,7 @@ class IP {
     sf::Clock _clock;
     Level *_level;
     EntityManager *_entityManager;
+    BulletManager *_bulletManager;
     Player *_player;
     ParticleManager *_particleManager;
     GUI *_gui;

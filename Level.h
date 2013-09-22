@@ -12,6 +12,7 @@ class IP;
 class Map;
 class Spawner;
 class EntityManager;
+class BulletManager;
 class Background;
 class Grass;
 class Character;
@@ -32,7 +33,7 @@ class Level {
     Map& GetMap();
     Spawner& GetSpawner();
     void Load(IP& ip, string name, Character& character);
-    void NextLevel(IP& ip, EntityManager& eManager, Character& character);
+    void NextLevel(IP& ip, EntityManager& eManager, BulletManager& bManager, Character& character);
 
     private:
     Map *_map;

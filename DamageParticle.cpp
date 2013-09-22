@@ -10,7 +10,6 @@ DamageParticle::DamageParticle(IP& ip, int damage, sf::Vector2f pos, sf::Vector2
     int fontSize = (damage >= 1000 ? 20 : 16);
     sf::Sprite sprites[damageText.size()];
     sf::Vector2i totalSize(0, 0);
-    const_cast<sf::Texture&>(ip._font.getTexture(fontSize)).setSmooth(false);
     for(int i=0 ; i<damageText.size() ; i++) {
         const sf::Glyph& g(ip._font.getGlyph(damageText[i], fontSize, false));
         sprites[i].setTexture(ip._font.getTexture(fontSize));
@@ -34,4 +33,8 @@ DamageParticle::DamageParticle(IP& ip, int damage, sf::Vector2f pos, sf::Vector2
 
 DamageParticle::~DamageParticle() {
 
+}
+
+void DamageParticle::Update(IP& ip, float eTime, Level& level) {
+    Particle::Update(ip, eTime, level);
 }

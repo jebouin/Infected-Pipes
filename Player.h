@@ -13,12 +13,13 @@ class Character;
 class EntityManager;
 class Level;
 class ParticleManager;
+class BulletManager;
 
 class Player {
     public:
     Player(IP& ip, EntityManager& eManager);
     ~Player();
-    void Update(IP& ip, float eTime, Level& level, EntityManager& eManager, ParticleManager& pManager);
+    void Update(IP& ip, float eTime, Level& level, EntityManager& eManager, ParticleManager& pManager, BulletManager& bManager);
     void Draw(IP& ip);
     sf::View& GetView();
     Character& GetCharacter();

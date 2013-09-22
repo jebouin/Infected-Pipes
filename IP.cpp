@@ -12,10 +12,11 @@
 #include "Animation.h"
 #include "AnimationTable.h"
 #include "GUI.h"
+#include "BulletManager.h"
 
 IP::IP() {
-    //_window = new sf::RenderWindow(sf::VideoMode(960, 704, 32), "Infected Pipes");
-    _window = new sf::RenderWindow(sf::VideoMode::getFullscreenModes()[0], "Infected Pipes", sf::Style::None);
+    _window = new sf::RenderWindow(sf::VideoMode(960, 704, 32), "Infected Pipes");
+    //_window = new sf::RenderWindow(sf::VideoMode::getFullscreenModes()[0], "Infected Pipes", sf::Style::None);
     _window->setVerticalSyncEnabled(true);
     _window->setFramerateLimit(60);
     _window->setMouseCursorVisible(false);
@@ -30,6 +31,7 @@ IP::IP() {
 
     _textureLoader = new TextureLoader(*this);
     _entityManager = new EntityManager();
+    _bulletManager = new BulletManager();
     _player = new Player(*this, *_entityManager);
     _level = new Level(*this, _player->GetCharacter());
     _particleManager = new ParticleManager();
@@ -61,22 +63,20 @@ IP::~IP() {
     delete _player;
     delete _particleManager;
     delete _gui;
+    delete _bulletManager;
 }
 
 void IP::Update() {
     float eTime = _clock.restart().asMilliseconds();
     _level->Update(*this, *_entityManager, _player->GetCharacter());
-    _entityManager->Update(*this, eTime, *_level, _player->GetCharacter(), *_particleManager);
-    _player->Update(*this, eTime, *_level, *_entityManager, *_particleManager);
+    _entityManager->Update(*this, eTime, *_level, _player->GetCharacter(), *_particleManager, *_bulletManager);
+    _player->Update(*this, eTime, *_level, *_entityManager, *_particleManager, *_bulletManager);
     _particleManager->Update(*this, eTime, *_level);
+    _bulletManager->Update(*this, eTime, *_level);
     _gui->Update(*this);
 }
 
 void IP::Draw() {
-    /*sf::View v(_window->getDefaultView());  //test
-    v.zoom(0.5f);
-    _window->setView(v);*/
-
     _window->clear();
     _renderer->Clear();
 
@@ -84,6 +84,7 @@ void IP::Draw() {
     _entityManager->Draw(*this);
     _player->Draw(*this);
     _particleManager->Draw(*this);
+    _bulletManager->Draw(*this);
     _level->DrawFront(*this);
 
     _renderer->GetTexture().setView(_renderer->GetTexture().getDefaultView());

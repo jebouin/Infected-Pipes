@@ -14,13 +14,14 @@ class Map;
 class Level;
 class EntityManager;
 class ParticleManager;
+class BulletManager;
 class Ennemy;
 
 class Character : public GameEntity {
     public:
     Character(IP& ip);
     ~Character();
-    void Update(IP& ip, float eTime, Level& level, EntityManager& eManager, ParticleManager& pManager);
+    void Update(IP& ip, float eTime, Level& level, EntityManager& eManager, ParticleManager& pManager, BulletManager& bManager);
     void EnterPipe(Level& level);
     bool EnteringPipe();
     void Hit(Ennemy *other, IP& ip, ParticleManager& pManager);

@@ -12,12 +12,13 @@ class Level;
 class Character;
 class EntityManager;
 class ParticleManager;
+class BulletManager;
 
 class Spiderock : public Ennemy {
     public:
     Spiderock(IP& ip);
     ~Spiderock();
-    void Update(IP& ip, float eTime, Level& level, Character& character, EntityManager& eManager, ParticleManager& pManager);
+    void Update(IP& ip, float eTime, Level& level, Character& character, EntityManager& eManager, ParticleManager& pManager, BulletManager& bManager);
 
     private:
 

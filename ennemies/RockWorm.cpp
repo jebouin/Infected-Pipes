@@ -9,6 +9,8 @@
 #include "ParticleManager.h"
 #include "AnimationTable.h"
 #include "Animation.h"
+#include "BulletManager.h"
+#include "Bullet.h"
 
 RockWorm::RockWorm(IP& ip) : Ennemy(ip, "rockWorm", sf::IntRect(1, 0, 7, 19), 7, 2) {
     _littleHitBox = sf::IntRect(1, 0, 7, 19);
@@ -23,6 +25,7 @@ RockWorm::RockWorm(IP& ip) : Ennemy(ip, "rockWorm", sf::IntRect(1, 0, 7, 19), 7,
     SetSpeed(0);
     SetPushable(false);
     _outTime = MathHelper::RandFloat(3000, 8000);
+    _shot = false;
 }
 
 RockWorm::~RockWorm() {
@@ -82,7 +85,7 @@ bool RockWorm::AutoSpawn(IP& ip, Level& level, EntityManager& eManager, Characte
     return true;
 }
 
-void RockWorm::Update(IP& ip, float eTime, Level& level, Character& character, EntityManager& eManager, ParticleManager& pManager) {
+void RockWorm::Update(IP& ip, float eTime, Level& level, Character& character, EntityManager& eManager, ParticleManager& pManager, BulletManager& bManager) {
     AnimationTable& anims(GetAnims());
     if(anims.GetAnimationName() == "spawn" && anims.GetAnimation().IsFinished()) {
         anims.SetAnimation("idle");
@@ -105,23 +108,37 @@ void RockWorm::Update(IP& ip, float eTime, Level& level, Character& character, E
         }
     }
 
-    if(anims.GetAnimationName() == "attack" && anims.GetAnimation().IsFinished()) { //attack finished
-        _attackTimer.restart();
-        anims.SetAnimation("idle");
-        SetHitbox(_littleHitBox);
-        move(sf::Vector2f(GetDir() ? 3 : -3, 0));
+    if(anims.GetAnimationName() == "attack") { //attack
+        if(anims.GetAnimation("attack").GetCurFrame() == 3 && !_shot) { //frame 3, shoot the rock
+            bManager.AddBullet(new Bullet(ip, "littleRockBullet",
+                                          sf::IntRect(1, 0, 3, 4),
+                                          MathHelper::GetCenter(GetGlobalHitbox()) + sf::Vector2f(0, -6),
+                                          MathHelper::Ang2Vec(MathHelper::Deg2Rad((GetDir() ? -30 : 210) + MathHelper::RandFloat(-10, 10)))*MathHelper::RandFloat(0.2, 0.3),
+                                          false));
+            _shot = true;
+        }
+
+        if(anims.GetAnimation().IsFinished()) { //finished
+            _attackTimer.restart();
+            anims.SetAnimation("idle");
+            SetHitbox(_littleHitBox);
+            move(sf::Vector2f(GetDir() ? 3 : -3, 0));
+            _shot = false;
+        }
     }
 
     sf::FloatRect r(GetGlobalHitbox());
     sf::Vector2f c(MathHelper::GetCenter(r));
     sf::Vector2f cc(MathHelper::GetCenter(character.GetGlobalHitbox()));
-    if(abs(c.x - cc.x) > 10) {
-        if(c.x < cc.x) {
-            GoRight(eTime);
-        } else if(c.x > cc.x) {
-            GoLeft(eTime);
+    if(anims.GetAnimationName() != "attack") {
+        if(abs(c.x - cc.x) > 10) {
+            if(c.x < cc.x) {
+                GoRight(eTime);
+            } else if(c.x > cc.x) {
+                GoLeft(eTime);
+            }
         }
     }
 
-    Ennemy::Update(ip, eTime, level, character, eManager, pManager);
+    Ennemy::Update(ip, eTime, level, character, eManager, pManager, bManager);
 }
