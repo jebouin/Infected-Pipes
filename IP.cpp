@@ -37,6 +37,8 @@ IP::IP() {
     _particleManager = new ParticleManager();
     _gui = new GUI(*this, *_textureLoader, _player->GetCharacter(), *_level);
 
+    _window->setActive(true);
+
     while(_window->isOpen()) {
         sf::Event e;
         while(_window->pollEvent(e)) {

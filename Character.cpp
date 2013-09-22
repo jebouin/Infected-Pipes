@@ -78,7 +78,7 @@ void Character::Update(IP& ip, float eTime, Level& level, EntityManager& eManage
         }
     }
 
-    //if(rand()%(max(300-GetLevel()*20, 10))==0) Damage(1, ip, pManager);
+    //Damage(1, ip, pManager);
 
     GameEntity::Update(ip, eTime, level, eManager, pManager);
 }

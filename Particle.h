@@ -17,6 +17,7 @@ class Particle : public MovingSprite {
     Particle(IP& ip, string name, sf::Vector2f pos, sf::Vector2f velocity, float rotVel, float lifeTime, sf::Vector2f startScale, sf::Vector2f endScale, float startAlpha, float endAlpha, bool gravity, bool collision, bool animated, sf::IntRect hitbox);
     ~Particle();
     virtual void Update(IP& ip, float eTime, Level& level);
+    virtual void Draw(IP& ip);
     bool IsAlive();
 
     private:

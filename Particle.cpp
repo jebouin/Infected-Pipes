@@ -4,6 +4,7 @@
 #include "MathHelper.h"
 #include "Map.h"
 #include "Spawner.h"
+#include "Renderer.h"
 
 Particle::Particle(IP& ip, string name, sf::Vector2f pos, sf::Vector2f velocity, float rotVel, float lifeTime, sf::Vector2f startScale, sf::Vector2f endScale, float startAlpha, float endAlpha, bool gravity, bool collision, bool animated, sf::IntRect hitbox)
     : MovingSprite(ip, name, hitbox, animated) {
@@ -48,6 +49,10 @@ void Particle::Update(IP& ip, float eTime, Level& level) {
     }
 
     setOrigin(sf::Vector2f(getTextureRect().width, getTextureRect().height)/2.f);
+}
+
+void Particle::Draw(IP& ip) {
+    ip._renderer->Draw(*this);
 }
 
 bool Particle::IsAlive() {

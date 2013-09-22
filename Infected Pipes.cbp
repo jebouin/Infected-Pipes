@@ -11,6 +11,7 @@
 				<Option object_output="obj\Debug\" />
 				<Option type="1" />
 				<Option compiler="gcc" />
+				<Option use_console_runner="0" />
 				<Compiler>
 					<Add option="-g" />
 				</Compiler>
@@ -31,15 +32,27 @@
 		<Compiler>
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
+			<Add directory="ennemies" />
+			<Add directory="..\Infected Pipes" />
+			<Add directory="gui" />
+			<Add directory="bullets" />
 		</Compiler>
+		<Unit filename="Animation.cpp" />
+		<Unit filename="Animation.h" />
+		<Unit filename="AnimationTable.cpp" />
+		<Unit filename="AnimationTable.h" />
+		<Unit filename="Background.cpp" />
+		<Unit filename="Background.h" />
 		<Unit filename="Character.cpp" />
 		<Unit filename="Character.h" />
-		<Unit filename="Ennemy.cpp" />
-		<Unit filename="Ennemy.h" />
+		<Unit filename="DamageParticle.cpp" />
+		<Unit filename="DamageParticle.h" />
 		<Unit filename="EntityManager.cpp" />
 		<Unit filename="EntityManager.h" />
 		<Unit filename="GameEntity.cpp" />
 		<Unit filename="GameEntity.h" />
+		<Unit filename="Grass.cpp" />
+		<Unit filename="Grass.h" />
 		<Unit filename="IP.cpp" />
 		<Unit filename="IP.h" />
 		<Unit filename="Level.cpp" />
@@ -50,14 +63,42 @@
 		<Unit filename="MathHelper.h" />
 		<Unit filename="MovingSprite.cpp" />
 		<Unit filename="MovingSprite.h" />
+		<Unit filename="Particle.cpp" />
+		<Unit filename="Particle.h" />
+		<Unit filename="ParticleManager.cpp" />
+		<Unit filename="ParticleManager.h" />
 		<Unit filename="Pipe.cpp" />
 		<Unit filename="Pipe.h" />
 		<Unit filename="Player.cpp" />
 		<Unit filename="Player.h" />
 		<Unit filename="Renderer.cpp" />
 		<Unit filename="Renderer.h" />
+		<Unit filename="Spawner.cpp" />
+		<Unit filename="Spawner.h" />
 		<Unit filename="TextureLoader.cpp" />
 		<Unit filename="TextureLoader.h" />
+		<Unit filename="bullets\Bullet.cpp" />
+		<Unit filename="bullets\Bullet.h" />
+		<Unit filename="bullets\BulletManager.cpp" />
+		<Unit filename="bullets\BulletManager.h" />
+		<Unit filename="ennemies\Ennemy.cpp" />
+		<Unit filename="ennemies\Ennemy.h" />
+		<Unit filename="ennemies\RockWorm.cpp" />
+		<Unit filename="ennemies\RockWorm.h" />
+		<Unit filename="ennemies\Spiderock.cpp" />
+		<Unit filename="ennemies\Spiderock.h" />
+		<Unit filename="gui\Cursor.cpp" />
+		<Unit filename="gui\Cursor.h" />
+		<Unit filename="gui\DifficultyIndicator.cpp" />
+		<Unit filename="gui\DifficultyIndicator.h" />
+		<Unit filename="gui\GUI.cpp" />
+		<Unit filename="gui\GUI.h" />
+		<Unit filename="gui\LevelIndicator.cpp" />
+		<Unit filename="gui\LevelIndicator.h" />
+		<Unit filename="gui\LifeBar.cpp" />
+		<Unit filename="gui\LifeBar.h" />
+		<Unit filename="gui\XPBar.cpp" />
+		<Unit filename="gui\XPBar.h" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<code_completion />
