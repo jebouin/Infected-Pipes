@@ -9,11 +9,12 @@
 #include "ParticleManager.h"
 #include "BulletManager.h"
 
-Ennemy::Ennemy(IP& ip, string name, sf::IntRect hitbox, int hp, int xp) : GameEntity(ip, name, hitbox, hp) {
+Ennemy::Ennemy(IP& ip, string name, sf::IntRect hitbox, int hp, int xp, int incDifficulty) : GameEntity(ip, name, hitbox, hp) {
     SetSpeed(MathHelper::RandFloat(0.0005, 0.001));
     SetJumpPower(0.6);
     _inPipe = true;
     _xp = xp;
+    _incDifficulty = incDifficulty;
 }
 
 Ennemy::~Ennemy() {
@@ -33,4 +34,8 @@ void Ennemy::Update(IP& ip, float eTime, Level& level, Character& character, Ent
 
 int Ennemy::GetXP() {
     return _xp;
+}
+
+int Ennemy::GetIncDifficulty() {
+    return _incDifficulty;
 }

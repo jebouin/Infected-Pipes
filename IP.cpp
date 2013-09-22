@@ -15,8 +15,8 @@
 #include "BulletManager.h"
 
 IP::IP() {
-    _window = new sf::RenderWindow(sf::VideoMode(960, 704, 32), "Infected Pipes");
-    //_window = new sf::RenderWindow(sf::VideoMode::getFullscreenModes()[0], "Infected Pipes", sf::Style::None);
+    //_window = new sf::RenderWindow(sf::VideoMode(960, 704, 32), "Infected Pipes");
+    _window = new sf::RenderWindow(sf::VideoMode::getFullscreenModes()[0], "Infected Pipes", sf::Style::None);
     _window->setVerticalSyncEnabled(true);
     _window->setFramerateLimit(60);
     _window->setMouseCursorVisible(false);
@@ -35,7 +35,7 @@ IP::IP() {
     _player = new Player(*this, *_entityManager);
     _level = new Level(*this, _player->GetCharacter());
     _particleManager = new ParticleManager();
-    _gui = new GUI(*this, *_textureLoader, _player->GetCharacter());
+    _gui = new GUI(*this, *_textureLoader, _player->GetCharacter(), *_level);
 
     while(_window->isOpen()) {
         sf::Event e;

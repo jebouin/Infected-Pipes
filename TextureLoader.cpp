@@ -22,6 +22,7 @@ TextureLoader::TextureLoader(IP& ip) {
     AddTexture("levelIndicator.png", "levelIndicator");
     AddTexture("cursor.png", "cursor");
     AddTexture("littleRockBullet.png", "littleRockBullet");
+    AddTexture("difficultyIndicator.png", "difficultyIndicator");
 }
 
 TextureLoader::~TextureLoader() {

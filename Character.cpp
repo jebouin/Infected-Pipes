@@ -68,7 +68,7 @@ void Character::Update(IP& ip, float eTime, Level& level, EntityManager& eManage
                     attackRect = sf::FloatRect(GetGlobalHitbox().left-16, GetGlobalHitbox().top, 16, GetGlobalHitbox().height);
                 }
                 if(eManager.GetEnnemy(i)->GetGlobalHitbox().intersects(attackRect)) {
-                    Hit(eManager.GetEnnemy(i), ip, pManager);
+                    Hit(eManager.GetEnnemy(i), ip, pManager, level);
                 }
             }
         }
@@ -97,10 +97,11 @@ bool Character::EnteringPipe() {
     return _enteringPipe;
 }
 
-void Character::Hit(Ennemy *other, IP& ip, ParticleManager& pManager) {
+void Character::Hit(Ennemy *other, IP& ip, ParticleManager& pManager, Level& level) {
     GameEntity::Hit((GameEntity*)other, ip, pManager);
     if(!other->IsAlive()) {
         EarnXP(other->GetXP());
+        level.SetDifficulty(level.GetDifficulty() + other->GetIncDifficulty());
     }
 }
 

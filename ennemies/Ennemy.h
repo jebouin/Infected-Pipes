@@ -16,14 +16,16 @@ class BulletManager;
 
 class Ennemy : public GameEntity {
     public:
-    Ennemy(IP& ip, string name, sf::IntRect hitbox, int hpn, int xp);
+    Ennemy(IP& ip, string name, sf::IntRect hitbox, int hpn, int xp, int incDifficulty);
     ~Ennemy();
     virtual void Update(IP& ip, float eTime, Level& level, Character& character, EntityManager& eManager, ParticleManager& pManager, BulletManager& bManager);
     int GetXP();
+    int GetIncDifficulty();
 
     private:
     bool _inPipe;
     int _xp;
+    int _incDifficulty;
 };
 
 #endif // ENNEMY_H_INCLUDED

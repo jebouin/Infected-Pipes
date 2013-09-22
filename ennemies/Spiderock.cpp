@@ -11,7 +11,7 @@
 #include "Animation.h"
 #include "BulletManager.h"
 
-Spiderock::Spiderock(IP& ip) : Ennemy(ip, "spiderock", sf::IntRect(3, 0, 13, 18), 10, 1) {
+Spiderock::Spiderock(IP& ip) : Ennemy(ip, "spiderock", sf::IntRect(3, 0, 13, 18), 10, 1, 1) {
     AnimationTable& t(GetAnims());
     t.AddAnimation("idle", new Animation(1, 100, sf::Vector2i(0, 0), sf::Vector2i(17, 18), true));
     t.AddAnimation("walk", new Animation(4, 100, sf::Vector2i(0, 18), sf::Vector2i(17, 18), true));

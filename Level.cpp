@@ -16,6 +16,7 @@ Level::Level(IP& ip, Character& character) {
     _levelInfos["rockyCave"] = LevelInfo{"level1", "rockyBackground", 0.2f};
     _levelInfos["rockyCave2"] = LevelInfo{"level2", "rockyBackground", 0.2f};
     Load(ip, "intro", character);
+    _difficulty = 0;
 }
 
 Level::~Level() {
@@ -95,4 +96,12 @@ void Level::NextLevel(IP& ip, EntityManager& eManager, BulletManager& bManager, 
     Load(ip, "rockyCave", character);
     eManager.Clear();
     bManager.Clear();
+}
+
+int Level::GetDifficulty() const {
+    return _difficulty;
+}
+
+void Level::SetDifficulty(int v) {
+    _difficulty = v;
 }

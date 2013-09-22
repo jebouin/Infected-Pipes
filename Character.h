@@ -24,7 +24,7 @@ class Character : public GameEntity {
     void Update(IP& ip, float eTime, Level& level, EntityManager& eManager, ParticleManager& pManager, BulletManager& bManager);
     void EnterPipe(Level& level);
     bool EnteringPipe();
-    void Hit(Ennemy *other, IP& ip, ParticleManager& pManager);
+    void Hit(Ennemy *other, IP& ip, ParticleManager& pManager, Level& level);
     void EarnXP(int amount);
     void LevelUp();
     int GetXP() const;

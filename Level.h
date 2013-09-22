@@ -34,6 +34,8 @@ class Level {
     Spawner& GetSpawner();
     void Load(IP& ip, string name, Character& character);
     void NextLevel(IP& ip, EntityManager& eManager, BulletManager& bManager, Character& character);
+    int GetDifficulty() const;
+    void SetDifficulty(int v);
 
     private:
     Map *_map;
@@ -43,6 +45,8 @@ class Level {
     Background *_background;
     string _curLevel;
     map<string, LevelInfo> _levelInfos;
+
+    int _difficulty;
 };
 
 #endif // LEVEL_H_INCLUDED
