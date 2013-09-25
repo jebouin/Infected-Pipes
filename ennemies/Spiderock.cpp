@@ -29,12 +29,12 @@ void Spiderock::Update(IP& ip, float eTime, Level& level, Character& character, 
     sf::Vector2f cc(MathHelper::GetCenter(character.GetGlobalHitbox()));
     if(c.x < cc.x) {
         GoRight(eTime);
-        if(level.GetMap().GetTileType(sf::Vector2i(sf::Vector2f(r.left+r.width+1, r.top+r.height+1)/16.f)) == Map::VOID && c.y - 20 > cc.y) {
+        if(level.GetMap().GetTileType(sf::Vector2i(sf::Vector2f(r.left+r.width+1, r.top+r.height+1)/16.f), Map::FRONT) == Map::VOID && c.y - 20 > cc.y) {
             Jump(level);
         }
     } else if(c.x > cc.x) {
         GoLeft(eTime);
-        if(level.GetMap().GetTileType(sf::Vector2i(sf::Vector2f(r.left-1, r.top+r.height+1)/16.f)) == Map::VOID && c.y - 20 > cc.y) {
+        if(level.GetMap().GetTileType(sf::Vector2i(sf::Vector2f(r.left-1, r.top+r.height+1)/16.f), Map::FRONT) == Map::VOID && c.y - 20 > cc.y) {
             Jump(level);
         }
     }

@@ -80,6 +80,10 @@ sf::Vector2f MathHelper::GetMousePos(sf::RenderWindow& window) {
     return sf::Vector2f(sf::Mouse::getPosition(window)) / 4.f;
 }
 
+sf::Vector2f MathHelper::Mod(sf::Vector2f vec, float v) {
+    return sf::Vector2f((int)vec.x%(int)v, (int)vec.y%(int)v);
+}
+
 float MathHelper::Deg2Rad(float deg) {
     return deg*PI/180.f;
 }

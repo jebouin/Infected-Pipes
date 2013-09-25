@@ -10,7 +10,7 @@ Grass::Grass(IP& ip, Level& level) {
     Map& map(level.GetMap());
     for(int i=0 ; i<map.GetSize().x ; i++) {
         for(int j=0 ; j<map.GetSize().y ; j++) {
-            if(map.GetTile(sf::Vector2i(i, j)) == 0 && map.GetTile(sf::Vector2i(i, j+1)) == 1) {
+            if(map.GetTile(sf::Vector2i(i, j), Map::FRONT) == 0 && map.GetTile(sf::Vector2i(i, j+1), Map::FRONT) == 1) {
                 for(int p=0 ; p<32 ; p++) {
                     sf::Color c(78, MathHelper::RandFloat(60, 80), MathHelper::RandFloat(40, 58));
                     sf::Vector2f pos(i*16+p/2.f, j*16+16 + MathHelper::RandFloat(0, 2));

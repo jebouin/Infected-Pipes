@@ -83,6 +83,10 @@ void Character::Update(IP& ip, float eTime, Level& level, EntityManager& eManage
     GameEntity::Update(ip, eTime, level, eManager, pManager);
 }
 
+void Character::Draw(IP& ip) {
+    GameEntity::Draw(ip);
+}
+
 void Character::EnterPipe(Level& level) {
     Spawner& s(level.GetSpawner());
     if(!s.CanEnterPipe(*(MovingSprite*)this)) {

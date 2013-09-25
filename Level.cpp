@@ -33,15 +33,16 @@ void Level::Update(IP& ip, EntityManager& eManager, Character& character) {
 
 void Level::DrawBack(IP& ip, sf::View& prevView) {
     _background->Draw(ip, prevView);
+    _map->DrawLayer(ip, Map::BACK);
 }
 
 void Level::DrawFront(IP& ip) {
     _spawner->Draw(ip);
-    _map->Draw(ip);
+    _map->DrawLayer(ip, Map::FRONT);
     _grass->Draw(ip);
 }
 
-Map& Level::GetMap() {
+Map& Level::GetMap() const {
     return *_map;
 }
 
@@ -52,29 +53,39 @@ Spawner& Level::GetSpawner() {
 void Level::Load(IP& ip, string name, Character& character) {
     _curLevel = name;
     LevelInfo& info(_levelInfos[name]);
-    _levelImage = sf::Image(ip._textureLoader->GetImage(info._imageName));
-    _map = new Map(ip, sf::Vector2i(_levelImage.getSize()));
+    _levelImages = vector<sf::Image>(2);
+    _levelImages[0] = sf::Image(ip._textureLoader->GetImage(info._imageName + "back"));
+    _levelImages[1] = sf::Image(ip._textureLoader->GetImage(info._imageName + "front"));
+    _map = new Map(ip, sf::Vector2i(_levelImages[0].getSize()));
     _spawner = new Spawner(ip, 10);
     sf::Vector2f charPos;
-    for(int i=0 ; i<_levelImage.getSize().x ; i++) {
-        for(int j=0 ; j<_levelImage.getSize().y ; j++) {
-            sf::Vector2i pos(i, j);
-            sf::Color c = _levelImage.getPixel(i, j);
-            if(c == sf::Color(0, 0, 0, 0)) {
-                _map->SetTile(pos, 0);
-            } else if(c == sf::Color(122, 137, 60)) {
-                _map->SetTile(pos, 1);
-            } else if(c == sf::Color(80, 80, 80)) {
-                _map->SetTile(pos, rand()%2+2);
-            } else if(c == sf::Color(255, 255, 255)) {
-                charPos = sf::Vector2f(pos)*16.f;
-            } else {
-                _map->SetTile(pos, 0);
-            }
 
-            if(c.r == 127 && c.g == 127 && c.b == 127 && c.a != 0) {
-                Pipe *p = new Pipe(ip, sf::Vector2f(pos)*16.f, c.a*2.f);
-                _spawner->AddPipe(p);
+    for(int t=0 ; t<2 ; t++) {
+        Map::Layer l(static_cast<Map::Layer>(t));
+        for(int i=0 ; i<_levelImages[0].getSize().x ; i++) {
+            for(int j=0 ; j<_levelImages[0].getSize().y ; j++) {
+                sf::Vector2i pos(i, j);
+                sf::Color c = _levelImages[t].getPixel(i, j);
+                if(c == sf::Color(0, 0, 0, 0)) {
+                    _map->SetTile(pos, 0, l);
+                } else if(c == sf::Color(122, 137, 60)) {
+                    _map->SetTile(pos, 1, l);
+                } else if(c == sf::Color(80, 80, 80)) {
+                    _map->SetTile(pos, rand()%2+2, l);
+                } else if(c == sf::Color(96, 78, 45)) {
+                    _map->SetTile(pos, 4, l);
+                } else if(c == sf::Color(56, 45, 26)) {
+                    _map->SetTile(pos, 5, l);
+                } else if(c == sf::Color(255, 255, 255)) {
+                    charPos = sf::Vector2f(pos)*16.f;
+                } else {
+                    _map->SetTile(pos, 0, l);
+                }
+
+                if(c.r == 127 && c.g == 127 && c.b == 127 && c.a != 0) {
+                    Pipe *p = new Pipe(ip, sf::Vector2f(pos)*16.f, c.a*2.f);
+                    _spawner->AddPipe(p);
+                }
             }
         }
     }
@@ -83,7 +94,7 @@ void Level::Load(IP& ip, string name, Character& character) {
         character.setPosition(charPos);
     }
 
-    _background = new Background(ip, _levelInfos[name]._backgroundName, _levelInfos[name]._backgroundZoom);
+    _background = new Background(ip, _levelInfos[name]._backgroundName, _levelInfos[name]._backgroundZoom, *this);
     _grass = new Grass(ip, *this);
 }
 

@@ -19,6 +19,7 @@ class MovingSprite : public sf::Sprite {
     ~MovingSprite();
     void Update(IP& ip, float eTime);
     void Update(IP& ip, float eTime, Level& level);
+    void Draw(IP& ip);
     void MoveCollidingMap(sf::Vector2f delta, Level& level);
     bool TryMove(sf::Vector2f delta, Level& level);
     sf::Vector2f GetVel();
@@ -27,11 +28,13 @@ class MovingSprite : public sf::Sprite {
     sf::IntRect GetHitbox();
     sf::FloatRect GetGlobalHitbox();
     AnimationTable& GetAnims();
+    bool OnPlatform();
     void SetVel(sf::Vector2f vel);
     void Accelerate(sf::Vector2f vec, float eTime);
     void SetRotVel(float rotVel);
     void SetUpperLeftCorner(sf::Vector2f pos);
     void SetHitbox(sf::IntRect rect);
+    void SetOnPlatform(bool on);
 
     private:
     AnimationTable *_animTable;
@@ -39,7 +42,10 @@ class MovingSprite : public sf::Sprite {
     sf::IntRect _hitbox;
     sf::Vector2f _vel;
     float _rotVel;
+    bool _onPlatform;
     bool _animated;
+
+    sf::ConvexShape _box;
 };
 
 #endif // MOVINGSPRITE_H_INCLUDED

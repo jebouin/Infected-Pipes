@@ -9,17 +9,21 @@
 using namespace std;
 
 class IP;
+class Level;
 
 class Background {
     public:
-    Background(IP& ip, string name, float zoom);
+    Background(IP& ip, string name, float zoom, Level& level);
     ~Background();
     void Draw(IP& ip, sf::View& prevView);
 
     private:
+    vector<sf::Sprite> _backSprites;
     sf::Sprite _back;
     sf::View _view;
     float _zoom;
+
+    const Level& _level;
 };
 
 #endif // BACKGROUND_H_INCLUDED

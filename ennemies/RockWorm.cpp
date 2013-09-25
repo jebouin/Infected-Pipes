@@ -40,7 +40,7 @@ bool RockWorm::AutoSpawn(IP& ip, Level& level, EntityManager& eManager, Characte
     bool possible = false;
     for(int i=0 ; i<map.GetSize().x ; i++) {
         for(int j=0 ; j<map.GetSize().y ; j++) {
-            if(map.GetTileType(sf::Vector2i(i, j)) == Map::VOID && map.GetTileType(sf::Vector2i(i, j+1)) == Map::WALL) {
+            if(map.GetTileType(sf::Vector2i(i, j), Map::FRONT) == Map::VOID && map.GetTileType(sf::Vector2i(i, j+1), Map::FRONT) == Map::WALL) {
                 possible = true;
             }
         }
@@ -55,7 +55,7 @@ bool RockWorm::AutoSpawn(IP& ip, Level& level, EntityManager& eManager, Characte
         tries++;
         correctPos = true;
         sf::Vector2i curPos(-1, -1);
-        while(!(map.GetTileType(curPos) == Map::VOID && map.GetTileType(curPos + sf::Vector2i(0, 1)) == Map::WALL)) {
+        while(!(map.GetTileType(curPos, Map::FRONT) == Map::VOID && map.GetTileType(curPos + sf::Vector2i(0, 1), Map::FRONT) == Map::WALL)) {
             curPos = sf::Vector2i(MathHelper::RandInt(0, map.GetSize().x), MathHelper::RandInt(0, map.GetSize().y));
         }
         SetUpperLeftCorner(sf::Vector2f(curPos.x*16+MathHelper::RandInt(1, 8), curPos.y*16+16-GetGlobalHitbox().height));

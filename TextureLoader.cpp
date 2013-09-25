@@ -4,9 +4,12 @@
 TextureLoader::TextureLoader(IP& ip) {
     AddTexture("tileset.png", "tileset");
     AddTexture("character.png", "character");
-    AddTexture("level0.png", "level0");
-    AddTexture("level1.png", "level1");
-    AddTexture("level2.png", "level2");
+
+    AddTexture("level0back.png", "level0back");
+    AddTexture("level0front.png", "level0front");
+    AddTexture("level1back.png", "level1back");
+    AddTexture("level1front.png", "level1front");
+
     AddTexture("pipe.png", "pipe");
     AddTexture("zombie.png", "zombie");
     AddTexture("spiderock.png", "spiderock");
@@ -23,6 +26,8 @@ TextureLoader::TextureLoader(IP& ip) {
     AddTexture("cursor.png", "cursor");
     AddTexture("littleRockBullet.png", "littleRockBullet");
     AddTexture("difficultyIndicator.png", "difficultyIndicator");
+    AddTexture("bat.png", "bat");
+    AddTexture("fir.png", "fir");
 }
 
 TextureLoader::~TextureLoader() {

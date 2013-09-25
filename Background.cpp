@@ -3,11 +3,25 @@
 #include "TextureLoader.h"
 #include "Renderer.h"
 #include "MathHelper.h"
+#include "Level.h"
+#include "Map.h"
 
-Background::Background(IP& ip, string name, float zoom) {
+Background::Background(IP& ip, string name, float zoom, Level& level) : _level(level){
+    Map& map(level.GetMap());
     _back.setTexture(ip._textureLoader->GetTexture(name));
     _view = sf::View(sf::FloatRect(0, 0, ip._renderer->GetTexture().getSize().x, ip._renderer->GetTexture().getSize().y));
     _zoom = zoom;
+
+    if(name == "nightBackground") {
+        for(int i=0 ; i<map.GetSize().x*2.5f ; i++) {
+            if(rand()%3==0) {
+                sf::Sprite fir;
+                fir.setTexture(ip._textureLoader->GetTexture("fir"));
+                fir.setPosition(sf::Vector2f(-1.25*16.f*map.GetSize().x, 0) + sf::Vector2f(sf::Vector2i(i, 9))*16.f + sf::Vector2f(0, -fir.getGlobalBounds().height + 16));
+                _backSprites.push_back(fir);
+            }
+        }
+    }
 }
 
 Background::~Background() {
@@ -27,5 +41,12 @@ void Background::Draw(IP& ip, sf::View& prevView) {
             ip._renderer->Draw(_back);
         }
     }
+
+    _view.setCenter(sf::Vector2f(prevView.getCenter().x / 2.5f, prevView.getCenter().y));
+    t.setView(_view);
+    for(int i=0 ; i<_backSprites.size() ; i++) {
+        ip._renderer->Draw(_backSprites[i]);
+    }
+
     t.setView(prevView);
 }

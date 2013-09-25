@@ -23,10 +23,12 @@ class GameEntity : public MovingSprite {
     ~GameEntity();
     void Update(IP& ip, float elapsedTime, Level& level, EntityManager& eManager, ParticleManager& pManager);
     void Update(IP& ip, float elapsedTime);
+    void Draw(IP& ip);
     void Collide(GameEntity* other, float elapsedTime);
     void GoLeft(float eTime);
     void GoRight(float eTime);
     void ChangeDir();
+    void PlatformDrop(Level& level);
     void Jump(Level& level);
     void Damage(int dmg, IP& ip, ParticleManager& pManager);
     void Hit(GameEntity *other, IP& ip, ParticleManager& pManager);

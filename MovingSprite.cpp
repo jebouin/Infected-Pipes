@@ -7,6 +7,7 @@
 #include "MathHelper.h"
 #include "Animation.h"
 #include "AnimationTable.h"
+#include "Renderer.h"
 
 MovingSprite::MovingSprite(IP& ip, string name, bool animated) : sf::Sprite() {
     _vel = sf::Vector2f(0, 0);
@@ -18,6 +19,8 @@ MovingSprite::MovingSprite(IP& ip, string name, bool animated) : sf::Sprite() {
     _animTable->AddAnimation("base", new Animation(1, 1000, sf::Vector2i(0, 0), sf::Vector2i(getTextureRect().width, getTextureRect().height), false));
     _animTable->SetAnimation("base");
     _animated = animated;
+    _onPlatform = false;
+    _box.setPointCount(4);
 }
 
 MovingSprite::MovingSprite(IP& ip, string name, sf::IntRect hitbox, bool animated) {
@@ -30,6 +33,8 @@ MovingSprite::MovingSprite(IP& ip, string name, sf::IntRect hitbox, bool animate
     _animTable->AddAnimation("base", new Animation(1, 1000, sf::Vector2i(0, 0), sf::Vector2i(getTextureRect().width, getTextureRect().height), false));
     _animTable->SetAnimation("base");
     _animated = animated;
+    _onPlatform = false;
+    _box.setPointCount(4);
 }
 
 MovingSprite::~MovingSprite() {
@@ -53,16 +58,33 @@ void MovingSprite::Update(IP& ip, float eTime, Level& level) {
         setTextureRect(_animTable->GetRect());
     }
     setRotation(getRotation() + GetRotVel()*eTime);
+    if(level.GetMap().IsOnTileType(*this, Map::PLATFORM) && GetVel().y >= 0) {
+        _onPlatform = true;
+    } else {
+        _onPlatform = false;
+    }
+
+    vector<sf::Vector2f> boxCorners = MathHelper::Rect2Corners(GetGlobalHitbox());
+    for(int i=0 ; i<4 ; i++) {
+        _box.setPoint(i, boxCorners[i]);
+    }
+}
+
+void MovingSprite::Draw(IP& ip) {
+    ip._renderer->Draw(*this);
+    //ip._renderer->Draw(_box);
 }
 
 void MovingSprite::MoveCollidingMap(sf::Vector2f delta, Level& level) {
     //cout << delta.x << " " << delta.y << endl;
-    if(MathHelper::GetVecLength(delta) > 16) {
+    if(MathHelper::GetVecLength(delta) > 2) {
         for(int i=0 ; i<2 ; i++)
             MoveCollidingMap(delta/2.f, level);
         return;
     }
     if(!TryMove(delta, level)) {
+        bool collideToPlatforms = false;
+
         for(float i=0.1f ; i<MathHelper::ABS(delta.x)-0.1f ; i+=0.1f) {
             if(!TryMove(sf::Vector2f(MathHelper::SGN(delta.x)/10.f, 0), level)) {
                 SetVel(sf::Vector2f(0, GetVel().y));
@@ -81,6 +103,11 @@ void MovingSprite::MoveCollidingMap(sf::Vector2f delta, Level& level) {
 bool MovingSprite::TryMove(sf::Vector2f delta, Level& level) {
     if(level.GetMap().IsCollided(*this, GetUpperLeftPos()+delta, Map::WALL) || level.GetSpawner().IsCollided(*this, GetUpperLeftPos()+delta)) {
         return false;
+    }
+    if(GetVel().y >= 0 && !((int)(GetGlobalHitbox().top + GetGlobalHitbox().height + delta.y)%16 > 3)) {
+        if(level.GetMap().IsOnTileType(*this, GetUpperLeftPos()+delta, Map::PLATFORM)) {
+            return false;
+        }
     }
     setPosition(getPosition() + delta);
     return true;
@@ -110,6 +137,10 @@ AnimationTable& MovingSprite::GetAnims() {
     return *_animTable;
 }
 
+bool MovingSprite::OnPlatform() {
+    return _onPlatform;
+}
+
 void MovingSprite::SetVel(sf::Vector2f vel) {
     _vel = vel;
 }
@@ -129,4 +160,8 @@ void MovingSprite::SetUpperLeftCorner(sf::Vector2f pos) {
 
 void MovingSprite::SetHitbox(sf::IntRect rect) {
     _hitbox = rect;
+}
+
+void MovingSprite::SetOnPlatform(bool on) {
+    _onPlatform = on;
 }

@@ -11,7 +11,7 @@
 #include "DamageParticle.h"
 
 GameEntity::GameEntity(IP& ip, string name, sf::IntRect hitbox, int hp) : MovingSprite(ip, name, hitbox, true) {
-    _jumpPower = 0.7;
+    _jumpPower = 0.69;
     _speed = 0.003;
     _weight = 0.3;
     _alive = true;
@@ -44,6 +44,10 @@ void GameEntity::Update(IP& ip, float elapsedTime, Level& level, EntityManager& 
 
 void GameEntity::Update(IP& ip, float elapsedTime) {
     MovingSprite::Update(ip, elapsedTime);
+}
+
+void GameEntity::Draw(IP& ip) {
+    MovingSprite::Draw(ip);
 }
 
 void GameEntity::Collide(GameEntity* other, float elapsedTime) {
@@ -105,8 +109,22 @@ void GameEntity::ChangeDir() {
     SetHitbox(sf::IntRect(frameSize.x-GetHitbox().left-GetHitbox().width, frameSize.y-GetHitbox().top-GetHitbox().height, GetHitbox().width, GetHitbox().height));
 }
 
+void GameEntity::PlatformDrop(Level& level) {
+    Map& m(level.GetMap());
+    if(m.IsOnTileType(*this, Map::WALL)) {
+        return;
+    }
+    if(!m.IsOnTileType(*this, Map::PLATFORM)) {
+        return;
+    }
+    setPosition(sf::Vector2f(getPosition().x, getPosition().y+4));
+}
+
 void GameEntity::Jump(Level& level) {
-    if(!level.GetSpawner().IsOnGround(*this) && !level.GetMap().IsOnTileType(*this, Map::WALL)) {
+    if(!level.GetSpawner().IsOnGround(*this) && !level.GetMap().IsOnTileType(*this, Map::WALL) && !level.GetMap().IsOnTileType(*this, Map::PLATFORM)) {
+        return;
+    }
+    if(GetVel().y < 0) {
         return;
     }
     SetVel(sf::Vector2f(GetVel().x, -_jumpPower));

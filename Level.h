@@ -30,7 +30,7 @@ class Level {
     void Update(IP& ip, EntityManager& eManager, Character& character);
     void DrawBack(IP& ip, sf::View& prevView);
     void DrawFront(IP& ip);
-    Map& GetMap();
+    Map& GetMap() const;
     Spawner& GetSpawner();
     void Load(IP& ip, string name, Character& character);
     void NextLevel(IP& ip, EntityManager& eManager, BulletManager& bManager, Character& character);
@@ -39,7 +39,7 @@ class Level {
 
     private:
     Map *_map;
-    sf::Image _levelImage;
+    vector<sf::Image> _levelImages;
     Spawner *_spawner;
     Grass *_grass;
     Background *_background;

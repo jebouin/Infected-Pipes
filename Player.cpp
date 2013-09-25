@@ -32,6 +32,7 @@ void Player::Update(IP& ip, float eTime, Level& level, EntityManager& eManager, 
         }
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
             _character->EnterPipe(level);
+            _character->PlatformDrop(level);
         }
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
             _character->Jump(level);
@@ -48,19 +49,19 @@ void Player::Update(IP& ip, float eTime, Level& level, EntityManager& eManager, 
     if(vrect.left+vrect.width > map.GetSize().x*16.f-16) {
         _view->setCenter(sf::Vector2f(map.GetSize().x*16.f - _view->getSize().x/2.f - 16, _view->getCenter().y));
     }
-    if(vrect.top < 0) {
+    /*if(vrect.top < 0) {
         _view->setCenter(sf::Vector2f(_view->getCenter().x, _view->getSize().y/2.f));
-    }
+    }*/
     if(vrect.top+vrect.height > map.GetSize().y*16.f) {
         _view->setCenter(sf::Vector2f(_view->getCenter().x, map.GetSize().y*16.f - _view->getSize().y/2.f));
     }
-    _view->setCenter(sf::Vector2f(sf::Vector2i(_view->getCenter())));
 
+    _view->setCenter(sf::Vector2f(/*sf::Vector2i(*/_view->getCenter()/*)*/));
     ip._renderer->GetTexture().setView(*_view);
 }
 
 void Player::Draw(IP& ip) {
-    ip._renderer->Draw(*_character);
+    _character->Draw(ip);
 }
 
 sf::View& Player::GetView() {
