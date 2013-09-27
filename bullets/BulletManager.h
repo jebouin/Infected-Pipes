@@ -12,12 +12,14 @@ using namespace std;
 class IP;
 class Bullet;
 class Level;
+class Character;
+class ParticleManager;
 
 class BulletManager {
     public:
     BulletManager();
     ~BulletManager();
-    void Update(IP& ip, float eTime, Level& level);
+    void Update(IP& ip, float eTime, Level& level, Character& character, ParticleManager& pManager);
     void Draw(IP& ip);
     void AddBullet(Bullet* bullet);
     void Clear();

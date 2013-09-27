@@ -19,7 +19,7 @@
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1380124522 source:c:\users\xaychru04\desktop\infected pipes\ip.cpp
+1380173823 source:c:\users\xaychru04\desktop\infected pipes\ip.cpp
 	"IP.h"
 	"Renderer.h"
 	"TextureLoader.h"
@@ -36,7 +36,7 @@
 	"GUI.h"
 	"BulletManager.h"
 
-1380124499 source:c:\users\xaychru04\desktop\infected pipes\textureloader.cpp
+1380302711 source:c:\users\xaychru04\desktop\infected pipes\textureloader.cpp
 	"TextureLoader.h"
 	"IP.h"
 
@@ -50,7 +50,7 @@
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1380125681 source:c:\users\xaychru04\desktop\infected pipes\map.cpp
+1380218539 source:c:\users\xaychru04\desktop\infected pipes\map.cpp
 	"Map.h"
 	"IP.h"
 	"TextureLoader.h"
@@ -58,7 +58,7 @@
 	"MathHelper.h"
 	"MovingSprite.h"
 
-1380118186 source:c:\users\xaychru04\desktop\infected pipes\movingsprite.cpp
+1380218539 source:c:\users\xaychru04\desktop\infected pipes\movingsprite.cpp
 	"MovingSprite.h"
 	"IP.h"
 	"Map.h"
@@ -75,7 +75,7 @@
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1380109389 source:c:\users\xaychru04\desktop\infected pipes\character.cpp
+1380130401 source:c:\users\xaychru04\desktop\infected pipes\character.cpp
 	"Character.h"
 	"IP.h"
 	"Animation.h"
@@ -96,7 +96,7 @@
 	"SFML/System.hpp"
 	"GameEntity.h"
 
-1380109394 c:\users\xaychru04\desktop\infected pipes\gameentity.h
+1380130377 c:\users\xaychru04\desktop\infected pipes\gameentity.h
 	<iostream>
 	<vector>
 	<cmath>
@@ -119,7 +119,7 @@
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1380109399 source:c:\users\xaychru04\desktop\infected pipes\gameentity.cpp
+1380130414 source:c:\users\xaychru04\desktop\infected pipes\gameentity.cpp
 	"GameEntity.h"
 	"Level.h"
 	"Map.h"
@@ -257,7 +257,7 @@
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1380094290 source:c:\users\xaychru04\desktop\infected pipes\spawner.cpp
+1380173859 source:c:\users\xaychru04\desktop\infected pipes\spawner.cpp
 	"Spawner.h"
 	"IP.h"
 	"EntityManager.h"
@@ -297,7 +297,7 @@
 	"Particle.h"
 	"Renderer.h"
 
-1379848912 source:c:\users\xaychru04\desktop\infected pipes\damageparticle.cpp
+1380130223 source:c:\users\xaychru04\desktop\infected pipes\damageparticle.cpp
 	"DamageParticle.h"
 	"IP.h"
 	"Animation.h"
@@ -305,18 +305,18 @@
 	"MathHelper.h"
 	"Renderer.h"
 
-1379848273 c:\users\xaychru04\desktop\infected pipes\damageparticle.h
+1380130223 c:\users\xaychru04\desktop\infected pipes\damageparticle.h
 	<iostream>
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 	"Particle.h"
 
-1379837765 c:\users\xaychru04\desktop\infected pipes\ennemies\spiderock.h
+1380135109 c:\users\xaychru04\desktop\infected pipes\ennemies\spiderock.h
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 	"Ennemy.h"
 
-1380123586 source:c:\users\xaychru04\desktop\infected pipes\ennemies\spiderock.cpp
+1380135099 source:c:\users\xaychru04\desktop\infected pipes\ennemies\spiderock.cpp
 	"Spiderock.h"
 	"IP.h"
 	"Map.h"
@@ -412,20 +412,20 @@
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1379794231 source:c:\users\xaychru04\desktop\infected pipes\gui\cursor.cpp
+1380302711 source:c:\users\xaychru04\desktop\infected pipes\gui\cursor.cpp
 	"Cursor.h"
 	"IP.h"
 	"TextureLoader.h"
 	"MathHelper.h"
 	"Renderer.h"
 
-1379795717 c:\users\xaychru04\desktop\infected pipes\bullets\bulletmanager.h
+1380173808 c:\users\xaychru04\desktop\infected pipes\bullets\bulletmanager.h
 	<iostream>
 	<vector>
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1379837033 source:c:\users\xaychru04\desktop\infected pipes\bullets\bullet.cpp
+1380173741 source:c:\users\xaychru04\desktop\infected pipes\bullets\bullet.cpp
 	"Bullet.h"
 	"TextureLoader.h"
 	"IP.h"
@@ -433,17 +433,22 @@
 	"Renderer.h"
 	"Map.h"
 	"Spawner.h"
+	"Character.h"
+	"ParticleManager.h"
+	"GameEntity.h"
 
-1379836444 c:\users\xaychru04\desktop\infected pipes\bullets\bullet.h
+1380173733 c:\users\xaychru04\desktop\infected pipes\bullets\bullet.h
 	<iostream>
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 	"MovingSprite.h"
 
-1379795750 source:c:\users\xaychru04\desktop\infected pipes\bullets\bulletmanager.cpp
+1380173808 source:c:\users\xaychru04\desktop\infected pipes\bullets\bulletmanager.cpp
 	"BulletManager.h"
 	"Bullet.h"
 	"Level.h"
+	"Character.h"
+	"ParticleManager.h"
 
 1379844307 c:\users\xaychru04\desktop\infected pipes\ennemies\ennemy.h
 	"SFML/Graphics.hpp"

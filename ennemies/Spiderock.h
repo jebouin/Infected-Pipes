@@ -21,7 +21,7 @@ class Spiderock : public Ennemy {
     void Update(IP& ip, float eTime, Level& level, Character& character, EntityManager& eManager, ParticleManager& pManager, BulletManager& bManager);
 
     private:
-
+    sf::Clock _attackTimer;
 };
 
 #endif // ENNEMY_H_INCLUDED

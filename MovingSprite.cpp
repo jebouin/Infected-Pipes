@@ -83,8 +83,6 @@ void MovingSprite::MoveCollidingMap(sf::Vector2f delta, Level& level) {
         return;
     }
     if(!TryMove(delta, level)) {
-        bool collideToPlatforms = false;
-
         for(float i=0.1f ; i<MathHelper::ABS(delta.x)-0.1f ; i+=0.1f) {
             if(!TryMove(sf::Vector2f(MathHelper::SGN(delta.x)/10.f, 0), level)) {
                 SetVel(sf::Vector2f(0, GetVel().y));

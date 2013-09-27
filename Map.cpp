@@ -126,22 +126,22 @@ bool Map::IsCollided(sf::FloatRect rect, TileType type) {
     vector<sf::Vector2f> corners = MathHelper::Rect2Corners(rect);
     for(float i=corners[0].x ; i<corners[1].x ; i+=2) {
         if(_tileTypes[GetTile(sf::Vector2i(sf::Vector2f(i, corners[0].y)/16.f), FRONT)] == type) {
-            return /*IsLocalCollided(MathHelper::Mod(sf::Vector2f(i, corners[0].y), 16), type)*/true;
+            return true;
         }
         if(_tileTypes[GetTile(sf::Vector2i(sf::Vector2f(i, corners[2].y)/16.f), FRONT)] == type) {
-            return /*IsLocalCollided(MathHelper::Mod(sf::Vector2f(i, corners[2].y), 16), type)*/true;
+            return true;
         }
     }
     for(float i=corners[0].y ; i<corners[2].y ; i+=2) {
         if(_tileTypes[GetTile(sf::Vector2i(sf::Vector2f(corners[0].x, i)/16.f), FRONT)] == type) {
-            return /*IsLocalCollided(MathHelper::Mod(sf::Vector2f(corners[0].x, i), 16), type)*/true;
+            return true;
         }
         if(_tileTypes[GetTile(sf::Vector2i(sf::Vector2f(corners[2].x, i)/16.f), FRONT)] == type) {
-            return /*IsLocalCollided(MathHelper::Mod(sf::Vector2f(corners[2].x, i), 16), type)*/true;
+            return true;
         }
     }
     if(_tileTypes[GetTile(sf::Vector2i(sf::Vector2f(corners[2])/16.f), FRONT)] == type) {
-        return /*IsLocalCollided(MathHelper::Mod(sf::Vector2f(corners[2]), 16), type)*/true;
+        return true;
     }
     return false;
 }
@@ -156,14 +156,13 @@ bool Map::IsCollided(MovingSprite& sprite, TileType type) {
 
 bool Map::IsOnTileType(MovingSprite& sprite, sf::Vector2f pos, TileType type) {
     sf::FloatRect rect = sprite.GetGlobalHitbox();
-    //cout << rect.left << " " << rect.width+rect.left << endl;
     for(float i=0 ; i<rect.width ; i+=8) {
         if(_tileTypes[GetTile(sf::Vector2i(sf::Vector2f(pos.x+i, pos.y+rect.height+1)/16.f), FRONT)] == type) {
-            return /*IsLocalCollided(MathHelper::Mod(sf::Vector2f(rect.left+i, rect.top+rect.height+1), 16), type)*/true;
+            return true;
         }
     }
     if(_tileTypes[GetTile(sf::Vector2i(sf::Vector2f(pos.x+rect.width, pos.y+rect.height+1)/16.f), FRONT)] == type) {
-        return /*IsLocalCollided(MathHelper::Mod(sf::Vector2f(rect.left+rect.width, rect.top+rect.height+1), 16), type)*/true;
+        return true;
     }
     return false;
 }

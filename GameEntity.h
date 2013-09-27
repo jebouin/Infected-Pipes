@@ -30,8 +30,8 @@ class GameEntity : public MovingSprite {
     void ChangeDir();
     void PlatformDrop(Level& level);
     void Jump(Level& level);
-    void Damage(int dmg, IP& ip, ParticleManager& pManager);
-    void Hit(GameEntity *other, IP& ip, ParticleManager& pManager);
+    void Damage(int dmg, IP& ip, ParticleManager& pManager, sf::Color color);
+    void Hit(GameEntity *other, IP& ip, ParticleManager& pManager, sf::Color color);
     void SetJumpPower(float p);
     void SetSpeed(float s);
     void SetWeight(float w);

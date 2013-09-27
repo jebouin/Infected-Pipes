@@ -5,7 +5,7 @@
 #include "MathHelper.h"
 #include "Renderer.h"
 
-DamageParticle::DamageParticle(IP& ip, int damage, sf::Vector2f pos, sf::Vector2f velocity, sf::Vector2f startScale, sf::Vector2f endScale, bool gravity, bool collision)
+DamageParticle::DamageParticle(IP& ip, int damage, sf::Vector2f pos, sf::Vector2f velocity, sf::Vector2f startScale, sf::Vector2f endScale, sf::Color color, bool gravity, bool collision)
     : Particle(ip, "blood0", pos, velocity, 0, (damage >= 1000 ? MathHelper::RandFloat(1500, 1800) : MathHelper::RandFloat(600, 800)), startScale, endScale, 255, 0, gravity, collision, false, sf::IntRect(0, 0, 1, 1)) {
     string damageText = MathHelper::NbToStringWithUnit(damage);
     int fontSize = (damage >= 1000 ? 20 : 16);
@@ -33,7 +33,7 @@ DamageParticle::DamageParticle(IP& ip, int damage, sf::Vector2f pos, sf::Vector2
     _text.setFont(ip._font);
     _text.setCharacterSize(fontSize);
     _text.setString(damageText);
-    setColor(sf::Color(255, 128, 0));
+    setColor(color);
     _text.setOrigin(sf::Vector2f(_text.getGlobalBounds().width, _text.getGlobalBounds().height)/2.f);
     SetHitbox(sf::IntRect(8, 2, _text.getLocalBounds().width-3, _text.getLocalBounds().height-2));
 }

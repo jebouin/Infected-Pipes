@@ -130,7 +130,7 @@ void GameEntity::Jump(Level& level) {
     SetVel(sf::Vector2f(GetVel().x, -_jumpPower));
 }
 
-void GameEntity::Damage(int dmg, IP& ip, ParticleManager& pManager) {
+void GameEntity::Damage(int dmg, IP& ip, ParticleManager& pManager, sf::Color color) {
     _hp -= dmg;
     if(_hp <= 0) {
         _alive = false;
@@ -143,12 +143,13 @@ void GameEntity::Damage(int dmg, IP& ip, ParticleManager& pManager) {
                                             MathHelper::Ang2Vec(MathHelper::Deg2Rad(MathHelper::RandFloat(250, 290))) * MathHelper::RandFloat(0.2, 0.4),
                                             sf::Vector2f(1, 1),
                                             sf::Vector2f(1, 1),
+                                            color,
                                             true,
                                             true));
 }
 
-void GameEntity::Hit(GameEntity *other, IP& ip, ParticleManager& pManager) {
-    other->Damage(MathHelper::RandInt(2, 5), ip, pManager);
+void GameEntity::Hit(GameEntity *other, IP& ip, ParticleManager& pManager, sf::Color color) {
+    other->Damage(MathHelper::RandInt(2, 5), ip, pManager, color);
     sf::Vector2f c(MathHelper::GetCenter(GetGlobalHitbox()));
     sf::Vector2f oc(MathHelper::GetCenter(other->GetGlobalHitbox()));
     sf::Vector2f dir = MathHelper::Normalize(sf::Vector2f(oc.x-c.x, 0));

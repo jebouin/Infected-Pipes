@@ -16,7 +16,7 @@ Cursor::~Cursor() {
 void Cursor::Update(IP& ip) {
     setPosition(sf::Vector2f(sf::Vector2i(sf::Vector2f(sf::Mouse::getPosition(*(ip._window))) / 4.f)));
 
-    if(MathHelper::GetVecLength(_prevPos-getPosition()) > 1) {
+    if(MathHelper::GetVecLength(_prevPos-getPosition()) > 0) {
         _inactiveTimer.restart();
         setColor(sf::Color(getColor().r, getColor().g, getColor().b, 255));
     } else {
