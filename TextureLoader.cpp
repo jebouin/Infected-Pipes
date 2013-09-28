@@ -28,6 +28,7 @@ TextureLoader::TextureLoader(IP& ip) {
     AddTexture("difficultyIndicator.png", "difficultyIndicator");
     AddTexture("bat.png", "bat");
     AddTexture("fir.png", "fir");
+    AddTexture("chest.png", "chest");
 }
 
 TextureLoader::~TextureLoader() {

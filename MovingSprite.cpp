@@ -21,6 +21,7 @@ MovingSprite::MovingSprite(IP& ip, string name, bool animated) : sf::Sprite() {
     _animated = animated;
     _onPlatform = false;
     _box.setPointCount(4);
+    _collidesWithPlatform = true;
 }
 
 MovingSprite::MovingSprite(IP& ip, string name, sf::IntRect hitbox, bool animated) {
@@ -35,6 +36,7 @@ MovingSprite::MovingSprite(IP& ip, string name, sf::IntRect hitbox, bool animate
     _animated = animated;
     _onPlatform = false;
     _box.setPointCount(4);
+    _collidesWithPlatform = true;
 }
 
 MovingSprite::~MovingSprite() {
@@ -102,7 +104,7 @@ bool MovingSprite::TryMove(sf::Vector2f delta, Level& level) {
     if(level.GetMap().IsCollided(*this, GetUpperLeftPos()+delta, Map::WALL) || level.GetSpawner().IsCollided(*this, GetUpperLeftPos()+delta)) {
         return false;
     }
-    if(GetVel().y >= 0 && !((int)(GetGlobalHitbox().top + GetGlobalHitbox().height + delta.y)%16 > 3)) {
+    if(GetVel().y >= 0 && !((int)(GetGlobalHitbox().top + GetGlobalHitbox().height + delta.y)%16 > 3) && _collidesWithPlatform) {
         if(level.GetMap().IsOnTileType(*this, GetUpperLeftPos()+delta, Map::PLATFORM)) {
             return false;
         }
@@ -162,4 +164,8 @@ void MovingSprite::SetHitbox(sf::IntRect rect) {
 
 void MovingSprite::SetOnPlatform(bool on) {
     _onPlatform = on;
+}
+
+void MovingSprite::SetCollideOnPlatform(bool c) {
+    _collidesWithPlatform = c;
 }

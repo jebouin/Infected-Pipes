@@ -35,6 +35,7 @@ class MovingSprite : public sf::Sprite {
     void SetUpperLeftCorner(sf::Vector2f pos);
     void SetHitbox(sf::IntRect rect);
     void SetOnPlatform(bool on);
+    void SetCollideOnPlatform(bool c);
 
     private:
     AnimationTable *_animTable;
@@ -43,6 +44,7 @@ class MovingSprite : public sf::Sprite {
     sf::Vector2f _vel;
     float _rotVel;
     bool _onPlatform;
+    bool _collidesWithPlatform;
     bool _animated;
 
     sf::ConvexShape _box;

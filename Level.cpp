@@ -10,6 +10,7 @@
 #include "Background.h"
 #include "Grass.h"
 #include "Character.h"
+#include "Chest.h"
 
 Level::Level(IP& ip, Character& character) {
     _levelInfos["intro"] = LevelInfo{"level0", "nightBackground", 0.0001f};
@@ -24,16 +25,26 @@ Level::~Level() {
     delete _spawner;
     delete _grass;
     delete _background;
+    for(int i=0 ; i<_chests.size() ; i++) {
+        delete _chests[i];
+    }
+    _chests.clear();
 }
 
-void Level::Update(IP& ip, EntityManager& eManager, Character& character) {
+void Level::Update(IP& ip, EntityManager& eManager, Character& character, float eTime) {
     _spawner->Update(ip, eManager, *this, character);
     _grass->Update(ip);
+    for(int i=0 ; i<_chests.size() ; i++) {
+        _chests[i]->Update(ip, eTime, *this);
+    }
 }
 
 void Level::DrawBack(IP& ip, sf::View& prevView) {
     _background->Draw(ip, prevView);
     _map->DrawLayer(ip, Map::BACK);
+    for(int i=0 ; i<_chests.size() ; i++) {
+        _chests[i]->Draw(ip);
+    }
 }
 
 void Level::DrawFront(IP& ip) {
@@ -96,6 +107,9 @@ void Level::Load(IP& ip, string name, Character& character) {
 
     _background = new Background(ip, _levelInfos[name]._backgroundName, _levelInfos[name]._backgroundZoom, *this);
     _grass = new Grass(ip, *this);
+
+    _chests.clear();
+    _chests.push_back(new Chest(ip, sf::Vector2f(_map->GetSize().x*8, 30)));
 }
 
 void Level::NextLevel(IP& ip, EntityManager& eManager, BulletManager& bManager, Character& character) {
@@ -115,4 +129,12 @@ int Level::GetDifficulty() const {
 
 void Level::SetDifficulty(int v) {
     _difficulty = v;
+}
+
+void Level::OpenChest(Character& character, IP& ip) {
+    for(int i=0 ; i<_chests.size() ; i++) {
+        if(_chests[i]->GetGlobalHitbox().intersects(character.GetGlobalHitbox())) {
+            _chests[i]->Open(ip);
+        }
+    }
 }

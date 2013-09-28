@@ -13,7 +13,7 @@ class Renderer {
     Renderer(sf::Vector2i size);
     ~Renderer();
     void Clear();
-    void Draw(const sf::Drawable& drawable);
+    void Draw(const sf::Drawable &drawable, const sf::RenderStates &states=sf::RenderStates::Default);
     void DrawToWindow(sf::RenderWindow& window);
     sf::RenderTexture& GetTexture();
 

@@ -33,7 +33,7 @@ class MathHelper {
 
     //rectangles and vector manipulation
     static vector<sf::Vector2f> Rect2Corners(sf::FloatRect rect);
-    static sf::FloatRect View2Rect(sf::View& view);
+    static sf::FloatRect View2Rect(const sf::View& view);
     static sf::Vector2f GetCenter(sf::FloatRect rect);
     static float GetVecLength(sf::Vector2f vec);
     static sf::Vector2f Normalize(sf::Vector2f vec);

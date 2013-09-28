@@ -14,7 +14,7 @@ Renderer::Renderer(sf::Vector2i size) {
     _littleSprite.scale(4, 4);
     _bigSprite.setTexture(_bigTexture->getTexture());
 
-    if (!_mosaicShader.loadFromFile("shaders/mosaic.frag", sf::Shader::Fragment)) {
+    if(!_mosaicShader.loadFromFile("shaders/mosaic.frag", sf::Shader::Fragment)) {
         cout << "Cannot load mosaic shader..." << endl;
     }
 }
@@ -29,8 +29,8 @@ void Renderer::Clear() {
     _bigTexture->clear();
 }
 
-void Renderer::Draw(const sf::Drawable& drawable) {
-    _littleTexture->draw(drawable);
+void Renderer::Draw(const sf::Drawable& drawable, const sf::RenderStates &states) {
+    _littleTexture->draw(drawable, states);
 }
 
 void Renderer::DrawToWindow(sf::RenderWindow& window) {

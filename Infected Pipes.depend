@@ -7,10 +7,10 @@
 	"SFML/System.hpp"
 	"IP.h"
 
-1379708778 source:c:\users\xaychru04\desktop\infected pipes\renderer.cpp
+1380369990 source:c:\users\xaychru04\desktop\infected pipes\renderer.cpp
 	"Renderer.h"
 
-1379708392 c:\users\xaychru04\desktop\infected pipes\renderer.h
+1380369965 c:\users\xaychru04\desktop\infected pipes\renderer.h
 	<iostream>
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
@@ -19,7 +19,7 @@
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1380173823 source:c:\users\xaychru04\desktop\infected pipes\ip.cpp
+1380370651 source:c:\users\xaychru04\desktop\infected pipes\ip.cpp
 	"IP.h"
 	"Renderer.h"
 	"TextureLoader.h"
@@ -36,7 +36,7 @@
 	"GUI.h"
 	"BulletManager.h"
 
-1380302711 source:c:\users\xaychru04\desktop\infected pipes\textureloader.cpp
+1380361797 source:c:\users\xaychru04\desktop\infected pipes\textureloader.cpp
 	"TextureLoader.h"
 	"IP.h"
 
@@ -58,7 +58,7 @@
 	"MathHelper.h"
 	"MovingSprite.h"
 
-1380218539 source:c:\users\xaychru04\desktop\infected pipes\movingsprite.cpp
+1380380865 source:c:\users\xaychru04\desktop\infected pipes\movingsprite.cpp
 	"MovingSprite.h"
 	"IP.h"
 	"Map.h"
@@ -70,7 +70,7 @@
 	"AnimationTable.h"
 	"Renderer.h"
 
-1380109389 c:\users\xaychru04\desktop\infected pipes\movingsprite.h
+1380380792 c:\users\xaychru04\desktop\infected pipes\movingsprite.h
 	<vector>
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
@@ -96,7 +96,7 @@
 	"SFML/System.hpp"
 	"GameEntity.h"
 
-1380130377 c:\users\xaychru04\desktop\infected pipes\gameentity.h
+1380377730 c:\users\xaychru04\desktop\infected pipes\gameentity.h
 	<iostream>
 	<vector>
 	<cmath>
@@ -119,7 +119,7 @@
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1380130414 source:c:\users\xaychru04\desktop\infected pipes\gameentity.cpp
+1380377787 source:c:\users\xaychru04\desktop\infected pipes\gameentity.cpp
 	"GameEntity.h"
 	"Level.h"
 	"Map.h"
@@ -132,7 +132,7 @@
 	"Particle.h"
 	"DamageParticle.h"
 
-1380109505 source:c:\users\xaychru04\desktop\infected pipes\player.cpp
+1380373818 source:c:\users\xaychru04\desktop\infected pipes\player.cpp
 	"Player.h"
 	"IP.h"
 	"Character.h"
@@ -149,17 +149,17 @@
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1379876875 c:\users\xaychru04\desktop\infected pipes\mathhelper.h
+1380372279 c:\users\xaychru04\desktop\infected pipes\mathhelper.h
 	<iostream>
 	<cmath>
 	<sstream>
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1379876875 source:c:\users\xaychru04\desktop\infected pipes\mathhelper.cpp
+1380372278 source:c:\users\xaychru04\desktop\infected pipes\mathhelper.cpp
 	"MathHelper.h"
 
-1380124701 source:c:\users\xaychru04\desktop\infected pipes\level.cpp
+1380373828 source:c:\users\xaychru04\desktop\infected pipes\level.cpp
 	"Level.h"
 	"IP.h"
 	"Map.h"
@@ -172,8 +172,9 @@
 	"Background.h"
 	"Grass.h"
 	"Character.h"
+	"Chest.h"
 
-1380124099 c:\users\xaychru04\desktop\infected pipes\level.h
+1380373818 c:\users\xaychru04\desktop\infected pipes\level.h
 	<map>
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
@@ -194,12 +195,12 @@
 	"SFML/System.hpp"
 	"GameEntity.h"
 
-1378917180 c:\users\xaychru04\desktop\infected pipes\pipe.h
+1380377075 c:\users\xaychru04\desktop\infected pipes\pipe.h
 	<iostream>
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1380094270 source:c:\users\xaychru04\desktop\infected pipes\pipe.cpp
+1380377126 source:c:\users\xaychru04\desktop\infected pipes\pipe.cpp
 	"Pipe.h"
 	"IP.h"
 	"EntityManager.h"
@@ -251,13 +252,13 @@
 	"Renderer.h"
 	"MathHelper.h"
 
-1379694460 c:\users\xaychru04\desktop\infected pipes\spawner.h
+1380377049 c:\users\xaychru04\desktop\infected pipes\spawner.h
 	<iostream>
 	<cmath>
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1380173859 source:c:\users\xaychru04\desktop\infected pipes\spawner.cpp
+1380377049 source:c:\users\xaychru04\desktop\infected pipes\spawner.cpp
 	"Spawner.h"
 	"IP.h"
 	"EntityManager.h"
@@ -267,6 +268,8 @@
 	"MathHelper.h"
 	"Character.h"
 	"RockWorm.h"
+	"Spiderock.h"
+	"Bat.h"
 	"Level.h"
 
 1378573983 c:\users\xaychru04\desktop\infected pipes\particlemanager.h
@@ -450,7 +453,7 @@
 	"Character.h"
 	"ParticleManager.h"
 
-1379844307 c:\users\xaychru04\desktop\infected pipes\ennemies\ennemy.h
+1380377049 c:\users\xaychru04\desktop\infected pipes\ennemies\ennemy.h
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 	"GameEntity.h"
@@ -480,7 +483,7 @@
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1379871433 source:c:\users\xaychru04\desktop\infected pipes\ennemies\bat.cpp
+1380378226 source:c:\users\xaychru04\desktop\infected pipes\ennemies\bat.cpp
 	"Bat.h"
 	"IP.h"
 	"Map.h"
@@ -498,4 +501,27 @@
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 	"Ennemy.h"
+
+1380373818 source:c:\users\xaychru04\desktop\infected pipes\chest.cpp
+	"Chest.h"
+	"IP.h"
+	"Level.h"
+	"ChestOpened.h"
+
+1380373818 c:\users\xaychru04\desktop\infected pipes\chest.h
+	<iostream>
+	"SFML/Graphics.hpp"
+	"SFML/System.hpp"
+	"MovingSprite.h"
+
+1380373818 c:\users\xaychru04\desktop\infected pipes\chestopened.h
+	<iostream>
+	"SFML/Graphics.hpp"
+	"SFML/System.hpp"
+
+1380374186 source:c:\users\xaychru04\desktop\infected pipes\chestopened.cpp
+	"ChestOpened.h"
+	"IP.h"
+	"MathHelper.h"
+	"Renderer.h"
 

@@ -34,6 +34,9 @@ void Player::Update(IP& ip, float eTime, Level& level, EntityManager& eManager, 
             _character->EnterPipe(level);
             _character->PlatformDrop(level);
         }
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Z)) {
+            level.OpenChest(*_character, ip);
+        }
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
             _character->Jump(level);
         }

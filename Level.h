@@ -16,6 +16,7 @@ class BulletManager;
 class Background;
 class Grass;
 class Character;
+class Chest;
 
 struct LevelInfo {
     string _imageName;
@@ -27,7 +28,7 @@ class Level {
     public:
     Level(IP& ip, Character& character);
     ~Level();
-    void Update(IP& ip, EntityManager& eManager, Character& character);
+    void Update(IP& ip, EntityManager& eManager, Character& character, float eTime);
     void DrawBack(IP& ip, sf::View& prevView);
     void DrawFront(IP& ip);
     Map& GetMap() const;
@@ -36,6 +37,7 @@ class Level {
     void NextLevel(IP& ip, EntityManager& eManager, BulletManager& bManager, Character& character);
     int GetDifficulty() const;
     void SetDifficulty(int v);
+    void OpenChest(Character& character, IP& ip);
 
     private:
     Map *_map;
@@ -47,6 +49,7 @@ class Level {
     map<string, LevelInfo> _levelInfos;
 
     int _difficulty;
+    vector<Chest*> _chests;
 };
 
 #endif // LEVEL_H_INCLUDED

@@ -60,7 +60,7 @@ vector<sf::Vector2f> MathHelper::Rect2Corners(sf::FloatRect rect) {
     return corners;
 }
 
-sf::FloatRect MathHelper::View2Rect(sf::View& view) {
+sf::FloatRect MathHelper::View2Rect(const sf::View& view) {
     return sf::FloatRect(sf::Vector2f(view.getCenter()-view.getSize()/2.f), sf::Vector2f(view.getSize()));
 }
 

@@ -36,6 +36,7 @@ class GameEntity : public MovingSprite {
     void SetSpeed(float s);
     void SetWeight(float w);
     void SetPushable(bool p);
+    void SetFlying(bool f);
     void SetHP(int hp);
     void SetHPMax(int max);
     float GetWeight();
@@ -52,6 +53,7 @@ class GameEntity : public MovingSprite {
     float _weight;
     bool _alive;
     bool _pushable;
+    bool _flying;
     int _hpMax;
     int _hp;
 

@@ -7,6 +7,8 @@
 #include "MathHelper.h"
 #include "Character.h"
 #include "RockWorm.h"
+#include "Spiderock.h"
+#include "Bat.h"
 #include "Level.h"
 
 Spawner::Spawner(IP& ip, int nbWaves) {
@@ -45,7 +47,7 @@ void Spawner::Update(IP& ip, EntityManager& eManager, Level& level, Character& c
 }
 
 void Spawner::Spawn(IP& ip, EntityManager& eManager, Level& level, Character& character) {
-    if(rand()%2==42) {
+    /*if(rand()%2==42) {
         int pipeId = rand()%_pipes.size();
         _pipes[pipeId]->Spawn(ip, eManager);
     } else {
@@ -54,7 +56,10 @@ void Spawner::Spawn(IP& ip, EntityManager& eManager, Level& level, Character& ch
             return;
         }
         eManager.Add(r);
-    }
+    }*/
+
+    int pipeId = rand()%_pipes.size();
+    _pipes[pipeId]->Spawn(ip, eManager, new Bat(ip));
 
 
     _nbToSpawn--;

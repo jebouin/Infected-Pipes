@@ -21,9 +21,8 @@ void Pipe::Update(IP& ip, EntityManager& eManager) {
 
 }
 
-void Pipe::Spawn(IP& ip, EntityManager& eManager) {
-    Spiderock *e = new Spiderock(ip);
+void Pipe::Spawn(IP& ip, EntityManager& eManager, Ennemy *e) {
     e->setPosition(sf::Vector2f(getPosition().x, getPosition().y));
-    e->SetVel(MathHelper::Ang2Vec(MathHelper::Deg2Rad(getRotation())) * MathHelper::RandFloat(0.4f, 0.6f));
+    e->SetVel(MathHelper::Ang2Vec(MathHelper::Deg2Rad(getRotation() + MathHelper::RandFloat(-10.f, 10.f))) * MathHelper::RandFloat(0.4f, 0.6f));
     eManager.Add(e);
 }

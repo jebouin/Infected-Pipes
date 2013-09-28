@@ -19,6 +19,7 @@ GameEntity::GameEntity(IP& ip, string name, sf::IntRect hitbox, int hp) : Moving
     _hp = _hpMax;
     _dir = true;
     _pushable = true;
+    _flying = false;
 }
 
 GameEntity::~GameEntity() {
@@ -27,7 +28,11 @@ GameEntity::~GameEntity() {
 
 void GameEntity::Update(IP& ip, float elapsedTime, Level& level, EntityManager& eManager, ParticleManager& pManager) {
     //SetVel(sf::Vector2f(GetVel().x / 1.2f, GetVel().y));
-    Accelerate(sf::Vector2f(0, 0.003), elapsedTime);
+    if(!_flying) {
+        Accelerate(sf::Vector2f(0, 0.003), elapsedTime);
+    } else {
+        Accelerate(sf::Vector2f(0, -0.008*GetVel().y), elapsedTime);
+    }
     Accelerate(sf::Vector2f(-0.008*GetVel().x, 0), elapsedTime);
 
     for(int i=0 ; i<eManager.GetNbEnnemies() ; i++) {
@@ -208,6 +213,10 @@ void GameEntity::SetWeight(float w) {
 
 void GameEntity::SetPushable(bool p) {
     _pushable = p;
+}
+
+void GameEntity::SetFlying(bool f) {
+    _flying = f;
 }
 
 void GameEntity::SetHP(int hp) {

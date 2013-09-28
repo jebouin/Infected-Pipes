@@ -11,13 +11,14 @@ using namespace std;
 class IP;
 class Map;
 class EntityManager;
+class Ennemy;
 
 class Pipe : public sf::Sprite {
     public:
     Pipe(IP& ip, sf::Vector2f pos, float angle);
     ~Pipe();
     void Update(IP& ip, EntityManager& eManager);
-    void Spawn(IP& ip, EntityManager& eManager);
+    void Spawn(IP& ip, EntityManager& eManager, Ennemy *e);
 
     private:
 
