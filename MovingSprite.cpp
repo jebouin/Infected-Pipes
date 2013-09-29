@@ -10,18 +10,7 @@
 #include "Renderer.h"
 
 MovingSprite::MovingSprite(IP& ip, string name, bool animated) : sf::Sprite() {
-    _vel = sf::Vector2f(0, 0);
-    _rotVel = 0;
-    setTexture(ip._textureLoader->GetTexture(name));
-    setOrigin(sf::Vector2f(getTextureRect().width, getTextureRect().height)/2.f);
-    _hitbox = getTextureRect();
-    _animTable = new AnimationTable();
-    _animTable->AddAnimation("base", new Animation(1, 1000, sf::Vector2i(0, 0), sf::Vector2i(getTextureRect().width, getTextureRect().height), false));
-    _animTable->SetAnimation("base");
-    _animated = animated;
-    _onPlatform = false;
-    _box.setPointCount(4);
-    _collidesWithPlatform = true;
+    MovingSprite(ip, name, getTextureRect(), animated);
 }
 
 MovingSprite::MovingSprite(IP& ip, string name, sf::IntRect hitbox, bool animated) {
@@ -41,6 +30,7 @@ MovingSprite::MovingSprite(IP& ip, string name, sf::IntRect hitbox, bool animate
 
 MovingSprite::~MovingSprite() {
     delete _animTable;
+    _animTable = 0;
 }
 
 void MovingSprite::Update(IP& ip, float eTime) {

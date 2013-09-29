@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1379754508 source:c:\users\xaychru04\desktop\infected pipes\main.cpp
+1380447504 source:c:\users\xaychru04\desktop\infected pipes\main.cpp
 	<iostream>
 	"ctime"
 	"cstdlib"
@@ -7,7 +7,7 @@
 	"SFML/System.hpp"
 	"IP.h"
 
-1380369990 source:c:\users\xaychru04\desktop\infected pipes\renderer.cpp
+1380447504 source:c:\users\xaychru04\desktop\infected pipes\renderer.cpp
 	"Renderer.h"
 
 1380369965 c:\users\xaychru04\desktop\infected pipes\renderer.h
@@ -19,7 +19,7 @@
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1380370651 source:c:\users\xaychru04\desktop\infected pipes\ip.cpp
+1380449149 source:c:\users\xaychru04\desktop\infected pipes\ip.cpp
 	"IP.h"
 	"Renderer.h"
 	"TextureLoader.h"
@@ -36,7 +36,7 @@
 	"GUI.h"
 	"BulletManager.h"
 
-1380361797 source:c:\users\xaychru04\desktop\infected pipes\textureloader.cpp
+1380446386 source:c:\users\xaychru04\desktop\infected pipes\textureloader.cpp
 	"TextureLoader.h"
 	"IP.h"
 
@@ -58,7 +58,7 @@
 	"MathHelper.h"
 	"MovingSprite.h"
 
-1380380865 source:c:\users\xaychru04\desktop\infected pipes\movingsprite.cpp
+1380447504 source:c:\users\xaychru04\desktop\infected pipes\movingsprite.cpp
 	"MovingSprite.h"
 	"IP.h"
 	"Map.h"
@@ -75,7 +75,7 @@
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1380130401 source:c:\users\xaychru04\desktop\infected pipes\character.cpp
+1380461325 source:c:\users\xaychru04\desktop\infected pipes\character.cpp
 	"Character.h"
 	"IP.h"
 	"Animation.h"
@@ -89,8 +89,10 @@
 	"Spawner.h"
 	"MathHelper.h"
 	"Renderer.h"
+	"Weapon.h"
+	"Bow.h"
 
-1380109389 c:\users\xaychru04\desktop\infected pipes\character.h
+1380446503 c:\users\xaychru04\desktop\infected pipes\character.h
 	<vector>
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
@@ -104,7 +106,7 @@
 	"SFML/System.hpp"
 	"MovingSprite.h"
 
-1379837709 source:c:\users\xaychru04\desktop\infected pipes\entitymanager.cpp
+1380447504 source:c:\users\xaychru04\desktop\infected pipes\entitymanager.cpp
 	"EntityManager.h"
 	"IP.h"
 	"Renderer.h"
@@ -132,7 +134,7 @@
 	"Particle.h"
 	"DamageParticle.h"
 
-1380373818 source:c:\users\xaychru04\desktop\infected pipes\player.cpp
+1380448678 source:c:\users\xaychru04\desktop\infected pipes\player.cpp
 	"Player.h"
 	"IP.h"
 	"Character.h"
@@ -159,7 +161,7 @@
 1380372278 source:c:\users\xaychru04\desktop\infected pipes\mathhelper.cpp
 	"MathHelper.h"
 
-1380373828 source:c:\users\xaychru04\desktop\infected pipes\level.cpp
+1380447803 source:c:\users\xaychru04\desktop\infected pipes\level.cpp
 	"Level.h"
 	"IP.h"
 	"Map.h"
@@ -231,7 +233,7 @@
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1378629624 source:c:\users\xaychru04\desktop\infected pipes\animationtable.cpp
+1380447504 source:c:\users\xaychru04\desktop\infected pipes\animationtable.cpp
 	"AnimationTable.h"
 	"Animation.h"
 
@@ -258,7 +260,7 @@
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1380377049 source:c:\users\xaychru04\desktop\infected pipes\spawner.cpp
+1380447504 source:c:\users\xaychru04\desktop\infected pipes\spawner.cpp
 	"Spawner.h"
 	"IP.h"
 	"EntityManager.h"
@@ -293,7 +295,7 @@
 	"SFML/System.hpp"
 	"MovingSprite.h"
 
-1379848069 source:c:\users\xaychru04\desktop\infected pipes\particlemanager.cpp
+1380447504 source:c:\users\xaychru04\desktop\infected pipes\particlemanager.cpp
 	"ParticleManager.h"
 	"IP.h"
 	"Level.h"
@@ -358,7 +360,7 @@
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1379843049 source:c:\users\xaychru04\desktop\infected pipes\gui\gui.cpp
+1380447504 source:c:\users\xaychru04\desktop\infected pipes\gui\gui.cpp
 	"GUI.h"
 	"IP.h"
 	"Character.h"
@@ -446,7 +448,7 @@
 	"SFML/System.hpp"
 	"MovingSprite.h"
 
-1380173808 source:c:\users\xaychru04\desktop\infected pipes\bullets\bulletmanager.cpp
+1380447088 source:c:\users\xaychru04\desktop\infected pipes\bullets\bulletmanager.cpp
 	"BulletManager.h"
 	"Bullet.h"
 	"Level.h"
@@ -502,7 +504,7 @@
 	"SFML/System.hpp"
 	"Ennemy.h"
 
-1380373818 source:c:\users\xaychru04\desktop\infected pipes\chest.cpp
+1380447504 source:c:\users\xaychru04\desktop\infected pipes\chest.cpp
 	"Chest.h"
 	"IP.h"
 	"Level.h"
@@ -524,4 +526,32 @@
 	"IP.h"
 	"MathHelper.h"
 	"Renderer.h"
+
+1380460551 source:c:\users\xaychru04\desktop\infected pipes\weapons\weapon.cpp
+	"Weapon.h"
+	"GameEntity.h"
+	"IP.h"
+	"Renderer.h"
+	"BulletManager.h"
+	"Bullet.h"
+
+1380460521 c:\users\xaychru04\desktop\infected pipes\weapons\weapon.h
+	<iostream>
+	"SFML/Graphics.hpp"
+	"SFML/System.hpp"
+	"MovingSprite.h"
+
+1380460081 c:\users\xaychru04\desktop\infected pipes\weapons\bow.h
+	<iostream>
+	"SFML/Graphics.hpp"
+	"SFML/System.hpp"
+	"Weapon.h"
+
+1380460521 source:c:\users\xaychru04\desktop\infected pipes\weapons\bow.cpp
+	"Bow.h"
+	"IP.h"
+	"GameEntity.h"
+	"BulletManager.h"
+	"Bullet.h"
+	"MathHelper.h"
 

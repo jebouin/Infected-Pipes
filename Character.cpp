@@ -11,6 +11,8 @@
 #include "Spawner.h"
 #include "MathHelper.h"
 #include "Renderer.h"
+#include "Weapon.h"
+#include "Bow.h"
 
 Character::Character(IP& ip) : GameEntity(ip, "character", sf::IntRect(2, 0, 7, 26), 10) {
     SetWeight(0.5f);
@@ -24,10 +26,13 @@ Character::Character(IP& ip) : GameEntity(ip, "character", sf::IntRect(2, 0, 7, 
     _level = 0;
     _xp = 0;
     _nextXP = 10;
+
+    _weapon = new Bow(ip, *this);
 }
 
 Character::~Character() {
-
+    delete _weapon;
+    _weapon = 0;
 }
 
 void Character::Update(IP& ip, float eTime, Level& level, EntityManager& eManager, ParticleManager& pManager, BulletManager& bManager) {
@@ -54,6 +59,7 @@ void Character::Update(IP& ip, float eTime, Level& level, EntityManager& eManage
     if(GetAnims().GetAnimationName()=="idle") {
         if(sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
             GetAnims().SetAnimation("attack");
+            _weapon->Use(ip, bManager);
             /*Bullet *b = new Bullet(ip, "littleRockBullet", sf::IntRect(0, 0, 5, 5),
                                    MathHelper::GetCenter(GetGlobalHitbox()),
                                    MathHelper::Ang2Vec(MathHelper::Vec2Ang(sf::Vector2f(ip._renderer->GetTexture().convertCoords(sf::Vector2i(MathHelper::GetMousePos(*(ip._window))))) - MathHelper::GetCenter(GetGlobalHitbox()))) * MathHelper::RandFloat(0.4, 0.6),
@@ -81,10 +87,13 @@ void Character::Update(IP& ip, float eTime, Level& level, EntityManager& eManage
     //Damage(1, ip, pManager);
 
     GameEntity::Update(ip, eTime, level, eManager, pManager);
+
+    _weapon->Update(ip, eTime, bManager);
 }
 
 void Character::Draw(IP& ip) {
     GameEntity::Draw(ip);
+    _weapon->Draw(ip);
 }
 
 void Character::EnterPipe(Level& level) {

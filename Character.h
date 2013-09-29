@@ -16,6 +16,8 @@ class EntityManager;
 class ParticleManager;
 class BulletManager;
 class Ennemy;
+class Weapon;
+class Bow;
 
 class Character : public GameEntity {
     public:
@@ -39,6 +41,8 @@ class Character : public GameEntity {
     bool _enteringPipe;
     bool _leavingPipe;
     sf::Clock _enterTimer;
+
+    Weapon *_weapon;
 };
 
 #endif // CHARACTER_H_INCLUDED

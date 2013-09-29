@@ -21,7 +21,9 @@ Renderer::Renderer(sf::Vector2i size) {
 
 Renderer::~Renderer() {
     delete _littleTexture;
+    _littleTexture = 0;
     delete _bigTexture;
+    _bigTexture = 0;
 }
 
 void Renderer::Clear() {

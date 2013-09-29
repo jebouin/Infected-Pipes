@@ -20,10 +20,15 @@ GUI::GUI(IP& ip, TextureLoader& tLoader, Character& character, Level& level) {
 
 GUI::~GUI() {
     delete _lifeBar;
+    _lifeBar = 0;
     delete _xpBar;
+    _xpBar = 0;
     delete _levelIndicator;
+    _levelIndicator = 0;
     delete _difficultyIndicator;
+    _difficultyIndicator = 0;
     delete _cursor;
+    _cursor = 0;
 }
 
 void GUI::Update(IP& ip) {

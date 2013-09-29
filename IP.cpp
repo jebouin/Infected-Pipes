@@ -45,10 +45,6 @@ IP::IP() {
             if(e.type == sf::Event::Closed || sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
                 _window->close();
             }
-            /*if(e.type == sf::Event::Resized) {
-                _renderer = new Renderer(sf::Vector2i(sf::Vector2f(e.size.width, e.size.height)/4.f), 4);
-                _player->SetView(sf::View(sf::FloatRect(0, 0, _renderer->GetTexture().getSize().x, _renderer->GetTexture().getSize().y)));
-            }*/
         }
 
         Update();
@@ -58,14 +54,24 @@ IP::IP() {
 
 IP::~IP() {
     delete _window;
+    _window = 0;
     delete _renderer;
+    _renderer = 0;
     delete _textureLoader;
+    _textureLoader = 0;
     delete _level;
+    _level = 0;
     delete _entityManager;
+    _entityManager = 0;
     delete _player;
+    _player = 0;
+    cout << "Player destroyed";
     delete _particleManager;
+    _particleManager = 0;
     delete _gui;
+    _gui = 0;
     delete _bulletManager;
+    _bulletManager = 0;
 }
 
 void IP::Update() {

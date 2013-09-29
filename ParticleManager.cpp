@@ -11,6 +11,7 @@ ParticleManager::ParticleManager() {
 ParticleManager::~ParticleManager() {
     for(int i=0 ; i<_particles.size() ; i++) {
         delete _particles[i];
+        _particles[i] = 0;
     }
     _particles.clear();
 }
@@ -20,7 +21,7 @@ void ParticleManager::Update(IP& ip, float elapsedTime, Level& level) {
         _particles[i]->Update(ip, elapsedTime, level);
         if(!_particles[i]->IsAlive()) {
             delete _particles[i];
-            _particles[i] = NULL;
+            _particles[i] = 0;
             _particles.erase(_particles.begin() + i);
             i--;
         }

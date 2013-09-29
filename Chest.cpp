@@ -11,6 +11,7 @@ Chest::Chest(IP& ip, sf::Vector2f pos) : MovingSprite(ip, "chest", sf::IntRect(0
 
 Chest::~Chest() {
     delete _chestOpened;
+    _chestOpened = 0;
 }
 
 void Chest::Update(IP& ip, float eTime, Level& level) {

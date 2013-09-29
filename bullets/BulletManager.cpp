@@ -17,6 +17,7 @@ void BulletManager::Update(IP& ip, float eTime, Level& level, Character& charact
         _bullets[i]->Update(ip, eTime, level, character, pManager);
         if(!_bullets[i]->IsAlive()) {
             delete _bullets[i];
+            _bullets[i] = 0;
             _bullets.erase(_bullets.begin() + i);
             i--;
         }
@@ -36,6 +37,7 @@ void BulletManager::AddBullet(Bullet* bullet) {
 void BulletManager::Clear() {
     for(int i=0 ; i<_bullets.size() ; i++) {
         delete _bullets[i];
+        _bullets[i] = 0;
     }
     _bullets.clear();
 }
@@ -46,7 +48,7 @@ int BulletManager::GetCount() {
 
 Bullet* BulletManager::GetBullet(int id) {
     if(id < 0 || id >= _bullets.size()) {
-        return NULL;
+        return 0;
     }
     return _bullets[id];
 }

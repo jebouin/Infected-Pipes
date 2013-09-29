@@ -24,9 +24,10 @@ Spawner::Spawner(IP& ip, int nbWaves) {
 
 Spawner::~Spawner() {
     for(int i=0 ; i<_pipes.size() ; i++) {
-        delete _pipes[0];
-        _pipes.erase(_pipes.begin());
+        delete _pipes[i];
+        _pipes[i] = 0;
     }
+    _pipes.clear();
 }
 
 void Spawner::Update(IP& ip, EntityManager& eManager, Level& level, Character& character) {

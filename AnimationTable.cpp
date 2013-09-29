@@ -8,6 +8,7 @@ AnimationTable::AnimationTable() {
 AnimationTable::~AnimationTable() {
     for(map<string, Animation*>::iterator i=_animations.begin() ; i!=_animations.end() ; i++) {
         delete i->second;
+        i->second = 0;
     }
 }
 

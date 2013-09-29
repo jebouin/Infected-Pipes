@@ -17,7 +17,9 @@ Player::Player(IP& ip, EntityManager& eManager) {
 
 Player::~Player() {
     delete _view;
+    _view = 0;
     delete _character;
+    _character = 0;
 }
 
 void Player::Update(IP& ip, float eTime, Level& level, EntityManager& eManager, ParticleManager& pManager, BulletManager& bManager) {

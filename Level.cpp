@@ -16,17 +16,26 @@ Level::Level(IP& ip, Character& character) {
     _levelInfos["intro"] = LevelInfo{"level0", "nightBackground", 0.0001f};
     _levelInfos["rockyCave"] = LevelInfo{"level1", "rockyBackground", 0.2f};
     _levelInfos["rockyCave2"] = LevelInfo{"level2", "rockyBackground", 0.2f};
+    _map = 0;
+    _spawner = 0;
+    _grass = 0;
+    _background = 0;
     Load(ip, "intro", character);
     _difficulty = 0;
 }
 
 Level::~Level() {
     delete _map;
+    _map = 0;
     delete _spawner;
+    _spawner = 0;
     delete _grass;
+    _grass = 0;
     delete _background;
+    _background = 0;
     for(int i=0 ; i<_chests.size() ; i++) {
         delete _chests[i];
+        _chests[i] = 0;
     }
     _chests.clear();
 }
@@ -67,7 +76,9 @@ void Level::Load(IP& ip, string name, Character& character) {
     _levelImages = vector<sf::Image>(2);
     _levelImages[0] = sf::Image(ip._textureLoader->GetImage(info._imageName + "back"));
     _levelImages[1] = sf::Image(ip._textureLoader->GetImage(info._imageName + "front"));
+    delete _map;
     _map = new Map(ip, sf::Vector2i(_levelImages[0].getSize()));
+    delete _spawner;
     _spawner = new Spawner(ip, 10);
     sf::Vector2f charPos;
 
@@ -105,9 +116,15 @@ void Level::Load(IP& ip, string name, Character& character) {
         character.setPosition(charPos);
     }
 
-    _background = new Background(ip, _levelInfos[name]._backgroundName, _levelInfos[name]._backgroundZoom, *this);
-    _grass = new Grass(ip, *this);
 
+    delete _background;
+    _background = new Background(ip, _levelInfos[name]._backgroundName, _levelInfos[name]._backgroundZoom, *this);
+    delete _grass;
+    _grass = new Grass(ip, *this);
+    for(int i=0 ; i<_chests.size() ; i++) {
+        delete _chests[i];
+        _chests[i] = 0;
+    }
     _chests.clear();
     _chests.push_back(new Chest(ip, sf::Vector2f(_map->GetSize().x*8, 30)));
 }

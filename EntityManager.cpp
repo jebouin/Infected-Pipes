@@ -20,6 +20,7 @@ void EntityManager::Update(IP& ip, float eTime, Level& level, Character& charact
         _ennemies[i]->Update(ip, eTime, level, character, *this, pManager, bManager);
         if(!_ennemies[i]->IsAlive()) {
             delete _ennemies[i];
+            _ennemies[i] = 0;
             _ennemies.erase(_ennemies.begin() + i);
             i--;
         }
@@ -39,6 +40,7 @@ void EntityManager::Add(Ennemy *e) {
 void EntityManager::Clear() {
     for(int i=0 ; i<_ennemies.size() ; i++) {
         delete _ennemies[i];
+        _ennemies[i] = 0;
     }
     _ennemies.clear();
 }
@@ -49,7 +51,7 @@ int EntityManager::GetNbEnnemies() {
 
 Ennemy* EntityManager::GetEnnemy(int id) {
     if(id<0 || id>=_ennemies.size()) {
-        return NULL;
+        return 0;
     }
     return _ennemies[id];
 }
