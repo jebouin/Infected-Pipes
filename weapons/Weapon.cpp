@@ -12,11 +12,12 @@ Weapon::Weapon(IP& ip, string name, sf::IntRect hitbox, const GameEntity& holder
 }
 
 Weapon::~Weapon() {
-    cout << "A" << endl;
+
 }
 
 void Weapon::Update(IP& ip, float eTime, BulletManager& bManager) {
     setPosition(_holder.getPosition() + _relativePos);
+    MovingSprite::Update(ip, eTime);
 }
 
 void Weapon::Draw(IP& ip) {

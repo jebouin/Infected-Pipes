@@ -27,12 +27,13 @@ Character::Character(IP& ip) : GameEntity(ip, "character", sf::IntRect(2, 0, 7, 
     _xp = 0;
     _nextXP = 10;
 
-    _weapon = new Bow(ip, *this);
+    _weapon = new Bow(ip, (const GameEntity&)*this);
+    //_weapon = new Weapon(ip, "bow", sf::IntRect(0, 0, 7, 17), *this, sf::Vector2f(5, 4), 500);
 }
 
 Character::~Character() {
-    delete _weapon;
-    _weapon = 0;
+    /*delete _weapon;
+    _weapon = 0;*/
 }
 
 void Character::Update(IP& ip, float eTime, Level& level, EntityManager& eManager, ParticleManager& pManager, BulletManager& bManager) {
@@ -45,7 +46,6 @@ void Character::Update(IP& ip, float eTime, Level& level, EntityManager& eManage
             _leavingPipe = true;
             _enterTimer.restart();
         }
-        return;
     } else if (_leavingPipe) {
         SetVel(sf::Vector2f(0, 0.1));
         MovingSprite::Update(ip, eTime);
@@ -53,40 +53,32 @@ void Character::Update(IP& ip, float eTime, Level& level, EntityManager& eManage
             _enterTimer.restart();
             _leavingPipe = false;
         }
-        return;
-    }
+    } else {
+        if(GetAnims().GetAnimationName()=="idle") {
+            if(sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+                GetAnims().SetAnimation("attack");
+                _weapon->Use(ip, bManager);
 
-    if(GetAnims().GetAnimationName()=="idle") {
-        if(sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-            GetAnims().SetAnimation("attack");
-            _weapon->Use(ip, bManager);
-            /*Bullet *b = new Bullet(ip, "littleRockBullet", sf::IntRect(0, 0, 5, 5),
-                                   MathHelper::GetCenter(GetGlobalHitbox()),
-                                   MathHelper::Ang2Vec(MathHelper::Vec2Ang(sf::Vector2f(ip._renderer->GetTexture().convertCoords(sf::Vector2i(MathHelper::GetMousePos(*(ip._window))))) - MathHelper::GetCenter(GetGlobalHitbox()))) * MathHelper::RandFloat(0.4, 0.6),
-                                   false);
-            bManager.AddBullet(b);*/
-
-            for(int i=0 ; i<eManager.GetNbEnnemies() ; i++) {
-                sf::FloatRect attackRect;
-                if(GetDir()) {
-                    attackRect = sf::FloatRect(GetGlobalHitbox().left+GetGlobalHitbox().width, GetGlobalHitbox().top, 16, GetGlobalHitbox().height);
-                } else {
-                    attackRect = sf::FloatRect(GetGlobalHitbox().left-16, GetGlobalHitbox().top, 16, GetGlobalHitbox().height);
-                }
-                if(eManager.GetEnnemy(i)->GetGlobalHitbox().intersects(attackRect)) {
-                    Hit(eManager.GetEnnemy(i), ip, pManager, level);
+                for(int i=0 ; i<eManager.GetNbEnnemies() ; i++) {
+                    sf::FloatRect attackRect;
+                    if(GetDir()) {
+                        attackRect = sf::FloatRect(GetGlobalHitbox().left+GetGlobalHitbox().width, GetGlobalHitbox().top, 16, GetGlobalHitbox().height);
+                    } else {
+                        attackRect = sf::FloatRect(GetGlobalHitbox().left-16, GetGlobalHitbox().top, 16, GetGlobalHitbox().height);
+                    }
+                    if(eManager.GetEnnemy(i)->GetGlobalHitbox().intersects(attackRect)) {
+                        Hit(eManager.GetEnnemy(i), ip, pManager, level);
+                    }
                 }
             }
+        } else {
+            if(GetAnims().GetAnimation().IsFinished()) {
+                GetAnims().SetAnimation("idle");
+            }
         }
-    } else {
-        if(GetAnims().GetAnimation().IsFinished()) {
-            GetAnims().SetAnimation("idle");
-        }
+
+        GameEntity::Update(ip, eTime, level, eManager, pManager);
     }
-
-    //Damage(1, ip, pManager);
-
-    GameEntity::Update(ip, eTime, level, eManager, pManager);
 
     _weapon->Update(ip, eTime, bManager);
 }
