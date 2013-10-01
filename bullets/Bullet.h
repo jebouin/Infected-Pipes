@@ -16,19 +16,23 @@ class Level;
 class Character;
 class ParticleManager;
 class GameEntity;
+class EntityManager;
 
 class Bullet : public MovingSprite {
     public:
-    Bullet(IP& ip, string name, sf::IntRect hitbox, sf::Vector2f position, sf::Vector2f vel, bool animated);
+    Bullet(IP& ip, string name, sf::IntRect hitbox, sf::Vector2f position, sf::Vector2f vel, int damage, bool animated, bool ennemy, bool gravity);
     ~Bullet();
-    void Update(IP& ip, float eTime, Level& level, Character& character, ParticleManager& pManager);
+    virtual void Update(IP& ip, float eTime, Level& level, Character& character, ParticleManager& pManager, EntityManager& eManager);
     void Draw(IP& ip);
     void Impact(GameEntity& entity, IP& ip, ParticleManager& pManager, sf::Color color);
     bool IsAlive() const;
 
     private:
+    bool _gravity;
     bool _alive;
     bool _dying;
+    bool _ennemy;
+    int _damage;
     sf::Clock _deadTimer;
 };
 

@@ -14,12 +14,13 @@ class Bullet;
 class Level;
 class Character;
 class ParticleManager;
+class EntityManager;
 
 class BulletManager {
     public:
     BulletManager();
     ~BulletManager();
-    void Update(IP& ip, float eTime, Level& level, Character& character, ParticleManager& pManager);
+    void Update(IP& ip, float eTime, Level& level, Character& character, ParticleManager& pManager, EntityManager& eManager);
     void Draw(IP& ip);
     void AddBullet(Bullet* bullet);
     void Clear();

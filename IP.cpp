@@ -15,8 +15,8 @@
 #include "BulletManager.h"
 
 IP::IP() {
-    _window = new sf::RenderWindow(sf::VideoMode(1600, 900, 32), "Infected Pipes");
-    //_window = new sf::RenderWindow(sf::VideoMode::getFullscreenModes()[0], "Infected Pipes", sf::Style::None);
+    //_window = new sf::RenderWindow(sf::VideoMode(1600, 900, 32), "Infected Pipes");
+    _window = new sf::RenderWindow(sf::VideoMode::getFullscreenModes()[0], "Infected Pipes", sf::Style::None);
     _window->setVerticalSyncEnabled(true);
     _window->setFramerateLimit(60);
     _window->setMouseCursorVisible(false);
@@ -80,7 +80,7 @@ void IP::Update() {
     _entityManager->Update(*this, eTime, *_level, _player->GetCharacter(), *_particleManager, *_bulletManager);
     _player->Update(*this, eTime, *_level, *_entityManager, *_particleManager, *_bulletManager);
     _particleManager->Update(*this, eTime, *_level);
-    _bulletManager->Update(*this, eTime, *_level, _player->GetCharacter(), *_particleManager);
+    _bulletManager->Update(*this, eTime, *_level, _player->GetCharacter(), *_particleManager, *_entityManager);
     _gui->Update(*this);
 }
 

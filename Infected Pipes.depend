@@ -19,7 +19,7 @@
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1380449149 source:c:\users\xaychru04\desktop\infected pipes\ip.cpp
+1380642313 source:c:\users\xaychru04\desktop\infected pipes\ip.cpp
 	"IP.h"
 	"Renderer.h"
 	"TextureLoader.h"
@@ -36,7 +36,7 @@
 	"GUI.h"
 	"BulletManager.h"
 
-1380446386 source:c:\users\xaychru04\desktop\infected pipes\textureloader.cpp
+1380643418 source:c:\users\xaychru04\desktop\infected pipes\textureloader.cpp
 	"TextureLoader.h"
 	"IP.h"
 
@@ -50,7 +50,7 @@
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1380218539 source:c:\users\xaychru04\desktop\infected pipes\map.cpp
+1380644503 source:c:\users\xaychru04\desktop\infected pipes\map.cpp
 	"Map.h"
 	"IP.h"
 	"TextureLoader.h"
@@ -75,7 +75,7 @@
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1380473591 source:c:\users\xaychru04\desktop\infected pipes\character.cpp
+1380474589 source:c:\users\xaychru04\desktop\infected pipes\character.cpp
 	"Character.h"
 	"IP.h"
 	"Animation.h"
@@ -340,7 +340,7 @@
 	"SFML/System.hpp"
 	"Ennemy.h"
 
-1380123573 source:c:\users\xaychru04\desktop\infected pipes\ennemies\rockworm.cpp
+1380643059 source:c:\users\xaychru04\desktop\infected pipes\ennemies\rockworm.cpp
 	"RockWorm.h"
 	"IP.h"
 	"Map.h"
@@ -353,7 +353,7 @@
 	"AnimationTable.h"
 	"Animation.h"
 	"BulletManager.h"
-	"Bullet.h"
+	"RockBullet.h"
 
 1379842968 c:\users\xaychru04\desktop\infected pipes\gui\gui.h
 	<iostream>
@@ -424,13 +424,13 @@
 	"MathHelper.h"
 	"Renderer.h"
 
-1380173808 c:\users\xaychru04\desktop\infected pipes\bullets\bulletmanager.h
+1380642301 c:\users\xaychru04\desktop\infected pipes\bullets\bulletmanager.h
 	<iostream>
 	<vector>
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1380173741 source:c:\users\xaychru04\desktop\infected pipes\bullets\bullet.cpp
+1380644684 source:c:\users\xaychru04\desktop\infected pipes\bullets\bullet.cpp
 	"Bullet.h"
 	"TextureLoader.h"
 	"IP.h"
@@ -441,19 +441,22 @@
 	"Character.h"
 	"ParticleManager.h"
 	"GameEntity.h"
+	"EntityManager.h"
+	"Ennemy.h"
 
-1380173733 c:\users\xaychru04\desktop\infected pipes\bullets\bullet.h
+1380644684 c:\users\xaychru04\desktop\infected pipes\bullets\bullet.h
 	<iostream>
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 	"MovingSprite.h"
 
-1380447088 source:c:\users\xaychru04\desktop\infected pipes\bullets\bulletmanager.cpp
+1380642301 source:c:\users\xaychru04\desktop\infected pipes\bullets\bulletmanager.cpp
 	"BulletManager.h"
 	"Bullet.h"
 	"Level.h"
 	"Character.h"
 	"ParticleManager.h"
+	"EntityManager.h"
 
 1380377049 c:\users\xaychru04\desktop\infected pipes\ennemies\ennemy.h
 	"SFML/Graphics.hpp"
@@ -547,11 +550,41 @@
 	"SFML/System.hpp"
 	"Weapon.h"
 
-1380474368 source:c:\users\xaychru04\desktop\infected pipes\weapons\bow.cpp
+1380644539 source:c:\users\xaychru04\desktop\infected pipes\weapons\bow.cpp
 	"Bow.h"
 	"IP.h"
 	"GameEntity.h"
 	"BulletManager.h"
-	"Bullet.h"
+	"Arrow.h"
 	"MathHelper.h"
+	"Renderer.h"
+
+1380644733 source:c:\users\xaychru04\desktop\infected pipes\bullets\rockbullet.cpp
+	"RockBullet.h"
+	"IP.h"
+	"Character.h"
+	"Level.h"
+	"EntityManager.h"
+	"ParticleManager.h"
+
+1380643073 c:\users\xaychru04\desktop\infected pipes\bullets\rockbullet.h
+	<iostream>
+	"SFML/Graphics.hpp"
+	"SFML/System.hpp"
+	"Bullet.h"
+
+1380644718 source:c:\users\xaychru04\desktop\infected pipes\bullets\arrow.cpp
+	"Arrow.h"
+	"IP.h"
+	"Character.h"
+	"Level.h"
+	"EntityManager.h"
+	"ParticleManager.h"
+	"MathHelper.h"
+
+1380643418 c:\users\xaychru04\desktop\infected pipes\bullets\arrow.h
+	<iostream>
+	"SFML/Graphics.hpp"
+	"SFML/System.hpp"
+	"Bullet.h"
 

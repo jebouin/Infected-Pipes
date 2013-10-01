@@ -36,6 +36,7 @@
 			<Add directory="..\Infected Pipes" />
 			<Add directory="gui" />
 			<Add directory="bullets" />
+			<Add directory="weapons" />
 		</Compiler>
 		<Unit filename="Animation.cpp" />
 		<Unit filename="Animation.h" />
@@ -45,6 +46,10 @@
 		<Unit filename="Background.h" />
 		<Unit filename="Character.cpp" />
 		<Unit filename="Character.h" />
+		<Unit filename="Chest.cpp" />
+		<Unit filename="Chest.h" />
+		<Unit filename="ChestOpened.cpp" />
+		<Unit filename="ChestOpened.h" />
 		<Unit filename="DamageParticle.cpp" />
 		<Unit filename="DamageParticle.h" />
 		<Unit filename="EntityManager.cpp" />
@@ -81,6 +86,8 @@
 		<Unit filename="bullets\Bullet.h" />
 		<Unit filename="bullets\BulletManager.cpp" />
 		<Unit filename="bullets\BulletManager.h" />
+		<Unit filename="ennemies\Bat.cpp" />
+		<Unit filename="ennemies\Bat.h" />
 		<Unit filename="ennemies\Ennemy.cpp" />
 		<Unit filename="ennemies\Ennemy.h" />
 		<Unit filename="ennemies\RockWorm.cpp" />
@@ -100,6 +107,10 @@
 		<Unit filename="gui\XPBar.cpp" />
 		<Unit filename="gui\XPBar.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="weapons\Bow.cpp" />
+		<Unit filename="weapons\Bow.h" />
+		<Unit filename="weapons\Weapon.cpp" />
+		<Unit filename="weapons\Weapon.h" />
 		<Extensions>
 			<code_completion />
 			<debugger />

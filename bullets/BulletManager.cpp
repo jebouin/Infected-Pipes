@@ -3,6 +3,7 @@
 #include "Level.h"
 #include "Character.h"
 #include "ParticleManager.h"
+#include "EntityManager.h"
 
 BulletManager::BulletManager() {
 
@@ -12,9 +13,9 @@ BulletManager::~BulletManager() {
     Clear();
 }
 
-void BulletManager::Update(IP& ip, float eTime, Level& level, Character& character, ParticleManager& pManager) {
+void BulletManager::Update(IP& ip, float eTime, Level& level, Character& character, ParticleManager& pManager, EntityManager& eManager) {
     for(int i=0 ; i<_bullets.size() ; i++) {
-        _bullets[i]->Update(ip, eTime, level, character, pManager);
+        _bullets[i]->Update(ip, eTime, level, character, pManager, eManager);
         if(!_bullets[i]->IsAlive()) {
             delete _bullets[i];
             _bullets[i] = 0;

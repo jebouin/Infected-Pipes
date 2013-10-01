@@ -10,7 +10,7 @@
 #include "AnimationTable.h"
 #include "Animation.h"
 #include "BulletManager.h"
-#include "Bullet.h"
+#include "RockBullet.h"
 
 RockWorm::RockWorm(IP& ip) : Ennemy(ip, "rockWorm", sf::IntRect(1, 0, 7, 19), 7, 2, 2) {
     _littleHitBox = sf::IntRect(1, 0, 7, 19);
@@ -110,11 +110,10 @@ void RockWorm::Update(IP& ip, float eTime, Level& level, Character& character, E
 
     if(anims.GetAnimationName() == "attack") { //attack
         if(anims.GetAnimation("attack").GetCurFrame() == 3 && !_shot) { //frame 3, shoot the rock
-            bManager.AddBullet(new Bullet(ip, "littleRockBullet",
-                                          sf::IntRect(1, 0, 3, 4),
-                                          MathHelper::GetCenter(GetGlobalHitbox()) + sf::Vector2f(0, -6),
-                                          MathHelper::Ang2Vec(MathHelper::Deg2Rad((GetDir() ? -30 : 210) + MathHelper::RandFloat(-10, 10)))*MathHelper::RandFloat(0.2, 0.3),
-                                          false));
+            bManager.AddBullet(new RockBullet(ip,
+                                              MathHelper::GetCenter(GetGlobalHitbox()) + sf::Vector2f(0, -6),
+                                              MathHelper::Ang2Vec(MathHelper::Deg2Rad((GetDir() ? -30 : 210) + MathHelper::RandFloat(-10, 10)))*MathHelper::RandFloat(0.2, 0.3),
+                                              true));
             _shot = true;
         }
 

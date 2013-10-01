@@ -24,13 +24,15 @@ TextureLoader::TextureLoader(IP& ip) {
     AddTexture("xpBarBorder.png", "xpBarBorder");
     AddTexture("levelIndicator.png", "levelIndicator");
     AddTexture("cursor.png", "cursor");
-    AddTexture("littleRockBullet.png", "littleRockBullet");
     AddTexture("difficultyIndicator.png", "difficultyIndicator");
     AddTexture("bat.png", "bat");
     AddTexture("fir.png", "fir");
     AddTexture("chest.png", "chest");
 
     AddTexture("bow.png", "bow");
+
+    AddTexture("littleRockBullet.png", "littleRockBullet");
+    AddTexture("arrow.png", "arrow");
 }
 
 TextureLoader::~TextureLoader() {

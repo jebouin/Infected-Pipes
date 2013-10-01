@@ -2,15 +2,16 @@
 #include "IP.h"
 #include "GameEntity.h"
 #include "BulletManager.h"
-#include "Bullet.h"
+#include "Arrow.h"
 #include "MathHelper.h"
+#include "Renderer.h"
 
 Bow::Bow(IP& ip, const GameEntity& holder) : Weapon(ip, "bow", sf::IntRect(0, 0, 7, 17), holder, sf::Vector2f(5, 4), 500) {
 
 }
 
 Bow::~Bow() {
-    cout << "A" << endl;
+
 }
 
 void Bow::Update(IP& ip, float eTime, BulletManager& bManager) {
@@ -25,10 +26,11 @@ bool Bow::Use(IP& ip, BulletManager& bManager) {
     if(!Weapon::Use(ip, bManager)) {
         return false;
     }
-    bManager.AddBullet(new Bullet(ip, "littleRockBullet",
-                                    sf::IntRect(1, 0, 3, 4),
-                                    MathHelper::GetCenter(GetGlobalHitbox()) + sf::Vector2f(0, -6),
-                                    MathHelper::Ang2Vec(MathHelper::Deg2Rad(210 + MathHelper::RandFloat(-10, 10)))*MathHelper::RandFloat(0.2, 0.3),
-                                    false));
+    sf::Vector2f mpos = sf::Vector2f(ip._renderer->GetTexture().convertCoords(sf::Vector2i(MathHelper::GetMousePos(*ip._window))));
+    sf::Vector2f d = mpos-getPosition();
+    bManager.AddBullet(new Arrow(ip,
+                                  getPosition(),
+                                  d/MathHelper::GetVecLength(d)*MathHelper::RandFloat(0.6, 0.7),
+                                  false));
     return true;
 }
