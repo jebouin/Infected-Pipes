@@ -24,8 +24,10 @@ class Bullet : public MovingSprite {
     ~Bullet();
     virtual void Update(IP& ip, float eTime, Level& level, Character& character, ParticleManager& pManager, EntityManager& eManager);
     void Draw(IP& ip);
+    void TestCollisions(IP& ip, float eTime, Level& level, sf::Vector2f delta);
     void Impact(GameEntity& entity, IP& ip, ParticleManager& pManager, sf::Color color);
     bool IsAlive() const;
+    bool IsDying() const;
 
     private:
     bool _gravity;

@@ -15,8 +15,11 @@ Arrow::~Arrow() {
 }
 
 void Arrow::Update(IP& ip, float eTime, Level& level, Character& character, ParticleManager& pManager, EntityManager& eManager) {
+    if(!IsDying()) {
+        setRotation(MathHelper::Rad2Deg(MathHelper::Vec2Ang(GetVel())));
+        SetHitbox(sf::IntRect(0, 0, getGlobalBounds().width, getGlobalBounds().height));
+    }
     Bullet::Update(ip, eTime, level, character, pManager, eManager);
-    setRotation(MathHelper::Rad2Deg(MathHelper::Vec2Ang(GetVel())));
 }
 
 void Arrow::Draw(IP& ip) {

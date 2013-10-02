@@ -36,10 +36,6 @@ void Bullet::Update(IP& ip, float eTime, Level& level, Character& character, Par
         //Accelerate(sf::Vector2f(-0.0003*GetVel().x, 0), eTime);
     }
 
-    if((level.GetMap().IsOnTileType(*this, Map::WALL) || level.GetMap().IsOnTileType(*this, Map::PLATFORM)) && !_dying) {
-        _dying = true;
-        _deadTimer.restart();
-    }
     if(_dying) {
         float deadTime = _deadTimer.getElapsedTime().asMilliseconds();
         setColor(sf::Color(getColor().r, getColor().g, getColor().b, 255-deadTime/1000.f*255));
@@ -48,9 +44,9 @@ void Bullet::Update(IP& ip, float eTime, Level& level, Character& character, Par
         }
     }
 
-    MovingSprite::Update(ip, eTime, level);
-
     if(!_dying) {
+        MovingSprite::Update(ip, eTime);
+        TestCollisions(ip, eTime, level, GetVel()*eTime);
         if(_ennemy) {
             if(GetGlobalHitbox().intersects(character.GetGlobalHitbox())) {
                 Impact((GameEntity&)(character), ip, pManager, sf::Color(255, 0, 0));
@@ -70,6 +66,29 @@ void Bullet::Draw(IP& ip) {
     ip._renderer->Draw(*this);
 }
 
+void Bullet::TestCollisions(IP& ip, float eTime, Level& level, sf::Vector2f delta) {
+    if(_dying) {
+        return;
+    }
+    if(abs(delta.x > 2.f) || abs(delta.y) > 2.f) {
+        for(int i=0 ; i<2 ; i++) {
+            TestCollisions(ip, eTime, level, delta/2.f);
+        }
+        return;
+    }
+
+    if(level.GetMap().IsCollided(*this, GetUpperLeftPos()+delta, Map::WALL) || level.GetSpawner().IsCollided(*this, GetUpperLeftPos()+delta)) {
+        _dying = true;
+        _deadTimer.restart();
+    }
+    if(GetVel().y >= 0 && !((int)(GetGlobalHitbox().top + GetGlobalHitbox().height + delta.y)%16 > 3)) {
+        if(level.GetMap().IsOnTileType(*this, GetUpperLeftPos()+delta, Map::PLATFORM)) {
+            _dying = true;
+            _deadTimer.restart();
+        }
+    }
+}
+
 void Bullet::Impact(GameEntity& entity, IP& ip, ParticleManager& pManager, sf::Color color) {
     _dying = true;
     _deadTimer.restart();
@@ -78,4 +97,8 @@ void Bullet::Impact(GameEntity& entity, IP& ip, ParticleManager& pManager, sf::C
 
 bool Bullet::IsAlive() const {
     return _alive;
+}
+
+bool Bullet::IsDying() const {
+    return _dying;
 }
