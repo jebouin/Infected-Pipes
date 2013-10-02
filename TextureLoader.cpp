@@ -10,10 +10,13 @@ TextureLoader::TextureLoader(IP& ip) {
     AddTexture("level1back.png", "level1back");
     AddTexture("level1front.png", "level1front");
 
-    AddTexture("pipe.png", "pipe");
-    AddTexture("zombie.png", "zombie");
     AddTexture("spiderock.png", "spiderock");
     AddTexture("rockWorm.png", "rockWorm");
+    AddTexture("bat.png", "bat");
+    AddTexture("snail.png", "snail");
+
+    AddTexture("pipe.png", "pipe");
+    AddTexture("zombie.png", "zombie");
     AddTexture("nightBackground.png", "nightBackground");
     AddTexture("rockyBackground.png", "rockyBackground");
     AddTexture("blood0.png", "blood0");
@@ -25,7 +28,6 @@ TextureLoader::TextureLoader(IP& ip) {
     AddTexture("levelIndicator.png", "levelIndicator");
     AddTexture("cursor.png", "cursor");
     AddTexture("difficultyIndicator.png", "difficultyIndicator");
-    AddTexture("bat.png", "bat");
     AddTexture("fir.png", "fir");
     AddTexture("chest.png", "chest");
 

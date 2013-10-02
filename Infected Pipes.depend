@@ -36,7 +36,7 @@
 	"GUI.h"
 	"BulletManager.h"
 
-1380643418 source:c:\users\xaychru04\desktop\infected pipes\textureloader.cpp
+1380733534 source:c:\users\xaychru04\desktop\infected pipes\textureloader.cpp
 	"TextureLoader.h"
 	"IP.h"
 
@@ -161,7 +161,7 @@
 1380372278 source:c:\users\xaychru04\desktop\infected pipes\mathhelper.cpp
 	"MathHelper.h"
 
-1380447803 source:c:\users\xaychru04\desktop\infected pipes\level.cpp
+1380709605 source:c:\users\xaychru04\desktop\infected pipes\level.cpp
 	"Level.h"
 	"IP.h"
 	"Map.h"
@@ -260,7 +260,7 @@
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1380447504 source:c:\users\xaychru04\desktop\infected pipes\spawner.cpp
+1380733534 source:c:\users\xaychru04\desktop\infected pipes\spawner.cpp
 	"Spawner.h"
 	"IP.h"
 	"EntityManager.h"
@@ -272,6 +272,7 @@
 	"RockWorm.h"
 	"Spiderock.h"
 	"Bat.h"
+	"Snail.h"
 	"Level.h"
 
 1378573983 c:\users\xaychru04\desktop\infected pipes\particlemanager.h
@@ -430,7 +431,7 @@
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1380707457 source:c:\users\xaychru04\desktop\infected pipes\bullets\bullet.cpp
+1380734192 source:c:\users\xaychru04\desktop\infected pipes\bullets\bullet.cpp
 	"Bullet.h"
 	"TextureLoader.h"
 	"IP.h"
@@ -444,7 +445,7 @@
 	"EntityManager.h"
 	"Ennemy.h"
 
-1380707084 c:\users\xaychru04\desktop\infected pipes\bullets\bullet.h
+1380734133 c:\users\xaychru04\desktop\infected pipes\bullets\bullet.h
 	<iostream>
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
@@ -550,7 +551,7 @@
 	"SFML/System.hpp"
 	"Weapon.h"
 
-1380707485 source:c:\users\xaychru04\desktop\infected pipes\weapons\bow.cpp
+1380734018 source:c:\users\xaychru04\desktop\infected pipes\weapons\bow.cpp
 	"Bow.h"
 	"IP.h"
 	"GameEntity.h"
@@ -587,4 +588,23 @@
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 	"Bullet.h"
+
+1380733534 c:\users\xaychru04\desktop\infected pipes\ennemies\snail.h
+	"SFML/Graphics.hpp"
+	"SFML/System.hpp"
+	"Ennemy.h"
+
+1380733776 source:c:\users\xaychru04\desktop\infected pipes\ennemies\snail.cpp
+	"Snail.h"
+	"IP.h"
+	"Map.h"
+	"Level.h"
+	"Character.h"
+	"MathHelper.h"
+	"EntityManager.h"
+	"Spawner.h"
+	"ParticleManager.h"
+	"AnimationTable.h"
+	"Animation.h"
+	"BulletManager.h"
 

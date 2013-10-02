@@ -36,6 +36,7 @@ class Bullet : public MovingSprite {
     bool _ennemy;
     int _damage;
     sf::Clock _deadTimer;
+    sf::Clock _timer;
 };
 
 #endif // BULLET_H_INCLUDED

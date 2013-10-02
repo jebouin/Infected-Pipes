@@ -9,6 +9,7 @@
 #include "RockWorm.h"
 #include "Spiderock.h"
 #include "Bat.h"
+#include "Snail.h"
 #include "Level.h"
 
 Spawner::Spawner(IP& ip, int nbWaves) {
@@ -60,7 +61,7 @@ void Spawner::Spawn(IP& ip, EntityManager& eManager, Level& level, Character& ch
     }*/
 
     int pipeId = rand()%_pipes.size();
-    _pipes[pipeId]->Spawn(ip, eManager, new Bat(ip));
+    _pipes[pipeId]->Spawn(ip, eManager, new Snail(ip));
 
 
     _nbToSpawn--;

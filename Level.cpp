@@ -126,7 +126,7 @@ void Level::Load(IP& ip, string name, Character& character) {
         _chests[i] = 0;
     }
     _chests.clear();
-    _chests.push_back(new Chest(ip, sf::Vector2f(_map->GetSize().x*8, 30)));
+    //_chests.push_back(new Chest(ip, sf::Vector2f(_map->GetSize().x*8, 30)));
 }
 
 void Level::NextLevel(IP& ip, EntityManager& eManager, BulletManager& bManager, Character& character) {

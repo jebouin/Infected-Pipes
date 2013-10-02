@@ -59,6 +59,11 @@ void Bullet::Update(IP& ip, float eTime, Level& level, Character& character, Par
                 }
             }
         }
+
+        if(_timer.getElapsedTime().asSeconds() > 4) {
+            _dying = true;
+            _deadTimer.restart();
+        }
     }
 }
 
