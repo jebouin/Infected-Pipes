@@ -20,6 +20,7 @@ GameEntity::GameEntity(IP& ip, string name, sf::IntRect hitbox, int hp) : Moving
     _dir = true;
     _pushable = true;
     _flying = false;
+    _invincible = false;
 }
 
 GameEntity::~GameEntity() {
@@ -111,7 +112,7 @@ void GameEntity::ChangeDir() {
         setScale(-1, 1);
     }
     sf::Vector2f frameSize(GetAnims().GetAnimation().GetRect().width, GetAnims().GetAnimation().GetRect().height);
-    SetHitbox(sf::IntRect(frameSize.x-GetHitbox().left-GetHitbox().width, frameSize.y-GetHitbox().top-GetHitbox().height, GetHitbox().width, GetHitbox().height));
+    SetHitbox(sf::IntRect(frameSize.x-GetHitbox().left-GetHitbox().width, GetHitbox().top, GetHitbox().width, GetHitbox().height));
 }
 
 void GameEntity::PlatformDrop(Level& level) {
@@ -135,7 +136,11 @@ void GameEntity::Jump(Level& level) {
     SetVel(sf::Vector2f(GetVel().x, -_jumpPower));
 }
 
-void GameEntity::Damage(int dmg, IP& ip, ParticleManager& pManager, sf::Color color) {
+void GameEntity::Damage(int dmg, IP& ip, ParticleManager& pManager, sf::Color color, sf::Vector2f pos, sf::Vector2f dir) {
+    if(_invincible) {
+        return;
+    }
+
     _hp -= dmg;
     if(_hp <= 0) {
         _alive = false;
@@ -154,49 +159,11 @@ void GameEntity::Damage(int dmg, IP& ip, ParticleManager& pManager, sf::Color co
 }
 
 void GameEntity::Hit(GameEntity *other, IP& ip, ParticleManager& pManager, sf::Color color) {
-    other->Damage(MathHelper::RandInt(2, 5), ip, pManager, color);
+    other->Damage(MathHelper::RandInt(2, 5), ip, pManager, color, other->getPosition(), MathHelper::Normalize(other->getPosition() - getPosition())*0.1f);
     sf::Vector2f c(MathHelper::GetCenter(GetGlobalHitbox()));
     sf::Vector2f oc(MathHelper::GetCenter(other->GetGlobalHitbox()));
     sf::Vector2f dir = MathHelper::Normalize(sf::Vector2f(oc.x-c.x, 0));
     other->SetVel(other->GetVel() + sf::Vector2f(dir.x, 0)*0.07f/other->GetWeight());
-
-    for(int i=0 ; i<5 ; i++) {
-        Particle *p = new Particle(ip, "blood1",
-                                   sf::Vector2f(other->GetGlobalHitbox().left+other->GetGlobalHitbox().width/2.f, other->GetGlobalHitbox().top+MathHelper::RandFloat(other->GetGlobalHitbox().height/2.f, other->GetGlobalHitbox().height/4.f)),
-                                   (dir - sf::Vector2f(0, MathHelper::RandFloat(0.4, 1))) * MathHelper::RandFloat(0.1, 0.2),
-                                   0,
-                                   350,
-                                   sf::Vector2f(1, 1),
-                                   sf::Vector2f(1, 1),
-                                   255,
-                                   255,
-                                   true,
-                                   true,
-                                   true,
-                                   sf::IntRect(3, 2, 1, 2));
-        p->GetAnims().AddAnimation("base", new Animation(7, 50, sf::Vector2i(0, 0), sf::Vector2i(6, 6), false));
-        p->GetAnims().SetAnimation("base");
-        pManager.AddParticle(p);
-    }
-
-    for(int i=0 ; i<10 ; i++) {
-        Particle *p = new Particle(ip, "blood0",
-                                   sf::Vector2f(other->GetGlobalHitbox().left+other->GetGlobalHitbox().width/2.f, other->GetGlobalHitbox().top+MathHelper::RandFloat(other->GetGlobalHitbox().height/2.f, other->GetGlobalHitbox().height/4.f)),
-                                   (dir - sf::Vector2f(0, MathHelper::RandFloat(0.6, 1.2))) * MathHelper::RandFloat(0.1, 0.2),
-                                   0,
-                                   300,
-                                   sf::Vector2f(1, 1),
-                                   sf::Vector2f(1, 1),
-                                   255,
-                                   255,
-                                   true,
-                                   true,
-                                   true,
-                                   sf::IntRect(2, 1, 1, 2));
-        p->GetAnims().AddAnimation("base", new Animation(6, 50, sf::Vector2i(0, 0), sf::Vector2i(4, 4), false));
-        p->GetAnims().SetAnimation("base");
-        pManager.AddParticle(p);
-    }
 }
 
 void GameEntity::SetJumpPower(float p) {
@@ -227,6 +194,18 @@ void GameEntity::SetHPMax(int hpMax) {
     _hpMax = max(hpMax, 0);
 }
 
+void GameEntity::SetAlive(bool a) {
+    _alive = a;
+}
+
+void GameEntity::SetInvincible(bool i) {
+    _invincible = i;
+}
+
+float GameEntity::GetSpeed() {
+    return _speed;
+}
+
 float GameEntity::GetWeight() {
     return _weight;
 }
@@ -249,4 +228,8 @@ bool GameEntity::GetDir() {
 
 bool GameEntity::IsPushable() {
     return _pushable;
+}
+
+bool GameEntity::IsInvincible() {
+    return _invincible;
 }

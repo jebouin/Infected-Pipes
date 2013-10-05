@@ -28,6 +28,7 @@ class Character : public GameEntity {
     void EnterPipe(Level& level);
     bool EnteringPipe();
     void Hit(Ennemy *other, IP& ip, ParticleManager& pManager, Level& level);
+    void Damage(int dmg, IP& ip, ParticleManager& pManager, sf::Color color, sf::Vector2f pos, sf::Vector2f dir);
     void EarnXP(int amount);
     void LevelUp();
     int GetXP() const;

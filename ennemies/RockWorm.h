@@ -1,5 +1,5 @@
-#ifndef SPIDEROCK_H_INCLUDED
-#define SPIDEROCK_H_INCLUDED
+#ifndef ROCKWORM_H_INCLUDED
+#define ROCKWORM_H_INCLUDED
 
 #include "SFML/Graphics.hpp"
 #include "SFML/System.hpp"
@@ -31,4 +31,4 @@ class RockWorm : public Ennemy {
     bool _shot;
 };
 
-#endif // ENNEMY_H_INCLUDED
+#endif // ROCKWORM_H_INCLUDED

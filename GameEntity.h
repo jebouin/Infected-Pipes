@@ -30,7 +30,7 @@ class GameEntity : public MovingSprite {
     void ChangeDir();
     void PlatformDrop(Level& level);
     void Jump(Level& level);
-    void Damage(int dmg, IP& ip, ParticleManager& pManager, sf::Color color);
+    virtual void Damage(int dmg, IP& ip, ParticleManager& pManager, sf::Color color, sf::Vector2f pos, sf::Vector2f dir);
     void Hit(GameEntity *other, IP& ip, ParticleManager& pManager, sf::Color color);
     void SetJumpPower(float p);
     void SetSpeed(float s);
@@ -39,12 +39,16 @@ class GameEntity : public MovingSprite {
     void SetFlying(bool f);
     void SetHP(int hp);
     void SetHPMax(int max);
+    void SetAlive(bool a);
+    void SetInvincible(bool i);
+    float GetSpeed();
     float GetWeight();
     bool IsAlive();
     int GetHP() const;
     int GetHPMax() const;
     bool GetDir();
     bool IsPushable();
+    bool IsInvincible();
 
     private:
     bool _dir;
@@ -54,6 +58,7 @@ class GameEntity : public MovingSprite {
     bool _alive;
     bool _pushable;
     bool _flying;
+    bool _invincible;
     int _hpMax;
     int _hp;
 

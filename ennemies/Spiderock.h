@@ -24,4 +24,4 @@ class Spiderock : public Ennemy {
     sf::Clock _attackTimer;
 };
 
-#endif // ENNEMY_H_INCLUDED
+#endif // SPIDEROCK_H_INCLUDED

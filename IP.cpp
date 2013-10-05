@@ -79,8 +79,8 @@ void IP::Update() {
     _level->Update(*this, *_entityManager, _player->GetCharacter(), eTime);
     _entityManager->Update(*this, eTime, *_level, _player->GetCharacter(), *_particleManager, *_bulletManager);
     _player->Update(*this, eTime, *_level, *_entityManager, *_particleManager, *_bulletManager);
-    _particleManager->Update(*this, eTime, *_level);
     _bulletManager->Update(*this, eTime, *_level, _player->GetCharacter(), *_particleManager, *_entityManager);
+    _particleManager->Update(*this, eTime, *_level);
     _gui->Update(*this);
 }
 

@@ -84,6 +84,10 @@ sf::Vector2f MathHelper::Mod(sf::Vector2f vec, float v) {
     return sf::Vector2f((int)vec.x%(int)v, (int)vec.y%(int)v);
 }
 
+sf::Vector2f MathHelper::RandDirVector() {
+    return Ang2Vec(Deg2Rad(RandFloat(0, 360)));
+}
+
 float MathHelper::Deg2Rad(float deg) {
     return deg*PI/180.f;
 }

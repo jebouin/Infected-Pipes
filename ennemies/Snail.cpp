@@ -17,7 +17,8 @@
 Snail::Snail(IP& ip) : Ennemy(ip, "snail", sf::IntRect(3, 1, 26, 20), 42, 8, 6) {
     AnimationTable& t(GetAnims());
     t.AddAnimation("walk", new Animation(2, 200, sf::Vector2i(0, 0), sf::Vector2i(31, 21), true));
-    t.AddAnimation("prepare", new Animation(1, 100, sf::Vector2i(0, 21), sf::Vector2i(31, 21), false));
+    t.AddAnimation("prepare", new Animation(4, 250, sf::Vector2i(0, 21), sf::Vector2i(31, 21), false));
+    t.AddAnimation("explode", new Animation(2, 150, sf::Vector2i(0, 42), sf::Vector2i(20, 16), true));
     t.SetAnimation("walk");
     SetSpeed(MathHelper::RandFloat(0.0003, 0.0004));
     _preparing = false;
@@ -39,7 +40,43 @@ void Snail::Update(IP& ip, float eTime, Level& level, Character& character, Enti
     sf::Vector2f cc(MathHelper::GetCenter(character.GetGlobalHitbox()));
     AnimationTable& t(GetAnims());
     float attackTime = _attackTimer.getElapsedTime().asMilliseconds();
-    sf::Vector2f eyePos = GetUpperLeftPos() + sf::Vector2f(GetDir() ? GetAnims().GetAnimation().GetRect().width-1. : 0., 1.);
+    sf::Vector2f eyePos = GetUpperLeftPos() + sf::Vector2f(GetDir() ? GetAnims().GetAnimation().GetRect().width-4. : 3., 1.);
+
+    if(t.GetAnimationName() != "explode") {
+        if(!_preparing) {
+            if(attackTime >= _nextAttack) {
+                _preparing = true;
+                _attackTimer.restart();
+                t.SetAnimation("prepare");
+            }
+        } else {
+            if(attackTime >= 1000) {
+                _preparing = false;
+                _attackTimer.restart();
+                t.SetAnimation("walk");
+                _nextAttack = MathHelper::RandFloat(1000, 3000);
+
+                //shoot
+                bManager.AddBullet(new LaserBullet(ip,
+                                                eyePos,
+                                                -MathHelper::Normalize(eyePos - cc)*0.4f,
+                                                true));
+            }
+            UpdateCircle(eyePos);
+        }
+
+        /*if(!IsAlive()) {
+            //SetRotVel(0.1f);
+            _explodeTimer.restart();
+            SetInvincible(true);
+            SetAlive(true);
+            SetHitbox(sf::IntRect(3, 2, 13, 13));
+            t.SetAnimation("explode");
+            SetSpeed(GetSpeed() * 4.f);
+            _preparing = false;
+            setOrigin(MathHelper::GetCenter(sf::FloatRect(GetHitbox())));
+        }*/
+    }
 
     if(!_preparing) {
         if(c.x < cc.x) {
@@ -53,29 +90,13 @@ void Snail::Update(IP& ip, float eTime, Level& level, Character& character, Enti
                 PlatformDrop(level);
             }
         }
-
-        if(attackTime >= _nextAttack) {
-            _preparing = true;
-            _attackTimer.restart();
-            t.SetAnimation("prepare");
-        }
-    } else {
-        if(attackTime >= 1000) {
-            _preparing = false;
-            _attackTimer.restart();
-            t.SetAnimation("walk");
-            _nextAttack = MathHelper::RandFloat(1000, 3000);
-
-            //shoot
-            bManager.AddBullet(new LaserBullet(ip,
-                                              eyePos,
-                                              -MathHelper::Normalize(eyePos - cc)*0.4f,
-                                              true));
-        }
-        UpdateCircle(eyePos);
     }
 
     Ennemy::Update(ip, eTime, level, character, eManager, pManager, bManager);
+
+    if(t.GetAnimationName() == "explode" && _explodeTimer.getElapsedTime().asMilliseconds() >= 2000) {
+        SetAlive(false);
+    }
 }
 
 void Snail::Draw(IP& ip) {
@@ -92,6 +113,6 @@ void Snail::UpdateCircle(sf::Vector2f eyePos) {
     float p = attackTime/1000.0;
     _circle.setRotation(p*360.f);
     sf::Color color = _circle.getOutlineColor();
-    _circle.setRadius(20.0 - 1.0/p*20.0);
+    _circle.setRadius(20.0 - (1.0/p+1.)*10.0);
     _circle.setOutlineColor(sf::Color(color.r, color.g, color.b, p*255));
 }

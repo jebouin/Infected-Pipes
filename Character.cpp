@@ -13,12 +13,13 @@
 #include "Renderer.h"
 #include "Weapon.h"
 #include "Bow.h"
+#include "Particle.h"
 
-Character::Character(IP& ip) : GameEntity(ip, "character", sf::IntRect(2, 0, 7, 26), 10) {
+Character::Character(IP& ip) : GameEntity(ip, "character", sf::IntRect(2, 2, 9, 27), 10) {
     SetWeight(0.5f);
     AnimationTable& t(GetAnims());
-    t.AddAnimation("idle", new Animation(1, 1000, sf::Vector2i(0, 0), sf::Vector2i(22, 26), true));
-    t.AddAnimation("attack", new Animation(1, 50, sf::Vector2i(0, 26), sf::Vector2i(22, 26), false));
+    t.AddAnimation("idle", new Animation(1, 1000, sf::Vector2i(0, 0), sf::Vector2i(13, 29), true));
+    t.AddAnimation("attack", new Animation(1, 50, sf::Vector2i(0, 29), sf::Vector2i(13, 29), false));
     t.SetAnimation("idle");
     _enteringPipe = false;
     _leavingPipe = false;
@@ -107,6 +108,51 @@ void Character::Hit(Ennemy *other, IP& ip, ParticleManager& pManager, Level& lev
     if(!other->IsAlive()) {
         EarnXP(other->GetXP());
         level.SetDifficulty(level.GetDifficulty() + other->GetIncDifficulty());
+    }
+}
+
+void Character::Damage(int dmg, IP& ip, ParticleManager& pManager, sf::Color color, sf::Vector2f pos, sf::Vector2f dir) {
+    GameEntity::Damage(dmg, ip, pManager, color, pos, dir);
+
+    //some blood
+    float ang = MathHelper::Rad2Deg(MathHelper::Vec2Ang(dir));
+    float spd = MathHelper::GetVecLength(dir);
+    for(int i=0 ; i<5 ; i++) {
+        Particle *p = new Particle(ip, "blood1",
+                                   pos,
+                                   MathHelper::Ang2Vec(MathHelper::Deg2Rad(ang + MathHelper::RandFloat(-20, 20))) * spd * MathHelper::RandFloat(0.7, 1.2),
+                                   0,
+                                   MathHelper::RandFloat(100, 500),
+                                   sf::Vector2f(1, 1),
+                                   sf::Vector2f(1, 1),
+                                   255,
+                                   255,
+                                   true,
+                                   true,
+                                   true,
+                                   sf::IntRect(2, 1, 2, 2));
+        p->GetAnims().AddAnimation("base", new Animation(7, 50, sf::Vector2i(0, 0), sf::Vector2i(6, 6), false));
+        p->GetAnims().SetAnimation("base");
+        pManager.AddParticle(p);
+    }
+
+    for(int i=0 ; i<10 ; i++) {
+        Particle *p = new Particle(ip, "blood0",
+                                   pos,
+                                   MathHelper::Ang2Vec(MathHelper::Deg2Rad(ang + MathHelper::RandFloat(-20, 20))) * spd * MathHelper::RandFloat(0.7, 1.2),
+                                   0,
+                                   MathHelper::RandFloat(100, 500),
+                                   sf::Vector2f(1, 1),
+                                   sf::Vector2f(1, 1),
+                                   255,
+                                   255,
+                                   true,
+                                   true,
+                                   true,
+                                   sf::IntRect(1, 0, 2, 1));
+        p->GetAnims().AddAnimation("base", new Animation(6, 50, sf::Vector2i(0, 0), sf::Vector2i(4, 4), false));
+        p->GetAnims().SetAnimation("base");
+        pManager.AddParticle(p);
     }
 }
 

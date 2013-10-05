@@ -28,6 +28,7 @@ class Snail : public Ennemy {
     float _nextAttack;
     sf::Clock _attackTimer;
     sf::Clock _particleTimer;
+    sf::Clock _explodeTimer;
 
     sf::CircleShape _circle;
 };

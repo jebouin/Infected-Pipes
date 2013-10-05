@@ -11,6 +11,7 @@
 #include "Bat.h"
 #include "Snail.h"
 #include "Level.h"
+#include "Ennemy.h"
 
 Spawner::Spawner(IP& ip, int nbWaves) {
     _curWave = 0;
@@ -49,9 +50,20 @@ void Spawner::Update(IP& ip, EntityManager& eManager, Level& level, Character& c
 }
 
 void Spawner::Spawn(IP& ip, EntityManager& eManager, Level& level, Character& character) {
-    /*if(rand()%2==42) {
+    /*if(rand()%2==0) {
         int pipeId = rand()%_pipes.size();
-        _pipes[pipeId]->Spawn(ip, eManager);
+        int et = rand()%3;
+        switch(et) {
+            case 0:
+                _pipes[pipeId]->Spawn(ip, eManager, new Spiderock(ip));
+                break;
+            case 1:
+                _pipes[pipeId]->Spawn(ip, eManager, new Bat(ip));
+                break;
+            case 2:
+                _pipes[pipeId]->Spawn(ip, eManager, new Snail(ip));
+                break;
+        }
     } else {
         RockWorm *r = new RockWorm(ip);
         if(!r->AutoSpawn(ip, level, eManager, character)) {
@@ -63,7 +75,6 @@ void Spawner::Spawn(IP& ip, EntityManager& eManager, Level& level, Character& ch
     int pipeId = rand()%_pipes.size();
     _pipes[pipeId]->Spawn(ip, eManager, new Snail(ip));
 
-
     _nbToSpawn--;
     if(_nbToSpawn == 0) {
         _spawning = false;
@@ -71,7 +82,6 @@ void Spawner::Spawn(IP& ip, EntityManager& eManager, Level& level, Character& ch
 }
 
 void Spawner::NextWave() {
-    _curWave++;
     if(_curWave > _nbWaves) {
         _finished = true;
         _spawning = false;
@@ -79,6 +89,7 @@ void Spawner::NextWave() {
         return;
     }
     _nbToSpawn = /*_difficulty*/pow(2, _curWave);
+    _curWave++;
     _spawning = true;
     _clock.restart();
     cout << "Wave: " << _curWave << endl;

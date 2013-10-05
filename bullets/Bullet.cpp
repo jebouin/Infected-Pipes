@@ -11,7 +11,7 @@
 #include "EntityManager.h"
 #include "Ennemy.h"
 
-Bullet::Bullet(IP& ip, string name, sf::IntRect hitbox, sf::Vector2f position, sf::Vector2f vel, int damage, bool animated, bool ennemy, bool gravity, bool instantDie) : MovingSprite(ip, name, hitbox, animated) {
+Bullet::Bullet(IP& ip, string name, sf::IntRect hitbox, sf::Vector2f position, sf::Vector2f vel, int damage, bool animated, bool ennemy, bool gravity, bool instantDie, bool sticky) : MovingSprite(ip, name, hitbox, animated) {
     setPosition(position);
     SetVel(vel);
     _alive = true;
@@ -20,6 +20,7 @@ Bullet::Bullet(IP& ip, string name, sf::IntRect hitbox, sf::Vector2f position, s
     _gravity = gravity;
     _damage = damage;
     _instantDie = instantDie;
+    _sticky = sticky;
 }
 
 Bullet::~Bullet() {
@@ -31,7 +32,7 @@ void Bullet::Update(IP& ip, float eTime, Level& level, Character& character, Par
         Accelerate(sf::Vector2f(0, 0.001), eTime);
     }
 
-    if(level.GetMap().IsOnTileType(*this, Map::WALL) || level.GetMap().IsOnTileType(*this, Map::PLATFORM) || level.GetSpawner().IsOnGround(*this)) {
+    if((level.GetMap().IsOnTileType(*this, Map::WALL) || level.GetMap().IsOnTileType(*this, Map::PLATFORM) || level.GetSpawner().IsOnGround(*this)) && _gravity) {
         Accelerate(sf::Vector2f(-0.01*GetVel().x, 0), eTime);
     } else {
         //Accelerate(sf::Vector2f(-0.0003*GetVel().x, 0), eTime);
@@ -86,11 +87,13 @@ void Bullet::TestCollisions(IP& ip, float eTime, Level& level, sf::Vector2f delt
     if(level.GetMap().IsCollided(*this, GetUpperLeftPos()+delta, Map::WALL) || level.GetSpawner().IsCollided(*this, GetUpperLeftPos()+delta)) {
         _dying = true;
         _deadTimer.restart();
+        setPosition(getPosition() + delta);
     }
-    if(GetVel().y >= 0 && !((int)(GetGlobalHitbox().top + GetGlobalHitbox().height + delta.y)%16 > 3)) {
+    if(GetVel().y >= 0 && !((int)(GetGlobalHitbox().top + GetGlobalHitbox().height + delta.y)%16 > 3) && _gravity) {
         if(level.GetMap().IsOnTileType(*this, GetUpperLeftPos()+delta, Map::PLATFORM)) {
             _dying = true;
             _deadTimer.restart();
+            setPosition(getPosition() + delta);
         }
     }
 }
@@ -99,7 +102,7 @@ void Bullet::Impact(GameEntity& entity, IP& ip, ParticleManager& pManager, sf::C
     _dying = true;
     _instantDie = true;
     _deadTimer.restart();
-    entity.Damage(_damage, ip, pManager, color);
+    entity.Damage(_damage, ip, pManager, color, getPosition(), GetVel());
 }
 
 bool Bullet::IsAlive() const {
