@@ -19,9 +19,17 @@ class Snail : public Ennemy {
     Snail(IP& ip);
     ~Snail();
     void Update(IP& ip, float eTime, Level& level, Character& character, EntityManager& eManager, ParticleManager& pManager, BulletManager& bManager);
+    void Draw(IP& ip);
 
     private:
+    void UpdateCircle(sf::Vector2f eyePos);
+
+    bool _preparing;
+    float _nextAttack;
     sf::Clock _attackTimer;
+    sf::Clock _particleTimer;
+
+    sf::CircleShape _circle;
 };
 
 #endif // SNAIL_H_INCLUDED

@@ -1,5 +1,5 @@
-#ifndef ROCKBULLET_H_INCLUDED
-#define ROCKBULLET_H_INCLUDED
+#ifndef ARROW_H_INCLUDED
+#define ARROW_H_INCLUDED
 
 #include <iostream>
 
@@ -27,4 +27,4 @@ class Arrow : public Bullet {
 
 };
 
-#endif // ROCKBULLET_H_INCLUDED
+#endif // ARROW_H_INCLUDED

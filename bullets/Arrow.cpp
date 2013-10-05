@@ -6,7 +6,7 @@
 #include "ParticleManager.h"
 #include "MathHelper.h"
 
-Arrow::Arrow(IP& ip, sf::Vector2f position, sf::Vector2f vel, bool ennemy) : Bullet(ip, "arrow", sf::IntRect(0, 1, 13, 3), position, vel, 42, true, ennemy, true) {
+Arrow::Arrow(IP& ip, sf::Vector2f position, sf::Vector2f vel, bool ennemy) : Bullet(ip, "arrow", sf::IntRect(0, 1, 13, 3), position, vel, 42, true, ennemy, true, false) {
 
 }
 

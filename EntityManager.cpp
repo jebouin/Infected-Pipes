@@ -29,7 +29,7 @@ void EntityManager::Update(IP& ip, float eTime, Level& level, Character& charact
 
 void EntityManager::Draw(IP& ip) {
     for(int i=0 ; i<_ennemies.size() ; i++) {
-        ip._renderer->Draw(*_ennemies[i]);
+        _ennemies[i]->Draw(ip);
     }
 }
 

@@ -30,7 +30,7 @@ bool Bow::Use(IP& ip, BulletManager& bManager) {
     sf::Vector2f d = mpos-getPosition();
     bManager.AddBullet(new Arrow(ip,
                                   getPosition(),
-                                  d/MathHelper::GetVecLength(d)*MathHelper::RandFloat(1.5, 1.6),
+                                  d/MathHelper::GetVecLength(d)*MathHelper::RandFloat(0.7, 0.9),
                                   false));
     return true;
 }

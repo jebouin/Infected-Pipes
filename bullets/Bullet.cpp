@@ -11,7 +11,7 @@
 #include "EntityManager.h"
 #include "Ennemy.h"
 
-Bullet::Bullet(IP& ip, string name, sf::IntRect hitbox, sf::Vector2f position, sf::Vector2f vel, int damage, bool animated, bool ennemy, bool gravity) : MovingSprite(ip, name, hitbox, animated) {
+Bullet::Bullet(IP& ip, string name, sf::IntRect hitbox, sf::Vector2f position, sf::Vector2f vel, int damage, bool animated, bool ennemy, bool gravity, bool instantDie) : MovingSprite(ip, name, hitbox, animated) {
     setPosition(position);
     SetVel(vel);
     _alive = true;
@@ -19,6 +19,7 @@ Bullet::Bullet(IP& ip, string name, sf::IntRect hitbox, sf::Vector2f position, s
     _ennemy = ennemy;
     _gravity = gravity;
     _damage = damage;
+    _instantDie = instantDie;
 }
 
 Bullet::~Bullet() {
@@ -39,7 +40,7 @@ void Bullet::Update(IP& ip, float eTime, Level& level, Character& character, Par
     if(_dying) {
         float deadTime = _deadTimer.getElapsedTime().asMilliseconds();
         setColor(sf::Color(getColor().r, getColor().g, getColor().b, 255-deadTime/1000.f*255));
-        if(deadTime > 1000) {
+        if(deadTime > 1000 || _instantDie) {
             _alive = false;
         }
     }
@@ -96,6 +97,7 @@ void Bullet::TestCollisions(IP& ip, float eTime, Level& level, sf::Vector2f delt
 
 void Bullet::Impact(GameEntity& entity, IP& ip, ParticleManager& pManager, sf::Color color) {
     _dying = true;
+    _instantDie = true;
     _deadTimer.restart();
     entity.Damage(_damage, ip, pManager, color);
 }

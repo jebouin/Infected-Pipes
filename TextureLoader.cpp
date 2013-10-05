@@ -19,8 +19,6 @@ TextureLoader::TextureLoader(IP& ip) {
     AddTexture("zombie.png", "zombie");
     AddTexture("nightBackground.png", "nightBackground");
     AddTexture("rockyBackground.png", "rockyBackground");
-    AddTexture("blood0.png", "blood0");
-    AddTexture("blood1.png", "blood1");
     AddTexture("lifeBar.png", "lifeBar");
     AddTexture("lifeBarBorder.png", "lifeBarBorder");
     AddTexture("xpBar.png", "xpBar");
@@ -35,6 +33,11 @@ TextureLoader::TextureLoader(IP& ip) {
 
     AddTexture("littleRockBullet.png", "littleRockBullet");
     AddTexture("arrow.png", "arrow");
+    AddTexture("laser.png", "laser");
+
+    AddTexture("blood0.png", "blood0");
+    AddTexture("blood1.png", "blood1");
+    AddTexture("laserParticle.png", "laserParticle");
 }
 
 TextureLoader::~TextureLoader() {

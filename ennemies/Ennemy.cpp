@@ -32,6 +32,10 @@ void Ennemy::Update(IP& ip, float eTime, Level& level, Character& character, Ent
     }
 }
 
+void Ennemy::Draw(IP& ip) {
+    GameEntity::Draw(ip);
+}
+
 int Ennemy::GetXP() {
     return _xp;
 }
