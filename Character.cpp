@@ -14,6 +14,7 @@
 #include "Weapon.h"
 #include "Bow.h"
 #include "Particle.h"
+#include "TextureLoader.h"
 
 Character::Character(IP& ip) : GameEntity(ip, "character", sf::IntRect(4, 3, 7, 27), 10) {
     SetWeight(0.5f);
@@ -29,7 +30,11 @@ Character::Character(IP& ip) : GameEntity(ip, "character", sf::IntRect(4, 3, 7, 
     _nextXP = 10;
 
     _weapon = new Bow(ip, (const GameEntity&)*this);
-    //_weapon = new Weapon(ip, "bow", sf::IntRect(0, 0, 7, 17), *this, sf::Vector2f(5, 4), 500);
+
+    _arm.setTexture(ip._textureLoader->GetTexture("arm"));
+    _arm.setOrigin(sf::Vector2f(2, 1));
+
+    SetAutoDir(false);
 }
 
 Character::~Character() {
@@ -38,6 +43,9 @@ Character::~Character() {
 }
 
 void Character::Update(IP& ip, float eTime, Level& level, EntityManager& eManager, ParticleManager& pManager, BulletManager& bManager) {
+    sf::Vector2f mpos = MathHelper::GetMousePos(ip);
+    AnimationTable& t(GetAnims());
+
     if(_enteringPipe) {
         SetVel(sf::Vector2f(0, 0.1));
         MovingSprite::Update(ip, eTime);
@@ -55,41 +63,45 @@ void Character::Update(IP& ip, float eTime, Level& level, EntityManager& eManage
             _leavingPipe = false;
         }
     } else {
-        /*if(GetAnims().GetAnimationName() != "attack") {
-            if(sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-                GetAnims().SetAnimation("attack");
-                _weapon->Use(ip, bManager);
-
-                for(int i=0 ; i<eManager.GetNbEnnemies() ; i++) {
-                    sf::FloatRect attackRect;
-                    if(GetDir()) {
-                        attackRect = sf::FloatRect(GetGlobalHitbox().left+GetGlobalHitbox().width, GetGlobalHitbox().top, 16, GetGlobalHitbox().height);
-                    } else {
-                        attackRect = sf::FloatRect(GetGlobalHitbox().left-16, GetGlobalHitbox().top, 16, GetGlobalHitbox().height);
-                    }
-                    if(eManager.GetEnnemy(i)->GetGlobalHitbox().intersects(attackRect)) {
-                        Hit(eManager.GetEnnemy(i), ip, pManager, level);
-                    }
-                }
-            }
-        } else {
-            if(GetAnims().GetAnimation().IsFinished()) {
-                GetAnims().SetAnimation("walk");
-            }
-        }*/
         if(sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
             _weapon->Use(ip, bManager);
         }
-
         GameEntity::Update(ip, eTime, level, eManager, pManager);
+        float r = MathHelper::Rad2Deg(MathHelper::Vec2Ang(mpos-_arm.getPosition()));
+        if(!GetDir()) {
+            _arm.setScale(-1, 1);
+            r -= 180;
+        } else {
+            _arm.setScale(1, 1);
+        }
+        _arm.setRotation(r);
     }
 
+    sf::Vector2f framed(0, 0);
+    if(t.GetAnimationName() == "idle") {
+        framed = sf::Vector2f(0, 0);
+    } else if(t.GetAnimationName() == "walk") {
+        int a = t.GetAnimation().GetCurFrame()%4;
+        framed.y = -((a == 1 ? 2 : (a==2 ? 1 : 0)));
+    }
+    if(GetDir()) {
+        if(mpos.x < _arm.getPosition().x) {
+            ChangeDir();
+        }
+        _arm.setPosition(GetUpperLeftPos() + sf::Vector2f(4, 12) + framed);
+    } else {
+        if(mpos.x > _arm.getPosition().x) {
+            ChangeDir();
+        }
+        _arm.setPosition(GetUpperLeftPos() + sf::Vector2f(getLocalBounds().width-4, 12) + framed);
+    }
     _weapon->Update(ip, eTime, bManager);
 }
 
 void Character::Draw(IP& ip) {
     GameEntity::Draw(ip);
     //_weapon->Draw(ip);
+    ip._renderer->Draw(_arm);
 }
 
 void Character::EnterPipe(Level& level) {

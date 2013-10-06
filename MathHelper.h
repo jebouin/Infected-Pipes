@@ -12,6 +12,8 @@
 
 using namespace std;
 
+class IP;
+
 struct HSV {
     float h;
     float s;
@@ -37,7 +39,7 @@ class MathHelper {
     static sf::Vector2f GetCenter(sf::FloatRect rect);
     static float GetVecLength(sf::Vector2f vec);
     static sf::Vector2f Normalize(sf::Vector2f vec);
-    static sf::Vector2f GetMousePos(sf::RenderWindow& window);
+    static sf::Vector2f GetMousePos(IP& ip);
     static sf::Vector2f Mod(sf::Vector2f vec, float v);
     static sf::Vector2f RandDirVector();
 

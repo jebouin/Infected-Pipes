@@ -44,6 +44,7 @@ class Character : public GameEntity {
     sf::Clock _enterTimer;
 
     Weapon *_weapon;
+    sf::Sprite _arm;
 };
 
 #endif // CHARACTER_H_INCLUDED

@@ -21,6 +21,7 @@ GameEntity::GameEntity(IP& ip, string name, sf::IntRect hitbox, int hp) : Moving
     _pushable = true;
     _flying = false;
     _invincible = false;
+    _autoDir = true;
 }
 
 GameEntity::~GameEntity() {
@@ -89,7 +90,7 @@ void GameEntity::GoLeft(float eTime) {
     if(acc < 0) {
         Accelerate(sf::Vector2f(acc, 0), eTime);
     }
-    if(_dir == true) {
+    if(_dir == true && _autoDir) {
         ChangeDir();
     }
 }
@@ -99,7 +100,7 @@ void GameEntity::GoRight(float eTime) {
     if(acc > 0) {
         Accelerate(sf::Vector2f(acc, 0), eTime);
     }
-    if(_dir == false) {
+    if(_dir == false && _autoDir) {
         ChangeDir();
     }
 }
@@ -200,6 +201,10 @@ void GameEntity::SetAlive(bool a) {
 
 void GameEntity::SetInvincible(bool i) {
     _invincible = i;
+}
+
+void GameEntity::SetAutoDir(bool a) {
+    _autoDir = a;
 }
 
 float GameEntity::GetSpeed() {

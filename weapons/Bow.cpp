@@ -26,7 +26,7 @@ bool Bow::Use(IP& ip, BulletManager& bManager) {
     if(!Weapon::Use(ip, bManager)) {
         return false;
     }
-    sf::Vector2f mpos = sf::Vector2f(ip._renderer->GetTexture().convertCoords(sf::Vector2i(MathHelper::GetMousePos(*ip._window))));
+    sf::Vector2f mpos = MathHelper::GetMousePos(ip);
     sf::Vector2f d = mpos-getPosition();
     bManager.AddBullet(new Arrow(ip,
                                   getPosition(),

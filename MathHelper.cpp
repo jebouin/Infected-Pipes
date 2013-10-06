@@ -1,4 +1,6 @@
 #include "MathHelper.h"
+#include "IP.h"
+#include "Renderer.h"
 
 float MathHelper::ABS(float n) {
     return (n<0 ? -n : n);
@@ -76,8 +78,8 @@ sf::Vector2f MathHelper::Normalize(sf::Vector2f vec) {
     return vec/GetVecLength(vec);
 }
 
-sf::Vector2f MathHelper::GetMousePos(sf::RenderWindow& window) {
-    return sf::Vector2f(sf::Mouse::getPosition(window)) / 4.f;
+sf::Vector2f MathHelper::GetMousePos(IP& ip) {
+    return sf::Vector2f(ip._renderer->GetTexture().convertCoords(sf::Vector2i(sf::Vector2f(sf::Mouse::getPosition(*ip._window)) / 4.f)));
 }
 
 sf::Vector2f MathHelper::Mod(sf::Vector2f vec, float v) {

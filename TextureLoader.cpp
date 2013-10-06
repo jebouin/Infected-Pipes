@@ -40,6 +40,8 @@ TextureLoader::TextureLoader(IP& ip) {
 
     AddTexture("fir.png", "fir");
     AddTexture("moon.png", "moon");
+
+    AddTexture("arm.png", "arm");
 }
 
 TextureLoader::~TextureLoader() {
