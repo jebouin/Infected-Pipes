@@ -106,7 +106,7 @@ bool MovingSprite::TryMove(sf::Vector2f delta, Level& level) {
         return false;
     }
     if(GetVel().y >= 0 && !((int)(GetGlobalHitbox().top + GetGlobalHitbox().height + delta.y)%16 > 3) && _collidesWithPlatform) {
-        if(level.GetMap().IsOnTileType(*this, GetUpperLeftPos()+delta, Map::PLATFORM)) {
+        if(level.GetMap().IsOnTileType(/*this, GetUpperLeftPos()+delta*/ sf::FloatRect(GetUpperLeftPos().x+GetHitbox().left+delta.x, GetUpperLeftPos().y+GetHitbox().top+GetGlobalHitbox().height-12+delta.y, GetGlobalHitbox().width, 12), Map::PLATFORM)) {
             return false;
         }
     }

@@ -15,12 +15,12 @@
 #include "Bow.h"
 #include "Particle.h"
 
-Character::Character(IP& ip) : GameEntity(ip, "character", sf::IntRect(2, 2, 9, 27), 10) {
+Character::Character(IP& ip) : GameEntity(ip, "character", sf::IntRect(4, 3, 7, 27), 10) {
     SetWeight(0.5f);
     AnimationTable& t(GetAnims());
-    t.AddAnimation("idle", new Animation(1, 1000, sf::Vector2i(0, 0), sf::Vector2i(13, 29), true));
-    t.AddAnimation("attack", new Animation(1, 50, sf::Vector2i(0, 29), sf::Vector2i(13, 29), false));
-    t.SetAnimation("idle");
+    t.AddAnimation("walk", new Animation(8, 100, sf::Vector2i(0, 0), sf::Vector2i(15, 31), true));
+    t.AddAnimation("idle", new Animation(1, 50, sf::Vector2i(0, 31), sf::Vector2i(15, 31), false));
+    t.SetAnimation("walk");
     _enteringPipe = false;
     _leavingPipe = false;
 
@@ -55,7 +55,7 @@ void Character::Update(IP& ip, float eTime, Level& level, EntityManager& eManage
             _leavingPipe = false;
         }
     } else {
-        if(GetAnims().GetAnimationName()=="idle") {
+        /*if(GetAnims().GetAnimationName() != "attack") {
             if(sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
                 GetAnims().SetAnimation("attack");
                 _weapon->Use(ip, bManager);
@@ -74,8 +74,11 @@ void Character::Update(IP& ip, float eTime, Level& level, EntityManager& eManage
             }
         } else {
             if(GetAnims().GetAnimation().IsFinished()) {
-                GetAnims().SetAnimation("idle");
+                GetAnims().SetAnimation("walk");
             }
+        }*/
+        if(sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+            _weapon->Use(ip, bManager);
         }
 
         GameEntity::Update(ip, eTime, level, eManager, pManager);
@@ -86,7 +89,7 @@ void Character::Update(IP& ip, float eTime, Level& level, EntityManager& eManage
 
 void Character::Draw(IP& ip) {
     GameEntity::Draw(ip);
-    _weapon->Draw(ip);
+    //_weapon->Draw(ip);
 }
 
 void Character::EnterPipe(Level& level) {

@@ -26,7 +26,6 @@ TextureLoader::TextureLoader(IP& ip) {
     AddTexture("levelIndicator.png", "levelIndicator");
     AddTexture("cursor.png", "cursor");
     AddTexture("difficultyIndicator.png", "difficultyIndicator");
-    AddTexture("fir.png", "fir");
     AddTexture("chest.png", "chest");
 
     AddTexture("bow.png", "bow");
@@ -38,6 +37,9 @@ TextureLoader::TextureLoader(IP& ip) {
     AddTexture("blood0.png", "blood0");
     AddTexture("blood1.png", "blood1");
     AddTexture("laserParticle.png", "laserParticle");
+
+    AddTexture("fir.png", "fir");
+    AddTexture("moon.png", "moon");
 }
 
 TextureLoader::~TextureLoader() {

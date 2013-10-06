@@ -30,6 +30,7 @@ class Map {
     bool IsCollided(sf::FloatRect rect, TileType type);
     bool IsCollided(MovingSprite& sprite, sf::Vector2f pos, TileType type);
     bool IsCollided(MovingSprite& sprite, TileType type);
+    bool IsOnTileType(sf::FloatRect rect, TileType type);
     bool IsOnTileType(MovingSprite& sprite, sf::Vector2f pos, TileType type);
     bool IsOnTileType(MovingSprite& sprite, TileType type);
 

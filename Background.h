@@ -19,6 +19,7 @@ class Background {
 
     private:
     vector<sf::Sprite> _backSprites;
+    vector<sf::Sprite> _backSprites2;
     sf::Sprite _back;
     sf::View _view;
     float _zoom;

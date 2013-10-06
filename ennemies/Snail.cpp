@@ -14,7 +14,7 @@
 #include "LaserBullet.h"
 #include "Renderer.h"
 
-Snail::Snail(IP& ip) : Ennemy(ip, "snail", sf::IntRect(3, 1, 26, 20), 42, 8, 6) {
+Snail::Snail(IP& ip) : Ennemy(ip, "snail", sf::IntRect(3, 1, 26, 19), 42, 8, 6) {
     AnimationTable& t(GetAnims());
     t.AddAnimation("walk", new Animation(2, 200, sf::Vector2i(0, 0), sf::Vector2i(31, 21), true));
     t.AddAnimation("prepare", new Animation(4, 250, sf::Vector2i(0, 21), sf::Vector2i(31, 21), false));
@@ -23,6 +23,7 @@ Snail::Snail(IP& ip) : Ennemy(ip, "snail", sf::IntRect(3, 1, 26, 20), 42, 8, 6) 
     SetSpeed(MathHelper::RandFloat(0.0003, 0.0004));
     _preparing = false;
     _nextAttack = MathHelper::RandFloat(1000, 3000);
+    SetWeight(1.0);
 
     _circle.setFillColor(sf::Color(0, 0, 0, 0));
     _circle.setOutlineColor(sf::Color(220, 200, 255));

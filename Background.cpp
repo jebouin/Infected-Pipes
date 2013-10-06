@@ -21,6 +21,11 @@ Background::Background(IP& ip, string name, float zoom, Level& level) : _level(l
                 _backSprites.push_back(fir);
             }
         }
+
+        sf::Sprite moon;
+        moon.setTexture(ip._textureLoader->GetTexture("moon"));
+        moon.setPosition(sf::Vector2f(ip._renderer->GetTexture().getSize().x/4.f*3.f, ip._renderer->GetTexture().getSize().y/4.f));
+        _backSprites2.push_back(moon);
     }
 }
 
@@ -40,6 +45,10 @@ void Background::Draw(IP& ip, sf::View& prevView) {
             _back.setPosition(sf::Vector2f(_back.getTextureRect().width*i, _back.getTextureRect().height*j));
             ip._renderer->Draw(_back);
         }
+    }
+
+    for(int i=0 ; i<_backSprites2.size() ; i++) {
+        ip._renderer->Draw(_backSprites2[i]);
     }
 
     _view.setCenter(sf::Vector2f(prevView.getCenter().x / 2.5f, prevView.getCenter().y));

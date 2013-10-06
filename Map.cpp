@@ -154,17 +154,21 @@ bool Map::IsCollided(MovingSprite& sprite, TileType type) {
     return IsCollided(sprite.GetGlobalHitbox(), type);
 }
 
-bool Map::IsOnTileType(MovingSprite& sprite, sf::Vector2f pos, TileType type) {
-    sf::FloatRect rect = sprite.GetGlobalHitbox();
+bool Map::IsOnTileType(sf::FloatRect rect, TileType type) {
     for(float i=0 ; i<rect.width ; i+=8) {
-        if(_tileTypes[GetTile(sf::Vector2i(sf::Vector2f(pos.x+i, pos.y+rect.height+1)/16.f), FRONT)] == type) {
+        if(_tileTypes[GetTile(sf::Vector2i(sf::Vector2f(rect.left+i, rect.top+rect.height+1)/16.f), FRONT)] == type) {
             return true;
         }
     }
-    if(_tileTypes[GetTile(sf::Vector2i(sf::Vector2f(pos.x+rect.width, pos.y+rect.height+1)/16.f), FRONT)] == type) {
+    if(_tileTypes[GetTile(sf::Vector2i(sf::Vector2f(rect.left+rect.width, rect.top+rect.height+1)/16.f), FRONT)] == type) {
         return true;
     }
     return false;
+}
+
+bool Map::IsOnTileType(MovingSprite& sprite, sf::Vector2f pos, TileType type) {
+    sf::FloatRect rect = sprite.GetGlobalHitbox();
+    return IsOnTileType(sf::FloatRect(pos.x, pos.y, rect.width, rect.height), type);
 }
 
 bool Map::IsOnTileType(MovingSprite& sprite, TileType type) {
