@@ -20,8 +20,8 @@ Level::Level(IP& ip, Character& character) {
     _spawner = 0;
     _grass = 0;
     _background = 0;
+    _difficulty = 2;
     Load(ip, "intro", character);
-    _difficulty = 0;
 }
 
 Level::~Level() {
@@ -79,7 +79,7 @@ void Level::Load(IP& ip, string name, Character& character) {
     delete _map;
     _map = new Map(ip, sf::Vector2i(_levelImages[0].getSize()));
     delete _spawner;
-    _spawner = new Spawner(ip, 10);
+    _spawner = new Spawner(ip, 10, *this);
     sf::Vector2f charPos;
 
     for(int t=0 ; t<2 ; t++) {

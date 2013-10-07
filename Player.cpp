@@ -28,10 +28,12 @@ void Player::Update(IP& ip, float eTime, Level& level, EntityManager& eManager, 
     if(!_character->EnteringPipe()) {
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
             _character->GoRight(eTime);
-        }
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Q)) {
+        } else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Q)) {
             _character->GoLeft(eTime);
+        } else {
+            _character->GetAnims().SetAnimation("idle");
         }
+
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
             _character->EnterPipe(level);
             _character->PlatformDrop(level);

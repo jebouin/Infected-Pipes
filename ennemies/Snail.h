@@ -16,7 +16,7 @@ class BulletManager;
 
 class Snail : public Ennemy {
     public:
-    Snail(IP& ip);
+    Snail(IP& ip, Level& level);
     ~Snail();
     void Update(IP& ip, float eTime, Level& level, Character& character, EntityManager& eManager, ParticleManager& pManager, BulletManager& bManager);
     void Draw(IP& ip);

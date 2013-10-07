@@ -18,8 +18,8 @@ class Ennemy : public GameEntity {
     public:
     enum EnnemyType {SPIDEROCK, ROCKWORM, BAT, SNAIL};
 
-    Ennemy(IP& ip, string name, sf::IntRect hitbox, int hpn, int xp, int incDifficulty);
-    ~Ennemy();
+    Ennemy(IP& ip, string name, sf::IntRect hitbox, int hpn, int xp, int incDifficulty, Level& level);
+    virtual ~Ennemy();
     virtual void Update(IP& ip, float eTime, Level& level, Character& character, EntityManager& eManager, ParticleManager& pManager, BulletManager& bManager);
     virtual void Draw(IP& ip);
     int GetXP();
@@ -29,6 +29,7 @@ class Ennemy : public GameEntity {
     bool _inPipe;
     int _xp;
     int _incDifficulty;
+    Level& _level;
 };
 
 #endif // ENNEMY_H_INCLUDED

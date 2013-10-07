@@ -12,7 +12,7 @@
 #include "BulletManager.h"
 #include "RockBullet.h"
 
-RockWorm::RockWorm(IP& ip) : Ennemy(ip, "rockWorm", sf::IntRect(1, 0, 7, 19), 7, 2, 2) {
+RockWorm::RockWorm(IP& ip, Level& level) : Ennemy(ip, "rockWorm", sf::IntRect(1, 0, 7, 19), 7, 2, 2, level) {
     _littleHitBox = sf::IntRect(1, 0, 7, 19);
     _bigHitBox = sf::IntRect(3, 0, 9, 20);
 

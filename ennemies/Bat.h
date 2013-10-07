@@ -16,7 +16,7 @@ class BulletManager;
 
 class Bat : public Ennemy {
     public:
-    Bat(IP& ip);
+    Bat(IP& ip, Level& level);
     ~Bat();
     void Update(IP& ip, float eTime, Level& level, Character& character, EntityManager& eManager, ParticleManager& pManager, BulletManager& bManager);
 

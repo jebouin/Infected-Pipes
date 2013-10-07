@@ -17,6 +17,9 @@
 #include "TextureLoader.h"
 
 Character::Character(IP& ip) : GameEntity(ip, "character", sf::IntRect(4, 3, 7, 27), 10) {
+    _arms[EMPTY] = Arm {sf::IntRect(0, 0, 6, 9), sf::Vector2f(2, 1)};
+    _arms[RAINBOW] = Arm {sf::IntRect(0, 9, 15, 9), sf::Vector2f(4, 1)};
+
     SetWeight(0.5f);
     AnimationTable& t(GetAnims());
     t.AddAnimation("walk", new Animation(8, 100, sf::Vector2i(0, 0), sf::Vector2i(15, 31), true));
@@ -31,15 +34,15 @@ Character::Character(IP& ip) : GameEntity(ip, "character", sf::IntRect(4, 3, 7, 
 
     _weapon = new Bow(ip, (const GameEntity&)*this);
 
-    _arm.setTexture(ip._textureLoader->GetTexture("arm"));
-    _arm.setOrigin(sf::Vector2f(2, 1));
+    _arm.setTexture(ip._textureLoader->GetTexture("arms"));
+    LoadArm(RAINBOW);
 
     SetAutoDir(false);
 }
 
 Character::~Character() {
-    /*delete _weapon;
-    _weapon = 0;*/
+    delete _weapon;
+    _weapon = 0;
 }
 
 void Character::Update(IP& ip, float eTime, Level& level, EntityManager& eManager, ParticleManager& pManager, BulletManager& bManager) {
@@ -102,6 +105,25 @@ void Character::Draw(IP& ip) {
     GameEntity::Draw(ip);
     //_weapon->Draw(ip);
     ip._renderer->Draw(_arm);
+}
+
+void Character::LoadArm(ArmType t) {
+    _arm.setTextureRect(_arms[t]._textureRect);
+    _arm.setOrigin(_arms[t]._origin);
+}
+
+void Character::GoLeft(float eTime) {
+    GameEntity::GoLeft(eTime);
+    if(GetAnims().GetAnimationName() == "idle") {
+        GetAnims().SetAnimation("walk");
+    }
+}
+
+void Character::GoRight(float eTime) {
+    GameEntity::GoRight(eTime);
+    if(GetAnims().GetAnimationName() == "idle") {
+        GetAnims().SetAnimation("walk");
+    }
 }
 
 void Character::EnterPipe(Level& level) {

@@ -16,7 +16,7 @@ class BulletManager;
 
 class Spiderock : public Ennemy {
     public:
-    Spiderock(IP& ip);
+    Spiderock(IP& ip, Level& level);
     ~Spiderock();
     void Update(IP& ip, float eTime, Level& level, Character& character, EntityManager& eManager, ParticleManager& pManager, BulletManager& bManager);
 

@@ -19,12 +19,22 @@ class Ennemy;
 class Weapon;
 class Bow;
 
+struct Arm {
+    sf::IntRect _textureRect;
+    sf::Vector2f _origin;
+};
+
 class Character : public GameEntity {
     public:
+    enum ArmType {EMPTY, RAINBOW};
+
     Character(IP& ip);
     ~Character();
     void Update(IP& ip, float eTime, Level& level, EntityManager& eManager, ParticleManager& pManager, BulletManager& bManager);
     void Draw(IP& ip);
+    void LoadArm(ArmType t);
+    void GoLeft(float eTime);
+    void GoRight(float eTime);
     void EnterPipe(Level& level);
     bool EnteringPipe();
     void Hit(Ennemy *other, IP& ip, ParticleManager& pManager, Level& level);
@@ -45,6 +55,8 @@ class Character : public GameEntity {
 
     Weapon *_weapon;
     sf::Sprite _arm;
+
+    map<ArmType, Arm> _arms;
 };
 
 #endif // CHARACTER_H_INCLUDED

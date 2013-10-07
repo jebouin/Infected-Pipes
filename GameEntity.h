@@ -25,8 +25,8 @@ class GameEntity : public MovingSprite {
     void Update(IP& ip, float elapsedTime);
     void Draw(IP& ip);
     void Collide(GameEntity* other, float elapsedTime);
-    void GoLeft(float eTime);
-    void GoRight(float eTime);
+    virtual void GoLeft(float eTime);
+    virtual void GoRight(float eTime);
     void ChangeDir();
     void PlatformDrop(Level& level);
     void Jump(Level& level);

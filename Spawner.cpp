@@ -13,15 +13,14 @@
 #include "Level.h"
 #include "Ennemy.h"
 
-Spawner::Spawner(IP& ip, int nbWaves) {
+Spawner::Spawner(IP& ip, int nbWaves, Level& l) {
     _curWave = 0;
-    _difficulty = 2;
     _nbWaves = nbWaves;
     _spawning = true;
-    _nbToSpawn = 16;
+    _difToSpawn = _difficulty;
     _finished = false;
 
-    NextWave();
+    NextWave(l);
 }
 
 Spawner::~Spawner() {
@@ -41,7 +40,7 @@ void Spawner::Update(IP& ip, EntityManager& eManager, Level& level, Character& c
     }
 
     if(eManager.GetNbEnnemies() == 0 && !_finished && !_spawning) {
-        NextWave();
+        NextWave(level);
     }
 
     for(int i=0 ; i<_pipes.size() ; i++) {
@@ -50,45 +49,54 @@ void Spawner::Update(IP& ip, EntityManager& eManager, Level& level, Character& c
 }
 
 void Spawner::Spawn(IP& ip, EntityManager& eManager, Level& level, Character& character) {
-    /*if(rand()%2==0) {
-        int pipeId = rand()%_pipes.size();
-        int et = rand()%3;
-        switch(et) {
-            case 0:
-                _pipes[pipeId]->Spawn(ip, eManager, new Spiderock(ip));
-                break;
-            case 1:
-                _pipes[pipeId]->Spawn(ip, eManager, new Bat(ip));
-                break;
-            case 2:
-                _pipes[pipeId]->Spawn(ip, eManager, new Snail(ip));
-                break;
-        }
-    } else {
-        RockWorm *r = new RockWorm(ip);
-        if(!r->AutoSpawn(ip, level, eManager, character)) {
-            return;
-        }
-        eManager.Add(r);
-    }*/
-
     int pipeId = rand()%_pipes.size();
-    _pipes[pipeId]->Spawn(ip, eManager, new Snail(ip));
+    int et;
+    static int d[4] = {1, 10, 20, 50};
+    for(int i=2 ; i>=0 ; i--) {
+        if(d[i] <= _difToSpawn) {
+            et = i;
+            break;
+        }
+    }
+    switch(et) {
+        case 0: {
+            _pipes[pipeId]->Spawn(ip, eManager, new Spiderock(ip, level));
+            break;
+         } case 1: {
+            RockWorm *r = new RockWorm(ip, level);
+            if(!r->AutoSpawn(ip, level, eManager, character)) {
+                delete r;
+                return;
+            }
+            eManager.Add(r);
+            break;
+        } case 2: {
+            _pipes[pipeId]->Spawn(ip, eManager, new Bat(ip, level));
+            break;
+        } case 3: {
+            _pipes[pipeId]->Spawn(ip, eManager, new Snail(ip, level));
+            break;
+        }
+    }
 
-    _nbToSpawn--;
-    if(_nbToSpawn == 0) {
+    _difToSpawn -= d[et];
+
+    /*int pipeId = rand()%_pipes.size();
+    _pipes[pipeId]->Spawn(ip, eManager, new Snail(ip));*/
+
+    if(_difToSpawn <= 0) {
         _spawning = false;
     }
 }
 
-void Spawner::NextWave() {
+void Spawner::NextWave(Level& level) {
     if(_curWave > _nbWaves) {
         _finished = true;
         _spawning = false;
         cout << "Finished!" << endl;
         return;
     }
-    _nbToSpawn = /*_difficulty*/pow(2, _curWave);
+    _difToSpawn = level.GetDifficulty();
     _curWave++;
     _spawning = true;
     _clock.restart();

@@ -9,7 +9,7 @@
 #include "ParticleManager.h"
 #include "BulletManager.h"
 
-Ennemy::Ennemy(IP& ip, string name, sf::IntRect hitbox, int hp, int xp, int incDifficulty) : GameEntity(ip, name, hitbox, hp) {
+Ennemy::Ennemy(IP& ip, string name, sf::IntRect hitbox, int hp, int xp, int incDifficulty, Level& level) : GameEntity(ip, name, hitbox, hp), _level(level) {
     SetSpeed(MathHelper::RandFloat(0.0005, 0.001));
     SetJumpPower(0.6);
     _inPipe = true;
@@ -18,7 +18,7 @@ Ennemy::Ennemy(IP& ip, string name, sf::IntRect hitbox, int hp, int xp, int incD
 }
 
 Ennemy::~Ennemy() {
-
+    _level.SetDifficulty(_level.GetDifficulty() + _incDifficulty);
 }
 
 void Ennemy::Update(IP& ip, float eTime, Level& level, Character& character, EntityManager& eManager, ParticleManager& pManager, BulletManager& bManager) {

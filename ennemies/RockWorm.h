@@ -16,7 +16,7 @@ class BulletManager;
 
 class RockWorm : public Ennemy {
     public:
-    RockWorm(IP& ip);
+    RockWorm(IP& ip, Level& level);
     ~RockWorm();
     bool AutoSpawn(IP& ip, Level& level, EntityManager& eManager, Character& character);
     void Update(IP& ip, float eTime, Level& level, Character& character, EntityManager& eManager, ParticleManager& pManager, BulletManager& bManager);
