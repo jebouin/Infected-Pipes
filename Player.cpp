@@ -28,7 +28,7 @@ void Player::Update(IP& ip, float eTime, Level& level, EntityManager& eManager, 
     if(!_character->EnteringPipe()) {
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
             _character->GoRight(eTime);
-        } else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Q)) {
+        } else if(sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
             _character->GoLeft(eTime);
         } else {
             _character->GetAnims().SetAnimation("idle");
@@ -38,7 +38,7 @@ void Player::Update(IP& ip, float eTime, Level& level, EntityManager& eManager, 
             _character->EnterPipe(level);
             _character->PlatformDrop(level);
         }
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Z)) {
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
             level.OpenChest(*_character, ip);
         }
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {

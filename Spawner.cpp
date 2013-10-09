@@ -52,7 +52,7 @@ void Spawner::Spawn(IP& ip, EntityManager& eManager, Level& level, Character& ch
     int pipeId = rand()%_pipes.size();
     int et;
     static int d[4] = {1, 10, 20, 50};
-    for(int i=2 ; i>=0 ; i--) {
+    for(int i=3 ; i>=0 ; i--) {
         if(d[i] <= _difToSpawn) {
             et = i;
             break;
