@@ -1,0 +1,38 @@
+#ifndef WATERFIELD_H_INCLUDED
+#define WATERFIELD_H_INCLUDED
+
+#include <iostream>
+#include <vector>
+
+#include <SFML/System.hpp>
+#include <SFML/Graphics.hpp>
+#include <SFML/Window.hpp>
+
+using namespace std;
+
+class IP;
+
+struct Spring {
+    float _nLength;
+    float _length;
+    float _velocity;
+};
+
+class WaterField {
+    public:
+    WaterField(sf::FloatRect rect, float resolution);
+    ~WaterField();
+    void Update(float elapsedTime);
+    void Draw(IP& ip);
+    void Splash(sf::Vector2f pos, float force);
+    sf::FloatRect GetRect();
+
+    private:
+    sf::VertexArray _vertexes;
+    sf::FloatRect _rect;
+    vector<Spring> _springs;
+    int _nbPoints;
+    float _resolution;
+};
+
+#endif // WATERFIELD_H_INCLUDED

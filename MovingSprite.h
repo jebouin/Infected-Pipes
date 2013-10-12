@@ -37,6 +37,11 @@ class MovingSprite : public sf::Sprite {
     void SetOnPlatform(bool on);
     void SetCollideOnPlatform(bool c);
 
+    protected:
+    void WaterCollision(Level& l, sf::Vector2f deltaPos);
+    bool IsInWater(Level& level);
+    sf::Vector2f _prevPos;
+
     private:
     AnimationTable *_animTable;
 

@@ -21,6 +21,7 @@ Bullet::Bullet(IP& ip, string name, sf::IntRect hitbox, sf::Vector2f position, s
     _damage = damage;
     _instantDie = instantDie;
     _sticky = sticky;
+    _inWater = false;
 }
 
 Bullet::~Bullet() {
@@ -28,7 +29,9 @@ Bullet::~Bullet() {
 }
 
 void Bullet::Update(IP& ip, float eTime, Level& level, Character& character, ParticleManager& pManager, EntityManager& eManager) {
-    if(_gravity) {
+    _inWater = IsInWater(level);
+
+    if(_gravity && !_inWater) {
         Accelerate(sf::Vector2f(0, 0.001), eTime);
     }
 
@@ -36,6 +39,10 @@ void Bullet::Update(IP& ip, float eTime, Level& level, Character& character, Par
         Accelerate(sf::Vector2f(-0.01*GetVel().x, 0), eTime);
     } else {
         //Accelerate(sf::Vector2f(-0.0003*GetVel().x, 0), eTime);
+    }
+
+    if(_inWater) {
+        Accelerate(sf::Vector2f(-0.004*GetVel().x, -0.004*GetVel().y), eTime);
     }
 
     if(_dying) {
@@ -49,6 +56,7 @@ void Bullet::Update(IP& ip, float eTime, Level& level, Character& character, Par
     if(!_dying) {
         MovingSprite::Update(ip, eTime);
         TestCollisions(ip, eTime, level, GetVel()*eTime);
+        WaterCollision(level, GetVel()*eTime);
         if(_ennemy) {
             if(GetGlobalHitbox().intersects(character.GetGlobalHitbox())) {
                 Impact((GameEntity&)(character), ip, pManager, sf::Color(255, 0, 0));

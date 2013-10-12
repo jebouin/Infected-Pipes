@@ -9,6 +9,7 @@
 #include "AnimationTable.h"
 #include "Particle.h"
 #include "DamageParticle.h"
+#include "WaterField.h"
 
 GameEntity::GameEntity(IP& ip, string name, sf::IntRect hitbox, int hp) : MovingSprite(ip, name, hitbox, true) {
     _jumpPower = 0.69;
@@ -22,6 +23,7 @@ GameEntity::GameEntity(IP& ip, string name, sf::IntRect hitbox, int hp) : Moving
     _flying = false;
     _invincible = false;
     _autoDir = true;
+    _inWater = false;
 }
 
 GameEntity::~GameEntity() {
@@ -29,13 +31,22 @@ GameEntity::~GameEntity() {
 }
 
 void GameEntity::Update(IP& ip, float elapsedTime, Level& level, EntityManager& eManager, ParticleManager& pManager) {
-    //SetVel(sf::Vector2f(GetVel().x / 1.2f, GetVel().y));
+    _inWater = IsInWater(level);
+
     if(!_flying) {
-        Accelerate(sf::Vector2f(0, 0.003), elapsedTime);
+        if(!_inWater) {
+            Accelerate(sf::Vector2f(0, 0.003), elapsedTime);
+        } else {
+            Accelerate(sf::Vector2f(0, 0.001), elapsedTime);
+        }
     } else {
         Accelerate(sf::Vector2f(0, -0.008*GetVel().y), elapsedTime);
     }
     Accelerate(sf::Vector2f(-0.008*GetVel().x, 0), elapsedTime);
+
+    if(_inWater) {
+        Accelerate(sf::Vector2f(-0.02*GetVel().x, -0.02*GetVel().y), elapsedTime);
+    }
 
     for(int i=0 ; i<eManager.GetNbEnnemies() ; i++) {
         Ennemy* e = eManager.GetEnnemy(i);
@@ -128,13 +139,18 @@ void GameEntity::PlatformDrop(Level& level) {
 }
 
 void GameEntity::Jump(Level& level) {
-    if(!level.GetSpawner().IsOnGround(*this) && !level.GetMap().IsOnTileType(*this, Map::WALL) && !level.GetMap().IsOnTileType(*this, Map::PLATFORM)) {
+    if(!level.GetSpawner().IsOnGround(*this) && !level.GetMap().IsOnTileType(*this, Map::WALL) && !level.GetMap().IsOnTileType(*this, Map::PLATFORM) && !_inWater) {
         return;
     }
     if(GetVel().y < 0) {
         return;
     }
-    SetVel(sf::Vector2f(GetVel().x, -_jumpPower));
+
+    if(_inWater) {
+        SetVel(sf::Vector2f(GetVel().x, -_jumpPower*1.3));
+    } else {
+        SetVel(sf::Vector2f(GetVel().x, -_jumpPower));
+    }
 }
 
 void GameEntity::Damage(int dmg, IP& ip, ParticleManager& pManager, sf::Color color, sf::Vector2f pos, sf::Vector2f dir) {

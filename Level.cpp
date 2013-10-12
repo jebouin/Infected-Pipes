@@ -11,6 +11,7 @@
 #include "Grass.h"
 #include "Character.h"
 #include "Chest.h"
+#include "WaterField.h"
 
 Level::Level(IP& ip, Character& character) {
     _levelInfos["intro"] = LevelInfo{"level0", "nightBackground", 0.0001f};
@@ -38,6 +39,11 @@ Level::~Level() {
         _chests[i] = 0;
     }
     _chests.clear();
+    for(int i=0 ; i<_waterFields.size() ; i++) {
+        delete _waterFields[i];
+        _waterFields[i] = 0;
+    }
+    _waterFields.clear();
 }
 
 void Level::Update(IP& ip, EntityManager& eManager, Character& character, float eTime) {
@@ -45,6 +51,9 @@ void Level::Update(IP& ip, EntityManager& eManager, Character& character, float 
     _grass->Update(ip);
     for(int i=0 ; i<_chests.size() ; i++) {
         _chests[i]->Update(ip, eTime, *this);
+    }
+    for(int i=0 ; i<_waterFields.size() ; i++) {
+        _waterFields[i]->Update(eTime);
     }
 }
 
@@ -57,6 +66,9 @@ void Level::DrawBack(IP& ip, sf::View& prevView) {
 }
 
 void Level::DrawFront(IP& ip) {
+    for(int i=0 ; i<_waterFields.size() ; i++) {
+        _waterFields[i]->Draw(ip);
+    }
     _spawner->Draw(ip);
     _map->DrawLayer(ip, Map::FRONT);
     _grass->Draw(ip);
@@ -80,8 +92,14 @@ void Level::Load(IP& ip, string name, Character& character) {
     _map = new Map(ip, sf::Vector2i(_levelImages[0].getSize()));
     delete _spawner;
     _spawner = new Spawner(ip, 10, *this);
+    for(int i=0 ; i<_waterFields.size() ; i++) {
+        delete _waterFields[i];
+        _waterFields[i] = 0;
+    }
+    _waterFields.clear();
     sf::Vector2f charPos;
 
+    //first pass to load single tiles
     for(int t=0 ; t<2 ; t++) {
         Map::Layer l(static_cast<Map::Layer>(t));
         for(int i=0 ; i<_levelImages[0].getSize().x ; i++) {
@@ -98,6 +116,8 @@ void Level::Load(IP& ip, string name, Character& character) {
                     _map->SetTile(pos, 4, l);
                 } else if(c == sf::Color(56, 45, 26)) {
                     _map->SetTile(pos, 5, l);
+                } else if(c == sf::Color(106, 129, 193)) {
+                    _map->SetTile(pos, 0, l);
                 } else if(c == sf::Color(255, 255, 255)) {
                     charPos = sf::Vector2f(pos)*16.f;
                 } else {
@@ -108,6 +128,19 @@ void Level::Load(IP& ip, string name, Character& character) {
                     Pipe *p = new Pipe(ip, sf::Vector2f(pos)*16.f, c.a*2.f);
                     _spawner->AddPipe(p);
                 }
+            }
+        }
+    }
+
+    //second pass to load fluids
+    int w = _levelImages[0].getSize().x;
+    int h = _levelImages[0].getSize().y;
+    sf::Color wc(106, 129, 193);
+    for(int i=0 ; i<w ; i++) {
+        for(int j=0 ; j<h ; j++) {
+            if(_levelImages[1].getPixel(i, j) == wc) {
+                sf::Vector2i s(GetRectSizeInImageAt(_levelImages[1], sf::Vector2i(i, j), wc));
+                _waterFields.push_back(new WaterField(sf::FloatRect(i*16-1, j*16+12, s.x*16+2, s.y*16-12+2), 2));
             }
         }
     }
@@ -127,6 +160,34 @@ void Level::Load(IP& ip, string name, Character& character) {
     }
     _chests.clear();
     //_chests.push_back(new Chest(ip, sf::Vector2f(_map->GetSize().x*8, 30)));
+}
+
+
+sf::Vector2i Level::GetRectSizeInImageAt(sf::Image& img, sf::Vector2i pos, sf::Color& c) {
+    int w = 100000;
+    int h = 0;
+
+    while(42) {
+        bool end = false;
+        for(int i=0 ; i<w ; i++) {
+            if(img.getPixel(i+pos.x, h+pos.y) != c) {
+                if(i == 0) {
+                    end = true;
+                } else {
+                    w = i;
+                }
+                break;
+            } else {
+                img.setPixel(i+pos.x, h+pos.y, sf::Color(255, 255, 255, 0));
+            }
+        }
+        if(end) {
+            break;
+        }
+        h++;
+    }
+
+    return sf::Vector2i(w, h);
 }
 
 void Level::NextLevel(IP& ip, EntityManager& eManager, BulletManager& bManager, Character& character) {
@@ -154,4 +215,12 @@ void Level::OpenChest(Character& character, IP& ip) {
             _chests[i]->Open(ip);
         }
     }
+}
+
+int Level::GetNbWaterFields() {
+    return _waterFields.size();
+}
+
+WaterField& Level::GetWaterField(int id) {
+    return *_waterFields[id];
 }

@@ -17,6 +17,7 @@ class Background;
 class Grass;
 class Character;
 class Chest;
+class WaterField;
 
 struct LevelInfo {
     string _imageName;
@@ -38,8 +39,12 @@ class Level {
     int GetDifficulty() const;
     void SetDifficulty(int v);
     void OpenChest(Character& character, IP& ip);
+    int GetNbWaterFields();
+    WaterField& GetWaterField(int id);
 
     private:
+    sf::Vector2i GetRectSizeInImageAt(sf::Image& img, sf::Vector2i pos, sf::Color& c);
+
     Map *_map;
     vector<sf::Image> _levelImages;
     Spawner *_spawner;
@@ -50,6 +55,7 @@ class Level {
 
     int _difficulty;
     vector<Chest*> _chests;
+    vector<WaterField*> _waterFields;
 };
 
 #endif // LEVEL_H_INCLUDED

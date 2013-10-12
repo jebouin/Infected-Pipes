@@ -8,6 +8,7 @@
 #include "Animation.h"
 #include "AnimationTable.h"
 #include "Renderer.h"
+#include "WaterField.h"
 
 MovingSprite::MovingSprite(IP& ip, string name, bool animated) : sf::Sprite() {
     _vel = sf::Vector2f(0, 0);
@@ -55,6 +56,9 @@ void MovingSprite::Update(IP& ip, float eTime) {
 
 void MovingSprite::Update(IP& ip, float eTime, Level& level) {
     sf::Vector2f delta = GetVel()*eTime;
+    sf::Vector2f deltaPos = getPosition()-_prevPos;
+    if(MathHelper::GetVecLength(deltaPos) > 1)
+        _prevPos = getPosition();
     MoveCollidingMap(delta, level);
     if(_animated) {
         _animTable->Update();
@@ -67,10 +71,12 @@ void MovingSprite::Update(IP& ip, float eTime, Level& level) {
         _onPlatform = false;
     }
 
-    vector<sf::Vector2f> boxCorners = MathHelper::Rect2Corners(GetGlobalHitbox());
+    /*vector<sf::Vector2f> boxCorners = MathHelper::Rect2Corners(GetGlobalHitbox());
     for(int i=0 ; i<4 ; i++) {
         _box.setPoint(i, boxCorners[i]);
-    }
+    }*/
+
+    WaterCollision(level, deltaPos);
 }
 
 void MovingSprite::Draw(IP& ip) {
@@ -112,6 +118,29 @@ bool MovingSprite::TryMove(sf::Vector2f delta, Level& level) {
     }
     setPosition(getPosition() + delta);
     return true;
+}
+
+void MovingSprite::WaterCollision(Level& level, sf::Vector2f deltaPos) {
+    for(int i=0 ; i<level.GetNbWaterFields() ; i++) {
+        WaterField& w(level.GetWaterField(i));
+        sf::FloatRect r(w.GetRect());
+
+        if(r.intersects(GetGlobalHitbox()) && !r.intersects(sf::FloatRect(GetGlobalHitbox().left-deltaPos.x, GetGlobalHitbox().top-deltaPos.y, GetGlobalHitbox().width, GetGlobalHitbox().height))) {
+            w.Splash(getPosition(), -GetVel().y*100);
+        }
+    }
+}
+
+bool MovingSprite::IsInWater(Level& level) {
+    for(int i=0 ; i<level.GetNbWaterFields() ; i++) {
+        WaterField& w(level.GetWaterField(i));
+        sf::FloatRect r(w.GetRect());
+
+        if(/*r.intersects(GetGlobalHitbox())*/r.contains(getPosition())) {
+            return true;
+        }
+    }
+    return false;
 }
 
 sf::Vector2f MovingSprite::GetVel() {

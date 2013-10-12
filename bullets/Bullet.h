@@ -36,6 +36,7 @@ class Bullet : public MovingSprite {
     bool _ennemy;
     bool _sticky;
     bool _instantDie;
+    bool _inWater;
     int _damage;
     sf::Clock _deadTimer;
     sf::Clock _timer;

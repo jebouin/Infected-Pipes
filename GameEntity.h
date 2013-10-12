@@ -51,6 +51,9 @@ class GameEntity : public MovingSprite {
     bool IsPushable();
     bool IsInvincible();
 
+    protected:
+    bool _inWater;
+
     private:
     bool _dir;
     float _jumpPower;
@@ -63,8 +66,6 @@ class GameEntity : public MovingSprite {
     bool _autoDir;
     int _hpMax;
     int _hp;
-
-    sf::Vector2f _prevPos;
 };
 
 #endif // GAMEENTITY_H_INCLUDED
