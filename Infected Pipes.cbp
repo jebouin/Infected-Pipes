@@ -82,12 +82,16 @@
 		<Unit filename="Spawner.h" />
 		<Unit filename="TextureLoader.cpp" />
 		<Unit filename="TextureLoader.h" />
+		<Unit filename="WaterField.cpp" />
+		<Unit filename="WaterField.h" />
 		<Unit filename="bullets\Arrow.cpp" />
 		<Unit filename="bullets\Arrow.h" />
 		<Unit filename="bullets\Bullet.cpp" />
 		<Unit filename="bullets\Bullet.h" />
 		<Unit filename="bullets\BulletManager.cpp" />
 		<Unit filename="bullets\BulletManager.h" />
+		<Unit filename="bullets\LaserBullet.cpp" />
+		<Unit filename="bullets\LaserBullet.h" />
 		<Unit filename="bullets\RockBullet.cpp" />
 		<Unit filename="bullets\RockBullet.h" />
 		<Unit filename="ennemies\Bat.cpp" />

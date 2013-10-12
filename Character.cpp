@@ -19,6 +19,7 @@
 Character::Character(IP& ip) : GameEntity(ip, "character", sf::IntRect(4, 3, 7, 27), 10) {
     _arms[EMPTY] = Arm {sf::IntRect(0, 0, 6, 9), sf::Vector2f(2, 1)};
     _arms[RAINBOW] = Arm {sf::IntRect(0, 9, 15, 9), sf::Vector2f(4, 1)};
+    _arms[BOW] = Arm {sf::IntRect(0, 18, 10, 17), sf::Vector2f(2, 3)};
 
     SetWeight(0.5f);
     AnimationTable& t(GetAnims());
@@ -35,7 +36,7 @@ Character::Character(IP& ip) : GameEntity(ip, "character", sf::IntRect(4, 3, 7, 
     _weapon = new Bow(ip, (const GameEntity&)*this);
 
     _arm.setTexture(ip._textureLoader->GetTexture("arms"));
-    LoadArm(RAINBOW);
+    LoadArm(BOW);
 
     SetAutoDir(false);
 }

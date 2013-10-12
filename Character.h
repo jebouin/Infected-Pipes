@@ -26,7 +26,7 @@ struct Arm {
 
 class Character : public GameEntity {
     public:
-    enum ArmType {EMPTY, RAINBOW};
+    enum ArmType {EMPTY, RAINBOW, BOW};
 
     Character(IP& ip);
     ~Character();

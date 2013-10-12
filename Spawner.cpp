@@ -49,7 +49,7 @@ void Spawner::Update(IP& ip, EntityManager& eManager, Level& level, Character& c
 }
 
 void Spawner::Spawn(IP& ip, EntityManager& eManager, Level& level, Character& character) {
-    int pipeId = rand()%_pipes.size();
+    /*int pipeId = rand()%_pipes.size();
     int et;
     static int d[4] = {1, 10, 20, 50};
     for(int i=3 ; i>=0 ; i--) {
@@ -79,7 +79,7 @@ void Spawner::Spawn(IP& ip, EntityManager& eManager, Level& level, Character& ch
         }
     }
 
-    _difToSpawn -= d[et];
+    _difToSpawn -= d[et];*/
 
 
 
