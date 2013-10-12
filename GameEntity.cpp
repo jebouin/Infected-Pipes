@@ -57,7 +57,7 @@ void GameEntity::Update(IP& ip, float elapsedTime, Level& level, EntityManager& 
         Collide((GameEntity*)e, elapsedTime);
     }
 
-    MovingSprite::Update(ip, elapsedTime, level);
+    MovingSprite::Update(ip, elapsedTime, level, pManager);
 }
 
 void GameEntity::Update(IP& ip, float elapsedTime) {

@@ -12,6 +12,7 @@
 #include "Character.h"
 #include "Chest.h"
 #include "WaterField.h"
+#include "ParticleManager.h"
 
 Level::Level(IP& ip, Character& character) {
     _levelInfos["intro"] = LevelInfo{"level0", "nightBackground", 0.0001f};
@@ -46,11 +47,11 @@ Level::~Level() {
     _waterFields.clear();
 }
 
-void Level::Update(IP& ip, EntityManager& eManager, Character& character, float eTime) {
+void Level::Update(IP& ip, EntityManager& eManager, Character& character, float eTime, ParticleManager& pManager) {
     _spawner->Update(ip, eManager, *this, character);
     _grass->Update(ip);
     for(int i=0 ; i<_chests.size() ; i++) {
-        _chests[i]->Update(ip, eTime, *this);
+        _chests[i]->Update(ip, eTime, *this, pManager);
     }
     for(int i=0 ; i<_waterFields.size() ; i++) {
         _waterFields[i]->Update(eTime);

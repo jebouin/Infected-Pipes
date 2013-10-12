@@ -11,6 +11,7 @@
 using namespace std;
 
 class IP;
+class ParticleManager;
 
 struct Spring {
     float _nLength;
@@ -24,7 +25,7 @@ class WaterField {
     ~WaterField();
     void Update(float elapsedTime);
     void Draw(IP& ip);
-    void Splash(sf::Vector2f pos, float force);
+    void Splash(sf::Vector2f pos, float force, ParticleManager& pManager, IP& ip);
     sf::FloatRect GetRect();
 
     private:

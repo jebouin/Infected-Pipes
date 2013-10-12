@@ -18,6 +18,7 @@ class Grass;
 class Character;
 class Chest;
 class WaterField;
+class ParticleManager;
 
 struct LevelInfo {
     string _imageName;
@@ -29,7 +30,7 @@ class Level {
     public:
     Level(IP& ip, Character& character);
     ~Level();
-    void Update(IP& ip, EntityManager& eManager, Character& character, float eTime);
+    void Update(IP& ip, EntityManager& eManager, Character& character, float eTime, ParticleManager& pManager);
     void DrawBack(IP& ip, sf::View& prevView);
     void DrawFront(IP& ip);
     Map& GetMap() const;

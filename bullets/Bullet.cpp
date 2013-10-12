@@ -56,7 +56,7 @@ void Bullet::Update(IP& ip, float eTime, Level& level, Character& character, Par
     if(!_dying) {
         MovingSprite::Update(ip, eTime);
         TestCollisions(ip, eTime, level, GetVel()*eTime);
-        WaterCollision(level, GetVel()*eTime);
+        WaterCollision(level, GetVel()*eTime, pManager, ip);
         if(_ennemy) {
             if(GetGlobalHitbox().intersects(character.GetGlobalHitbox())) {
                 Impact((GameEntity&)(character), ip, pManager, sf::Color(255, 0, 0));

@@ -25,7 +25,7 @@ Particle::~Particle() {
 
 }
 
-void Particle::Update(IP& ip, float eTime, Level& level) {
+void Particle::Update(IP& ip, float eTime, Level& level, ParticleManager& pManager) {
     float lifePos = _timer.getElapsedTime().asMilliseconds()/_lifeTime;
     if(lifePos >= 1) {
         _alive = false;
@@ -36,7 +36,7 @@ void Particle::Update(IP& ip, float eTime, Level& level) {
     setScale(MathHelper::Interpolate(lifePos, _startScale, _endScale));
     setColor(sf::Color(getColor().r, getColor().g, getColor().b, MathHelper::Interpolate(lifePos, _startAlpha, _endAlpha)));
     if(_collision) {
-        MovingSprite::Update(ip, eTime, level);
+        MovingSprite::Update(ip, eTime, level, pManager);
     } else {
         MovingSprite::Update(ip, eTime);
     }

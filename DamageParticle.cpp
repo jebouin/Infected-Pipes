@@ -42,8 +42,8 @@ DamageParticle::~DamageParticle() {
 
 }
 
-void DamageParticle::Update(IP& ip, float eTime, Level& level) {
-    Particle::Update(ip, eTime, level);
+void DamageParticle::Update(IP& ip, float eTime, Level& level, ParticleManager& pManager) {
+    Particle::Update(ip, eTime, level, pManager);
     _text.setPosition(getPosition());
     _text.setColor(getColor());
 }

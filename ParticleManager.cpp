@@ -18,7 +18,7 @@ ParticleManager::~ParticleManager() {
 
 void ParticleManager::Update(IP& ip, float elapsedTime, Level& level) {
     for(int i=0 ; i<_particles.size() ; i++) {
-        _particles[i]->Update(ip, elapsedTime, level);
+        _particles[i]->Update(ip, elapsedTime, level, *this);
         if(!_particles[i]->IsAlive()) {
             delete _particles[i];
             _particles[i] = 0;

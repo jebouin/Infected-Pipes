@@ -19,7 +19,7 @@
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1381586703 source:c:\users\xaychru04\desktop\infected pipes\ip.cpp
+1381591810 source:c:\users\xaychru04\desktop\infected pipes\ip.cpp
 	"IP.h"
 	"Renderer.h"
 	"TextureLoader.h"
@@ -36,7 +36,7 @@
 	"GUI.h"
 	"BulletManager.h"
 
-1381167540 source:c:\users\xaychru04\desktop\infected pipes\textureloader.cpp
+1381591514 source:c:\users\xaychru04\desktop\infected pipes\textureloader.cpp
 	"TextureLoader.h"
 	"IP.h"
 
@@ -58,7 +58,7 @@
 	"MathHelper.h"
 	"MovingSprite.h"
 
-1381586782 source:c:\users\xaychru04\desktop\infected pipes\movingsprite.cpp
+1381593618 source:c:\users\xaychru04\desktop\infected pipes\movingsprite.cpp
 	"MovingSprite.h"
 	"IP.h"
 	"Map.h"
@@ -70,8 +70,9 @@
 	"AnimationTable.h"
 	"Renderer.h"
 	"WaterField.h"
+	"ParticleManager.h"
 
-1381585806 c:\users\xaychru04\desktop\infected pipes\movingsprite.h
+1381592348 c:\users\xaychru04\desktop\infected pipes\movingsprite.h
 	<vector>
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
@@ -124,7 +125,7 @@
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1381586863 source:c:\users\xaychru04\desktop\infected pipes\gameentity.cpp
+1381591715 source:c:\users\xaychru04\desktop\infected pipes\gameentity.cpp
 	"GameEntity.h"
 	"Level.h"
 	"Map.h"
@@ -167,7 +168,7 @@
 	"IP.h"
 	"Renderer.h"
 
-1381584823 source:c:\users\xaychru04\desktop\infected pipes\level.cpp
+1381593096 source:c:\users\xaychru04\desktop\infected pipes\level.cpp
 	"Level.h"
 	"IP.h"
 	"Map.h"
@@ -182,8 +183,9 @@
 	"Character.h"
 	"Chest.h"
 	"WaterField.h"
+	"ParticleManager.h"
 
-1381580975 c:\users\xaychru04\desktop\infected pipes\level.h
+1381591795 c:\users\xaychru04\desktop\infected pipes\level.h
 	<map>
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
@@ -289,7 +291,7 @@
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1379848273 source:c:\users\xaychru04\desktop\infected pipes\particle.cpp
+1381591890 source:c:\users\xaychru04\desktop\infected pipes\particle.cpp
 	"Particle.h"
 	"IP.h"
 	"Level.h"
@@ -298,20 +300,20 @@
 	"Spawner.h"
 	"Renderer.h"
 
-1379848273 c:\users\xaychru04\desktop\infected pipes\particle.h
+1381591890 c:\users\xaychru04\desktop\infected pipes\particle.h
 	<iostream>
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 	"MovingSprite.h"
 
-1380447504 source:c:\users\xaychru04\desktop\infected pipes\particlemanager.cpp
+1381591952 source:c:\users\xaychru04\desktop\infected pipes\particlemanager.cpp
 	"ParticleManager.h"
 	"IP.h"
 	"Level.h"
 	"Particle.h"
 	"Renderer.h"
 
-1380130223 source:c:\users\xaychru04\desktop\infected pipes\damageparticle.cpp
+1381591945 source:c:\users\xaychru04\desktop\infected pipes\damageparticle.cpp
 	"DamageParticle.h"
 	"IP.h"
 	"Animation.h"
@@ -319,7 +321,7 @@
 	"MathHelper.h"
 	"Renderer.h"
 
-1380130223 c:\users\xaychru04\desktop\infected pipes\damageparticle.h
+1381591945 c:\users\xaychru04\desktop\infected pipes\damageparticle.h
 	<iostream>
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
@@ -439,7 +441,7 @@
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1381586080 source:c:\users\xaychru04\desktop\infected pipes\bullets\bullet.cpp
+1381592044 source:c:\users\xaychru04\desktop\infected pipes\bullets\bullet.cpp
 	"Bullet.h"
 	"TextureLoader.h"
 	"IP.h"
@@ -516,13 +518,13 @@
 	"SFML/System.hpp"
 	"Ennemy.h"
 
-1380447504 source:c:\users\xaychru04\desktop\infected pipes\chest.cpp
+1381591703 source:c:\users\xaychru04\desktop\infected pipes\chest.cpp
 	"Chest.h"
 	"IP.h"
 	"Level.h"
 	"ChestOpened.h"
 
-1380373818 c:\users\xaychru04\desktop\infected pipes\chest.h
+1381591703 c:\users\xaychru04\desktop\infected pipes\chest.h
 	<iostream>
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
@@ -634,15 +636,18 @@
 	"SFML/System.hpp"
 	"Bullet.h"
 
-1381580976 c:\users\xaychru04\desktop\infected pipes\waterfield.h
+1381593091 c:\users\xaychru04\desktop\infected pipes\waterfield.h
 	<iostream>
 	<vector>
 	<SFML/System.hpp>
 	<SFML/Graphics.hpp>
 	<SFML/Window.hpp>
 
-1381584998 source:c:\users\xaychru04\desktop\infected pipes\waterfield.cpp
+1381593578 source:c:\users\xaychru04\desktop\infected pipes\waterfield.cpp
 	"WaterField.h"
 	"IP.h"
 	"Renderer.h"
+	"ParticleManager.h"
+	"Particle.h"
+	"MathHelper.h"
 

@@ -9,6 +9,7 @@
 #include "AnimationTable.h"
 #include "Renderer.h"
 #include "WaterField.h"
+#include "ParticleManager.h"
 
 MovingSprite::MovingSprite(IP& ip, string name, bool animated) : sf::Sprite() {
     _vel = sf::Vector2f(0, 0);
@@ -23,6 +24,7 @@ MovingSprite::MovingSprite(IP& ip, string name, bool animated) : sf::Sprite() {
     _onPlatform = false;
     _box.setPointCount(4);
     _collidesWithPlatform = true;
+    _collidesWithWater = true;
 }
 
 MovingSprite::MovingSprite(IP& ip, string name, sf::IntRect hitbox, bool animated) {
@@ -38,6 +40,7 @@ MovingSprite::MovingSprite(IP& ip, string name, sf::IntRect hitbox, bool animate
     _onPlatform = false;
     _box.setPointCount(4);
     _collidesWithPlatform = true;
+    _collidesWithWater = true;
 }
 
 MovingSprite::~MovingSprite() {
@@ -54,7 +57,7 @@ void MovingSprite::Update(IP& ip, float eTime) {
     }
 }
 
-void MovingSprite::Update(IP& ip, float eTime, Level& level) {
+void MovingSprite::Update(IP& ip, float eTime, Level& level, ParticleManager& pManager) {
     sf::Vector2f delta = GetVel()*eTime;
     sf::Vector2f deltaPos = getPosition()-_prevPos;
     if(MathHelper::GetVecLength(deltaPos) > 1)
@@ -76,7 +79,7 @@ void MovingSprite::Update(IP& ip, float eTime, Level& level) {
         _box.setPoint(i, boxCorners[i]);
     }*/
 
-    WaterCollision(level, deltaPos);
+    WaterCollision(level, delta, pManager, ip);
 }
 
 void MovingSprite::Draw(IP& ip) {
@@ -120,13 +123,16 @@ bool MovingSprite::TryMove(sf::Vector2f delta, Level& level) {
     return true;
 }
 
-void MovingSprite::WaterCollision(Level& level, sf::Vector2f deltaPos) {
+void MovingSprite::WaterCollision(Level& level, sf::Vector2f deltaPos, ParticleManager& pManager, IP& ip) {
+    if(!_collidesWithWater) {
+        return;
+    }
     for(int i=0 ; i<level.GetNbWaterFields() ; i++) {
         WaterField& w(level.GetWaterField(i));
         sf::FloatRect r(w.GetRect());
 
         if(r.intersects(GetGlobalHitbox()) && !r.intersects(sf::FloatRect(GetGlobalHitbox().left-deltaPos.x, GetGlobalHitbox().top-deltaPos.y, GetGlobalHitbox().width, GetGlobalHitbox().height))) {
-            w.Splash(getPosition(), -GetVel().y*100);
+            w.Splash(getPosition(), -GetVel().y*100, pManager, ip);
         }
     }
 }
@@ -198,4 +204,8 @@ void MovingSprite::SetOnPlatform(bool on) {
 
 void MovingSprite::SetCollideOnPlatform(bool c) {
     _collidesWithPlatform = c;
+}
+
+void MovingSprite::SetCollideWithWater(bool c) {
+    _collidesWithWater = c;
 }

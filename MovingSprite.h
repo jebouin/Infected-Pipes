@@ -11,6 +11,7 @@ using namespace std;
 class IP;
 class Level;
 class AnimationTable;
+class ParticleManager;
 
 class MovingSprite : public sf::Sprite {
     public:
@@ -18,7 +19,7 @@ class MovingSprite : public sf::Sprite {
     MovingSprite(IP& ip, string name, sf::IntRect hitbox, bool animated=true);
     ~MovingSprite();
     void Update(IP& ip, float eTime);
-    void Update(IP& ip, float eTime, Level& level);
+    void Update(IP& ip, float eTime, Level& level, ParticleManager& pManager);
     void Draw(IP& ip);
     void MoveCollidingMap(sf::Vector2f delta, Level& level);
     bool TryMove(sf::Vector2f delta, Level& level);
@@ -36,9 +37,10 @@ class MovingSprite : public sf::Sprite {
     void SetHitbox(sf::IntRect rect);
     void SetOnPlatform(bool on);
     void SetCollideOnPlatform(bool c);
+    void SetCollideWithWater(bool c);
 
     protected:
-    void WaterCollision(Level& l, sf::Vector2f deltaPos);
+    void WaterCollision(Level& l, sf::Vector2f deltaPos, ParticleManager& pManager, IP& ip);
     bool IsInWater(Level& level);
     sf::Vector2f _prevPos;
 
@@ -50,6 +52,7 @@ class MovingSprite : public sf::Sprite {
     float _rotVel;
     bool _onPlatform;
     bool _collidesWithPlatform;
+    bool _collidesWithWater;
     bool _animated;
 
     sf::ConvexShape _box;

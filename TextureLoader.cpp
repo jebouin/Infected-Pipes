@@ -37,6 +37,7 @@ TextureLoader::TextureLoader(IP& ip) {
     AddTexture("blood0.png", "blood0");
     AddTexture("blood1.png", "blood1");
     AddTexture("laserParticle.png", "laserParticle");
+    AddTexture("waterParticle.png", "waterParticle");
 
     AddTexture("fir.png", "fir");
     AddTexture("moon.png", "moon");

@@ -14,9 +14,9 @@ Chest::~Chest() {
     _chestOpened = 0;
 }
 
-void Chest::Update(IP& ip, float eTime, Level& level) {
+void Chest::Update(IP& ip, float eTime, Level& level, ParticleManager& pManager) {
     Accelerate(sf::Vector2f(0, 0.003), eTime);
-    MovingSprite::Update(ip, eTime, level);
+    MovingSprite::Update(ip, eTime, level, pManager);
 
     _chestOpened->Update(ip, eTime);
 }

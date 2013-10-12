@@ -18,7 +18,7 @@ class Chest : public MovingSprite {
     public:
     Chest(IP& ip, sf::Vector2f pos);
     ~Chest();
-    void Update(IP& ip, float eTime, Level& level);
+    void Update(IP& ip, float eTime, Level& level, ParticleManager& pManager);
     void Draw(IP& ip);
     void Open(IP& ip);
 

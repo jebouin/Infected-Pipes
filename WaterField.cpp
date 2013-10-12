@@ -1,6 +1,9 @@
 #include "WaterField.h"
 #include "IP.h"
 #include "Renderer.h"
+#include "ParticleManager.h"
+#include "Particle.h"
+#include "MathHelper.h"
 
 WaterField::WaterField(sf::FloatRect rect, float resolution) {
     _rect = rect;
@@ -93,12 +96,31 @@ void WaterField::Draw(IP& ip){
     ip._renderer->Draw(_vertexes);
 }
 
-void WaterField::Splash(sf::Vector2f pos, float force) {
+void WaterField::Splash(sf::Vector2f pos, float force, ParticleManager& pManager, IP& ip) {
     if(pos.x < _rect.left || pos.x > _rect.left+_rect.width) {
         return;
     }
     int id = int((pos.x-_rect.left)/_rect.width*_nbPoints);
     _springs[id]._velocity = force;
+
+    float y = _rect.top+_rect.height - _springs[id]._length;
+    for(int i=0 ; i<5 ; i++) {
+        Particle *p = new Particle(ip, "waterParticle",
+                                   sf::Vector2f(pos.x, y),
+                                   MathHelper::Ang2Vec(MathHelper::Deg2Rad(MathHelper::RandFloat(-70, -110))) * MathHelper::RandFloat(0.1, 0.3),
+                                   0,
+                                   MathHelper::RandFloat(100, 500),
+                                   sf::Vector2f(1, 1),
+                                   sf::Vector2f(1, 1),
+                                   255,
+                                   0,
+                                   true,
+                                   true,
+                                   true,
+                                   sf::IntRect(1, 1, 3, 3));
+        p->SetCollideWithWater(false);
+        pManager.AddParticle(p);
+    }
 }
 
 sf::FloatRect WaterField::GetRect() {
