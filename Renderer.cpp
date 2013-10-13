@@ -27,7 +27,7 @@ Renderer::~Renderer() {
 }
 
 void Renderer::Clear() {
-    _littleTexture->clear(sf::Color(31, 23, 53));
+    _littleTexture->clear(sf::Color(0, 0, 0));
     _bigTexture->clear();
 }
 

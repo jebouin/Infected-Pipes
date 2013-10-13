@@ -5,14 +5,12 @@
 #include "EntityManager.h"
 #include "Player.h"
 #include "Background.h"
-#include "Grass.h"
 #include "ParticleManager.h"
-#include "Particle.h"
-#include "MathHelper.h"
-#include "Animation.h"
-#include "AnimationTable.h"
 #include "GUI.h"
 #include "BulletManager.h"
+#include "SceneManager.h"
+#include "Game.h"
+#include "MathHelper.h"
 
 IP::IP() {
     _window = new sf::RenderWindow(sf::VideoMode(1600, 900, 32), "Infected Pipes");
@@ -21,6 +19,7 @@ IP::IP() {
     _window->setFramerateLimit(60);
     _window->setMouseCursorVisible(false);
     _renderer = new Renderer(sf::Vector2i(sf::Vector2f(_window->getSize())/4.f));
+    _sceneManager = new SceneManager(*this);
 
     _font.loadFromFile("font/font.ttf");
     for(int i=0 ; i<10 ; i++) {
@@ -30,14 +29,8 @@ IP::IP() {
     const_cast<sf::Texture&>(_font.getTexture(16)).setSmooth(false);
 
     _textureLoader = new TextureLoader(*this);
-    _entityManager = new EntityManager();
-    _bulletManager = new BulletManager();
-    _player = new Player(*this, *_entityManager);
-    _level = new Level(*this, _player->GetCharacter());
-    _particleManager = new ParticleManager();
-    _gui = new GUI(*this, *_textureLoader, _player->GetCharacter(), *_level);
-
     _window->setActive(true);
+    _sceneManager->AddScene(new Game(*this));
 
     while(_window->isOpen()) {
         sf::Event e;
@@ -59,45 +52,23 @@ IP::~IP() {
     _renderer = 0;
     delete _textureLoader;
     _textureLoader = 0;
-    delete _level;
-    _level = 0;
-    delete _entityManager;
-    _entityManager = 0;
-    delete _player;
-    _player = 0;
-    cout << "Player destroyed";
-    delete _particleManager;
-    _particleManager = 0;
-    delete _gui;
-    _gui = 0;
-    delete _bulletManager;
-    _bulletManager = 0;
+    delete _sceneManager;
+    _sceneManager = 0;
 }
 
 void IP::Update() {
     float eTime = _clock.restart().asMilliseconds();
-    _level->Update(*this, *_entityManager, _player->GetCharacter(), eTime, *_particleManager);
-    _entityManager->Update(*this, eTime, *_level, _player->GetCharacter(), *_particleManager, *_bulletManager);
-    _player->Update(*this, eTime, *_level, *_entityManager, *_particleManager, *_bulletManager);
-    _bulletManager->Update(*this, eTime, *_level, _player->GetCharacter(), *_particleManager, *_entityManager);
-    _particleManager->Update(*this, eTime, *_level);
-    _gui->Update(*this);
+    _sceneManager->Update(eTime, *this);
+    if(_sceneManager->GetNbScenes() < 1) {
+        _window->close();
+    }
 }
 
 void IP::Draw() {
     _window->clear();
     _renderer->Clear();
 
-    _level->DrawBack(*this, _player->GetView());
-    _entityManager->Draw(*this);
-    _player->Draw(*this);
-    _particleManager->Draw(*this);
-    _bulletManager->Draw(*this);
-    _level->DrawFront(*this);
-
-    _renderer->GetTexture().setView(_renderer->GetTexture().getDefaultView());
-    _gui->Draw(*this);
-    _renderer->GetTexture().setView(_player->GetView());
+    _sceneManager->Draw(*this);
 
     _renderer->DrawToWindow(*_window);
     _window->display();

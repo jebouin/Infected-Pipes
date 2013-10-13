@@ -6,14 +6,7 @@
 
 class Renderer;
 class TextureLoader;
-class Level;
-class EntityManager;
-class Player;
-class Background;
-class Grass;
-class ParticleManager;
-class GUI;
-class BulletManager;
+class SceneManager;
 
 class IP {
     public:
@@ -29,12 +22,7 @@ class IP {
 
     private:
     sf::Clock _clock;
-    Level *_level;
-    EntityManager *_entityManager;
-    BulletManager *_bulletManager;
-    Player *_player;
-    ParticleManager *_particleManager;
-    GUI *_gui;
+    SceneManager *_sceneManager;
 };
 
 #endif // IP_H_INCLUDED

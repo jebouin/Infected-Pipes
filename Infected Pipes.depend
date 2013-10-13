@@ -7,7 +7,7 @@
 	"SFML/System.hpp"
 	"IP.h"
 
-1380447504 source:c:\users\xaychru04\desktop\infected pipes\renderer.cpp
+1381681410 source:c:\users\xaychru04\desktop\infected pipes\renderer.cpp
 	"Renderer.h"
 
 1380369965 c:\users\xaychru04\desktop\infected pipes\renderer.h
@@ -15,11 +15,11 @@
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1379795727 c:\users\xaychru04\desktop\infected pipes\ip.h
+1381682042 c:\users\xaychru04\desktop\infected pipes\ip.h
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1381672900 source:c:\users\xaychru04\desktop\infected pipes\ip.cpp
+1381682042 source:c:\users\xaychru04\desktop\infected pipes\ip.cpp
 	"IP.h"
 	"Renderer.h"
 	"TextureLoader.h"
@@ -27,14 +27,12 @@
 	"EntityManager.h"
 	"Player.h"
 	"Background.h"
-	"Grass.h"
 	"ParticleManager.h"
-	"Particle.h"
-	"MathHelper.h"
-	"Animation.h"
-	"AnimationTable.h"
 	"GUI.h"
 	"BulletManager.h"
+	"SceneManager.h"
+	"Game.h"
+	"MathHelper.h"
 
 1381672900 source:c:\users\xaychru04\desktop\infected pipes\textureloader.cpp
 	"TextureLoader.h"
@@ -650,4 +648,26 @@
 	"ParticleManager.h"
 	"Particle.h"
 	"MathHelper.h"
+
+1381681576 c:\users\xaychru04\desktop\infected pipes\scenes\scenemanager.h
+	<iostream>
+	<vector>
+
+1381681287 source:c:\users\xaychru04\desktop\infected pipes\scenes\game.cpp
+	"Game.h"
+	"IP.h"
+
+1381682042 c:\users\xaychru04\desktop\infected pipes\scenes\game.h
+	"Scene.h"
+
+1381681143 c:\users\xaychru04\desktop\infected pipes\scenes\scene.h
+
+1381681143 source:c:\users\xaychru04\desktop\infected pipes\scenes\scene.cpp
+	"Scene.h"
+	"IP.h"
+
+1381681576 source:c:\users\xaychru04\desktop\infected pipes\scenes\scenemanager.cpp
+	"SceneManager.h"
+	"Scene.h"
+	"IP.h"
 
