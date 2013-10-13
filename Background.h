@@ -15,9 +15,11 @@ class Background {
     public:
     Background(IP& ip, string name, float zoom, Level& level);
     ~Background();
+    void Update(IP& ip, float elapsedTime);
     void Draw(IP& ip, sf::View& prevView);
 
     private:
+    string _name;
     vector<sf::Sprite> _backSprites;
     vector<sf::Sprite> _backSprites2;
     sf::Sprite _back;

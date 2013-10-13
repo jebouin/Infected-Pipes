@@ -50,6 +50,7 @@ Level::~Level() {
 void Level::Update(IP& ip, EntityManager& eManager, Character& character, float eTime, ParticleManager& pManager) {
     _spawner->Update(ip, eManager, *this, character);
     _grass->Update(ip);
+    _background->Update(ip, eTime);
     for(int i=0 ; i<_chests.size() ; i++) {
         _chests[i]->Update(ip, eTime, *this, pManager);
     }

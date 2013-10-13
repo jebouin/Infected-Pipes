@@ -85,11 +85,11 @@ void WaterField::Draw(IP& ip){
 
         _vertexes.append(sf::Vertex(p0, topc));
         _vertexes.append(sf::Vertex(p1, topc));
-        _vertexes.append(sf::Vertex(sf::Vector2f(p1.x, p1.y+1), topc));
-        _vertexes.append(sf::Vertex(sf::Vector2f(p0.x, p0.y+1), topc));
+        _vertexes.append(sf::Vertex(sf::Vector2f(p1.x, p1.y+4), waterc));
+        _vertexes.append(sf::Vertex(sf::Vector2f(p0.x, p0.y+4), waterc));
 
-        _vertexes.append(sf::Vertex(sf::Vector2f(p0.x, p0.y+1), waterc));
-        _vertexes.append(sf::Vertex(sf::Vector2f(p1.x, p1.y+1), waterc));
+        _vertexes.append(sf::Vertex(sf::Vector2f(p0.x, p0.y+4), waterc));
+        _vertexes.append(sf::Vertex(sf::Vector2f(p1.x, p1.y+4), waterc));
         _vertexes.append(sf::Vertex(sf::Vector2f(x1, baseY), downc));
         _vertexes.append(sf::Vertex(sf::Vector2f(x0, baseY), downc));
     }

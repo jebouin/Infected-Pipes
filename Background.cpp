@@ -11,8 +11,9 @@ Background::Background(IP& ip, string name, float zoom, Level& level) : _level(l
     _back.setTexture(ip._textureLoader->GetTexture(name));
     _view = sf::View(sf::FloatRect(0, 0, ip._renderer->GetTexture().getSize().x, ip._renderer->GetTexture().getSize().y));
     _zoom = zoom;
+    _name = name;
 
-    if(name == "nightBackground") {
+    if(_name == "nightBackground") {
         for(int i=0 ; i<map.GetSize().x*2.5f ; i++) {
             if(rand()%3==0) {
                 sf::Sprite fir;
@@ -26,11 +27,30 @@ Background::Background(IP& ip, string name, float zoom, Level& level) : _level(l
         moon.setTexture(ip._textureLoader->GetTexture("moon"));
         moon.setPosition(sf::Vector2f(ip._renderer->GetTexture().getSize().x/4.f*3.f, ip._renderer->GetTexture().getSize().y/4.f));
         _backSprites2.push_back(moon);
+
+        /*for(int i=0 ; i<10 ; i++) {
+            sf::Sprite cloud;
+            cloud.setTexture(ip._textureLoader->GetTexture("cloud"));
+            cloud.setPosition(sf::Vector2f(MathHelper::RandFloat(0-cloud.getTextureRect().width, ip._renderer->GetTexture().getSize().x), MathHelper::RandFloat(48, 128)));
+            _backSprites2.push_back(cloud);
+        }*/
     }
 }
 
 Background::~Background() {
 
+}
+
+void Background::Update(IP& ip, float elapsedTime) {
+    /*if(_name == "nightBackground") {
+        for(int i=0 ; i<10 ; i++) {
+            sf::Sprite& cloud(_backSprites2[i+1]);
+            cloud.move(-1.f * elapsedTime * MathHelper::Interpolate((cloud.getPosition().y-48.f)/80.f, 0.01, 0.04), 0);
+            if(cloud.getPosition().x < -cloud.getTextureRect().width) {
+                cloud.setPosition(ip._renderer->GetTexture().getSize().x, MathHelper::RandFloat(88-40, 88+40));
+            }
+        }
+    }*/
 }
 
 void Background::Draw(IP& ip, sf::View& prevView) {
