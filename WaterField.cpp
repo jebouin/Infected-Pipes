@@ -42,26 +42,26 @@ void WaterField::Update(float elapsedTime) {
 
     float *rd = new float[_nbPoints];
     float *ld = new float[_nbPoints];
-
+    float ispeed = 100;
     for(int j=0 ; j<8 ; j++) {
         for(int i=0 ; i<_springs.size() ; i++) {
             if(i > 0) {
                 ld[i] = spread*(_springs[i]._length-_springs[i-1]._length);
-                _springs[i-1]._velocity += ld[i];
+                _springs[i-1]._velocity += ld[i]*elapsedTime/ispeed;
             }
             if(i < _springs.size()-1) {
                 rd[i] = spread*(_springs[i]._length-_springs[i+1]._length);
-                _springs[i+1]._velocity += rd[i];
+                _springs[i+1]._velocity += rd[i]*elapsedTime/ispeed;
             }
         }
     }
 
     for(int i=0 ; i<_springs.size() ; i++) {
         if(i > 0) {
-            _springs[i-1]._length += ld[i];
+            _springs[i-1]._length += ld[i]*elapsedTime/ispeed;
         }
         if(i < _springs.size()-1) {
-            _springs[i+1]._length += rd[i];
+            _springs[i+1]._length += rd[i]*elapsedTime/ispeed;
         }
     }
 
