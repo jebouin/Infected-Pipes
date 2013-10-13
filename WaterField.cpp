@@ -22,7 +22,7 @@ WaterField::~WaterField() {
 void WaterField::Update(float elapsedTime) {
     const float k = 0.65f;
     const float d = 0.15f;
-    const float spread = 0.1;
+    const float spread = 0.2;
     for(int i=0 ; i<_nbPoints ; i++) {
         Spring& s(_springs[i]);
         float x = s._length - s._nLength;
@@ -30,14 +30,14 @@ void WaterField::Update(float elapsedTime) {
         s._velocity += acc*elapsedTime/50.f;
         s._length += s._velocity*elapsedTime/50.f;
 
-        /*if(s._length < 0) {
+        if(s._length < 0) {
             s._length = 0;
             s._velocity = 0;
         }
         if(s._length > _rect.height+12) {
             s._length = _rect.height+12;
             s._velocity = 0;
-        }*/
+        }
     }
 
     float *rd = new float[_nbPoints];

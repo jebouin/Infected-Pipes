@@ -79,7 +79,7 @@ sf::Vector2f MathHelper::Normalize(sf::Vector2f vec) {
 }
 
 sf::Vector2f MathHelper::GetMousePos(IP& ip) {
-    return sf::Vector2f(ip._renderer->GetTexture().convertCoords(sf::Vector2i(sf::Vector2f(sf::Mouse::getPosition(*ip._window)) / 4.f)));
+    return sf::Vector2f(ip._renderer->GetTexture().mapPixelToCoords(sf::Vector2i(sf::Mouse::getPosition(*ip._window)) / 4));
 }
 
 sf::Vector2f MathHelper::Mod(sf::Vector2f vec, float v) {
