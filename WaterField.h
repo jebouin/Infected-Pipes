@@ -21,7 +21,7 @@ struct Spring {
 
 class WaterField {
     public:
-    WaterField(sf::FloatRect rect, float resolution);
+    WaterField(sf::FloatRect rect, float resolution, bool surface);
     ~WaterField();
     void Update(float elapsedTime);
     void Draw(IP& ip);
@@ -34,6 +34,7 @@ class WaterField {
     vector<Spring> _springs;
     int _nbPoints;
     float _resolution;
+    bool _surface;
 };
 
 #endif // WATERFIELD_H_INCLUDED

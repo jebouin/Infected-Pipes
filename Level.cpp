@@ -137,12 +137,30 @@ void Level::Load(IP& ip, string name, Character& character) {
     //second pass to load fluids
     int w = _levelImages[0].getSize().x;
     int h = _levelImages[0].getSize().y;
-    sf::Color wc(106, 129, 193);
+    sf::Color waterSufaceC(106, 129, 193);
+    sf::Color waterC(70, 94, 160);
     for(int i=0 ; i<w ; i++) {
         for(int j=0 ; j<h ; j++) {
-            if(_levelImages[1].getPixel(i, j) == wc) {
-                sf::Vector2i s(GetRectSizeInImageAt(_levelImages[1], sf::Vector2i(i, j), wc));
-                _waterFields.push_back(new WaterField(sf::FloatRect(i*16-1, j*16+12, s.x*16+2, s.y*16-12+2), 2));
+            if(_levelImages[1].getPixel(i, j) == waterSufaceC) {
+                sf::Vector2i s(GetRectSizeInImageAt(_levelImages[1], sf::Vector2i(i, j), waterSufaceC));
+                float offsets[2]{0};
+                if(_map->GetTileType(sf::Vector2i(i-1, j), Map::FRONT) != Map::VOID) {
+                    offsets[0] = 2;
+                }
+                if(_map->GetTileType(sf::Vector2i(i+s.x, j), Map::FRONT) != Map::VOID) {
+                    offsets[1] = 2;
+                }
+                _waterFields.push_back(new WaterField(sf::FloatRect(i*16-offsets[0], j*16+8, s.x*16+offsets[0]+offsets[1], s.y*16-8), 2, true));
+            } else if(_levelImages[1].getPixel(i, j) == waterC) {
+                sf::Vector2i s(/*GetRectSizeInImageAt(_levelImages[1], sf::Vector2i(i, j), waterC)*/1, 1);
+                float offsets[4]{0};
+                sf::Vector2i testPos[4] = {sf::Vector2i(i-1, j), sf::Vector2i(i+s.x, j), sf::Vector2i(i, j-1), sf::Vector2i(i, j+1)};
+                for(int i=0 ; i<4 ; i++) {
+                    if(_map->GetTileType(testPos[i], Map::FRONT) != Map::VOID) {
+                        offsets[i] = 2;
+                    }
+                }
+                _waterFields.push_back(new WaterField(sf::FloatRect(i*16-offsets[0], j*16-offsets[2], s.x*16+offsets[0]+offsets[1], s.y*16+offsets[2]+offsets[3]), 2, false));
             }
         }
     }
@@ -166,7 +184,7 @@ void Level::Load(IP& ip, string name, Character& character) {
 
 
 sf::Vector2i Level::GetRectSizeInImageAt(sf::Image& img, sf::Vector2i pos, sf::Color& c) {
-    int w = 100000;
+    /*int w = 100000;
     int h = 0;
 
     while(42) {
@@ -189,7 +207,23 @@ sf::Vector2i Level::GetRectSizeInImageAt(sf::Image& img, sf::Vector2i pos, sf::C
         h++;
     }
 
-    return sf::Vector2i(w, h);
+    return sf::Vector2i(w, h);*/
+    int w = 100000;
+
+    for(int i=0 ; i<w ; i++) {
+        if(img.getPixel(i+pos.x, pos.y) != c) {
+            if(i == 0) {
+                break;
+            } else {
+                w = i;
+            }
+            break;
+        } else {
+            img.setPixel(i+pos.x, pos.y, sf::Color(255, 255, 255, 0));
+        }
+    }
+
+    return sf::Vector2i(w, 1);
 }
 
 void Level::NextLevel(IP& ip, EntityManager& eManager, BulletManager& bManager, Character& character) {

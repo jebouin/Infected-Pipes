@@ -5,14 +5,24 @@
 #include "Particle.h"
 #include "MathHelper.h"
 
-WaterField::WaterField(sf::FloatRect rect, float resolution) {
+WaterField::WaterField(sf::FloatRect rect, float resolution, bool surface) {
     _rect = rect;
+    _surface = surface;
     _nbPoints = rect.width/resolution;
     _resolution = rect.width/_nbPoints;
-    for(int i=0 ; i<_nbPoints ; i++) {
-        _springs.push_back(Spring{rect.height, rect.height, 0});
-    }
     _vertexes.setPrimitiveType(sf::Quads);
+
+    if(_surface) {
+        for(int i=0 ; i<_nbPoints ; i++) {
+            _springs.push_back(Spring{rect.height, rect.height, 0});
+        }
+    } else {
+        vector<sf::Vector2f> corners = MathHelper::Rect2Corners(_rect);
+        sf::Color c(rand()%256, rand()%256, rand()%256, 80);
+        for(int i=0 ; i<corners.size() ; i++) {
+            _vertexes.append(sf::Vertex(corners[i], sf::Color(106, 129, 193, 80)));
+        }
+    }
 }
 
 WaterField::~WaterField() {
@@ -20,6 +30,10 @@ WaterField::~WaterField() {
 }
 
 void WaterField::Update(float elapsedTime) {
+    if(!_surface) {
+        return;
+    }
+
     const float k = 0.65f;
     const float d = 0.15f;
     const float spread = 0.2;
@@ -34,8 +48,8 @@ void WaterField::Update(float elapsedTime) {
             s._length = 0;
             s._velocity = 0;
         }
-        if(s._length > _rect.height+12) {
-            s._length = _rect.height+12;
+        if(s._length > _rect.height+6) {
+            s._length = _rect.height+6;
             s._velocity = 0;
         }
     }
@@ -70,36 +84,42 @@ void WaterField::Update(float elapsedTime) {
 }
 
 void WaterField::Draw(IP& ip){
-    _vertexes.clear();
-
     static sf::Color topc(177, 181, 191, 200);
     static sf::Color waterc(106, 129, 193, 80);
     static sf::Color downc(106, 129, 193, 80);
 
-    float baseY = _rect.top+_rect.height;
-    for(int i=0 ; i<_nbPoints-1 ; i++) {
-        float x0 = float(i)/float(_nbPoints-1)*_rect.width+_rect.left;
-        float x1 = float(i+1)/float(_nbPoints-1)*_rect.width+_rect.left;
-        sf::Vector2f p0 = sf::Vector2f(x0, baseY - _springs[i]._length);
-        sf::Vector2f p1 = sf::Vector2f(x1, baseY - _springs[i+1]._length);
+    if(_surface) {
+        _vertexes.clear();
+        float baseY = _rect.top+_rect.height;
+        for(int i=0 ; i<_nbPoints-1 ; i++) {
+            float x0 = float(i)/float(_nbPoints-1)*_rect.width+_rect.left;
+            float x1 = float(i+1)/float(_nbPoints-1)*_rect.width+_rect.left;
+            sf::Vector2f p0 = sf::Vector2f(x0, baseY - _springs[i]._length);
+            sf::Vector2f p1 = sf::Vector2f(x1, baseY - _springs[i+1]._length);
 
-        _vertexes.append(sf::Vertex(p0, topc));
-        _vertexes.append(sf::Vertex(p1, topc));
-        _vertexes.append(sf::Vertex(sf::Vector2f(p1.x, p1.y+4), waterc));
-        _vertexes.append(sf::Vertex(sf::Vector2f(p0.x, p0.y+4), waterc));
+            _vertexes.append(sf::Vertex(p0, topc));
+            _vertexes.append(sf::Vertex(p1, topc));
+            _vertexes.append(sf::Vertex(sf::Vector2f(p1.x, p1.y+4), waterc));
+            _vertexes.append(sf::Vertex(sf::Vector2f(p0.x, p0.y+4), waterc));
 
-        _vertexes.append(sf::Vertex(sf::Vector2f(p0.x, p0.y+4), waterc));
-        _vertexes.append(sf::Vertex(sf::Vector2f(p1.x, p1.y+4), waterc));
-        _vertexes.append(sf::Vertex(sf::Vector2f(x1, baseY), downc));
-        _vertexes.append(sf::Vertex(sf::Vector2f(x0, baseY), downc));
+            _vertexes.append(sf::Vertex(sf::Vector2f(p0.x, p0.y+4), waterc));
+            _vertexes.append(sf::Vertex(sf::Vector2f(p1.x, p1.y+4), waterc));
+            _vertexes.append(sf::Vertex(sf::Vector2f(x1, baseY), downc));
+            _vertexes.append(sf::Vertex(sf::Vector2f(x0, baseY), downc));
+        }
     }
+
     ip._renderer->Draw(_vertexes);
 }
 
 void WaterField::Splash(sf::Vector2f pos, float force, ParticleManager& pManager, IP& ip) {
+    if(!_surface) {
+        return;
+    }
     if(pos.x < _rect.left || pos.x > _rect.left+_rect.width) {
         return;
     }
+
     int id = int((pos.x-_rect.left)/_rect.width*_nbPoints);
     _springs[id]._velocity = force;
 
