@@ -39,6 +39,7 @@ Character::Character(IP& ip) : GameEntity(ip, "character", sf::IntRect(4, 3, 7, 
     LoadArm(BOW);
 
     SetAutoDir(false);
+    SetCollisionPrecision(.05);
 }
 
 Character::~Character() {

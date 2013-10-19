@@ -160,7 +160,7 @@ void GameEntity::Damage(int dmg, IP& ip, ParticleManager& pManager, sf::Color co
 
     _hp -= dmg;
     if(_hp <= 0) {
-        _alive = false;
+        Die(ip, pManager);
         _hp = 0;
     }
 
@@ -173,6 +173,10 @@ void GameEntity::Damage(int dmg, IP& ip, ParticleManager& pManager, sf::Color co
                                             color,
                                             true,
                                             true));
+}
+
+void GameEntity::Die(IP& ip, ParticleManager& pManager) {
+    _alive = false;
 }
 
 void GameEntity::Hit(GameEntity *other, IP& ip, ParticleManager& pManager, sf::Color color) {

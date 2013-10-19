@@ -13,6 +13,7 @@ Particle::Particle(IP& ip, string name, sf::Vector2f pos, sf::Vector2f velocity,
     _collision = collision;
     setPosition(pos);
     SetVel(velocity);
+    SetRotVel(rotVel);
     _lifeTime = lifeTime;
     _startScale = startScale;
     _endScale = endScale;
@@ -26,6 +27,7 @@ Particle::~Particle() {
 }
 
 void Particle::Update(IP& ip, float eTime, Level& level, ParticleManager& pManager) {
+    bool inWater = IsInWater(level);
     float lifePos = _timer.getElapsedTime().asMilliseconds()/_lifeTime;
     if(lifePos >= 1) {
         _alive = false;
@@ -41,11 +43,15 @@ void Particle::Update(IP& ip, float eTime, Level& level, ParticleManager& pManag
         MovingSprite::Update(ip, eTime);
     }
 
-    if(_gravity) {
+    if(_gravity && !inWater) {
         Accelerate(sf::Vector2f(0, 0.001), eTime);
         if(level.GetMap().IsOnTileType(*this, Map::WALL) || level.GetSpawner().IsOnGround(*this)) {
             SetVel(sf::Vector2f(GetVel().x/1.1f, GetVel().y));
         }
+    }
+
+    if(inWater) {
+        Accelerate(sf::Vector2f(-0.004*GetVel().x, -0.004*GetVel().y), eTime);
     }
 
     setOrigin(sf::Vector2f(getTextureRect().width, getTextureRect().height)/2.f);

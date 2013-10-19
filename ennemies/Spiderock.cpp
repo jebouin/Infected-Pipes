@@ -7,6 +7,7 @@
 #include "EntityManager.h"
 #include "Spawner.h"
 #include "ParticleManager.h"
+#include "Particle.h"
 #include "AnimationTable.h"
 #include "Animation.h"
 #include "BulletManager.h"
@@ -56,4 +57,42 @@ void Spiderock::Update(IP& ip, float eTime, Level& level, Character& character, 
     }
 
     Ennemy::Update(ip, eTime, level, character, eManager, pManager, bManager);
+}
+
+void Spiderock::Die(IP& ip, ParticleManager& pManager) {
+    GameEntity::Die(ip, pManager);
+    for(int i=0 ; i<4 ; i++) {
+        int type = rand()%2;
+        pManager.AddParticle(new Particle(ip, type==0 ? "rockParticle" : "rockParticle2",
+                                          getPosition(),
+                                          MathHelper::Ang2Vec(MathHelper::Deg2Rad(MathHelper::RandFloat(-160, 20))) * MathHelper::RandFloat(.1, .35),
+                                          MathHelper::RandFloat(-1., 1.),
+                                          MathHelper::RandFloat(600, 1400),
+                                          sf::Vector2f(1, 1),
+                                          sf::Vector2f(1, 1),
+                                          255,
+                                          0,
+                                          true,
+                                          true,
+                                          false,
+                                          sf::IntRect(1, 1, 4, 4)));
+    }
+    if(_inWater) {
+        return;
+    }
+    for(int i=0 ; i<3 ; i++) {
+        pManager.AddParticle(new Particle(ip, "smokeParticle",
+                                          getPosition()+MathHelper::Ang2Vec(MathHelper::Deg2Rad(MathHelper::RandFloat(0, 360))) * MathHelper::RandFloat(0., 13.),
+                                          sf::Vector2f(0., 0.),
+                                          MathHelper::RandFloat(-.5, .5),
+                                          MathHelper::RandFloat(200, 400),
+                                          sf::Vector2f(.5, .5),
+                                          sf::Vector2f(2., 2.),
+                                          128,
+                                          0,
+                                          false,
+                                          false,
+                                          false,
+                                          sf::IntRect(2, 2, 3, 3)));
+    }
 }

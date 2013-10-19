@@ -38,6 +38,7 @@ class MovingSprite : public sf::Sprite {
     void SetOnPlatform(bool on);
     void SetCollideOnPlatform(bool c);
     void SetCollideWithWater(bool c);
+    void SetCollisionPrecision(float p);
 
     protected:
     void WaterCollision(Level& l, sf::Vector2f deltaPos, ParticleManager& pManager, IP& ip);
@@ -50,6 +51,7 @@ class MovingSprite : public sf::Sprite {
     sf::IntRect _hitbox;
     sf::Vector2f _vel;
     float _rotVel;
+    float _collisionPrecision;
     bool _onPlatform;
     bool _collidesWithPlatform;
     bool _collidesWithWater;

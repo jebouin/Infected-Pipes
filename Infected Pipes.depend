@@ -19,7 +19,7 @@
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1382037724 source:c:\users\xaychru04\desktop\infected pipes\ip.cpp
+1382188072 source:c:\users\xaychru04\desktop\infected pipes\ip.cpp
 	"IP.h"
 	"Renderer.h"
 	"TextureLoader.h"
@@ -34,7 +34,7 @@
 	"Game.h"
 	"MathHelper.h"
 
-1381672900 source:c:\users\xaychru04\desktop\infected pipes\textureloader.cpp
+1382182321 source:c:\users\xaychru04\desktop\infected pipes\textureloader.cpp
 	"TextureLoader.h"
 	"IP.h"
 
@@ -56,7 +56,7 @@
 	"MathHelper.h"
 	"MovingSprite.h"
 
-1382178269 source:c:\users\xaychru04\desktop\infected pipes\movingsprite.cpp
+1382181631 source:c:\users\xaychru04\desktop\infected pipes\movingsprite.cpp
 	"MovingSprite.h"
 	"IP.h"
 	"Map.h"
@@ -70,12 +70,12 @@
 	"WaterField.h"
 	"ParticleManager.h"
 
-1381592348 c:\users\xaychru04\desktop\infected pipes\movingsprite.h
+1382181490 c:\users\xaychru04\desktop\infected pipes\movingsprite.h
 	<vector>
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1381594389 source:c:\users\xaychru04\desktop\infected pipes\character.cpp
+1382181631 source:c:\users\xaychru04\desktop\infected pipes\character.cpp
 	"Character.h"
 	"IP.h"
 	"Animation.h"
@@ -100,7 +100,7 @@
 	"SFML/System.hpp"
 	"GameEntity.h"
 
-1381586174 c:\users\xaychru04\desktop\infected pipes\gameentity.h
+1382188546 c:\users\xaychru04\desktop\infected pipes\gameentity.h
 	<iostream>
 	<vector>
 	<cmath>
@@ -123,7 +123,7 @@
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1382178269 source:c:\users\xaychru04\desktop\infected pipes\gameentity.cpp
+1382181173 source:c:\users\xaychru04\desktop\infected pipes\gameentity.cpp
 	"GameEntity.h"
 	"Level.h"
 	"Map.h"
@@ -166,7 +166,7 @@
 	"IP.h"
 	"Renderer.h"
 
-1382178767 source:c:\users\xaychru04\desktop\infected pipes\level.cpp
+1382182613 source:c:\users\xaychru04\desktop\infected pipes\level.cpp
 	"Level.h"
 	"IP.h"
 	"Map.h"
@@ -289,7 +289,7 @@
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1381591890 source:c:\users\xaychru04\desktop\infected pipes\particle.cpp
+1382188289 source:c:\users\xaychru04\desktop\infected pipes\particle.cpp
 	"Particle.h"
 	"IP.h"
 	"Level.h"
@@ -325,12 +325,12 @@
 	"SFML/System.hpp"
 	"Particle.h"
 
-1381171354 c:\users\xaychru04\desktop\infected pipes\ennemies\spiderock.h
+1382181245 c:\users\xaychru04\desktop\infected pipes\ennemies\spiderock.h
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 	"Ennemy.h"
 
-1381677375 source:c:\users\xaychru04\desktop\infected pipes\ennemies\spiderock.cpp
+1382187331 source:c:\users\xaychru04\desktop\infected pipes\ennemies\spiderock.cpp
 	"Spiderock.h"
 	"IP.h"
 	"Map.h"
@@ -340,6 +340,7 @@
 	"EntityManager.h"
 	"Spawner.h"
 	"ParticleManager.h"
+	"Particle.h"
 	"AnimationTable.h"
 	"Animation.h"
 	"BulletManager.h"
@@ -641,7 +642,7 @@
 	<SFML/Graphics.hpp>
 	<SFML/Window.hpp>
 
-1382178738 source:c:\users\xaychru04\desktop\infected pipes\waterfield.cpp
+1382179031 source:c:\users\xaychru04\desktop\infected pipes\waterfield.cpp
 	"WaterField.h"
 	"IP.h"
 	"Renderer.h"
