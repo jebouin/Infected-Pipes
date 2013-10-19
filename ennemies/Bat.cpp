@@ -6,6 +6,7 @@
 #include "MathHelper.h"
 #include "EntityManager.h"
 #include "Spawner.h"
+#include "Particle.h"
 #include "ParticleManager.h"
 #include "AnimationTable.h"
 #include "Animation.h"
@@ -38,4 +39,24 @@ void Bat::Update(IP& ip, float eTime, Level& level, Character& character, Entity
     }
 
     Ennemy::Update(ip, eTime, level, character, eManager, pManager, bManager);
+}
+
+void Bat::Die(IP& ip, ParticleManager& pManager) {
+    GameEntity::Die(ip, pManager);
+    for(int i=0 ; i<6 ; i++) {
+        int type = rand()%2;
+        pManager.AddParticle(new Particle(ip, "featherParticle",
+                                          getPosition(),
+                                          MathHelper::Ang2Vec(MathHelper::Deg2Rad(MathHelper::RandFloat(0, 360))) * MathHelper::RandFloat(.01, .05),
+                                          MathHelper::RandFloat(-0.3, 0.3),
+                                          MathHelper::RandFloat(1500, 3000),
+                                          sf::Vector2f(1, 1),
+                                          sf::Vector2f(1, 1),
+                                          255,
+                                          0,
+                                          false,
+                                          true,
+                                          false,
+                                          sf::IntRect(3, 1, 5, 3)));
+    }
 }

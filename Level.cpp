@@ -93,7 +93,7 @@ void Level::Load(IP& ip, string name, Character& character) {
     delete _map;
     _map = new Map(ip, sf::Vector2i(_levelImages[0].getSize()));
     delete _spawner;
-    _spawner = new Spawner(ip, 10, *this);
+    _spawner = new Spawner(ip, 20, *this);
     for(int i=0 ; i<_waterFields.size() ; i++) {
         delete _waterFields[i];
         _waterFields[i] = 0;

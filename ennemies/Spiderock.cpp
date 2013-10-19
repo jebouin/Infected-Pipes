@@ -75,7 +75,7 @@ void Spiderock::Die(IP& ip, ParticleManager& pManager) {
                                           true,
                                           true,
                                           false,
-                                          sf::IntRect(1, 1, 4, 4)));
+                                          type==0 ? sf::IntRect(1, 1, 4, 4) : sf::IntRect(1, 1, 5, 3)));
     }
     if(_inWater) {
         return;

@@ -49,12 +49,25 @@ void Particle::Update(IP& ip, float eTime, Level& level, ParticleManager& pManag
             SetVel(sf::Vector2f(GetVel().x/1.1f, GetVel().y));
         }
     }
-
     if(inWater) {
         Accelerate(sf::Vector2f(-0.004*GetVel().x, -0.004*GetVel().y), eTime);
     }
 
     setOrigin(sf::Vector2f(getTextureRect().width, getTextureRect().height)/2.f);
+
+    //bounce
+    /*if(_collision) {
+        float dirx = MathHelper::ABS(GetVel().x)/GetVel().x;
+        float diry = MathHelper::ABS(GetVel().y)/GetVel().y;
+        sf::Vector2f tpx = sf::Vector2f(dirx, 0)+GetUpperLeftPos();
+        sf::Vector2f tpy = sf::Vector2f(0, diry)+GetUpperLeftPos();
+        if(level.GetMap().IsCollided(*this, tpx, Map::WALL) || level.GetSpawner().IsCollided(*this, tpx)) {
+            SetVel(sf::Vector2f(-GetVel().x, GetVel().y));
+        }
+        if(level.GetMap().IsCollided(*this, tpy, Map::WALL) || level.GetSpawner().IsCollided(*this, tpy)) {
+            SetVel(sf::Vector2f(GetVel().x, -GetVel().y));
+        }
+    }*/
 }
 
 void Particle::Draw(IP& ip) {

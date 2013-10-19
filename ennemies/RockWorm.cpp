@@ -6,6 +6,8 @@
 #include "MathHelper.h"
 #include "EntityManager.h"
 #include "Spawner.h"
+#include "RockWorm.h"
+#include "Particle.h"
 #include "ParticleManager.h"
 #include "AnimationTable.h"
 #include "Animation.h"
@@ -140,4 +142,39 @@ void RockWorm::Update(IP& ip, float eTime, Level& level, Character& character, E
     }
 
     Ennemy::Update(ip, eTime, level, character, eManager, pManager, bManager);
+}
+
+void RockWorm::Die(IP& ip, ParticleManager& pManager) {
+    GameEntity::Die(ip, pManager);
+    for(int i=0 ; i<20 ; i++) {
+        Particle *p = new Particle(ip, "rockWormBlood",
+                                   sf::Vector2f(GetGlobalHitbox().left+MathHelper::RandFloat(0, GetGlobalHitbox().width), GetGlobalHitbox().top+MathHelper::RandFloat(0, GetGlobalHitbox().height)),
+                                   MathHelper::Ang2Vec(MathHelper::Deg2Rad(MathHelper::RandFloat(-160, 20))) * MathHelper::RandFloat(.02, .05),
+                                   0,
+                                   480,
+                                   sf::Vector2f(1, 1),
+                                   sf::Vector2f(1, 1),
+                                   255,
+                                   0,
+                                   true,
+                                   true,
+                                   true,
+                                   sf::IntRect(2, 2, 2, 1));
+        p->GetAnims().AddAnimation("base", new Animation(6, 80, sf::Vector2i(0, 0), sf::Vector2i(6, 5), false));
+        p->GetAnims().SetAnimation("base");
+        pManager.AddParticle(p);
+    }
+    pManager.AddParticle(new Particle(ip, "rockWormHead",
+                                      getPosition()+sf::Vector2f(3, 2),
+                                      sf::Vector2f(0., -MathHelper::RandFloat(.3, .6)),
+                                      MathHelper::RandFloat(-.2, .2),
+                                      MathHelper::RandFloat(1000, 2000),
+                                      sf::Vector2f(1., 1.),
+                                      sf::Vector2f(2., 2.),
+                                      255,
+                                      0,
+                                      true,
+                                      true,
+                                      false,
+                                      sf::IntRect(0, 0, 6, 5)));
 }

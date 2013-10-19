@@ -20,6 +20,7 @@ class RockWorm : public Ennemy {
     ~RockWorm();
     bool AutoSpawn(IP& ip, Level& level, EntityManager& eManager, Character& character);
     void Update(IP& ip, float eTime, Level& level, Character& character, EntityManager& eManager, ParticleManager& pManager, BulletManager& bManager);
+    void Die(IP& ip, ParticleManager& pManager);
 
     private:
     float _outTime;

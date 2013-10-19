@@ -82,9 +82,15 @@ void Spawner::Spawn(IP& ip, EntityManager& eManager, Level& level, Character& ch
     _difToSpawn -= d[et];
 
 
-
-    /*int pipeId = rand()%_pipes.size();
-    _pipes[pipeId]->Spawn(ip, eManager, new Snail(ip));*/
+    /*if(rand()%20==0) {
+        int pipeId = rand()%_pipes.size();
+        RockWorm *r = new RockWorm(ip, level);
+        if(!r->AutoSpawn(ip, level, eManager, character)) {
+            delete r;
+            return;
+        }
+        eManager.Add(r);
+    }*/
 
     if(_difToSpawn <= 0) {
         _spawning = false;

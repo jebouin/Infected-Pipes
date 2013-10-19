@@ -24,6 +24,7 @@ Snail::Snail(IP& ip, Level& level) : Ennemy(ip, "snail", sf::IntRect(3, 1, 26, 1
     _preparing = false;
     _nextAttack = MathHelper::RandFloat(1000, 3000);
     SetWeight(1.0);
+    SetCollisionPrecision(.05);
 
     _circle.setFillColor(sf::Color(0, 0, 0, 0));
     _circle.setOutlineColor(sf::Color(220, 200, 255));
@@ -116,4 +117,42 @@ void Snail::UpdateCircle(sf::Vector2f eyePos) {
     sf::Color color = _circle.getOutlineColor();
     _circle.setRadius(20.0 - (1.0/p+1.)*10.0);
     _circle.setOutlineColor(sf::Color(color.r, color.g, color.b, p*255));
+}
+
+void Snail::Die(IP& ip, ParticleManager& pManager) {
+    GameEntity::Die(ip, pManager);
+    for(int i=0 ; i<12 ; i++) {
+        int type = rand()%2;
+        pManager.AddParticle(new Particle(ip, type==0 ? "snailParticle" : "snailParticle2",
+                                          getPosition(),
+                                          MathHelper::Ang2Vec(MathHelper::Deg2Rad(MathHelper::RandFloat(-160, 20))) * MathHelper::RandFloat(.2, .8),
+                                          MathHelper::RandFloat(-1., 1.),
+                                          MathHelper::RandFloat(600, 1400),
+                                          sf::Vector2f(1, 1),
+                                          sf::Vector2f(1, 1),
+                                          255,
+                                          0,
+                                          true,
+                                          true,
+                                          false,
+                                          type==0 ? sf::IntRect(2, 2, 7, 3) : sf::IntRect(2, 2, 5, 4)));
+    }
+    if(_inWater) {
+        return;
+    }
+    for(int i=0 ; i<4 ; i++) {
+        pManager.AddParticle(new Particle(ip, "smokeParticle",
+                                          sf::Vector2f(GetGlobalHitbox().left+MathHelper::RandFloat(0, GetGlobalHitbox().width), GetGlobalHitbox().top+MathHelper::RandFloat(0, GetGlobalHitbox().height)),
+                                          sf::Vector2f(0., 0.),
+                                          MathHelper::RandFloat(-.5, .5),
+                                          MathHelper::RandFloat(400, 700),
+                                          sf::Vector2f(.5, .5),
+                                          sf::Vector2f(2., 2.),
+                                          128,
+                                          0,
+                                          false,
+                                          false,
+                                          false,
+                                          sf::IntRect(2, 2, 3, 3)));
+    }
 }
