@@ -15,6 +15,7 @@ Map::Map(IP& ip, sf::Vector2i size) {
     _tileTypes.push_back(WALL);
     _tileTypes.push_back(PLATFORM);
     _tileTypes.push_back(VOID);
+    _tileTypes.push_back(WALL);
 }
 
 Map::~Map() {
@@ -39,7 +40,7 @@ void Map::DrawLayer(IP& ip, Layer l) {
                 }
             }
 
-            if(tileId == 2 || tileId == 3) {
+            if(tileId == 2 || tileId == 3 || tileId == 6) {
                 tileX = GetNbDirNeigboursCode(pos, l);
             }
 
