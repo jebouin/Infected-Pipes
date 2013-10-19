@@ -150,7 +150,7 @@ void Level::Load(IP& ip, string name, Character& character) {
                 if(_map->GetTileType(sf::Vector2i(i+s.x, j), Map::FRONT) != Map::VOID) {
                     offsets[1] = 2;
                 }
-                _waterFields.push_back(new WaterField(sf::FloatRect(i*16-offsets[0], j*16+8, s.x*16+offsets[0]+offsets[1], s.y*16-8), 2, true));
+                _waterFields.push_back(new WaterField(sf::FloatRect(i*16-offsets[0], j*16+8, s.x*16+offsets[0]+offsets[1], s.y*16-8), 4, true));
             } else if(_levelImages[1].getPixel(i, j) == waterC) {
                 sf::Vector2i s(/*GetRectSizeInImageAt(_levelImages[1], sf::Vector2i(i, j), waterC)*/1, 1);
                 float offsets[4]{0};

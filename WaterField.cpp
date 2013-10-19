@@ -122,6 +122,7 @@ void WaterField::Splash(sf::Vector2f pos, float force, ParticleManager& pManager
 
     int id = int((pos.x-_rect.left)/_rect.width*_nbPoints);
     _springs[id]._velocity = force;
+    _springs[min(id+1, _nbPoints-1)]._velocity = force;
 
     float y = _rect.top+_rect.height - _springs[id]._length;
     for(int i=0 ; i<5 ; i++) {
