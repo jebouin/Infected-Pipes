@@ -83,7 +83,7 @@ void Spawner::Spawn(IP& ip, EntityManager& eManager, Level& level, Character& ch
     _difToSpawn -= d[et];*/
 
 
-    if(rand()%30==0) {
+    if(rand()%10==0) {
         _pipes[pipeId]->Spawn(ip, eManager, new SnowBallEnemy(ip, level));
     }
 

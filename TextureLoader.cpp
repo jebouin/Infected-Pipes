@@ -47,6 +47,7 @@ TextureLoader::TextureLoader(IP& ip) {
     AddTexture("rockWormBlood.png", "rockWormBlood");
     AddTexture("snailParticle.png", "snailParticle");
     AddTexture("snailParticle2.png", "snailParticle2");
+    AddTexture("snowParticle.png", "snowParticle");
 
     AddTexture("fir.png", "fir");
     AddTexture("moon.png", "moon");

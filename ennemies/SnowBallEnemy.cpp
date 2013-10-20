@@ -12,7 +12,7 @@
 #include "Animation.h"
 #include "BulletManager.h"
 
-SnowBallEnemy::SnowBallEnemy(IP& ip, Level& level) : Ennemy(ip, "snowBallEnemy", sf::IntRect(0, 0, 16, 16), 1, 1, 1, level) {
+SnowBallEnemy::SnowBallEnemy(IP& ip, Level& level) : Ennemy(ip, "snowBallEnemy", sf::IntRect(0, 0, 16, 15), 1, 1, 1, level) {
     SetSpeed(0.001);
     SetJumpPower(.0);
     SetFriction(0.f);
@@ -48,12 +48,11 @@ void SnowBallEnemy::Update(IP& ip, float eTime, Level& level, Character& charact
 
 void SnowBallEnemy::Die(IP& ip, ParticleManager& pManager) {
     GameEntity::Die(ip, pManager);
-    /*for(int i=0 ; i<4 ; i++) {
-        int type = rand()%2;
-        pManager.AddParticle(new Particle(ip, type==0 ? "rockParticle" : "rockParticle2",
-                                          getPosition(),
-                                          MathHelper::Ang2Vec(MathHelper::Deg2Rad(MathHelper::RandFloat(-160, 20))) * MathHelper::RandFloat(.1, .35),
-                                          MathHelper::RandFloat(-1., 1.),
+    for(int i=0 ; i<20 ; i++) {
+        pManager.AddParticle(new Particle(ip, "snowParticle",
+                                          getPosition() + MathHelper::Ang2Vec(MathHelper::Deg2Rad(MathHelper::RandFloat(0, 360))) * MathHelper::RandFloat(0, 8),
+                                          MathHelper::Ang2Vec(MathHelper::Deg2Rad(MathHelper::RandFloat(-160, 20))) * MathHelper::RandFloat(.05, .1),
+                                          0.,
                                           MathHelper::RandFloat(600, 1400),
                                           sf::Vector2f(1, 1),
                                           sf::Vector2f(1, 1),
@@ -62,24 +61,6 @@ void SnowBallEnemy::Die(IP& ip, ParticleManager& pManager) {
                                           true,
                                           true,
                                           false,
-                                          type==0 ? sf::IntRect(1, 1, 4, 4) : sf::IntRect(1, 1, 5, 3)));
+                                          sf::IntRect(1, 1, 3, 2)));
     }
-    if(_inWater) {
-        return;
-    }
-    for(int i=0 ; i<3 ; i++) {
-        pManager.AddParticle(new Particle(ip, "smokeParticle",
-                                          getPosition()+MathHelper::Ang2Vec(MathHelper::Deg2Rad(MathHelper::RandFloat(0, 360))) * MathHelper::RandFloat(0., 13.),
-                                          sf::Vector2f(0., 0.),
-                                          MathHelper::RandFloat(-.5, .5),
-                                          MathHelper::RandFloat(200, 400),
-                                          sf::Vector2f(.5, .5),
-                                          sf::Vector2f(2., 2.),
-                                          128,
-                                          0,
-                                          false,
-                                          false,
-                                          false,
-                                          sf::IntRect(2, 2, 3, 3)));
-    }*/
 }

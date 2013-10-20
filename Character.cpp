@@ -53,6 +53,7 @@ void Character::Update(IP& ip, float eTime, Level& level, EntityManager& eManage
     _weapon->SetRelPosition(_arm.getPosition()-GetUpperLeftPos()+_arms[_curArmType]._bulletPos);
 
     if(_enteringPipe) {
+        _arm.setRotation(0);
         SetVel(sf::Vector2f(0, 0.1));
         MovingSprite::Update(ip, eTime);
         if(_enterTimer.getElapsedTime().asMilliseconds() > 500) {
@@ -62,6 +63,7 @@ void Character::Update(IP& ip, float eTime, Level& level, EntityManager& eManage
             _enterTimer.restart();
         }
     } else if (_leavingPipe) {
+        _arm.setRotation(0);
         SetVel(sf::Vector2f(0, 0.1));
         MovingSprite::Update(ip, eTime);
         if(!level.GetSpawner().IsCollided(*this)) {
