@@ -36,7 +36,7 @@ Character::Character(IP& ip) : GameEntity(ip, "character", sf::IntRect(4, 3, 7, 
     _weapon = new Bow(ip, (const GameEntity&)*this);
 
     _arm.setTexture(ip._textureLoader->GetTexture("arms"));
-    LoadArm(BOW);
+    LoadArm(RAINBOW);
 
     SetAutoDir(false);
     SetCollisionPrecision(.05);

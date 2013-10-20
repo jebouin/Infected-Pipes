@@ -31,7 +31,7 @@ void Bat::Update(IP& ip, float eTime, Level& level, Character& character, Entity
     sf::Vector2f c(MathHelper::GetCenter(r));
     sf::Vector2f cc(MathHelper::GetCenter(character.GetGlobalHitbox()));
 
-    if(MathHelper::GetVecLength(c-cc) > 142) {
+    if(MathHelper::GetVecLength(c-cc) > 142 && MathHelper::GetVecLength(c-cc) < 600) {
         Accelerate(sf::Vector2f(MathHelper::RandFloat(-0.003, 0.003), MathHelper::RandFloat(-0.002, 0.002)), eTime);
     } else {
         Accelerate(sf::Vector2f(MathHelper::RandFloat(-0.003, 0.003), MathHelper::RandFloat(-0.002, 0.002)), eTime);
