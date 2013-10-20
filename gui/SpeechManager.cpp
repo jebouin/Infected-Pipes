@@ -13,12 +13,12 @@ SpeechManager::~SpeechManager() {
 void SpeechManager::Update(IP& ip, float eTime) {
     for(int i=0 ; i<_bubbles.size() ; i++) {
         _bubbles[i]->Update(ip, eTime);
-        /*if(!_bubbles[i]->IsAlive()) {
+        if(!_bubbles[i]->IsAlive()) {
             delete _bubbles[i];
             _bubbles[i] = 0;
             _bubbles.erase(_bubbles.begin() + i);
             i--;
-        }*/
+        }
     }
 }
 

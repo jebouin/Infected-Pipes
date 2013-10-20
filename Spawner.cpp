@@ -51,7 +51,7 @@ void Spawner::Update(IP& ip, EntityManager& eManager, Level& level, Character& c
 
 void Spawner::Spawn(IP& ip, EntityManager& eManager, Level& level, Character& character) {
     int pipeId = rand()%_pipes.size();
-    /*int et;
+    int et;
     static int d[4] = {1, 10, 20, 50};
     for(int i=3 ; i>=0 ; i--) {
         if(d[i] <= _difToSpawn) {
@@ -80,12 +80,12 @@ void Spawner::Spawn(IP& ip, EntityManager& eManager, Level& level, Character& ch
         }
     }
 
-    _difToSpawn -= d[et];*/
+    _difToSpawn -= d[et];
 
 
-    if(rand()%10==0) {
+    /*if(rand()%10==0) {
         _pipes[pipeId]->Spawn(ip, eManager, new SnowBallEnemy(ip, level));
-    }
+    }*/
 
     if(_difToSpawn <= 0) {
         _spawning = false;
@@ -144,7 +144,8 @@ bool Spawner::CanEnterPipe(MovingSprite& s) {
         if(sr.intersects(_pipes[i]->getGlobalBounds())) {
             float pipeX = _pipes[i]->getPosition().x;
             float dist = MathHelper::ABS(s.getPosition().x-pipeX);
-            if(dist < 5) {
+            if(dist < 6) {
+                s.setPosition(sf::Vector2f(pipeX, s.getPosition().y));
                 return true;
             }
         }

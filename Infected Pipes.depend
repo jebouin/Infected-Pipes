@@ -267,7 +267,7 @@
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1382281490 source:c:\users\xaychru04\desktop\infected pipes\spawner.cpp
+1382289316 source:c:\users\xaychru04\desktop\infected pipes\spawner.cpp
 	"Spawner.h"
 	"IP.h"
 	"EntityManager.h"
@@ -657,7 +657,7 @@
 	<iostream>
 	<vector>
 
-1382288471 source:c:\users\xaychru04\desktop\infected pipes\scenes\game.cpp
+1382294348 source:c:\users\xaychru04\desktop\infected pipes\scenes\game.cpp
 	"Game.h"
 	"IP.h"
 	"Level.h"
@@ -705,19 +705,19 @@
 	"SFML/System.hpp"
 	"Ennemy.h"
 
-1382288606 source:c:\users\xaychru04\desktop\infected pipes\gui\speechbubble.cpp
+1382294312 source:c:\users\xaychru04\desktop\infected pipes\gui\speechbubble.cpp
 	"SpeechBubble.h"
 	"IP.h"
 	"GameEntity.h"
 	"Renderer.h"
 	"MathHelper.h"
 
-1382288024 c:\users\xaychru04\desktop\infected pipes\gui\speechbubble.h
+1382293912 c:\users\xaychru04\desktop\infected pipes\gui\speechbubble.h
 	<iostream>
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1382285904 source:c:\users\xaychru04\desktop\infected pipes\gui\speechmanager.cpp
+1382294249 source:c:\users\xaychru04\desktop\infected pipes\gui\speechmanager.cpp
 	"SpeechManager.h"
 	"SpeechBubble.h"
 	"IP.h"

@@ -4,8 +4,14 @@
 #include "Renderer.h"
 #include "MathHelper.h"
 
-SpeechBubble::SpeechBubble(IP& ip, string text, const GameEntity& speaker)
+SpeechBubble::SpeechBubble(IP& ip, string text, const GameEntity& speaker, float stayTime, float fadeTime)
     : sf::ConvexShape(), _speaker(speaker){
+    _stayTime = stayTime;
+    _fadeTime = fadeTime;
+
+    _alive = true;
+    _fading = false;
+
     //text
     _text.setFont(ip._font);
     _text.setCharacterSize(8);
@@ -40,9 +46,35 @@ SpeechBubble::~SpeechBubble() {
 void SpeechBubble::Update(IP& ip, float eTime) {
     setPosition(sf::Vector2f(sf::Vector2i(sf::Vector2f(_speaker.getPosition().x-getGlobalBounds().width/2.f, _speaker.getGlobalBounds().top-getGlobalBounds().height) + sf::Vector2f(0, -5))));
     _text.setPosition(sf::Vector2f(sf::Vector2i(getPosition() + MathHelper::GetCenter(_upperRect) + sf::Vector2f(1, -2))));
+
+    if(_alive) {
+        if(!_fading) {
+            if(_timer.getElapsedTime().asMilliseconds() >= _stayTime) {
+                _timer.restart();
+                _fading = true;
+            }
+        } else {
+            float alpha = 255-255*(_timer.getElapsedTime().asMilliseconds()/_fadeTime);
+            setOutlineColor(sf::Color(getOutlineColor().r, getOutlineColor().g, getOutlineColor().b, alpha));
+            setFillColor(sf::Color(getFillColor().r, getFillColor().g, getFillColor().b, alpha));
+            _text.setColor(sf::Color(_text.getColor().r, _text.getColor().g, _text.getColor().b, alpha));
+            if(_timer.getElapsedTime().asMilliseconds() >= _fadeTime) {
+                _timer.restart();
+                _alive = false;
+                _fading = false;
+                setOutlineColor(sf::Color(getOutlineColor().r, getOutlineColor().g, getOutlineColor().b, 0));
+                setFillColor(sf::Color(getFillColor().r, getFillColor().g, getFillColor().b, 0));
+                _text.setColor(sf::Color(_text.getColor().r, _text.getColor().g, _text.getColor().b, 0));
+            }
+        }
+    }
 }
 
 void SpeechBubble::Draw(IP& ip){
     ip._renderer->Draw(*this);
     ip._renderer->Draw(_text);
+}
+
+bool SpeechBubble::IsAlive() {
+    return _alive;
 }
