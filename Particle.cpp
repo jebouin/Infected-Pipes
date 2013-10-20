@@ -45,7 +45,7 @@ void Particle::Update(IP& ip, float eTime, Level& level, ParticleManager& pManag
 
     if(_gravity && !inWater) {
         Accelerate(sf::Vector2f(0, 0.001), eTime);
-        if(level.GetMap().IsOnTileType(*this, Map::WALL) || level.GetSpawner().IsOnGround(*this)) {
+        if(level.GetMap().IsOnTileType(*this, Map::WALL) || level.GetSpawner().IsOnGround(*this) || level.GetMap().IsOnTileType(*this, Map::PLATFORM)) {
             SetVel(sf::Vector2f(GetVel().x/1.1f, GetVel().y));
         }
     }
