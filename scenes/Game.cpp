@@ -8,6 +8,8 @@
 #include "GUI.h"
 #include "BulletManager.h"
 #include "Renderer.h"
+#include "SpeechManager.h"
+#include "SpeechBubble.h"
 
 Game::Game(IP& ip) : Scene(ip) {
     _entityManager = new EntityManager();
@@ -16,6 +18,8 @@ Game::Game(IP& ip) : Scene(ip) {
     _level = new Level(ip, _player->GetCharacter());
     _particleManager = new ParticleManager();
     _gui = new GUI(ip, *ip._textureLoader, _player->GetCharacter(), *_level);
+    _speechManager = new SpeechManager();
+    _speechManager->AddBubble(new SpeechBubble(ip, "Hello! :D", (const GameEntity&)_player->GetCharacter()));
 }
 
 Game::~Game() {
@@ -25,13 +29,14 @@ Game::~Game() {
     _entityManager = 0;
     delete _player;
     _player = 0;
-    cout << "Player destroyed";
     delete _particleManager;
     _particleManager = 0;
     delete _gui;
     _gui = 0;
     delete _bulletManager;
     _bulletManager = 0;
+    delete _speechManager;
+    _speechManager = 0;
 }
 
 void Game::Update(float eTime, IP& ip) {
@@ -43,6 +48,7 @@ void Game::Update(float eTime, IP& ip) {
     _bulletManager->Update(ip, eTime, *_level, _player->GetCharacter(), *_particleManager, *_entityManager);
     _particleManager->Update(ip, eTime, *_level);
     _gui->Update(ip);
+    _speechManager->Update(ip, eTime);
 }
 
 void Game::Draw(IP& ip) {
@@ -54,6 +60,7 @@ void Game::Draw(IP& ip) {
     _particleManager->Draw(ip);
     _bulletManager->Draw(ip);
     _level->DrawFront(ip);
+    _speechManager->Draw(ip);
 
     ip._renderer->GetTexture().setView(ip._renderer->GetTexture().getDefaultView());
     _gui->Draw(ip);

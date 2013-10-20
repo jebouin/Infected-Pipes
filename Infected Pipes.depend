@@ -290,7 +290,7 @@
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1382190367 source:c:\users\xaychru04\desktop\infected pipes\particle.cpp
+1382281937 source:c:\users\xaychru04\desktop\infected pipes\particle.cpp
 	"Particle.h"
 	"IP.h"
 	"Level.h"
@@ -657,7 +657,7 @@
 	<iostream>
 	<vector>
 
-1381682279 source:c:\users\xaychru04\desktop\infected pipes\scenes\game.cpp
+1382288471 source:c:\users\xaychru04\desktop\infected pipes\scenes\game.cpp
 	"Game.h"
 	"IP.h"
 	"Level.h"
@@ -668,8 +668,10 @@
 	"GUI.h"
 	"BulletManager.h"
 	"Renderer.h"
+	"SpeechManager.h"
+	"SpeechBubble.h"
 
-1381682042 c:\users\xaychru04\desktop\infected pipes\scenes\game.h
+1382285904 c:\users\xaychru04\desktop\infected pipes\scenes\game.h
 	"Scene.h"
 
 1381681143 c:\users\xaychru04\desktop\infected pipes\scenes\scene.h
@@ -702,4 +704,26 @@
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 	"Ennemy.h"
+
+1382288606 source:c:\users\xaychru04\desktop\infected pipes\gui\speechbubble.cpp
+	"SpeechBubble.h"
+	"IP.h"
+	"GameEntity.h"
+	"Renderer.h"
+	"MathHelper.h"
+
+1382288024 c:\users\xaychru04\desktop\infected pipes\gui\speechbubble.h
+	<iostream>
+	"SFML/Graphics.hpp"
+	"SFML/System.hpp"
+
+1382285904 source:c:\users\xaychru04\desktop\infected pipes\gui\speechmanager.cpp
+	"SpeechManager.h"
+	"SpeechBubble.h"
+	"IP.h"
+
+1382285904 c:\users\xaychru04\desktop\infected pipes\gui\speechmanager.h
+	<iostream>
+	"SFML/Graphics.hpp"
+	"SFML/System.hpp"
 

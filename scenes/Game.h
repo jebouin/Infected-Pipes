@@ -11,6 +11,7 @@ class Background;
 class ParticleManager;
 class GUI;
 class BulletManager;
+class SpeechManager;
 
 class Game : public Scene {
 public:
@@ -26,6 +27,7 @@ private:
     Player *_player;
     ParticleManager *_particleManager;
     GUI *_gui;
+    SpeechManager *_speechManager;
 };
 
 #endif
