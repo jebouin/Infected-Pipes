@@ -31,6 +31,11 @@ void Bat::Update(IP& ip, float eTime, Level& level, Character& character, Entity
     sf::Vector2f c(MathHelper::GetCenter(r));
     sf::Vector2f cc(MathHelper::GetCenter(character.GetGlobalHitbox()));
 
+    if(GetGlobalHitbox().intersects(character.GetGlobalHitbox()) && _attackTimer.getElapsedTime().asMilliseconds() > 800) {
+        Hit(&character, ip, pManager, sf::Color(255, 0, 0), MathHelper::RandInt(4, 5));
+        _attackTimer.restart();
+    }
+
     if(MathHelper::GetVecLength(c-cc) > 142 && MathHelper::GetVecLength(c-cc) < 600) {
         Accelerate(sf::Vector2f(MathHelper::RandFloat(-0.003, 0.003), MathHelper::RandFloat(-0.002, 0.002)), eTime);
     } else {

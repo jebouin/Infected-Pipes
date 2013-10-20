@@ -20,7 +20,7 @@ class EntityManager;
 
 class Bullet : public MovingSprite {
     public:
-    Bullet(IP& ip, string name, sf::IntRect hitbox, sf::Vector2f position, sf::Vector2f vel, int damage, bool animated, bool ennemy, bool gravity, bool instantDie, bool sticky);
+    Bullet(IP& ip, string name, sf::IntRect hitbox, sf::Vector2f position, sf::Vector2f vel, int damage, float knockBack, bool animated, bool ennemy, bool gravity, bool instantDie, bool sticky);
     ~Bullet();
     virtual void Update(IP& ip, float eTime, Level& level, Character& character, ParticleManager& pManager, EntityManager& eManager);
     void Draw(IP& ip);
@@ -38,6 +38,7 @@ class Bullet : public MovingSprite {
     bool _instantDie;
     bool _inWater;
     int _damage;
+    float _knockBack;
     sf::Clock _deadTimer;
     sf::Clock _timer;
 };

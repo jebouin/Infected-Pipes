@@ -10,8 +10,9 @@
 #include "GameEntity.h"
 #include "EntityManager.h"
 #include "Ennemy.h"
+#include "MathHelper.h"
 
-Bullet::Bullet(IP& ip, string name, sf::IntRect hitbox, sf::Vector2f position, sf::Vector2f vel, int damage, bool animated, bool ennemy, bool gravity, bool instantDie, bool sticky)
+Bullet::Bullet(IP& ip, string name, sf::IntRect hitbox, sf::Vector2f position, sf::Vector2f vel, int damage, float knockBack, bool animated, bool ennemy, bool gravity, bool instantDie, bool sticky)
     : MovingSprite(ip, name, hitbox, animated) {
     setPosition(position);
     SetVel(vel);
@@ -23,6 +24,7 @@ Bullet::Bullet(IP& ip, string name, sf::IntRect hitbox, sf::Vector2f position, s
     _instantDie = instantDie;
     _sticky = sticky;
     _inWater = false;
+    _knockBack = knockBack;
 }
 
 Bullet::~Bullet() {
@@ -112,6 +114,7 @@ void Bullet::Impact(GameEntity& entity, IP& ip, ParticleManager& pManager, sf::C
     _instantDie = true;
     _deadTimer.restart();
     entity.Damage(_damage, ip, pManager, color, getPosition(), GetVel());
+    entity.SetVel(entity.GetVel() + GetVel()/MathHelper::GetVecLength(GetVel())*_knockBack);
 }
 
 bool Bullet::IsAlive() const {

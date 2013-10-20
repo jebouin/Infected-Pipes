@@ -31,7 +31,7 @@ void Spiderock::Update(IP& ip, float eTime, Level& level, Character& character, 
     sf::Vector2f cc(MathHelper::GetCenter(character.GetGlobalHitbox()));
 
     if(GetGlobalHitbox().intersects(character.GetGlobalHitbox()) && _attackTimer.getElapsedTime().asMilliseconds() > 800) {
-        Hit(&character, ip, pManager, sf::Color(255, 0, 0));
+        Hit(&character, ip, pManager, sf::Color(255, 0, 0), MathHelper::RandInt(2, 3));
         _attackTimer.restart();
     }
 

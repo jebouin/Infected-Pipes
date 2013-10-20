@@ -147,7 +147,7 @@ bool Character::EnteringPipe() {
 }
 
 void Character::Hit(Ennemy *other, IP& ip, ParticleManager& pManager, Level& level) {
-    GameEntity::Hit((GameEntity*)other, ip, pManager, sf::Color(255, 255, 0));
+    GameEntity::Hit((GameEntity*)other, ip, pManager, sf::Color(255, 255, 0), MathHelper::RandInt(2, 5));
     if(!other->IsAlive()) {
         EarnXP(other->GetXP());
         level.SetDifficulty(level.GetDifficulty() + other->GetIncDifficulty());

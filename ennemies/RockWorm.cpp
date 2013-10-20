@@ -76,7 +76,7 @@ bool RockWorm::AutoSpawn(IP& ip, Level& level, EntityManager& eManager, Characte
             }
         }
         float distFromCharacter = MathHelper::GetVecLength(rc-MathHelper::GetCenter(character.GetGlobalHitbox()));
-        if(distFromCharacter < 42 || distFromCharacter > 800) {   //near to player?
+        if(distFromCharacter < 42 || distFromCharacter > 300) {   //near to player?
             correctPos = false;
         }
 

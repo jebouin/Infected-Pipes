@@ -180,8 +180,8 @@ void GameEntity::Die(IP& ip, ParticleManager& pManager) {
     _alive = false;
 }
 
-void GameEntity::Hit(GameEntity *other, IP& ip, ParticleManager& pManager, sf::Color color) {
-    other->Damage(MathHelper::RandInt(2, 5), ip, pManager, color, other->getPosition(), MathHelper::Normalize(other->getPosition() - getPosition())*0.1f);
+void GameEntity::Hit(GameEntity *other, IP& ip, ParticleManager& pManager, sf::Color color, int damage) {
+    other->Damage(damage, ip, pManager, color, other->getPosition(), MathHelper::Normalize(other->getPosition() - getPosition())*0.1f);
     sf::Vector2f c(MathHelper::GetCenter(GetGlobalHitbox()));
     sf::Vector2f oc(MathHelper::GetCenter(other->GetGlobalHitbox()));
     sf::Vector2f dir = MathHelper::Normalize(sf::Vector2f(oc.x-c.x, 0));

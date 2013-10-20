@@ -22,7 +22,7 @@ class Bat : public Ennemy {
     void Die(IP& ip, ParticleManager& pManager);
 
     private:
-
+    sf::Clock _attackTimer;
 };
 
 #endif // ENNEMY_H_INCLUDED
