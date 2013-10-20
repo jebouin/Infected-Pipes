@@ -6,7 +6,7 @@
 #include "MathHelper.h"
 #include "Renderer.h"
 
-Bow::Bow(IP& ip, const GameEntity& holder) : Weapon(ip, "bow", sf::IntRect(0, 0, 7, 17), holder, sf::Vector2f(0, 0), 200) {
+Bow::Bow(IP& ip, const GameEntity& holder, sf::Vector2f relativePos) : Weapon(ip, holder, relativePos, 200) {
 
 }
 
@@ -22,15 +22,20 @@ void Bow::Draw(IP& ip) {
     Weapon::Draw(ip);
 }
 
-bool Bow::Use(IP& ip, BulletManager& bManager) {
-    if(!Weapon::Use(ip, bManager)) {
+bool Bow::Use(IP& ip, BulletManager& bManager, float angle) {
+    if(!Weapon::Use(ip, bManager, angle)) {
         return false;
     }
-    sf::Vector2f mpos = MathHelper::GetMousePos(ip);
-    sf::Vector2f d = mpos-getPosition();
+    /*sf::Vector2f mpos = MathHelper::GetMousePos(ip);
+    sf::Vector2f d = mpos-GetPosition();
     bManager.AddBullet(new Arrow(ip,
-                                 getPosition(),
+                                 GetPosition(),
                                  d/MathHelper::GetVecLength(d)*MathHelper::RandFloat(0.7, 0.9),
+                                 false));*/
+    sf::Vector2f d = MathHelper::Ang2Vec(MathHelper::Deg2Rad(angle));
+    bManager.AddBullet(new Arrow(ip,
+                                 GetPosition(),
+                                 d*MathHelper::RandFloat(0.7, 0.9),
                                  false));
     return true;
 }

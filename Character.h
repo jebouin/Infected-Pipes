@@ -22,6 +22,7 @@ class Bow;
 struct Arm {
     sf::IntRect _textureRect;
     sf::Vector2f _origin;
+    sf::Vector2f _bulletPos;
 };
 
 class Character : public GameEntity {
@@ -52,6 +53,7 @@ class Character : public GameEntity {
     bool _enteringPipe;
     bool _leavingPipe;
     sf::Clock _enterTimer;
+    ArmType _curArmType;
 
     Weapon *_weapon;
     sf::Sprite _arm;

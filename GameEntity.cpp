@@ -24,6 +24,7 @@ GameEntity::GameEntity(IP& ip, string name, sf::IntRect hitbox, int hp) : Moving
     _invincible = false;
     _autoDir = true;
     _inWater = false;
+    _friction = .008;
 }
 
 GameEntity::~GameEntity() {
@@ -42,7 +43,7 @@ void GameEntity::Update(IP& ip, float elapsedTime, Level& level, EntityManager& 
     } else {
         Accelerate(sf::Vector2f(0, -0.008*GetVel().y), elapsedTime);
     }
-    Accelerate(sf::Vector2f(-0.008*GetVel().x, 0), elapsedTime);
+    Accelerate(sf::Vector2f(-_friction*GetVel().x, 0), elapsedTime);
 
     if(_inWater) {
         Accelerate(sf::Vector2f(-0.02*GetVel().x, -0.02*GetVel().y), elapsedTime);
@@ -225,6 +226,10 @@ void GameEntity::SetInvincible(bool i) {
 
 void GameEntity::SetAutoDir(bool a) {
     _autoDir = a;
+}
+
+void GameEntity::SetFriction(float friction) {
+    _friction = friction;
 }
 
 float GameEntity::GetSpeed() {

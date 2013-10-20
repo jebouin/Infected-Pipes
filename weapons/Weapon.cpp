@@ -5,8 +5,8 @@
 #include "BulletManager.h"
 #include "Bullet.h"
 
-Weapon::Weapon(IP& ip, string name, sf::IntRect hitbox, const GameEntity& holder, sf::Vector2f relativePos, float reloadTime)
-    : MovingSprite(ip, name, true), _holder(holder) {
+Weapon::Weapon(IP& ip, const GameEntity& holder, sf::Vector2f relativePos, float reloadTime)
+    : _holder(holder) {
     _reloadTime = reloadTime;
     _relativePos = relativePos;
 }
@@ -16,18 +16,25 @@ Weapon::~Weapon() {
 }
 
 void Weapon::Update(IP& ip, float eTime, BulletManager& bManager) {
-    setPosition(_holder.getPosition() + _relativePos);
-    MovingSprite::Update(ip, eTime);
+    _position = _holder.GetUpperLeftPos()+_relativePos;
 }
 
 void Weapon::Draw(IP& ip) {
-    ip._renderer->Draw(*this);
+
 }
 
-bool Weapon::Use(IP& ip, BulletManager& bManager) {
+bool Weapon::Use(IP& ip, BulletManager& bManager, float angle) {
     if(_useTimer.getElapsedTime().asMilliseconds() >= _reloadTime) {
         _useTimer.restart();
         return true;
     }
     return false;
+}
+
+sf::Vector2f Weapon::GetPosition() {
+    return _position;
+}
+
+void Weapon::SetRelPosition(sf::Vector2f p) {
+    _relativePos = p;
 }

@@ -43,6 +43,7 @@ class GameEntity : public MovingSprite {
     void SetAlive(bool a);
     void SetInvincible(bool i);
     void SetAutoDir(bool a);
+    void SetFriction(float friction);
     float GetSpeed();
     float GetWeight();
     bool IsAlive();
@@ -60,6 +61,7 @@ class GameEntity : public MovingSprite {
     float _jumpPower;
     float _speed;
     float _weight;
+    float _friction;
     bool _alive;
     bool _pushable;
     bool _flying;

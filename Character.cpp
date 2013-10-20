@@ -17,9 +17,9 @@
 #include "TextureLoader.h"
 
 Character::Character(IP& ip) : GameEntity(ip, "character", sf::IntRect(4, 3, 7, 27), 10) {
-    _arms[EMPTY] = Arm {sf::IntRect(0, 0, 6, 9), sf::Vector2f(2, 1)};
-    _arms[RAINBOW] = Arm {sf::IntRect(0, 9, 15, 9), sf::Vector2f(4, 1)};
-    _arms[BOW] = Arm {sf::IntRect(0, 18, 10, 17), sf::Vector2f(2, 3)};
+    _arms[EMPTY] = Arm {sf::IntRect(0, 0, 6, 9), sf::Vector2f(2, 1), sf::Vector2f(5, 6)};
+    _arms[RAINBOW] = Arm {sf::IntRect(0, 9, 15, 9), sf::Vector2f(4, 1), sf::Vector2f(2, 2)};
+    _arms[BOW] = Arm {sf::IntRect(0, 18, 10, 17), sf::Vector2f(2, 3), sf::Vector2f(4, 4)};
 
     SetWeight(0.5f);
     AnimationTable& t(GetAnims());
@@ -33,10 +33,10 @@ Character::Character(IP& ip) : GameEntity(ip, "character", sf::IntRect(4, 3, 7, 
     _xp = 0;
     _nextXP = 10;
 
-    _weapon = new Bow(ip, (const GameEntity&)*this);
+    _weapon = new Bow(ip, (const GameEntity&)*this, sf::Vector2f(4, 1));
 
     _arm.setTexture(ip._textureLoader->GetTexture("arms"));
-    LoadArm(RAINBOW);
+    LoadArm(BOW);
 
     SetAutoDir(false);
     SetCollisionPrecision(.05);
@@ -50,6 +50,7 @@ Character::~Character() {
 void Character::Update(IP& ip, float eTime, Level& level, EntityManager& eManager, ParticleManager& pManager, BulletManager& bManager) {
     sf::Vector2f mpos = MathHelper::GetMousePos(ip);
     AnimationTable& t(GetAnims());
+    _weapon->SetRelPosition(_arm.getPosition()-GetUpperLeftPos()+_arms[_curArmType]._bulletPos);
 
     if(_enteringPipe) {
         SetVel(sf::Vector2f(0, 0.1));
@@ -68,11 +69,11 @@ void Character::Update(IP& ip, float eTime, Level& level, EntityManager& eManage
             _leavingPipe = false;
         }
     } else {
-        if(sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-            _weapon->Use(ip, bManager);
-        }
         GameEntity::Update(ip, eTime, level, eManager, pManager);
         float r = MathHelper::Rad2Deg(MathHelper::Vec2Ang(mpos-_arm.getPosition()));
+        if(sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+            _weapon->Use(ip, bManager, r);
+        }
         if(!GetDir()) {
             _arm.setScale(-1, 1);
             r -= 180;
@@ -112,6 +113,7 @@ void Character::Draw(IP& ip) {
 void Character::LoadArm(ArmType t) {
     _arm.setTextureRect(_arms[t]._textureRect);
     _arm.setOrigin(_arms[t]._origin);
+    _curArmType = t;
 }
 
 void Character::GoLeft(float eTime) {

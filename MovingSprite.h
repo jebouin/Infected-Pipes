@@ -25,7 +25,7 @@ class MovingSprite : public sf::Sprite {
     bool TryMove(sf::Vector2f delta, Level& level);
     sf::Vector2f GetVel();
     float GetRotVel();
-    sf::Vector2f GetUpperLeftPos();
+    sf::Vector2f GetUpperLeftPos() const;
     sf::IntRect GetHitbox();
     sf::FloatRect GetGlobalHitbox();
     AnimationTable& GetAnims();

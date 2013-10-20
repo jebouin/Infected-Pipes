@@ -14,6 +14,7 @@ TextureLoader::TextureLoader(IP& ip) {
     AddTexture("rockWorm.png", "rockWorm");
     AddTexture("bat.png", "bat");
     AddTexture("snail.png", "snail");
+    AddTexture("snowBallEnemy.png", "snowBallEnemy");
 
     AddTexture("pipe.png", "pipe");
     AddTexture("zombie.png", "zombie");
@@ -50,6 +51,7 @@ TextureLoader::TextureLoader(IP& ip) {
     AddTexture("fir.png", "fir");
     AddTexture("moon.png", "moon");
     AddTexture("cloud.png", "cloud");
+    AddTexture("stars.png", "stars");
 
     AddTexture("arms.png", "arms");
 }

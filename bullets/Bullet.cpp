@@ -11,7 +11,8 @@
 #include "EntityManager.h"
 #include "Ennemy.h"
 
-Bullet::Bullet(IP& ip, string name, sf::IntRect hitbox, sf::Vector2f position, sf::Vector2f vel, int damage, bool animated, bool ennemy, bool gravity, bool instantDie, bool sticky) : MovingSprite(ip, name, hitbox, animated) {
+Bullet::Bullet(IP& ip, string name, sf::IntRect hitbox, sf::Vector2f position, sf::Vector2f vel, int damage, bool animated, bool ennemy, bool gravity, bool instantDie, bool sticky)
+    : MovingSprite(ip, name, hitbox, animated) {
     setPosition(position);
     SetVel(vel);
     _alive = true;

@@ -120,6 +120,8 @@ void Level::Load(IP& ip, string name, Character& character) {
                     _map->SetTile(pos, 5, l);
                 } else if(c == sf::Color(51, 51, 51)) {
                     _map->SetTile(pos, 6, l);
+                } else if(c == sf::Color(56, 45, 26, 128)) {
+                    _map->SetTile(pos, 7, l);
                 } else if(c == sf::Color(106, 129, 193)) {
                     _map->SetTile(pos, 0, l);
                 } else if(c == sf::Color(255, 255, 255)) {

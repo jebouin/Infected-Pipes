@@ -160,7 +160,7 @@ float MovingSprite::GetRotVel() {
     return _rotVel;
 }
 
-sf::Vector2f MovingSprite::GetUpperLeftPos() {
+sf::Vector2f MovingSprite::GetUpperLeftPos() const {
     return sf::Vector2f(getGlobalBounds().left, getGlobalBounds().top);
 }
 

@@ -23,17 +23,33 @@ Background::Background(IP& ip, string name, float zoom, Level& level) : _level(l
             }
         }
 
+        for(int i=0 ; i<100 ; i++) {
+            int starType = rand()%4;
+            sf::Sprite star;
+            star.setTexture(ip._textureLoader->GetTexture("stars"));
+            switch(starType) {
+            case 0:
+                star.setTextureRect(sf::IntRect(0, 0, 5, 5));
+                break;
+            case 1:
+                star.setTextureRect(sf::IntRect(0, 5, 3, 3));
+                break;
+            case 2:
+                star.setTextureRect(sf::IntRect(0, 8, 1, 1));
+                break;
+            case 3:
+                star.setTextureRect(sf::IntRect(0, 9, 1, 1));
+                break;
+            }
+            /*correct that!*/star.setPosition(MathHelper::RandInt(0, ip._renderer->GetTexture().getSize().x-star.getLocalBounds().width), MathHelper::RandInt(0, ip._renderer->GetTexture().getSize().y-star.getLocalBounds().height));
+            star.setOrigin(sf::Vector2f(star.getTextureRect().width, star.getTextureRect().height)/2.f);
+            _backSprites2.push_back(star);
+        }
+
         sf::Sprite moon;
         moon.setTexture(ip._textureLoader->GetTexture("moon"));
         moon.setPosition(sf::Vector2f(ip._renderer->GetTexture().getSize().x/4.f*3.f, ip._renderer->GetTexture().getSize().y/4.f));
         _backSprites2.push_back(moon);
-
-        /*for(int i=0 ; i<10 ; i++) {
-            sf::Sprite cloud;
-            cloud.setTexture(ip._textureLoader->GetTexture("cloud"));
-            cloud.setPosition(sf::Vector2f(MathHelper::RandFloat(0-cloud.getTextureRect().width, ip._renderer->GetTexture().getSize().x), MathHelper::RandFloat(48, 128)));
-            _backSprites2.push_back(cloud);
-        }*/
     }
 }
 
@@ -42,15 +58,16 @@ Background::~Background() {
 }
 
 void Background::Update(IP& ip, float elapsedTime) {
-    /*if(_name == "nightBackground") {
-        for(int i=0 ; i<10 ; i++) {
-            sf::Sprite& cloud(_backSprites2[i+1]);
-            cloud.move(-1.f * elapsedTime * MathHelper::Interpolate((cloud.getPosition().y-48.f)/80.f, 0.01, 0.04), 0);
-            if(cloud.getPosition().x < -cloud.getTextureRect().width) {
-                cloud.setPosition(ip._renderer->GetTexture().getSize().x, MathHelper::RandFloat(88-40, 88+40));
+    if(_name == "nightBackground") {
+        static sf::IntRect tRects[4] = {sf::IntRect(0, 0, 5, 5), sf::IntRect(0, 5, 3, 3), sf::IntRect(0, 8, 1, 1), sf::IntRect(0, 9, 1, 1)};
+        for(int i=0 ; i<100 ; i++) {
+            if(rand()%3==0) {
+                sf::Sprite& s(_backSprites2[i]);
+                s.setTextureRect(tRects[rand()%2 + 2*(i%2)]);
+                s.setOrigin(sf::Vector2f(s.getTextureRect().width, s.getTextureRect().height)/2.f);
             }
         }
-    }*/
+    }
 }
 
 void Background::Draw(IP& ip, sf::View& prevView) {
