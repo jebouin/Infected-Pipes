@@ -49,7 +49,7 @@ void Spawner::Update(IP& ip, EntityManager& eManager, Level& level, Character& c
     /*if(level.GetName() == "miniBoss1") {
         if(rand()%100==0) {
             Slime *slime = new Slime(ip, level);
-            slime->setPosition(sf::Vector2f(23*16, -15));
+            slime->setPosition(sf::Vector2f(26*16, -15));
             eManager.Add(slime);
         }
     }*/

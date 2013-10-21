@@ -22,7 +22,7 @@ Slimey::Slimey(IP& ip, Level& level) : Ennemy(ip, "slimey", sf::IntRect(4, 0, 34
     t.SetAnimation("0");
     SetSpeed(0.002);
     SetJumpPower(.4);
-    setPosition(sf::Vector2f(23*16, -15));
+    setPosition(sf::Vector2f(16*16, -15));
     _nextJump = 800;
     SetAutoDir(false);
     _prevState = 0;

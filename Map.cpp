@@ -17,6 +17,7 @@ Map::Map(IP& ip, sf::Vector2i size) {
     _tileTypes.push_back(VOID);
     _tileTypes.push_back(WALL);
     _tileTypes.push_back(VOID);
+    _tileTypes.push_back(VOID);
 }
 
 Map::~Map() {

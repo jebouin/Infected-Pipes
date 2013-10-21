@@ -23,7 +23,7 @@ Level::Level(IP& ip, Character& character) {
     _grass = 0;
     _background = 0;
     _difficulty = 2;
-    Load(ip, "miniBoss1", character);
+    Load(ip, "rockyCave", character);
     character.setPosition(character.getPosition() + sf::Vector2f(0, 50));
 }
 
@@ -130,6 +130,8 @@ void Level::Load(IP& ip, string name, Character& character) {
                     _map->SetTile(pos, 6, l);
                 } else if(c == sf::Color(56, 45, 26, 128)) {
                     _map->SetTile(pos, 7, l);
+                } else if(c == sf::Color(51, 51, 51, 200)) {
+                    _map->SetTile(pos, 8, l);
                 } else if(c == sf::Color(106, 129, 193)) {
                     _map->SetTile(pos, 0, l);
                 } else if(c == sf::Color(255, 255, 255)) {

@@ -15,7 +15,7 @@
 Slime::Slime(IP& ip, Level& level) : Ennemy(ip, "slime", sf::IntRect(1, 1, 18, 10), 7, 1, 1, level) {
     SetSpeed(0.002);
     SetJumpPower(.3);
-    _nextJump = MathHelper::RandFloat(400, 600);
+    _nextJump = MathHelper::RandFloat(300, 500);
     SetAutoDir(false);
 }
 
@@ -37,7 +37,7 @@ void Slime::Update(IP& ip, float eTime, Level& level, Character& character, Enti
     if(_jumpTimer.getElapsedTime().asMilliseconds() >= _nextJump) {
         if(Jump(level)) {
             _jumpTimer.restart();
-            _nextJump = MathHelper::RandFloat(400, 600);
+            _nextJump = MathHelper::RandFloat(300, 500);
         }
     }
 
