@@ -11,6 +11,7 @@
 #include "SnowBallEnemy.h"
 #include "Bat.h"
 #include "Snail.h"
+#include "Slimey.h"
 #include "Level.h"
 #include "Ennemy.h"
 
@@ -50,37 +51,47 @@ void Spawner::Update(IP& ip, EntityManager& eManager, Level& level, Character& c
 }
 
 void Spawner::Spawn(IP& ip, EntityManager& eManager, Level& level, Character& character) {
-    int pipeId = rand()%_pipes.size();
-    int et;
-    static int d[4] = {1, 10, 20, 50};
-    for(int i=3 ; i>=0 ; i--) {
-        if(d[i] <= _difToSpawn) {
-            et = i;
-            break;
-        }
-    }
-    switch(et) {
-        case 0: {
-            _pipes[pipeId]->Spawn(ip, eManager, new Spiderock(ip, level));
-            break;
-         } case 1: {
-            RockWorm *r = new RockWorm(ip, level);
-            if(!r->AutoSpawn(ip, level, eManager, character)) {
-                delete r;
-                return;
+    string levelName = level.GetName();
+
+    if(levelName == "miniBoss1") {
+        Slimey *slimey = new Slimey(ip, level);
+        eManager.Add(slimey);
+        _difToSpawn = 0;
+    } else {
+        int pipeId = rand()%_pipes.size();
+        int et;
+        static int d[4] = {1, 10, 20, 50};
+        for(int i=3 ; i>=0 ; i--) {
+            if(d[i] <= _difToSpawn) {
+                et = i;
+                break;
             }
-            eManager.Add(r);
-            break;
-        } case 2: {
-            _pipes[pipeId]->Spawn(ip, eManager, new Bat(ip, level));
-            break;
-        } case 3: {
-            _pipes[pipeId]->Spawn(ip, eManager, new Snail(ip, level));
-            break;
         }
+        switch(et) {
+            case 0: {
+                _pipes[pipeId]->Spawn(ip, eManager, new Spiderock(ip, level));
+                break;
+             } case 1: {
+                RockWorm *r = new RockWorm(ip, level);
+                if(!r->AutoSpawn(ip, level, eManager, character)) {
+                    delete r;
+                    return;
+                }
+                eManager.Add(r);
+                break;
+            } case 2: {
+                _pipes[pipeId]->Spawn(ip, eManager, new Bat(ip, level));
+                break;
+            } case 3: {
+                _pipes[pipeId]->Spawn(ip, eManager, new Snail(ip, level));
+                break;
+            }
+        }
+
+        _difToSpawn -= d[et];
     }
 
-    _difToSpawn -= d[et];
+
 
 
     /*if(rand()%10==0) {
@@ -93,7 +104,7 @@ void Spawner::Spawn(IP& ip, EntityManager& eManager, Level& level, Character& ch
 }
 
 void Spawner::NextWave(Level& level) {
-    if(_curWave > _nbWaves) {
+    if(_curWave >= _nbWaves) {
         _finished = true;
         _spawning = false;
         cout << "Finished!" << endl;

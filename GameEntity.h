@@ -29,7 +29,7 @@ class GameEntity : public MovingSprite {
     virtual void GoRight(float eTime);
     void ChangeDir();
     void PlatformDrop(Level& level);
-    void Jump(Level& level);
+    bool Jump(Level& level);
     virtual void Damage(int dmg, IP& ip, ParticleManager& pManager, sf::Color color, sf::Vector2f pos, sf::Vector2f dir);
     virtual void Die(IP& ip, ParticleManager& pManager);
     void Hit(GameEntity *other, IP& ip, ParticleManager& pManager, sf::Color color, int damage);

@@ -17,13 +17,14 @@
 Level::Level(IP& ip, Character& character) {
     _levelInfos["intro"] = LevelInfo{"level0", "nightBackground", 0.0001f};
     _levelInfos["rockyCave"] = LevelInfo{"level1", "rockyBackground", 0.2f};
-    _levelInfos["rockyCave2"] = LevelInfo{"level2", "rockyBackground", 0.2f};
+    _levelInfos["miniBoss1"] = LevelInfo{"miniBoss1", "rockyBackground", 0.2f};
     _map = 0;
     _spawner = 0;
     _grass = 0;
     _background = 0;
     _difficulty = 2;
-    Load(ip, "intro", character);
+    Load(ip, "miniBoss1", character);
+    character.setPosition(character.getPosition() + sf::Vector2f(0, 50));
 }
 
 Level::~Level() {
@@ -92,8 +93,15 @@ void Level::Load(IP& ip, string name, Character& character) {
     _levelImages[1] = sf::Image(ip._textureLoader->GetImage(info._imageName + "front"));
     delete _map;
     _map = new Map(ip, sf::Vector2i(_levelImages[0].getSize()));
+
     delete _spawner;
-    _spawner = new Spawner(ip, 20, *this);
+    if(name == "intro" || name == "rockyCave") {
+        _spawner = new Spawner(ip, 20, *this);
+    } else if(name == "miniBoss1") {
+        _spawner = new Spawner(ip, 1, *this);
+    }
+
+
     for(int i=0 ; i<_waterFields.size() ; i++) {
         delete _waterFields[i];
         _waterFields[i] = 0;
@@ -236,7 +244,7 @@ void Level::NextLevel(IP& ip, EntityManager& eManager, BulletManager& bManager, 
     } else {
         Load(ip, "rockyCave", character);
     }*/
-    Load(ip, "rockyCave", character);
+    Load(ip, /*"rockyCave"*/"miniBoss1", character);
     eManager.Clear();
     bManager.Clear();
 }
@@ -263,4 +271,8 @@ int Level::GetNbWaterFields() {
 
 WaterField& Level::GetWaterField(int id) {
     return *_waterFields[id];
+}
+
+string Level::GetName() {
+    return _curLevel;
 }

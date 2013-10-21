@@ -42,6 +42,7 @@ class Level {
     void OpenChest(Character& character, IP& ip);
     int GetNbWaterFields();
     WaterField& GetWaterField(int id);
+    string GetName();
 
     private:
     sf::Vector2i GetRectSizeInImageAt(sf::Image& img, sf::Vector2i pos, sf::Color& c);

@@ -139,19 +139,19 @@ void GameEntity::PlatformDrop(Level& level) {
     setPosition(sf::Vector2f(getPosition().x, getPosition().y+4));
 }
 
-void GameEntity::Jump(Level& level) {
+bool GameEntity::Jump(Level& level) {
     if(!level.GetSpawner().IsOnGround(*this) && !level.GetMap().IsOnTileType(*this, Map::WALL) && !level.GetMap().IsOnTileType(*this, Map::PLATFORM) && !_inWater) {
-        return;
+        return false;
     }
     if(GetVel().y < 0) {
-        return;
+        return false;
     }
-
     if(_inWater) {
         SetVel(sf::Vector2f(GetVel().x, -_jumpPower*1.3));
     } else {
         SetVel(sf::Vector2f(GetVel().x, -_jumpPower));
     }
+    return true;
 }
 
 void GameEntity::Damage(int dmg, IP& ip, ParticleManager& pManager, sf::Color color, sf::Vector2f pos, sf::Vector2f dir) {
