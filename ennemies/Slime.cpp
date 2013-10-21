@@ -13,6 +13,9 @@
 #include "BulletManager.h"
 
 Slime::Slime(IP& ip, Level& level) : Ennemy(ip, "slime", sf::IntRect(1, 1, 18, 10), 7, 1, 1, level) {
+    AnimationTable& t(GetAnims());
+    t.AddAnimation("idle", new Animation(4, 100, sf::Vector2i(0, 0), sf::Vector2i(24, 12), true));
+    t.SetAnimation("idle");
     SetSpeed(0.002);
     SetJumpPower(.3);
     _nextJump = MathHelper::RandFloat(300, 500);
@@ -35,10 +38,14 @@ void Slime::Update(IP& ip, float eTime, Level& level, Character& character, Enti
     }
 
     if(_jumpTimer.getElapsedTime().asMilliseconds() >= _nextJump) {
+        if(rand()%10==0) {
+            SetJumpPower(.7);
+        }
         if(Jump(level)) {
             _jumpTimer.restart();
             _nextJump = MathHelper::RandFloat(300, 500);
         }
+        SetJumpPower(.3);
     }
 
     if(!level.GetMap().IsOnTileType(*this, Map::WALL) && !level.GetSpawner().IsOnGround(*this)) {
