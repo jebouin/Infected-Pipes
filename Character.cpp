@@ -146,16 +146,16 @@ bool Character::EnteringPipe() {
     return _enteringPipe;
 }
 
-void Character::Hit(Ennemy *other, IP& ip, ParticleManager& pManager, Level& level) {
-    GameEntity::Hit((GameEntity*)other, ip, pManager, sf::Color(255, 255, 0), MathHelper::RandInt(2, 5));
+void Character::Hit(Ennemy *other, IP& ip, ParticleManager& pManager, EntityManager& eManager, Level& level) {
+    GameEntity::Hit((GameEntity*)other, ip, pManager, sf::Color(255, 255, 0), MathHelper::RandInt(2, 5), eManager, level);
     if(!other->IsAlive()) {
         EarnXP(other->GetXP());
         level.SetDifficulty(level.GetDifficulty() + other->GetIncDifficulty());
     }
 }
 
-void Character::Damage(int dmg, IP& ip, ParticleManager& pManager, sf::Color color, sf::Vector2f pos, sf::Vector2f dir) {
-    GameEntity::Damage(dmg, ip, pManager, color, pos, dir);
+void Character::Damage(int dmg, IP& ip, ParticleManager& pManager, sf::Color color, sf::Vector2f pos, sf::Vector2f dir, EntityManager& eManager, Level& level) {
+    GameEntity::Damage(dmg, ip, pManager, color, pos, dir, eManager, level);
 
     //some blood
     float ang = MathHelper::Rad2Deg(MathHelper::Vec2Ang(dir));

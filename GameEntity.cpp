@@ -154,14 +154,14 @@ bool GameEntity::Jump(Level& level) {
     return true;
 }
 
-void GameEntity::Damage(int dmg, IP& ip, ParticleManager& pManager, sf::Color color, sf::Vector2f pos, sf::Vector2f dir) {
+void GameEntity::Damage(int dmg, IP& ip, ParticleManager& pManager, sf::Color color, sf::Vector2f pos, sf::Vector2f dir, EntityManager& eManager, Level& level) {
     if(_invincible) {
         return;
     }
 
     _hp -= dmg;
     if(_hp <= 0) {
-        Die(ip, pManager);
+        Die(ip, pManager, eManager, level);
         _hp = 0;
     }
 
@@ -176,12 +176,12 @@ void GameEntity::Damage(int dmg, IP& ip, ParticleManager& pManager, sf::Color co
                                             true));
 }
 
-void GameEntity::Die(IP& ip, ParticleManager& pManager) {
+void GameEntity::Die(IP& ip, ParticleManager& pManager, EntityManager& eManager, Level& level) {
     _alive = false;
 }
 
-void GameEntity::Hit(GameEntity *other, IP& ip, ParticleManager& pManager, sf::Color color, int damage) {
-    other->Damage(damage, ip, pManager, color, other->getPosition(), MathHelper::Normalize(other->getPosition() - getPosition())*0.1f);
+void GameEntity::Hit(GameEntity *other, IP& ip, ParticleManager& pManager, sf::Color color, int damage, EntityManager& eManager, Level& level) {
+    other->Damage(damage, ip, pManager, color, other->getPosition(), MathHelper::Normalize(other->getPosition() - getPosition())*0.1f, eManager, level);
     sf::Vector2f c(MathHelper::GetCenter(GetGlobalHitbox()));
     sf::Vector2f oc(MathHelper::GetCenter(other->GetGlobalHitbox()));
     sf::Vector2f dir = MathHelper::Normalize(sf::Vector2f(oc.x-c.x, 0));

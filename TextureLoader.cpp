@@ -18,6 +18,7 @@ TextureLoader::TextureLoader(IP& ip) {
     AddTexture("snail.png", "snail");
     AddTexture("snowBallEnemy.png", "snowBallEnemy");
     AddTexture("slimey.png", "slimey");
+    AddTexture("slime.png", "slime");
 
     AddTexture("pipe.png", "pipe");
     AddTexture("zombie.png", "zombie");
@@ -53,6 +54,7 @@ TextureLoader::TextureLoader(IP& ip) {
     AddTexture("snailParticle.png", "snailParticle");
     AddTexture("snailParticle2.png", "snailParticle2");
     AddTexture("snowParticle.png", "snowParticle");
+    AddTexture("slimeParticle.png", "slimeParticle");
 
     AddTexture("fir.png", "fir");
     AddTexture("moon.png", "moon");

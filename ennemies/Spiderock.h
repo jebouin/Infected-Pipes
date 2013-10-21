@@ -19,7 +19,7 @@ class Spiderock : public Ennemy {
     Spiderock(IP& ip, Level& level);
     ~Spiderock();
     void Update(IP& ip, float eTime, Level& level, Character& character, EntityManager& eManager, ParticleManager& pManager, BulletManager& bManager);
-    void Die(IP& ip, ParticleManager& pManager);
+    void Die(IP& ip, ParticleManager& pManager, EntityManager& eManager, Level& level);
 
     private:
     sf::Clock _attackTimer;

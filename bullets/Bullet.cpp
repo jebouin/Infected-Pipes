@@ -62,13 +62,13 @@ void Bullet::Update(IP& ip, float eTime, Level& level, Character& character, Par
         WaterCollision(level, GetVel()*eTime, pManager, ip);
         if(_ennemy) {
             if(GetGlobalHitbox().intersects(character.GetGlobalHitbox())) {
-                Impact((GameEntity&)(character), ip, pManager, sf::Color(255, 0, 0));
+                Impact((GameEntity&)(character), ip, pManager, sf::Color(255, 0, 0), eManager, level);
             }
         } else {
             for(int i=0 ; i<eManager.GetNbEnnemies() ; i++) {
                 Ennemy *e = eManager.GetEnnemy(i);
                 if(e->GetGlobalHitbox().intersects(GetGlobalHitbox())) {
-                    Impact((GameEntity&)(*e), ip, pManager, sf::Color(255, 255, 0));
+                    Impact((GameEntity&)(*e), ip, pManager, sf::Color(255, 255, 0), eManager, level);
                 }
             }
         }
@@ -109,11 +109,11 @@ void Bullet::TestCollisions(IP& ip, float eTime, Level& level, sf::Vector2f delt
     }
 }
 
-void Bullet::Impact(GameEntity& entity, IP& ip, ParticleManager& pManager, sf::Color color) {
+void Bullet::Impact(GameEntity& entity, IP& ip, ParticleManager& pManager, sf::Color color, EntityManager& eManager, Level& level) {
     _dying = true;
     _instantDie = true;
     _deadTimer.restart();
-    entity.Damage(_damage, ip, pManager, color, getPosition(), GetVel());
+    entity.Damage(_damage, ip, pManager, color, getPosition(), GetVel(), eManager, level);
     entity.SetVel(entity.GetVel() + GetVel()/MathHelper::GetVecLength(GetVel())*_knockBack);
 }
 

@@ -144,8 +144,8 @@ void RockWorm::Update(IP& ip, float eTime, Level& level, Character& character, E
     Ennemy::Update(ip, eTime, level, character, eManager, pManager, bManager);
 }
 
-void RockWorm::Die(IP& ip, ParticleManager& pManager) {
-    GameEntity::Die(ip, pManager);
+void RockWorm::Die(IP& ip, ParticleManager& pManager, EntityManager& eManager, Level& level) {
+    GameEntity::Die(ip, pManager, eManager, level);
     for(int i=0 ; i<20 ; i++) {
         Particle *p = new Particle(ip, "rockWormBlood",
                                    sf::Vector2f(GetGlobalHitbox().left+MathHelper::RandFloat(0, GetGlobalHitbox().width), GetGlobalHitbox().top+MathHelper::RandFloat(0, GetGlobalHitbox().height)),

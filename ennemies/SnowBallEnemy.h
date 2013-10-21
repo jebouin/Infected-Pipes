@@ -19,7 +19,7 @@ class SnowBallEnemy : public Ennemy {
     SnowBallEnemy(IP& ip, Level& level);
     ~SnowBallEnemy();
     void Update(IP& ip, float eTime, Level& level, Character& character, EntityManager& eManager, ParticleManager& pManager, BulletManager& bManager);
-    void Die(IP& ip, ParticleManager& pManager);
+    void Die(IP& ip, ParticleManager& pManager, EntityManager& eManager, Level& level);
 
     private:
 

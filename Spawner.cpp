@@ -14,6 +14,7 @@
 #include "Slimey.h"
 #include "Level.h"
 #include "Ennemy.h"
+#include "Slime.h"
 
 Spawner::Spawner(IP& ip, int nbWaves, Level& l) {
     _curWave = 0;
@@ -44,6 +45,14 @@ void Spawner::Update(IP& ip, EntityManager& eManager, Level& level, Character& c
     if(eManager.GetNbEnnemies() == 0 && !_finished && !_spawning) {
         NextWave(level);
     }
+
+    /*if(level.GetName() == "miniBoss1") {
+        if(rand()%100==0) {
+            Slime *slime = new Slime(ip, level);
+            slime->setPosition(sf::Vector2f(23*16, -15));
+            eManager.Add(slime);
+        }
+    }*/
 
     for(int i=0 ; i<_pipes.size() ; i++) {
         _pipes[i]->Update(ip, eManager);

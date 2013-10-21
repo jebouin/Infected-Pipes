@@ -46,8 +46,8 @@ void SnowBallEnemy::Update(IP& ip, float eTime, Level& level, Character& charact
     Ennemy::Update(ip, eTime, level, character, eManager, pManager, bManager);
 }
 
-void SnowBallEnemy::Die(IP& ip, ParticleManager& pManager) {
-    GameEntity::Die(ip, pManager);
+void SnowBallEnemy::Die(IP& ip, ParticleManager& pManager, EntityManager& eManager, Level& level) {
+    GameEntity::Die(ip, pManager, eManager, level);
     for(int i=0 ; i<20 ; i++) {
         pManager.AddParticle(new Particle(ip, "snowParticle",
                                           getPosition() + MathHelper::Ang2Vec(MathHelper::Deg2Rad(MathHelper::RandFloat(0, 360))) * MathHelper::RandFloat(0, 8),

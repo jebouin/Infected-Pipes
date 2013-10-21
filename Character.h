@@ -38,8 +38,8 @@ class Character : public GameEntity {
     void GoRight(float eTime);
     void EnterPipe(Level& level);
     bool EnteringPipe();
-    void Hit(Ennemy *other, IP& ip, ParticleManager& pManager, Level& level);
-    void Damage(int dmg, IP& ip, ParticleManager& pManager, sf::Color color, sf::Vector2f pos, sf::Vector2f dir);
+    void Hit(Ennemy *other, IP& ip, ParticleManager& pManager, EntityManager& eManager, Level& level);
+    void Damage(int dmg, IP& ip, ParticleManager& pManager, sf::Color color, sf::Vector2f pos, sf::Vector2f dir, EntityManager& eManager, Level& level);
     void EarnXP(int amount);
     void LevelUp();
     int GetXP() const;

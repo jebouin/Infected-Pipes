@@ -31,7 +31,7 @@ void Spiderock::Update(IP& ip, float eTime, Level& level, Character& character, 
     sf::Vector2f cc(MathHelper::GetCenter(character.GetGlobalHitbox()));
 
     if(GetGlobalHitbox().intersects(character.GetGlobalHitbox()) && _attackTimer.getElapsedTime().asMilliseconds() > 800) {
-        Hit(&character, ip, pManager, sf::Color(255, 0, 0), MathHelper::RandInt(2, 3));
+        Hit(&character, ip, pManager, sf::Color(255, 0, 0), MathHelper::RandInt(2, 3), eManager, level);
         _attackTimer.restart();
     }
 
@@ -60,8 +60,8 @@ void Spiderock::Update(IP& ip, float eTime, Level& level, Character& character, 
     Ennemy::Update(ip, eTime, level, character, eManager, pManager, bManager);
 }
 
-void Spiderock::Die(IP& ip, ParticleManager& pManager) {
-    GameEntity::Die(ip, pManager);
+void Spiderock::Die(IP& ip, ParticleManager& pManager, EntityManager& eManager, Level& level) {
+    GameEntity::Die(ip, pManager, eManager, level);
     for(int i=0 ; i<4 ; i++) {
         int type = rand()%2;
         pManager.AddParticle(new Particle(ip, type==0 ? "rockParticle" : "rockParticle2",

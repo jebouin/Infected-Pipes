@@ -119,8 +119,8 @@ void Snail::UpdateCircle(sf::Vector2f eyePos) {
     _circle.setOutlineColor(sf::Color(color.r, color.g, color.b, p*255));
 }
 
-void Snail::Die(IP& ip, ParticleManager& pManager) {
-    GameEntity::Die(ip, pManager);
+void Snail::Die(IP& ip, ParticleManager& pManager, EntityManager& eManager, Level& level) {
+    GameEntity::Die(ip, pManager, eManager, level);
     for(int i=0 ; i<12 ; i++) {
         int type = rand()%2;
         pManager.AddParticle(new Particle(ip, type==0 ? "snailParticle" : "snailParticle2",

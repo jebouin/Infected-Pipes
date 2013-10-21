@@ -11,8 +11,9 @@
 #include "AnimationTable.h"
 #include "Animation.h"
 #include "BulletManager.h"
+#include "Slime.h"
 
-Slimey::Slimey(IP& ip, Level& level) : Ennemy(ip, "slimey", sf::IntRect(4, 0, 34, 25), 700, 100, 50, level) {
+Slimey::Slimey(IP& ip, Level& level) : Ennemy(ip, "slimey", sf::IntRect(4, 0, 34, 25), 70, 100, 50, level) {
     AnimationTable& t(GetAnims());
     t.AddAnimation("0", new Animation(1, 100, sf::Vector2i(0, 0), sf::Vector2i(42, 26), false));
     t.AddAnimation("1", new Animation(1, 100, sf::Vector2i(0, 26), sf::Vector2i(42, 26), false));
@@ -38,7 +39,7 @@ void Slimey::Update(IP& ip, float eTime, Level& level, Character& character, Ent
     AnimationTable& t(GetAnims());
 
     if(GetGlobalHitbox().intersects(character.GetGlobalHitbox()) && _attackTimer.getElapsedTime().asMilliseconds() > 800) {
-        Hit(&character, ip, pManager, sf::Color(255, 0, 0), MathHelper::RandInt(20, 24));
+        Hit(&character, ip, pManager, sf::Color(255, 0, 0), MathHelper::RandInt(20, 24), eManager, level);
         _attackTimer.restart();
     }
 
@@ -100,65 +101,30 @@ void Slimey::Update(IP& ip, float eTime, Level& level, Character& character, Ent
         }
     }
 
-    /*if(c.x < cc.x) {
-        GoRight(eTime);
-        if(level.GetMap().GetTileType(sf::Vector2i(sf::Vector2f(r.left+r.width+1, r.top+r.height+1)/16.f), Map::FRONT) == Map::VOID && c.y - 20 > cc.y) {
-            Jump(level);
-        }
-    } else if(c.x > cc.x) {
-        GoLeft(eTime);
-        if(level.GetMap().GetTileType(sf::Vector2i(sf::Vector2f(r.left-1, r.top+r.height+1)/16.f), Map::FRONT) == Map::VOID && c.y - 20 > cc.y) {
-            Jump(level);
-        }
-    }
-
-    if(level.GetMap().IsOnTileType(*this, Map::PLATFORM)) {
-        if(c.y - cc.y < -10.f) {
-            PlatformDrop(level);
-        }
-    }
-
-    if(abs(GetVel().x) < 0.05 && MathHelper::GetVecLength(c-cc) > 16) {
-        Jump(level);
-    }*/
-
     Ennemy::Update(ip, eTime, level, character, eManager, pManager, bManager);
 }
 
-void Slimey::Die(IP& ip, ParticleManager& pManager) {
-    GameEntity::Die(ip, pManager);
-    /*for(int i=0 ; i<4 ; i++) {
-        int type = rand()%2;
-        pManager.AddParticle(new Particle(ip, type==0 ? "rockParticle" : "rockParticle2",
-                                          getPosition(),
-                                          MathHelper::Ang2Vec(MathHelper::Deg2Rad(MathHelper::RandFloat(-160, 20))) * MathHelper::RandFloat(.1, .35),
-                                          MathHelper::RandFloat(-1., 1.),
-                                          MathHelper::RandFloat(600, 1400),
-                                          sf::Vector2f(1, 1),
-                                          sf::Vector2f(1, 1),
+void Slimey::Die(IP& ip, ParticleManager& pManager, EntityManager& eManager, Level& level) {
+    GameEntity::Die(ip, pManager, eManager, level);
+    for(int i=0 ; i<80 ; i++) {
+        pManager.AddParticle(new Particle(ip, "slimeParticle",
+                                          getPosition()+MathHelper::Ang2Vec(MathHelper::Deg2Rad(MathHelper::RandFloat(0, 360))) * MathHelper::RandFloat(0., 6.),
+                                          MathHelper::Ang2Vec(MathHelper::Deg2Rad(MathHelper::RandFloat(-160, 20))) * MathHelper::RandFloat(.2, 1.),
+                                          0,
+                                          MathHelper::RandFloat(1500, 2500),
+                                          sf::Vector2f(1., 1.),
+                                          sf::Vector2f(.0, .0),
                                           255,
                                           0,
                                           true,
                                           true,
                                           false,
-                                          type==0 ? sf::IntRect(1, 1, 4, 4) : sf::IntRect(1, 1, 5, 3)));
-    }
-    if(_inWater) {
-        return;
-    }
-    for(int i=0 ; i<3 ; i++) {
-        pManager.AddParticle(new Particle(ip, "smokeParticle",
-                                          getPosition()+MathHelper::Ang2Vec(MathHelper::Deg2Rad(MathHelper::RandFloat(0, 360))) * MathHelper::RandFloat(0., 13.),
-                                          sf::Vector2f(0., 0.),
-                                          MathHelper::RandFloat(-.5, .5),
-                                          MathHelper::RandFloat(200, 400),
-                                          sf::Vector2f(.5, .5),
-                                          sf::Vector2f(2., 2.),
-                                          128,
-                                          0,
-                                          false,
-                                          false,
-                                          false,
                                           sf::IntRect(2, 2, 3, 3)));
-    }*/
+    }
+    for(int i=0 ; i<16 ; i++) {
+        Slime *slime = new Slime(ip, level);
+        slime->setPosition(getPosition());
+        slime->SetVel(MathHelper::Ang2Vec(MathHelper::Deg2Rad(MathHelper::RandFloat(-90, -90)))*MathHelper::RandFloat(1.0, 1.2));
+        eManager.Add(slime);
+    }
 }

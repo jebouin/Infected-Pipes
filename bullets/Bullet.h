@@ -25,7 +25,7 @@ class Bullet : public MovingSprite {
     virtual void Update(IP& ip, float eTime, Level& level, Character& character, ParticleManager& pManager, EntityManager& eManager);
     void Draw(IP& ip);
     void TestCollisions(IP& ip, float eTime, Level& level, sf::Vector2f delta);
-    void Impact(GameEntity& entity, IP& ip, ParticleManager& pManager, sf::Color color);
+    void Impact(GameEntity& entity, IP& ip, ParticleManager& pManager, sf::Color color, EntityManager& eManager, Level& level);
     bool IsAlive() const;
     bool IsDying() const;
 
