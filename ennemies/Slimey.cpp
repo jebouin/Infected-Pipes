@@ -22,7 +22,7 @@ Slimey::Slimey(IP& ip, Level& level) : Ennemy(ip, "slimey", sf::IntRect(4, 0, 34
     t.SetAnimation("0");
     SetSpeed(0.002);
     SetJumpPower(.4);
-    setPosition(sf::Vector2f(16*16, -15));
+    setPosition(sf::Vector2f(16*16, 20));
     _nextJump = 800;
     SetAutoDir(false);
     _prevState = 0;
@@ -39,7 +39,7 @@ void Slimey::Update(IP& ip, float eTime, Level& level, Character& character, Ent
     AnimationTable& t(GetAnims());
 
     if(GetGlobalHitbox().intersects(character.GetGlobalHitbox()) && _attackTimer.getElapsedTime().asMilliseconds() > 800) {
-        Hit(&character, ip, pManager, sf::Color(255, 0, 0), MathHelper::RandInt(20, 24), eManager, level);
+        Hit(&character, ip, pManager, sf::Color(255, 0, 0), MathHelper::RandInt(10+_prevState*10, 13+_prevState*10), eManager, level);
         _attackTimer.restart();
     }
 
