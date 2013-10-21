@@ -13,7 +13,7 @@
 #include "BulletManager.h"
 #include "Slime.h"
 
-Slimey::Slimey(IP& ip, Level& level) : Ennemy(ip, "slimey", sf::IntRect(4, 0, 34, 25), 70, 100, 50, level) {
+Slimey::Slimey(IP& ip, Level& level) : Ennemy(ip, "slimey", sf::IntRect(4, 0, 34, 25), 600, 100, 50, level) {
     AnimationTable& t(GetAnims());
     t.AddAnimation("0", new Animation(1, 100, sf::Vector2i(0, 0), sf::Vector2i(42, 26), false));
     t.AddAnimation("1", new Animation(1, 100, sf::Vector2i(0, 26), sf::Vector2i(42, 26), false));

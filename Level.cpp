@@ -12,6 +12,7 @@
 #include "Character.h"
 #include "Chest.h"
 #include "WaterField.h"
+#include "WaterFall.h"
 #include "ParticleManager.h"
 
 Level::Level(IP& ip, Character& character) {
@@ -47,6 +48,11 @@ Level::~Level() {
         _waterFields[i] = 0;
     }
     _waterFields.clear();
+    for(int i=0 ; i<_waterFalls.size() ; i++) {
+        delete _waterFalls[i];
+        _waterFalls[i] = 0;
+    }
+    _waterFalls.clear();
 }
 
 void Level::Update(IP& ip, EntityManager& eManager, Character& character, float eTime, ParticleManager& pManager) {
@@ -59,11 +65,17 @@ void Level::Update(IP& ip, EntityManager& eManager, Character& character, float 
     for(int i=0 ; i<_waterFields.size() ; i++) {
         _waterFields[i]->Update(eTime);
     }
+    for(int i=0 ; i<_waterFalls.size() ; i++) {
+        _waterFalls[i]->Update(ip, eTime, *this);
+    }
 }
 
 void Level::DrawBack(IP& ip, sf::View& prevView) {
     _background->Draw(ip, prevView);
     _map->DrawLayer(ip, Map::BACK);
+    for(int i=0 ; i<_waterFalls.size() ; i++) {
+        _waterFalls[i]->Draw(ip);
+    }
     for(int i=0 ; i<_chests.size() ; i++) {
         _chests[i]->Draw(ip);
     }
@@ -108,6 +120,11 @@ void Level::Load(IP& ip, string name, Character& character) {
         _waterFields[i] = 0;
     }
     _waterFields.clear();
+    for(int i=0 ; i<_waterFalls.size() ; i++) {
+        delete _waterFalls[i];
+        _waterFalls[i] = 0;
+    }
+    _waterFalls.clear();
     sf::Vector2f charPos;
 
     //first pass to load single tiles
@@ -154,6 +171,7 @@ void Level::Load(IP& ip, string name, Character& character) {
     int h = _levelImages[0].getSize().y;
     sf::Color waterSufaceC(106, 129, 193);
     sf::Color waterC(70, 94, 160);
+    sf::Color waterFallC(70, 94, 160, 130);
     for(int i=0 ; i<w ; i++) {
         for(int j=0 ; j<h ; j++) {
             if(_levelImages[1].getPixel(i, j) == waterSufaceC) {
@@ -176,6 +194,8 @@ void Level::Load(IP& ip, string name, Character& character) {
                     }
                 }
                 _waterFields.push_back(new WaterField(sf::FloatRect(i*16-offsets[0], j*16-offsets[2], s.x*16+offsets[0]+offsets[1], s.y*16+offsets[2]+offsets[3]), 2, false));
+            } else if(_levelImages[0].getPixel(i, j) == waterFallC) {
+                _waterFalls.push_back(new WaterFall(ip, sf::Vector2i(i, j)));
             }
         }
     }

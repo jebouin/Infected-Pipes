@@ -19,6 +19,7 @@ class Character;
 class Chest;
 class WaterField;
 class ParticleManager;
+class WaterFall;
 
 struct LevelInfo {
     string _imageName;
@@ -58,6 +59,7 @@ class Level {
     int _difficulty;
     vector<Chest*> _chests;
     vector<WaterField*> _waterFields;
+    vector<WaterFall*> _waterFalls;
 };
 
 #endif // LEVEL_H_INCLUDED

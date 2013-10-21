@@ -19,7 +19,7 @@
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1382358414 source:c:\users\xaychru04\desktop\infected pipes\ip.cpp
+1382369618 source:c:\users\xaychru04\desktop\infected pipes\ip.cpp
 	"IP.h"
 	"Renderer.h"
 	"TextureLoader.h"
@@ -34,7 +34,7 @@
 	"Game.h"
 	"MathHelper.h"
 
-1382363458 source:c:\users\xaychru04\desktop\infected pipes\textureloader.cpp
+1382375833 source:c:\users\xaychru04\desktop\infected pipes\textureloader.cpp
 	"TextureLoader.h"
 	"IP.h"
 
@@ -166,7 +166,7 @@
 	"IP.h"
 	"Renderer.h"
 
-1382365668 source:c:\users\xaychru04\desktop\infected pipes\level.cpp
+1382377032 source:c:\users\xaychru04\desktop\infected pipes\level.cpp
 	"Level.h"
 	"IP.h"
 	"Map.h"
@@ -181,9 +181,10 @@
 	"Character.h"
 	"Chest.h"
 	"WaterField.h"
+	"WaterFall.h"
 	"ParticleManager.h"
 
-1382345058 c:\users\xaychru04\desktop\infected pipes\level.h
+1382376983 c:\users\xaychru04\desktop\infected pipes\level.h
 	<map>
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
@@ -770,4 +771,22 @@
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 	"Ennemy.h"
+
+1382376530 c:\users\xaychru04\desktop\infected pipes\waterfall.h
+	<iostream>
+	<vector>
+	<SFML/System.hpp>
+	<SFML/Graphics.hpp>
+	<SFML/Window.hpp>
+	"MovingSprite.h"
+
+1382386392 source:c:\users\xaychru04\desktop\infected pipes\waterfall.cpp
+	"WaterFall.h"
+	"IP.h"
+	"Renderer.h"
+	"ParticleManager.h"
+	"Particle.h"
+	"MathHelper.h"
+	"Animation.h"
+	"AnimationTable.h"
 
