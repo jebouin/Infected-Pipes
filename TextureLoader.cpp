@@ -11,6 +11,8 @@ TextureLoader::TextureLoader(IP& ip) {
     AddTexture("level1front.png", "level1front");
     AddTexture("miniBoss1back.png", "miniBoss1back");
     AddTexture("miniBoss1front.png", "miniBoss1front");
+    AddTexture("level2back.png", "level2back");
+    AddTexture("level2front.png", "level2front");
 
     AddTexture("spiderock.png", "spiderock");
     AddTexture("rockWorm.png", "rockWorm");

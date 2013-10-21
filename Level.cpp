@@ -18,12 +18,13 @@ Level::Level(IP& ip, Character& character) {
     _levelInfos["intro"] = LevelInfo{"level0", "nightBackground", 0.0001f};
     _levelInfos["rockyCave"] = LevelInfo{"level1", "rockyBackground", 0.2f};
     _levelInfos["miniBoss1"] = LevelInfo{"miniBoss1", "rockyBackground", 0.2f};
+    _levelInfos["wetCave"] = LevelInfo{"level2", "rockyBackground", 0.2f};
     _map = 0;
     _spawner = 0;
     _grass = 0;
     _background = 0;
     _difficulty = 2;
-    Load(ip, "rockyCave", character);
+    Load(ip, "wetCave", character);
     character.setPosition(character.getPosition() + sf::Vector2f(0, 50));
 }
 
@@ -95,10 +96,10 @@ void Level::Load(IP& ip, string name, Character& character) {
     _map = new Map(ip, sf::Vector2i(_levelImages[0].getSize()));
 
     delete _spawner;
-    if(name == "intro" || name == "rockyCave") {
-        _spawner = new Spawner(ip, 20, *this);
-    } else if(name == "miniBoss1") {
+    if(name == "miniBoss1") {
         _spawner = new Spawner(ip, 1, *this);
+    } else {
+        _spawner = new Spawner(ip, 20, *this);
     }
 
 
@@ -166,7 +167,7 @@ void Level::Load(IP& ip, string name, Character& character) {
                 }
                 _waterFields.push_back(new WaterField(sf::FloatRect(i*16-offsets[0], j*16+8, s.x*16+offsets[0]+offsets[1], s.y*16-8), 4, true));
             } else if(_levelImages[1].getPixel(i, j) == waterC) {
-                sf::Vector2i s(/*GetRectSizeInImageAt(_levelImages[1], sf::Vector2i(i, j), waterC)*/1, 1);
+                sf::Vector2i s(1, 1);
                 float offsets[4]{0};
                 sf::Vector2i testPos[4] = {sf::Vector2i(i-1, j), sf::Vector2i(i+s.x, j), sf::Vector2i(i, j-1), sf::Vector2i(i, j+1)};
                 for(int i=0 ; i<4 ; i++) {
