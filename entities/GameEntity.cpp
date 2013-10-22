@@ -84,7 +84,7 @@ void GameEntity::Collide(GameEntity* other, float elapsedTime) {
     sf::Vector2f dir = MathHelper::Normalize(delta);
     //cout << vecLength << endl;
     for(float i=0 ; i<vecLength ; i++) {
-        sf::Vector2f curPos = GetUpperLeftPos() - delta-(i*dir);
+        sf::Vector2f curPos = GetGlobalUpperLeftPos() - delta-(i*dir);
         sf::FloatRect r = sf::FloatRect(GetHitbox().left+curPos.x, GetHitbox().top+curPos.y, GetHitbox().width, GetHitbox().height);
         sf::FloatRect r2 = other->GetGlobalHitbox();
 

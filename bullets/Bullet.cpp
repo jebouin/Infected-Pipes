@@ -95,13 +95,13 @@ void Bullet::TestCollisions(IP& ip, float eTime, Level& level, sf::Vector2f delt
         return;
     }
 
-    if(level.GetMap().IsCollided(*this, GetUpperLeftPos()+delta, Map::WALL) || level.GetSpawner().IsCollided(*this, GetUpperLeftPos()+delta)) {
+    if(level.GetMap().IsCollided(*this, GetGlobalUpperLeftPos()+delta, Map::WALL) || level.GetSpawner().IsCollided(*this, GetGlobalUpperLeftPos()+delta)) {
         _dying = true;
         _deadTimer.restart();
         setPosition(getPosition() + delta);
     }
     if(GetVel().y >= 0 && !((int)(GetGlobalHitbox().top + GetGlobalHitbox().height + delta.y)%16 > 3) && _gravity) {
-        if(level.GetMap().IsOnTileType(*this, GetUpperLeftPos()+delta, Map::PLATFORM)) {
+        if(level.GetMap().IsOnTileType(*this, GetGlobalUpperLeftPos()+delta, Map::PLATFORM)) {
             _dying = true;
             _deadTimer.restart();
             setPosition(getPosition() + delta);

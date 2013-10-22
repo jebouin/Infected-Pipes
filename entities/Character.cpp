@@ -16,7 +16,7 @@
 #include "Particle.h"
 #include "TextureLoader.h"
 
-Character::Character(IP& ip) : GameEntity(ip, "character", sf::IntRect(4, 3, 7, 27), 10) {
+Character::Character(IP& ip) : GameEntity(ip, "character", sf::IntRect(4, 3, 7, 26), 10) {
     _arms[EMPTY] = Arm {sf::IntRect(0, 0, 6, 9), sf::Vector2f(2, 1), sf::Vector2f(5, 6)};
     _arms[RAINBOW] = Arm {sf::IntRect(0, 9, 15, 9), sf::Vector2f(4, 1), sf::Vector2f(2, 2)};
     _arms[BOW] = Arm {sf::IntRect(0, 18, 10, 17), sf::Vector2f(2, 3), sf::Vector2f(4, 4)};
@@ -50,7 +50,7 @@ Character::~Character() {
 void Character::Update(IP& ip, float eTime, Level& level, EntityManager& eManager, ParticleManager& pManager, BulletManager& bManager) {
     sf::Vector2f mpos = MathHelper::GetMousePos(ip);
     AnimationTable& t(GetAnims());
-    _weapon->SetRelPosition(_arm.getPosition()-GetUpperLeftPos()+_arms[_curArmType]._bulletPos);
+    _weapon->SetRelPosition(_arm.getPosition()-GetGlobalUpperLeftPos()+_arms[_curArmType]._bulletPos);
 
     if(_enteringPipe) {
         _arm.setRotation(0);
@@ -96,12 +96,12 @@ void Character::Update(IP& ip, float eTime, Level& level, EntityManager& eManage
         if(mpos.x < _arm.getPosition().x) {
             ChangeDir();
         }
-        _arm.setPosition(GetUpperLeftPos() + sf::Vector2f(4, 12) + framed);
+        _arm.setPosition(GetGlobalUpperLeftPos() + sf::Vector2f(4, 12) + framed);
     } else {
         if(mpos.x > _arm.getPosition().x) {
             ChangeDir();
         }
-        _arm.setPosition(GetUpperLeftPos() + sf::Vector2f(getLocalBounds().width-4, 12) + framed);
+        _arm.setPosition(GetGlobalUpperLeftPos() + sf::Vector2f(getLocalBounds().width-4, 12) + framed);
     }
     _weapon->Update(ip, eTime, bManager);
 }

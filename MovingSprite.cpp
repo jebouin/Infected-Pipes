@@ -101,12 +101,14 @@ void MovingSprite::MoveCollidingMap(sf::Vector2f delta, Level& level) {
         for(float i=p ; i<MathHelper::ABS(delta.x)-p ; i+=p) {
             if(!TryMove(sf::Vector2f(MathHelper::SGN(delta.x)/(1./p), 0), level)) {
                 SetVel(sf::Vector2f(0, GetVel().y));
+                SetRotVel(GetRotVel()/2.f);
                 break;
             }
         }
         for(float i=p ; i<MathHelper::ABS(delta.y)-p ; i+=p) {
             if(!TryMove(sf::Vector2f(0, MathHelper::SGN(delta.y)/(1./p)), level)) {
                 SetVel(sf::Vector2f(GetVel().x, 0));
+                SetRotVel(GetRotVel()/2.f);
                 break;
             }
         }
@@ -114,11 +116,11 @@ void MovingSprite::MoveCollidingMap(sf::Vector2f delta, Level& level) {
 }
 
 bool MovingSprite::TryMove(sf::Vector2f delta, Level& level) {
-    if(level.GetMap().IsCollided(*this, GetUpperLeftPos()+delta, Map::WALL) || level.GetSpawner().IsCollided(*this, GetUpperLeftPos()+delta)) {
+    if(level.GetMap().IsCollided(*this, GetGlobalUpperLeftPos()+delta, Map::WALL) || level.GetSpawner().IsCollided(*this, GetGlobalUpperLeftPos()+delta)) {
         return false;
     }
     if(GetVel().y >= 0 && !((int)(GetGlobalHitbox().top + GetGlobalHitbox().height + delta.y)%16 > 3) && _collidesWithPlatform) {
-        if(level.GetMap().IsOnTileType(/*this, GetUpperLeftPos()+delta*/ sf::FloatRect(GetUpperLeftPos().x+GetHitbox().left+delta.x, GetUpperLeftPos().y+GetHitbox().top+GetGlobalHitbox().height-12+delta.y, GetGlobalHitbox().width, 12), Map::PLATFORM)) {
+        if(level.GetMap().IsOnTileType(/*this, GetUpperLeftPos()+delta*/ sf::FloatRect(GetGlobalUpperLeftPos().x+GetHitbox().left+delta.x, GetGlobalUpperLeftPos().y+GetHitbox().top+GetGlobalHitbox().height-12+delta.y, GetGlobalHitbox().width, 12), Map::PLATFORM)) {
             return false;
         }
     }
@@ -160,7 +162,11 @@ float MovingSprite::GetRotVel() {
     return _rotVel;
 }
 
-sf::Vector2f MovingSprite::GetUpperLeftPos() const {
+sf::Vector2f MovingSprite::GetLocalUpperLeftPos() const {
+    return getPosition() - sf::Vector2f(getLocalBounds().width/2.f, getLocalBounds().height/2.f);
+}
+
+sf::Vector2f MovingSprite::GetGlobalUpperLeftPos() const {
     return sf::Vector2f(getGlobalBounds().left, getGlobalBounds().top);
 }
 
@@ -169,7 +175,7 @@ sf::IntRect MovingSprite::GetHitbox() {
 }
 
 sf::FloatRect MovingSprite::GetGlobalHitbox() {
-    return sf::FloatRect(sf::Vector2f(_hitbox.left, _hitbox.top)+GetUpperLeftPos(), sf::Vector2f(_hitbox.width, _hitbox.height));
+    return sf::FloatRect(sf::Vector2f(_hitbox.left, _hitbox.top)+GetGlobalUpperLeftPos(), sf::Vector2f(_hitbox.width, _hitbox.height));
 }
 
 AnimationTable& MovingSprite::GetAnims() {
@@ -193,7 +199,7 @@ void MovingSprite::SetRotVel(float rotVel) {
 }
 
 void MovingSprite::SetUpperLeftCorner(sf::Vector2f pos) {
-    sf::Vector2f delta = getPosition() - GetUpperLeftPos();
+    sf::Vector2f delta = getPosition() - GetGlobalUpperLeftPos();
     setPosition(pos + delta);
 }
 

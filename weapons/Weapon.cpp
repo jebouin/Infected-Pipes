@@ -16,7 +16,7 @@ Weapon::~Weapon() {
 }
 
 void Weapon::Update(IP& ip, float eTime, BulletManager& bManager) {
-    _position = _holder.GetUpperLeftPos()+_relativePos;
+    _position = _holder.GetGlobalUpperLeftPos()+_relativePos;
 }
 
 void Weapon::Draw(IP& ip) {

@@ -42,7 +42,7 @@ void Snail::Update(IP& ip, float eTime, Level& level, Character& character, Enti
     sf::Vector2f cc(MathHelper::GetCenter(character.GetGlobalHitbox()));
     AnimationTable& t(GetAnims());
     float attackTime = _attackTimer.getElapsedTime().asMilliseconds();
-    sf::Vector2f eyePos = GetUpperLeftPos() + sf::Vector2f(GetDir() ? GetAnims().GetAnimation().GetRect().width-4. : 3., 1.);
+    sf::Vector2f eyePos = GetGlobalUpperLeftPos() + sf::Vector2f(GetDir() ? GetAnims().GetAnimation().GetRect().width-4. : 3., 1.);
 
     if(t.GetAnimationName() != "explode") {
         if(!_preparing) {
