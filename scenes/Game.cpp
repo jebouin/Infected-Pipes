@@ -43,9 +43,9 @@ void Game::Update(float eTime, IP& ip) {
     Scene::Update(eTime, ip);
 
     _level->Update(ip, *_entityManager, _player->GetCharacter(), eTime, *_particleManager);
-    _bulletManager->Update(ip, eTime, *_level, _player->GetCharacter(), *_particleManager, *_entityManager);
     _entityManager->Update(ip, eTime, *_level, _player->GetCharacter(), *_particleManager, *_bulletManager);
     _player->Update(ip, eTime, *_level, *_entityManager, *_particleManager, *_bulletManager);
+    _bulletManager->Update(ip, eTime, *_level, _player->GetCharacter(), *_particleManager, *_entityManager);
     _particleManager->Update(ip, eTime, *_level);
     _gui->Update(ip);
     _speechManager->Update(ip, eTime);

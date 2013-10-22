@@ -13,7 +13,7 @@
 #include "BulletManager.h"
 #include "Slime.h"
 
-Slimey::Slimey(IP& ip, Level& level) : Ennemy(ip, "slimey", sf::IntRect(4, 0, 34, 25), 200, 100, 50, level) {
+Slimey::Slimey(IP& ip, Level& level) : Ennemy(ip, "slimey", sf::IntRect(4, 0, 34, 25), 1500, 100, 50, level) {
     AnimationTable& t(GetAnims());
     t.AddAnimation("0", new Animation(1, 100, sf::Vector2i(0, 0), sf::Vector2i(42, 26), false));
     t.AddAnimation("1", new Animation(1, 100, sf::Vector2i(0, 26), sf::Vector2i(42, 26), false));
@@ -85,7 +85,7 @@ void Slimey::Update(IP& ip, float eTime, Level& level, Character& character, Ent
                                               type==0 ? sf::IntRect(2, 2, 5, 5) : sf::IntRect(2, 2, 9, 7)));
         }
         t.SetAnimation(MathHelper::IntToString(curState));
-        SetSpeed(0.002 + 0.0015*curState);
+        SetSpeed(0.002 + 0.0025*curState);
         SetJumpPower(.4 + 0.1*curState);
         if(curState == 3) {
             SetSpeed(0.);
