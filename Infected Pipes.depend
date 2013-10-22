@@ -166,7 +166,7 @@
 	"IP.h"
 	"Renderer.h"
 
-1382463347 source:c:\users\xaychru04\desktop\infected pipes\level.cpp
+1382472061 source:c:\users\xaychru04\desktop\infected pipes\level.cpp
 	"Level.h"
 	"IP.h"
 	"Map.h"
@@ -449,7 +449,7 @@
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1382457861 source:c:\users\xaychru04\desktop\infected pipes\bullets\bullet.cpp
+1382473967 source:c:\users\xaychru04\desktop\infected pipes\bullets\bullet.cpp
 	"Bullet.h"
 	"TextureLoader.h"
 	"IP.h"
@@ -464,7 +464,7 @@
 	"Ennemy.h"
 	"MathHelper.h"
 
-1382355146 c:\users\xaychru04\desktop\infected pipes\bullets\bullet.h
+1382471345 c:\users\xaychru04\desktop\infected pipes\bullets\bullet.h
 	<iostream>
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
@@ -579,13 +579,14 @@
 	"MathHelper.h"
 	"Renderer.h"
 
-1382299647 source:c:\users\xaychru04\desktop\infected pipes\bullets\rockbullet.cpp
+1382471360 source:c:\users\xaychru04\desktop\infected pipes\bullets\rockbullet.cpp
 	"RockBullet.h"
 	"IP.h"
 	"Character.h"
 	"Level.h"
 	"EntityManager.h"
 	"ParticleManager.h"
+	"MathHelper.h"
 
 1380643073 c:\users\xaychru04\desktop\infected pipes\bullets\rockbullet.h
 	<iostream>
@@ -593,7 +594,7 @@
 	"SFML/System.hpp"
 	"Bullet.h"
 
-1382299595 source:c:\users\xaychru04\desktop\infected pipes\bullets\arrow.cpp
+1382473039 source:c:\users\xaychru04\desktop\infected pipes\bullets\arrow.cpp
 	"Arrow.h"
 	"IP.h"
 	"Character.h"
@@ -664,7 +665,7 @@
 	<iostream>
 	<vector>
 
-1382469478 source:c:\users\xaychru04\desktop\infected pipes\scenes\game.cpp
+1382473135 source:c:\users\xaychru04\desktop\infected pipes\scenes\game.cpp
 	"Game.h"
 	"IP.h"
 	"Level.h"
@@ -845,7 +846,7 @@
 	"SFML/System.hpp"
 	"GameEntity.h"
 
-1382470777 source:c:\users\xaychru04\desktop\infected pipes\entities\character.cpp
+1382473756 source:c:\users\xaychru04\desktop\infected pipes\entities\character.cpp
 	"Character.h"
 	"IP.h"
 	"Animation.h"
@@ -955,7 +956,7 @@
 	"SFML/System.hpp"
 	"Ennemy.h"
 
-1382470434 source:c:\users\xaychru04\desktop\infected pipes\entities\ennemies\slimey.cpp
+1382474046 source:c:\users\xaychru04\desktop\infected pipes\entities\ennemies\slimey.cpp
 	"Slimey.h"
 	"IP.h"
 	"Map.h"
@@ -1070,7 +1071,7 @@
 	"DamageParticle.h"
 	"WaterField.h"
 
-1382455384 source:c:\users\xaychru04\desktop\infected pipes\entities\duck.cpp
+1382471638 source:c:\users\xaychru04\desktop\infected pipes\entities\duck.cpp
 	"Duck.h"
 	"IP.h"
 	"Level.h"

@@ -69,6 +69,7 @@ void Bullet::Update(IP& ip, float eTime, Level& level, Character& character, Par
                 Ennemy *e = eManager.GetEnnemy(i);
                 if(e->GetGlobalHitbox().intersects(GetGlobalHitbox())) {
                     Impact((GameEntity&)(*e), ip, pManager, sf::Color(255, 255, 0), eManager, level);
+                    break;
                 }
             }
         }
@@ -88,6 +89,7 @@ void Bullet::TestCollisions(IP& ip, float eTime, Level& level, sf::Vector2f delt
     if(_dying) {
         return;
     }
+
     if(abs(delta.x > 2.f) || abs(delta.y) > 2.f) {
         for(int i=0 ; i<2 ; i++) {
             TestCollisions(ip, eTime, level, delta/2.f);
@@ -123,4 +125,11 @@ bool Bullet::IsAlive() const {
 
 bool Bullet::IsDying() const {
     return _dying;
+}
+
+bool Bullet::Die() {
+    if(!_dying) {
+        _dying = true;
+        _deadTimer.restart();
+    }
 }

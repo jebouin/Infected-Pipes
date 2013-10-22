@@ -50,8 +50,9 @@ void Slimey::Update(IP& ip, float eTime, Level& level, Character& character, Ent
     }
 
     int curState = (GetHPMax()-GetHP())*4/GetHPMax();
+    curState = min(curState, 3);
     if(curState > _prevState && curState < 4) {
-        for(int i=0 ; i<20 ; i++) {
+        for(int i=0 ; i<20*(curState-_prevState) ; i++) {
             int type = rand()%2;
             pManager.AddParticle(new Particle(ip, type==0 ? "rockParticle" : "rockParticle2",
                                               getPosition()+MathHelper::Ang2Vec(MathHelper::Deg2Rad(MathHelper::RandFloat(0, 360))) * MathHelper::RandFloat(0., 20.),
@@ -67,7 +68,7 @@ void Slimey::Update(IP& ip, float eTime, Level& level, Character& character, Ent
                                               false,
                                               type==0 ? sf::IntRect(1, 1, 4, 4) : sf::IntRect(1, 1, 5, 3)));
         }
-        for(int i=0 ; i<8 ; i++) {
+        for(int i=0 ; i<8*(curState-_prevState) ; i++) {
             int type = rand()%2;
             pManager.AddParticle(new Particle(ip, type==0 ? "rockParticle3" : "rockParticle4",
                                               getPosition()+MathHelper::Ang2Vec(MathHelper::Deg2Rad(MathHelper::RandFloat(0, 360))) * MathHelper::RandFloat(0., 20.),
@@ -123,7 +124,7 @@ void Slimey::Die(IP& ip, ParticleManager& pManager, EntityManager& eManager, Lev
     }
     for(int i=0 ; i<16 ; i++) {
         Slime *slime = new Slime(ip, level);
-        slime->setPosition(getPosition());
+        slime->setPosition(getPosition() + MathHelper::Ang2Vec(MathHelper::Deg2Rad(MathHelper::RandFloat(0, 360))) * MathHelper::RandFloat(0., 2.));
         slime->SetVel(MathHelper::Ang2Vec(MathHelper::Deg2Rad(MathHelper::RandFloat(-90, -90)))*MathHelper::RandFloat(1.0, 1.2));
         eManager.Add(slime);
     }

@@ -9,6 +9,9 @@
 Duck::Duck(IP& ip)
     : GameEntity(ip, "duck", sf::IntRect(2, 1, 8, 9), 42) {
     SetInvincible(true);
+    if(rand()%2==0) {
+        setScale(-1, 1);
+    }
 }
 
 Duck::~Duck() {
