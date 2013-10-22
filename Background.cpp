@@ -23,6 +23,7 @@ Background::Background(IP& ip, string name, float zoom, Level& level) : _level(l
             }
         }
 
+        //!!! star density
         for(int i=0 ; i<100 ; i++) {
             int starType = rand()%4;
             sf::Sprite star;

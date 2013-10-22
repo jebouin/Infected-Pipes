@@ -16,7 +16,7 @@ class BulletManager;
 
 class Ennemy : public GameEntity {
     public:
-    enum EnnemyType {SPIDEROCK, ROCKWORM, BAT, SNAIL};
+    enum EnnemyType {SPIDEROCK, ROCKWORM, BAT, SNAIL, SLIME, SLIMEY, SNOWBALL};
 
     Ennemy(IP& ip, string name, sf::IntRect hitbox, int hpn, int xp, int incDifficulty, Level& level);
     virtual ~Ennemy();

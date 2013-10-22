@@ -34,7 +34,7 @@
 	"Game.h"
 	"MathHelper.h"
 
-1382375833 source:c:\users\xaychru04\desktop\infected pipes\textureloader.cpp
+1382429169 source:c:\users\xaychru04\desktop\infected pipes\textureloader.cpp
 	"TextureLoader.h"
 	"IP.h"
 
@@ -166,7 +166,7 @@
 	"IP.h"
 	"Renderer.h"
 
-1382377032 source:c:\users\xaychru04\desktop\infected pipes\level.cpp
+1382429198 source:c:\users\xaychru04\desktop\infected pipes\level.cpp
 	"Level.h"
 	"IP.h"
 	"Map.h"
@@ -219,7 +219,7 @@
 	"TextureLoader.h"
 	"MathHelper.h"
 
-1382271629 source:c:\users\xaychru04\desktop\infected pipes\background.cpp
+1382427292 source:c:\users\xaychru04\desktop\infected pipes\background.cpp
 	"Background.h"
 	"IP.h"
 	"TextureLoader.h"
@@ -475,7 +475,7 @@
 	"ParticleManager.h"
 	"EntityManager.h"
 
-1381171408 c:\users\xaychru04\desktop\infected pipes\ennemies\ennemy.h
+1382428263 c:\users\xaychru04\desktop\infected pipes\ennemies\ennemy.h
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 	"GameEntity.h"
@@ -731,7 +731,7 @@
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1382363025 source:c:\users\xaychru04\desktop\infected pipes\ennemies\slimey.cpp
+1382388085 source:c:\users\xaychru04\desktop\infected pipes\ennemies\slimey.cpp
 	"Slimey.h"
 	"IP.h"
 	"Map.h"
@@ -789,4 +789,19 @@
 	"MathHelper.h"
 	"Animation.h"
 	"AnimationTable.h"
+
+1382428582 source:c:\users\xaychru04\desktop\infected pipes\ennemies\boss.cpp
+	"Boss.h"
+	"Level.h"
+	"Character.h"
+	"EntityManager.h"
+	"ParticleManager.h"
+	"BulletManager.h"
+	"Renderer.h"
+
+1382428263 c:\users\xaychru04\desktop\infected pipes\ennemies\boss.h
+	<iostream>
+	"SFML/Graphics.hpp"
+	"SFML/System.hpp"
+	"Ennemy.h"
 
