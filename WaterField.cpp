@@ -147,3 +147,7 @@ void WaterField::Splash(sf::Vector2f pos, float force, ParticleManager& pManager
 sf::FloatRect WaterField::GetRect() {
     return _rect;
 }
+
+bool WaterField::IsSurface() {
+    return _surface;
+}

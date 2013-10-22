@@ -2,6 +2,7 @@
 #define BOSS_H_INCLUDED
 
 #include <iostream>
+#include <vector>
 
 #include "SFML/Graphics.hpp"
 #include "SFML/System.hpp"
@@ -15,6 +16,7 @@ class Character;
 class EntityManager;
 class ParticleManager;
 class BulletManager;
+class MovingSprite;
 
 class Boss : public Ennemy {
 public:

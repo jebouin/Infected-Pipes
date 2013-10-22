@@ -5,6 +5,7 @@
 #include "ParticleManager.h"
 #include "BulletManager.h"
 #include "Renderer.h"
+#include "MovingSprite.h"
 
 Boss::Boss(IP& ip, string name, sf::IntRect hitbox, int hp, int xp, int incDifficulty, Level& level)
     : Ennemy(ip, name, hitbox, hp, xp, incDifficulty, level) {

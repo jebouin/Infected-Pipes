@@ -15,6 +15,7 @@
 #include "Level.h"
 #include "Ennemy.h"
 #include "Slime.h"
+//#include "WormBoss.h"
 
 Spawner::Spawner(IP& ip, int nbWaves, Level& l) {
     _curWave = 0;
@@ -66,6 +67,10 @@ void Spawner::Spawn(IP& ip, EntityManager& eManager, Level& level, Character& ch
         Slimey *slimey = new Slimey(ip, level);
         eManager.Add(slimey);
         _difToSpawn = 0;
+    } else if(levelName == "miniBoss2") {
+        /*WormBoss *wormBoss = new WormBoss(ip, level);
+        eManager.Add(wormBoss);
+        _difToSpawn = 0;*/
     } else {
         int pipeId = rand()%_pipes.size();
         int et;

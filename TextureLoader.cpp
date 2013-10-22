@@ -23,6 +23,7 @@ TextureLoader::TextureLoader(IP& ip) {
     AddTexture("snowBallEnemy.png", "snowBallEnemy");
     AddTexture("slimey.png", "slimey");
     AddTexture("slime.png", "slime");
+    AddTexture("wormBossBody.png", "wormBossBody");
 
     AddTexture("pipe.png", "pipe");
     AddTexture("zombie.png", "zombie");
