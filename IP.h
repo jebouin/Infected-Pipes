@@ -23,6 +23,7 @@ class IP {
     private:
     sf::Clock _clock;
     SceneManager *_sceneManager;
+    bool _focused;
 };
 
 #endif // IP_H_INCLUDED

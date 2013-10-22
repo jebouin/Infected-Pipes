@@ -90,8 +90,7 @@ void MovingSprite::Draw(IP& ip) {
 }
 
 void MovingSprite::MoveCollidingMap(sf::Vector2f delta, Level& level) {
-    //cout << delta.x << " " << delta.y << endl;
-    if(MathHelper::GetVecLength(delta) > 2) {
+    if(MathHelper::GetVecLength(delta) > 3) {
         for(int i=0 ; i<2 ; i++)
             MoveCollidingMap(delta/2.f, level);
         return;

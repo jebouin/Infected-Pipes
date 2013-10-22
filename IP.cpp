@@ -31,12 +31,23 @@ IP::IP() {
     _textureLoader = new TextureLoader(*this);
     _window->setActive(true);
     _sceneManager->AddScene(new Game(*this));
+    _focused = true;
 
     while(_window->isOpen()) {
         sf::Event e;
         while(_window->pollEvent(e)) {
             if(e.type == sf::Event::Closed || sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
                 _window->close();
+            }
+            if(e.type == sf::Event::LostFocus) {
+                _focused = false;
+            }
+            if(e.type == sf::Event::GainedFocus) {
+                _focused = true;
+                _clock.restart();
+            }
+            if(e.type == sf::Event::Resized) {
+                _clock.restart();
             }
         }
 
@@ -58,6 +69,10 @@ IP::~IP() {
 
 void IP::Update() {
     float eTime = _clock.restart().asMilliseconds();
+    if(eTime > 1000.f/30.f) {
+        eTime = 1000.f/30.f;
+    }
+    cout << eTime << endl;
     _sceneManager->Update(eTime, *this);
     if(_sceneManager->GetNbScenes() < 1) {
         _window->close();

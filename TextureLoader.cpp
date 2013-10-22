@@ -63,6 +63,7 @@ TextureLoader::TextureLoader(IP& ip) {
     AddTexture("snailParticle2.png", "snailParticle2");
     AddTexture("snowParticle.png", "snowParticle");
     AddTexture("slimeParticle.png", "slimeParticle");
+    AddTexture("littleBubble.png", "littleBubble");
 
     AddTexture("fir.png", "fir");
     AddTexture("moon.png", "moon");
