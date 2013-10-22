@@ -29,6 +29,9 @@ void Map::DrawLayer(IP& ip, Layer l) {
     for(int i=vrect.left/16.f ; i<(vrect.left+vrect.width)/16.f ; i++) {
         for(int j=vrect.top/16.f ; j<(vrect.top+vrect.height)/16.f ; j++) {
             sf::Vector2i pos(i, j);
+            if(!IsOnMap(pos)) {
+                continue;
+            }
             int tileX = 0;
             int tileId = GetTile(pos, l);
             if(tileId == 1) {

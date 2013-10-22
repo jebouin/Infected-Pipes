@@ -27,6 +27,8 @@ struct LevelInfo {
     string _imageName;
     string _backgroundName;
     float _backgroundZoom;
+    bool _addDucks;
+    bool _addMice;
 };
 
 class Level {

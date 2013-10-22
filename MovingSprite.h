@@ -31,6 +31,7 @@ class MovingSprite : public sf::Sprite {
     sf::FloatRect GetGlobalHitbox();
     AnimationTable& GetAnims();
     bool OnPlatform();
+    bool IsInWater(Level& level);
     void SetVel(sf::Vector2f vel);
     void Accelerate(sf::Vector2f vec, float eTime);
     void SetRotVel(float rotVel);
@@ -43,7 +44,6 @@ class MovingSprite : public sf::Sprite {
 
     protected:
     void WaterCollision(Level& l, sf::Vector2f deltaPos, ParticleManager& pManager, IP& ip);
-    bool IsInWater(Level& level);
     sf::Vector2f _prevPos;
 
     private:

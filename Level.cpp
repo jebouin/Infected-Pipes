@@ -15,14 +15,15 @@
 #include "WaterFall.h"
 #include "ParticleManager.h"
 #include "Duck.h"
+#include "Mouse.h"
 #include "MathHelper.h"
 
 Level::Level(IP& ip, Character& character) {
-    _levelInfos["intro"] = LevelInfo{"level0", "nightBackground", 0.0001f};
-    _levelInfos["rockyCave"] = LevelInfo{"level1", "rockyBackground", 0.2f};
-    _levelInfos["miniBoss1"] = LevelInfo{"miniBoss1", "rockyBackground", 0.2f};
-    _levelInfos["miniBoss2"] = LevelInfo{"miniBoss2", "rockyBackground", 0.2f};
-    _levelInfos["wetCave"] = LevelInfo{"level2", "rockyBackground", 0.2f};
+    _levelInfos["intro"] = LevelInfo{"level0", "nightBackground", 0.0001f, true, false};
+    _levelInfos["rockyCave"] = LevelInfo{"level1", "rockyBackground", 0.2f, true, true};
+    _levelInfos["miniBoss1"] = LevelInfo{"miniBoss1", "rockyBackground", 0.2f, false, false};
+    _levelInfos["miniBoss2"] = LevelInfo{"miniBoss2", "rockyBackground", 0.2f, false, false};
+    _levelInfos["wetCave"] = LevelInfo{"level2", "rockyBackground", 0.2f, true, true};
     _map = 0;
     _spawner = 0;
     _grass = 0;
@@ -203,12 +204,14 @@ void Level::Load(IP& ip, string name, Character& character) {
                     offsets[1] = 2;
                 }
                 _waterFields.push_back(new WaterField(sf::FloatRect(i*16-offsets[0], j*16+8, s.x*16+offsets[0]+offsets[1], s.y*16-8), 2, true));
-                sf::FloatRect rect(_waterFields[GetNbWaterFields()-1]->GetRect());
-                int nbDucks = (int)(MathHelper::RandFloat(0, 1)*MathHelper::RandFloat(0, 1)*((float)s.x/3.f));
-                for(int k=0 ; k<nbDucks ; k++) {
-                    Duck *duck = new Duck(ip);
-                    duck->setPosition(sf::Vector2f(MathHelper::RandFloat(rect.left+duck->getGlobalBounds().width/2.f, rect.left+rect.width-duck->getGlobalBounds().width/2.f), rect.top));
-                    _passiveEntities.push_back(duck);
+                if(_levelInfos[name]._addDucks) {
+                    sf::FloatRect rect(_waterFields[GetNbWaterFields()-1]->GetRect());
+                    int nbDucks = (int)(MathHelper::RandFloat(0, 1)*MathHelper::RandFloat(0, 1)*((float)s.x/3.f));
+                    for(int k=0 ; k<nbDucks ; k++) {
+                        Duck *duck = new Duck(ip);
+                        duck->setPosition(sf::Vector2f(MathHelper::RandFloat(rect.left+duck->getGlobalBounds().width/2.f, rect.left+rect.width-duck->getGlobalBounds().width/2.f), rect.top));
+                        _passiveEntities.push_back(duck);
+                    }
                 }
             } else if(_levelImages[1].getPixel(i, j) == waterC) {
                 sf::Vector2i s(1, 1);
@@ -230,6 +233,23 @@ void Level::Load(IP& ip, string name, Character& character) {
     //make the waterfalls, huh, fall.
     for(int i=_waterFalls.size()-1 ; i>=0 ; i--) {
         _waterFalls[i]->Fall(ip, *this);
+    }
+
+    //add some passive things
+    if(_levelInfos[name]._addMice) {
+        for(int i=0 ; i<_map->GetSize().x ; i++) {
+            for(int j=0 ; j<_map->GetSize().y ; j++) {
+                sf::Vector2i pos(i, j);
+                if(_map->GetTileType(pos, Map::FRONT)==Map::VOID && _map->GetTileType(pos+sf::Vector2i(0, 1), Map::FRONT)==Map::WALL && rand()%20==0) {
+                    Mouse *mouse = new Mouse(ip);
+                    mouse->setPosition(sf::Vector2f(pos)*16.f + sf::Vector2f(8, 12));
+                    if(mouse->IsInWater(*this)) {
+                        continue;
+                    }
+                    _passiveEntities.push_back(mouse);
+                }
+            }
+        }
     }
 
     if(!_spawner->SpawnCharacter(character)) {

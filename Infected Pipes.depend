@@ -34,7 +34,7 @@
 	"Game.h"
 	"MathHelper.h"
 
-1382450115 source:c:\users\xaychru04\desktop\infected pipes\textureloader.cpp
+1382459668 source:c:\users\xaychru04\desktop\infected pipes\textureloader.cpp
 	"TextureLoader.h"
 	"IP.h"
 
@@ -48,7 +48,7 @@
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1382362738 source:c:\users\xaychru04\desktop\infected pipes\map.cpp
+1382463292 source:c:\users\xaychru04\desktop\infected pipes\map.cpp
 	"Map.h"
 	"IP.h"
 	"TextureLoader.h"
@@ -56,7 +56,7 @@
 	"MathHelper.h"
 	"MovingSprite.h"
 
-1382457957 source:c:\users\xaychru04\desktop\infected pipes\movingsprite.cpp
+1382457998 source:c:\users\xaychru04\desktop\infected pipes\movingsprite.cpp
 	"MovingSprite.h"
 	"IP.h"
 	"Map.h"
@@ -70,7 +70,7 @@
 	"WaterField.h"
 	"ParticleManager.h"
 
-1382457835 c:\users\xaychru04\desktop\infected pipes\movingsprite.h
+1382461544 c:\users\xaychru04\desktop\infected pipes\movingsprite.h
 	<vector>
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
@@ -166,7 +166,7 @@
 	"IP.h"
 	"Renderer.h"
 
-1382455818 source:c:\users\xaychru04\desktop\infected pipes\level.cpp
+1382463347 source:c:\users\xaychru04\desktop\infected pipes\level.cpp
 	"Level.h"
 	"IP.h"
 	"Map.h"
@@ -184,9 +184,10 @@
 	"WaterFall.h"
 	"ParticleManager.h"
 	"Duck.h"
+	"Mouse.h"
 	"MathHelper.h"
 
-1382454251 c:\users\xaychru04\desktop\infected pipes\level.h
+1382463197 c:\users\xaychru04\desktop\infected pipes\level.h
 	<map>
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
@@ -1079,6 +1080,25 @@
 	"WaterField.h"
 
 1382451292 c:\users\xaychru04\desktop\infected pipes\entities\duck.h
+	"SFML/Graphics.hpp"
+	"SFML/System.hpp"
+	"GameEntity.h"
+
+1382462883 source:c:\users\xaychru04\desktop\infected pipes\entities\mouse.cpp
+	"Mouse.h"
+	"IP.h"
+	"Level.h"
+	"Map.h"
+	"Spawner.h"
+	"EntityManager.h"
+	"ParticleManager.h"
+	"Renderer.h"
+	"WaterField.h"
+	"MathHelper.h"
+	"Animation.h"
+	"AnimationTable.h"
+
+1382462787 c:\users\xaychru04\desktop\infected pipes\entities\mouse.h
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 	"GameEntity.h"
