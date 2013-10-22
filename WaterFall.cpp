@@ -22,6 +22,7 @@ WaterFall::WaterFall(IP& ip, sf::Vector2i tilePos, bool big)
     t.SetAnimation("fall");
     setPosition(sf::Vector2f(tilePos*16) + sf::Vector2f(8, 4));
     _tilePos = tilePos;
+    SetCollideWithWater(false);
 }
 
 WaterFall::~WaterFall() {

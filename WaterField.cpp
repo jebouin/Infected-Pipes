@@ -151,3 +151,14 @@ sf::FloatRect WaterField::GetRect() {
 bool WaterField::IsSurface() {
     return _surface;
 }
+
+float WaterField::GetHeight(float x) {
+    if(!_surface) {
+        return 0;
+    }
+    if(x < _rect.left || x > _rect.left+_rect.width) {
+        return 0;
+    }
+    int id = int((x-_rect.left)/_rect.width*_nbPoints);
+    return _springs[id]._length;
+}

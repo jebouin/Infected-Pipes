@@ -14,6 +14,8 @@
 #include "WaterField.h"
 #include "WaterFall.h"
 #include "ParticleManager.h"
+#include "Duck.h"
+#include "MathHelper.h"
 
 Level::Level(IP& ip, Character& character) {
     _levelInfos["intro"] = LevelInfo{"level0", "nightBackground", 0.0001f};
@@ -54,6 +56,11 @@ Level::~Level() {
         _waterFalls[i] = 0;
     }
     _waterFalls.clear();
+    for(int i=0 ; i<_passiveEntities.size() ; i++) {
+        delete _passiveEntities[i];
+        _passiveEntities[i] = 0;
+    }
+    _passiveEntities.clear();
 }
 
 void Level::Update(IP& ip, EntityManager& eManager, Character& character, float eTime, ParticleManager& pManager) {
@@ -69,6 +76,9 @@ void Level::Update(IP& ip, EntityManager& eManager, Character& character, float 
     for(int i=0 ; i<_waterFalls.size() ; i++) {
         _waterFalls[i]->Update(ip, eTime, *this, pManager);
     }
+    for(int i=0 ; i<_passiveEntities.size() ; i++) {
+        _passiveEntities[i]->Update(ip, eTime, *this, eManager, pManager);
+    }
 }
 
 void Level::DrawBack(IP& ip, sf::View& prevView) {
@@ -79,6 +89,9 @@ void Level::DrawBack(IP& ip, sf::View& prevView) {
     }
     for(int i=0 ; i<_chests.size() ; i++) {
         _chests[i]->Draw(ip);
+    }
+    for(int i=0 ; i<_passiveEntities.size() ; i++) {
+        _passiveEntities[i]->Draw(ip);
     }
 }
 
@@ -115,7 +128,6 @@ void Level::Load(IP& ip, string name, Character& character) {
         _spawner = new Spawner(ip, 20, *this);
     }
 
-
     for(int i=0 ; i<_waterFields.size() ; i++) {
         delete _waterFields[i];
         _waterFields[i] = 0;
@@ -126,8 +138,13 @@ void Level::Load(IP& ip, string name, Character& character) {
         _waterFalls[i] = 0;
     }
     _waterFalls.clear();
-    sf::Vector2f charPos;
+    for(int i=0 ; i<_passiveEntities.size() ; i++) {
+        delete _passiveEntities[i];
+        _passiveEntities[i] = 0;
+    }
+    _passiveEntities.clear();
 
+    sf::Vector2f charPos;
     //first pass to load single tiles
     for(int t=0 ; t<2 ; t++) {
         Map::Layer l(static_cast<Map::Layer>(t));
@@ -167,7 +184,7 @@ void Level::Load(IP& ip, string name, Character& character) {
         }
     }
 
-    //second pass to load fluids
+    //second pass to load fluids and ducks
     int w = _levelImages[0].getSize().x;
     int h = _levelImages[0].getSize().y;
     sf::Color waterSufaceC(106, 129, 193);
@@ -186,6 +203,13 @@ void Level::Load(IP& ip, string name, Character& character) {
                     offsets[1] = 2;
                 }
                 _waterFields.push_back(new WaterField(sf::FloatRect(i*16-offsets[0], j*16+8, s.x*16+offsets[0]+offsets[1], s.y*16-8), 2, true));
+                sf::FloatRect rect(_waterFields[GetNbWaterFields()-1]->GetRect());
+                int nbDucks = (int)(MathHelper::RandFloat(0, 1)*MathHelper::RandFloat(0, 1)*((float)s.x/3.f));
+                for(int k=0 ; k<nbDucks ; k++) {
+                    Duck *duck = new Duck(ip);
+                    duck->setPosition(sf::Vector2f(MathHelper::RandFloat(rect.left+duck->getGlobalBounds().width/2.f, rect.left+rect.width-duck->getGlobalBounds().width/2.f), rect.top));
+                    _passiveEntities.push_back(duck);
+                }
             } else if(_levelImages[1].getPixel(i, j) == waterC) {
                 sf::Vector2i s(1, 1);
                 float offsets[4]{0};
@@ -306,6 +330,17 @@ WaterField& Level::GetWaterField(int id) {
 
 void Level::AddWaterFall(IP& ip, sf::Vector2i tilePos, bool big) {
     _waterFalls.push_back(new WaterFall(ip, tilePos, big));
+}
+
+int Level::GetNbPassiveEntities() {
+    return _passiveEntities.size();
+}
+
+GameEntity* Level::GetPassiveEntity(int id) {
+    if(id < 0 || id >=GetNbPassiveEntities()) {
+        return 0;
+    }
+    return _passiveEntities[id];
 }
 
 string Level::GetName() {

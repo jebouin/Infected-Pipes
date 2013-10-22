@@ -20,6 +20,8 @@ class Chest;
 class WaterField;
 class ParticleManager;
 class WaterFall;
+class Duck;
+class GameEntity;
 
 struct LevelInfo {
     string _imageName;
@@ -44,6 +46,8 @@ class Level {
     int GetNbWaterFields();
     WaterField& GetWaterField(int id);
     void AddWaterFall(IP& ip, sf::Vector2i tilePos, bool big);
+    int GetNbPassiveEntities();
+    GameEntity* GetPassiveEntity(int id);
     string GetName();
 
     private:
@@ -61,6 +65,7 @@ class Level {
     vector<Chest*> _chests;
     vector<WaterField*> _waterFields;
     vector<WaterFall*> _waterFalls;
+    vector<GameEntity*> _passiveEntities;
 };
 
 #endif // LEVEL_H_INCLUDED
