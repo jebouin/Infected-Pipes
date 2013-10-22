@@ -18,7 +18,7 @@ class Level;
 
 class WaterFall : public MovingSprite {
     public:
-    WaterFall(IP& ip, sf::Vector2i tilePos);
+    WaterFall(IP& ip, sf::Vector2i tilePos, bool big);
     ~WaterFall();
     void Update(IP& ip, float elapsedTime, Level& level, ParticleManager& pManager);
     void Draw(IP& ip);
@@ -27,6 +27,7 @@ class WaterFall : public MovingSprite {
     private:
     sf::Clock _splashTimer;
     sf::Vector2i _tilePos;
+    bool _big;
 };
 
 #endif // WATERFALL_H_INCLUDED

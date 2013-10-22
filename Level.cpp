@@ -173,6 +173,7 @@ void Level::Load(IP& ip, string name, Character& character) {
     sf::Color waterSufaceC(106, 129, 193);
     sf::Color waterC(70, 94, 160);
     sf::Color waterFallC(70, 94, 160, 130);
+    sf::Color bigWaterFallC(70, 94, 160, 180);
     for(int i=0 ; i<w ; i++) {
         for(int j=0 ; j<h ; j++) {
             if(_levelImages[1].getPixel(i, j) == waterSufaceC) {
@@ -196,7 +197,9 @@ void Level::Load(IP& ip, string name, Character& character) {
                 }
                 _waterFields.push_back(new WaterField(sf::FloatRect(i*16-offsets[0], j*16-offsets[2], s.x*16+offsets[0]+offsets[1], s.y*16+offsets[2]+offsets[3]), 2, false));
             } else if(_levelImages[0].getPixel(i, j) == waterFallC) {
-                _waterFalls.push_back(new WaterFall(ip, sf::Vector2i(i, j)));
+                _waterFalls.push_back(new WaterFall(ip, sf::Vector2i(i, j), false));
+            } else if(_levelImages[0].getPixel(i, j) == bigWaterFallC) {
+                _waterFalls.push_back(new WaterFall(ip, sf::Vector2i(i, j), true));
             }
         }
     }
@@ -301,8 +304,8 @@ WaterField& Level::GetWaterField(int id) {
     return *_waterFields[id];
 }
 
-void Level::AddWaterFall(IP& ip, sf::Vector2i tilePos) {
-    _waterFalls.push_back(new WaterFall(ip, tilePos));
+void Level::AddWaterFall(IP& ip, sf::Vector2i tilePos, bool big) {
+    _waterFalls.push_back(new WaterFall(ip, tilePos, big));
 }
 
 string Level::GetName() {

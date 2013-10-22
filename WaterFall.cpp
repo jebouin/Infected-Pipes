@@ -10,10 +10,15 @@
 #include "WaterField.h"
 #include "Map.h"
 
-WaterFall::WaterFall(IP& ip, sf::Vector2i tilePos)
-    : MovingSprite(ip, "waterFall", sf::IntRect(0, 0, 6, 16), true) {
+WaterFall::WaterFall(IP& ip, sf::Vector2i tilePos, bool big)
+    : MovingSprite(ip, big ? "bigWaterFall" : "waterFall", big ? sf::IntRect(0, 0, 16, 16) : sf::IntRect(0, 0, 6, 16), true) {
+    _big = big;
     AnimationTable& t(GetAnims());
-    t.AddAnimation("fall", new Animation(8, 30, sf::Vector2i(0, 0), sf::Vector2i(6, 16), true));
+    if(big) {
+        t.AddAnimation("fall", new Animation(8, 30, sf::Vector2i(0, 0), sf::Vector2i(16, 16), true));
+    } else {
+        t.AddAnimation("fall", new Animation(8, 30, sf::Vector2i(0, 0), sf::Vector2i(6, 16), true));
+    }
     t.SetAnimation("fall");
     setPosition(sf::Vector2f(tilePos*16) + sf::Vector2f(8, 4));
     _tilePos = tilePos;
@@ -48,7 +53,7 @@ void WaterFall::Fall(IP& ip, Level& level) {
     for(int i=_tilePos.y+1 ; i<level.GetMap().GetSize().y ; i++) {
         sf::Vector2i curTilePos(_tilePos.x, i);
         sf::FloatRect curRect(sf::Vector2f(curTilePos)*16.f, sf::Vector2f(16, 16));
-        level.AddWaterFall(ip, curTilePos);
+        level.AddWaterFall(ip, curTilePos, _big);
         for(int j=0 ; j<level.GetNbWaterFields() ; j++) {
             WaterField& wf(level.GetWaterField(j));
             if(!wf.IsSurface()) {

@@ -43,7 +43,7 @@ class Level {
     void OpenChest(Character& character, IP& ip);
     int GetNbWaterFields();
     WaterField& GetWaterField(int id);
-    void AddWaterFall(IP& ip, sf::Vector2i tilePos);
+    void AddWaterFall(IP& ip, sf::Vector2i tilePos, bool big);
     string GetName();
 
     private:
