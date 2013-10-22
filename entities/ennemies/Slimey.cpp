@@ -105,7 +105,7 @@ void Slimey::Update(IP& ip, float eTime, Level& level, Character& character, Ent
 }
 
 void Slimey::Die(IP& ip, ParticleManager& pManager, EntityManager& eManager, Level& level) {
-    GameEntity::Die(ip, pManager, eManager, level);
+    Ennemy::Die(ip, pManager, eManager, level);
     for(int i=0 ; i<80 ; i++) {
         pManager.AddParticle(new Particle(ip, "slimeParticle",
                                           getPosition()+MathHelper::Ang2Vec(MathHelper::Deg2Rad(MathHelper::RandFloat(0, 360))) * MathHelper::RandFloat(0., 6.),

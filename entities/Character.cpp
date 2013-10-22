@@ -201,7 +201,7 @@ void Character::Damage(int dmg, IP& ip, ParticleManager& pManager, sf::Color col
 
 void Character::EarnXP(int amount) {
     _xp += amount;
-    if(_xp >= _nextXP) {
+    while(_xp >= _nextXP) {
         LevelUp();
     }
     cout << _xp << "/" << _nextXP << "XP" << endl;

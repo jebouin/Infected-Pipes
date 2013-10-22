@@ -72,7 +72,6 @@ void IP::Update() {
     if(eTime > 1000.f/30.f) {
         eTime = 1000.f/30.f;
     }
-    cout << eTime << endl;
     _sceneManager->Update(eTime, *this);
     if(_sceneManager->GetNbScenes() < 1) {
         _window->close();

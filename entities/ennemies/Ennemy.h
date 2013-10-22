@@ -24,12 +24,14 @@ class Ennemy : public GameEntity {
     virtual void Draw(IP& ip);
     int GetXP();
     int GetIncDifficulty();
+    virtual void Die(IP& ip, ParticleManager& pManager, EntityManager& eManager, Level& level);
 
     private:
     bool _inPipe;
     int _xp;
     int _incDifficulty;
     Level& _level;
+    Character* _character;
 };
 
 #endif // ENNEMY_H_INCLUDED

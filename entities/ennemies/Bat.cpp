@@ -47,7 +47,7 @@ void Bat::Update(IP& ip, float eTime, Level& level, Character& character, Entity
 }
 
 void Bat::Die(IP& ip, ParticleManager& pManager, EntityManager& eManager, Level& level) {
-    GameEntity::Die(ip, pManager, eManager, level);
+    Ennemy::Die(ip, pManager, eManager, level);
     for(int i=0 ; i<6 ; i++) {
         int type = rand()%2;
         pManager.AddParticle(new Particle(ip, "featherParticle",
