@@ -29,6 +29,7 @@ public:
 private:
     sf::Clock _timer;
     sf::Clock _stateTimer;
+    sf::Clock _particleTimer;
     State _curState;
     float _nextStateTime;
 };

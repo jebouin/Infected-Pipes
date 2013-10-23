@@ -149,7 +149,7 @@ void RockWorm::Die(IP& ip, ParticleManager& pManager, EntityManager& eManager, L
     for(int i=0 ; i<20 ; i++) {
         Particle *p = new Particle(ip, "rockWormBlood",
                                    sf::Vector2f(GetGlobalHitbox().left+MathHelper::RandFloat(0, GetGlobalHitbox().width), GetGlobalHitbox().top+MathHelper::RandFloat(0, GetGlobalHitbox().height)),
-                                   MathHelper::Ang2Vec(MathHelper::Deg2Rad(MathHelper::RandFloat(-160, 20))) * MathHelper::RandFloat(.02, .05),
+                                   MathHelper::Ang2Vec(MathHelper::Deg2Rad(MathHelper::RandFloat(-160, -20))) * MathHelper::RandFloat(.02, .05),
                                    0,
                                    480,
                                    sf::Vector2f(1, 1),

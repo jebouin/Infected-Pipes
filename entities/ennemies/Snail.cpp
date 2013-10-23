@@ -125,7 +125,7 @@ void Snail::Die(IP& ip, ParticleManager& pManager, EntityManager& eManager, Leve
         int type = rand()%2;
         pManager.AddParticle(new Particle(ip, type==0 ? "snailParticle" : "snailParticle2",
                                           getPosition(),
-                                          MathHelper::Ang2Vec(MathHelper::Deg2Rad(MathHelper::RandFloat(-160, 20))) * MathHelper::RandFloat(.2, .8),
+                                          MathHelper::Ang2Vec(MathHelper::Deg2Rad(MathHelper::RandFloat(-160, -20))) * MathHelper::RandFloat(.2, .8),
                                           MathHelper::RandFloat(-1., 1.),
                                           MathHelper::RandFloat(600, 1400),
                                           sf::Vector2f(1, 1),

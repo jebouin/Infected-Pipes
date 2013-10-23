@@ -66,7 +66,7 @@ void Spiderock::Die(IP& ip, ParticleManager& pManager, EntityManager& eManager, 
         int type = rand()%2;
         pManager.AddParticle(new Particle(ip, type==0 ? "rockParticle" : "rockParticle2",
                                           getPosition(),
-                                          MathHelper::Ang2Vec(MathHelper::Deg2Rad(MathHelper::RandFloat(-160, 20))) * MathHelper::RandFloat(.1, .35),
+                                          MathHelper::Ang2Vec(MathHelper::Deg2Rad(MathHelper::RandFloat(-160, -20))) * MathHelper::RandFloat(.1, .35),
                                           MathHelper::RandFloat(-1., 1.),
                                           MathHelper::RandFloat(600, 1400),
                                           sf::Vector2f(1, 1),

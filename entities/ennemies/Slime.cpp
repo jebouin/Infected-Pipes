@@ -64,7 +64,7 @@ void Slime::Die(IP& ip, ParticleManager& pManager, EntityManager& eManager, Leve
     for(int i=0 ; i<4 ; i++) {
         pManager.AddParticle(new Particle(ip, "slimeParticle",
                                           getPosition()+MathHelper::Ang2Vec(MathHelper::Deg2Rad(MathHelper::RandFloat(0, 360))) * MathHelper::RandFloat(0., 6.),
-                                          MathHelper::Ang2Vec(MathHelper::Deg2Rad(MathHelper::RandFloat(-160, 20))) * MathHelper::RandFloat(.1, .35),
+                                          MathHelper::Ang2Vec(MathHelper::Deg2Rad(MathHelper::RandFloat(-160, -20))) * MathHelper::RandFloat(.1, .35),
                                           0,
                                           MathHelper::RandFloat(400, 800),
                                           sf::Vector2f(1, 1),

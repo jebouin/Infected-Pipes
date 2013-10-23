@@ -51,7 +51,7 @@ void SnowBallEnemy::Die(IP& ip, ParticleManager& pManager, EntityManager& eManag
     for(int i=0 ; i<20 ; i++) {
         pManager.AddParticle(new Particle(ip, "snowParticle",
                                           getPosition() + MathHelper::Ang2Vec(MathHelper::Deg2Rad(MathHelper::RandFloat(0, 360))) * MathHelper::RandFloat(0, 8),
-                                          MathHelper::Ang2Vec(MathHelper::Deg2Rad(MathHelper::RandFloat(-160, 20))) * MathHelper::RandFloat(.05, .1),
+                                          MathHelper::Ang2Vec(MathHelper::Deg2Rad(MathHelper::RandFloat(-160, -20))) * MathHelper::RandFloat(.05, .1),
                                           0.,
                                           MathHelper::RandFloat(600, 1400),
                                           sf::Vector2f(1, 1),

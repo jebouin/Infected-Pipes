@@ -9,6 +9,7 @@
 #include "MathHelper.h"
 #include "Map.h"
 #include "Bullet.h"
+#include "Particle.h"
 
 WormBoss::WormBoss(IP& ip, Level& level)
         : Boss(ip, "wormBossHead", sf::IntRect(0, 0, 21, 21), 1000, 100, 50, level) {
@@ -73,11 +74,61 @@ void WormBoss::Update(IP& ip, float eTime, Level& level, Character& character, E
         }
     }
 
+    if(_curState == PREPARING || _curState == GOINGUP || _curState == GOINGDOWN) {
+        if(_particleTimer.getElapsedTime().asMilliseconds() >= 100) {
+            _particleTimer.restart();
+            for(int i=0 ; i<3 ; i++) {
+                pManager.AddParticle(new Particle(ip, "smokeParticle",
+                                                  sf::Vector2f(getPosition().x + MathHelper::RandFloat(-GetGlobalHitbox().width/2.f, GetGlobalHitbox().width/2.f), m.GetSize().y*16-16),
+                                                  sf::Vector2f(0., 0.),
+                                                  MathHelper::RandFloat(-.5, .5),
+                                                  MathHelper::RandFloat(200, 400),
+                                                  sf::Vector2f(.5, .5),
+                                                  sf::Vector2f(2., 2.),
+                                                  128,
+                                                  0,
+                                                  false,
+                                                  false,
+                                                  false,
+                                                  sf::IntRect(2, 2, 3, 3)));
+            }
+            if(_curState == GOINGUP || _curState == GOINGDOWN) {
+                pManager.AddParticle(new Particle(ip, "rockParticle",
+                                                  sf::Vector2f(getPosition().x + MathHelper::RandFloat(-GetGlobalHitbox().width/2.f, GetGlobalHitbox().width/2.f), m.GetSize().y*16-24),
+                                                  MathHelper::Ang2Vec(MathHelper::Deg2Rad(MathHelper::RandFloat(-120, -60))) * MathHelper::RandFloat(.3, .5),
+                                                  MathHelper::RandFloat(-.5, .5),
+                                                  MathHelper::RandFloat(400, 700),
+                                                  sf::Vector2f(1., 1.),
+                                                  sf::Vector2f(1., 1.),
+                                                  255,
+                                                  0,
+                                                  true,
+                                                  true,
+                                                  false,
+                                                  sf::IntRect(1, 1, 4, 3)));
+                int type = rand()%2;
+                pManager.AddParticle(new Particle(ip, type==0 ? "rockParticle" : "rockParticle2",
+                                                  sf::Vector2f(getPosition().x + MathHelper::RandFloat(-GetGlobalHitbox().width/2.f, GetGlobalHitbox().width/2.f), m.GetSize().y*16-24),
+                                                  MathHelper::Ang2Vec(MathHelper::Deg2Rad(MathHelper::RandFloat(-160, 20))) * MathHelper::RandFloat(.3, .5),
+                                                  MathHelper::RandFloat(-1., 1.),
+                                                  MathHelper::RandFloat(600, 1400),
+                                                  sf::Vector2f(1, 1),
+                                                  sf::Vector2f(1, 1),
+                                                  255,
+                                                  0,
+                                                  true,
+                                                  true,
+                                                  false,
+                                                  type==0 ? sf::IntRect(1, 1, 4, 4) : sf::IntRect(1, 1, 5, 3)));
+            }
+        }
+    }
+
     //Update state
     if(_stateTimer.getElapsedTime().asMilliseconds() >= _nextStateTime) {
         if(_curState == IDLE) {
             ChangeState(GOINGDOWN);
-            SetVel(sf::Vector2f(0, .3));
+            SetVel(sf::Vector2f(0, .25));
         } else if(_curState == INGROUND) {
             ChangeState(PREPARING);
         } else if(_curState == PREPARING) {
@@ -85,7 +136,7 @@ void WormBoss::Update(IP& ip, float eTime, Level& level, Character& character, E
                 ChangeState(JUMPING);
             } else {
                 ChangeState(GOINGUP);
-                SetVel(sf::Vector2f(0, -.3));
+                SetVel(sf::Vector2f(0, -.4));
             }
         }
     }
