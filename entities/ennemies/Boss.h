@@ -22,8 +22,8 @@ class Boss : public Ennemy {
 public:
     Boss(IP& ip, string name, sf::IntRect hitbox, int hp, int xp, int incDifficulty, Level& level);
     ~Boss();
-    void Update(IP& ip, float eTime, Level& level, Character& character, EntityManager& eManager, ParticleManager& pManager, BulletManager& bManager);
-    void Draw(IP& ip);
+    virtual void Update(IP& ip, float eTime, Level& level, Character& character, EntityManager& eManager, ParticleManager& pManager, BulletManager& bManager);
+    virtual void Draw(IP& ip);
     void AddPart(MovingSprite* part);
     void ClearParts();
     int GetNbParts();

@@ -1,4 +1,4 @@
-/*#include "WormBoss.h"
+#include "WormBoss.h"
 #include "Level.h"
 #include "Character.h"
 #include "EntityManager.h"
@@ -21,4 +21,3 @@ void WormBoss::Update(IP& ip, float eTime, Level& level, Character& character, E
 void WormBoss::Draw(IP& ip) {
     Boss::Draw(ip);
 }
-*/

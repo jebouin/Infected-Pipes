@@ -170,7 +170,7 @@ bool Spawner::CanEnterPipe(MovingSprite& s) {
             float pipeX = _pipes[i]->getPosition().x;
             float dist = MathHelper::ABS(s.getPosition().x-pipeX);
             if(dist < 6) {
-                s.setPosition(sf::Vector2f(pipeX, s.getPosition().y));
+                s.setPosition(sf::Vector2f(sf::Vector2i(sf::Vector2f(pipeX, s.getPosition().y))));
                 return true;
             }
         }

@@ -1,4 +1,4 @@
-/*#ifndef WORMBOSS_H_INCLUDED
+#ifndef WORMBOSS_H_INCLUDED
 #define WORMBOSS_H_INCLUDED
 
 #include <iostream>
@@ -28,4 +28,3 @@ private:
 };
 
 #endif // WORMBOSS_H_INCLUDED
-*/
