@@ -16,7 +16,7 @@ MovingSprite::MovingSprite(IP& ip, string name, bool animated) : sf::Sprite() {
     _rotVel = 0;
     setTexture(ip._textureLoader->GetTexture(name));
     _hitbox = getTextureRect();
-    setOrigin(MathHelper::GetCenter(sf::FloatRect(_hitbox)));
+    setOrigin(sf::Vector2f(sf::Vector2i(MathHelper::GetCenter(sf::FloatRect(_hitbox)))));
     _animTable = new AnimationTable();
     _animTable->AddAnimation("base", new Animation(1, 1000, sf::Vector2i(0, 0), sf::Vector2i(getTextureRect().width, getTextureRect().height), false));
     _animTable->SetAnimation("base");
@@ -32,7 +32,7 @@ MovingSprite::MovingSprite(IP& ip, string name, sf::IntRect hitbox, bool animate
     _vel = sf::Vector2f(0, 0);
     _rotVel = 0;
     setTexture(ip._textureLoader->GetTexture(name));
-    setOrigin(MathHelper::GetCenter(sf::FloatRect(hitbox)));
+    setOrigin(sf::Vector2f(sf::Vector2i(MathHelper::GetCenter(sf::FloatRect(hitbox)))));
     _hitbox = hitbox;
     _animTable = new AnimationTable();
     _animTable->AddAnimation("base", new Animation(1, 1000, sf::Vector2i(0, 0), sf::Vector2i(getTextureRect().width, getTextureRect().height), false));

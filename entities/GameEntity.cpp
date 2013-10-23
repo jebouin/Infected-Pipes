@@ -25,6 +25,7 @@ GameEntity::GameEntity(IP& ip, string name, sf::IntRect hitbox, int hp) : Moving
     _autoDir = true;
     _inWater = false;
     _friction = .008;
+    _havePhysics = true;
 }
 
 GameEntity::~GameEntity() {
@@ -33,6 +34,11 @@ GameEntity::~GameEntity() {
 
 void GameEntity::Update(IP& ip, float elapsedTime, Level& level, EntityManager& eManager, ParticleManager& pManager) {
     _inWater = IsInWater(level);
+
+    if(!_havePhysics) {
+        MovingSprite::Update(ip, elapsedTime);
+        return;
+    }
 
     if(!_flying) {
         if(!_inWater) {
@@ -79,6 +85,9 @@ void GameEntity::Draw(IP& ip) {
 }
 
 void GameEntity::Collide(GameEntity* other, float elapsedTime) {
+    /*if(!_havePhysics || !other->HasPhysics()) {
+        return;
+    }*/
     sf::Vector2f delta = -GetVel()*elapsedTime;
     float vecLength = MathHelper::GetVecLength(delta);
     sf::Vector2f dir = MathHelper::Normalize(delta);
@@ -99,8 +108,8 @@ void GameEntity::Collide(GameEntity* other, float elapsedTime) {
         float dx = rx*MathHelper::SGN(sf::Vector2f(c-c2).x);
         dx = max(-0.5f, min(dx, 0.5f));
 
-        if(IsPushable()) SetVel(GetVel() + sf::Vector2f(dx, 0)*other->GetWeight());
-        if(other->IsPushable()) other->SetVel(other->GetVel() - sf::Vector2f(dx, 0)*GetWeight());
+        if(IsPushable() && HasPhysics()) SetVel(GetVel() + sf::Vector2f(dx, 0)*other->GetWeight());
+        if(other->IsPushable() && other->HasPhysics()) other->SetVel(other->GetVel() - sf::Vector2f(dx, 0)*GetWeight());
 
         return;
     }
@@ -241,6 +250,10 @@ void GameEntity::SetFriction(float friction) {
     _friction = friction;
 }
 
+void GameEntity::SetPhysics(bool p) {
+    _havePhysics = p;
+}
+
 float GameEntity::GetSpeed() {
     return _speed;
 }
@@ -271,4 +284,8 @@ bool GameEntity::IsPushable() {
 
 bool GameEntity::IsInvincible() {
     return _invincible;
+}
+
+bool GameEntity::HasPhysics() const {
+    return _havePhysics;
 }

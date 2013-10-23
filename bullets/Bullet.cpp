@@ -116,7 +116,9 @@ void Bullet::Impact(GameEntity& entity, IP& ip, ParticleManager& pManager, sf::C
     _instantDie = true;
     _deadTimer.restart();
     entity.Damage(_damage, ip, pManager, color, getPosition(), GetVel(), eManager, level);
-    entity.SetVel(entity.GetVel() + GetVel()/MathHelper::GetVecLength(GetVel())*_knockBack);
+    if(entity.HasPhysics()) {
+        entity.SetVel(entity.GetVel() + GetVel()/MathHelper::GetVecLength(GetVel())*_knockBack);
+    }
 }
 
 bool Bullet::IsAlive() const {

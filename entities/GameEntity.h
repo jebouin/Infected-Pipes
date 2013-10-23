@@ -44,6 +44,7 @@ class GameEntity : public MovingSprite {
     void SetInvincible(bool i);
     void SetAutoDir(bool a);
     void SetFriction(float friction);
+    void SetPhysics(bool p);
     float GetSpeed();
     float GetWeight();
     bool IsAlive();
@@ -52,6 +53,7 @@ class GameEntity : public MovingSprite {
     bool GetDir();
     bool IsPushable();
     bool IsInvincible();
+    bool HasPhysics() const;
 
     protected:
     bool _inWater;
@@ -67,6 +69,7 @@ class GameEntity : public MovingSprite {
     bool _flying;
     bool _invincible;
     bool _autoDir;
+    bool _havePhysics;
     int _hpMax;
     int _hp;
 };

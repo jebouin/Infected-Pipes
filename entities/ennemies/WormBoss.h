@@ -18,13 +18,19 @@ class BulletManager;
 
 class WormBoss : public Boss {
 public:
+    enum State {IDLE, PREPARING, JUMPING, GOINGUP, GOINGDOWN, INGROUND};
+
     WormBoss(IP& ip, Level& level);
     ~WormBoss();
     void Update(IP& ip, float eTime, Level& level, Character& character, EntityManager& eManager, ParticleManager& pManager, BulletManager& bManager);
     void Draw(IP& ip);
+    void ChangeState(State state);
 
 private:
-
+    sf::Clock _timer;
+    sf::Clock _stateTimer;
+    State _curState;
+    float _nextStateTime;
 };
 
 #endif // WORMBOSS_H_INCLUDED
