@@ -29,7 +29,7 @@ Level::Level(IP& ip, Character& character) {
     _grass = 0;
     _background = 0;
     _difficulty = 2;
-    Load(ip, "wetCave", character);
+    Load(ip, "miniBoss2", character);
     character.setPosition(character.getPosition() + sf::Vector2f(0, 50));
 }
 

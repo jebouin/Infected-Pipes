@@ -5,8 +5,10 @@
 #include "ParticleManager.h"
 #include "BulletManager.h"
 #include "Renderer.h"
+#include "IP.h"
 
-WormBoss::WormBoss(IP& ip, Level& level) : Boss(ip, "wormBossBody", sf:IntRect(0, 0, 22, 22), 100, 100, 50, level) {
+WormBoss::WormBoss(IP& ip, Level& level)
+        : Boss(ip, "wormBossBody", sf::IntRect(0, 0, 22, 22), 100, 100, 50, level) {
 
 }
 

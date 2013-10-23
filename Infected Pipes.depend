@@ -271,7 +271,7 @@
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1382433900 source:c:\users\xaychru04\desktop\infected pipes\spawner.cpp
+1382516718 source:c:\users\xaychru04\desktop\infected pipes\spawner.cpp
 	"Spawner.h"
 	"IP.h"
 	"EntityManager.h"
@@ -885,7 +885,7 @@
 	"SFML/System.hpp"
 	"Ennemy.h"
 
-1382433238 source:c:\users\xaychru04\desktop\infected pipes\entities\ennemies\boss.cpp
+1382517154 source:c:\users\xaychru04\desktop\infected pipes\entities\ennemies\boss.cpp
 	"Boss.h"
 	"Level.h"
 	"Character.h"
@@ -893,9 +893,8 @@
 	"ParticleManager.h"
 	"BulletManager.h"
 	"Renderer.h"
-	"MovingSprite.h"
 
-1382515968 c:\users\xaychru04\desktop\infected pipes\entities\ennemies\boss.h
+1382516996 c:\users\xaychru04\desktop\infected pipes\entities\ennemies\boss.h
 	<iostream>
 	<vector>
 	"SFML/Graphics.hpp"
@@ -1039,13 +1038,15 @@
 	"SFML/System.hpp"
 	"Ennemy.h"
 
-1382433900 source:c:\users\xaychru04\desktop\infected pipes\entities\ennemies\wormboss.cpp
+1382517908 source:c:\users\xaychru04\desktop\infected pipes\entities\ennemies\wormboss.cpp
+	"WormBoss.h"
 	"Level.h"
 	"Character.h"
 	"EntityManager.h"
 	"ParticleManager.h"
 	"BulletManager.h"
 	"Renderer.h"
+	"IP.h"
 
 1380957574 source:c:\users\xaychru04\desktop\infected pipes\entities\entitymanager.cpp
 	"EntityManager.h"
@@ -1103,4 +1104,10 @@
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 	"GameEntity.h"
+
+1382517908 c:\users\xaychru04\desktop\infected pipes\entities\ennemies\wormboss.h
+	<iostream>
+	"SFML/Graphics.hpp"
+	"SFML/System.hpp"
+	"Boss.h"
 
