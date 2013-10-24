@@ -68,9 +68,11 @@ void Spawner::Spawn(IP& ip, EntityManager& eManager, Level& level, Character& ch
         eManager.Add(slimey);
         _difToSpawn = 0;
     } else if(levelName == "miniBoss2") {
-        WormBoss *wormBoss = new WormBoss(ip, level);
-        eManager.Add(wormBoss);
-        _difToSpawn = 0;
+        for(int i=0 ; i<2 ; i++) {
+            WormBoss *wormBoss = new WormBoss(ip, level);
+            eManager.Add(wormBoss);
+            _difToSpawn = 0;
+        }
     } else {
         int pipeId = rand()%_pipes.size();
         int et;

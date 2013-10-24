@@ -166,7 +166,7 @@
 	"IP.h"
 	"Renderer.h"
 
-1382544161 source:c:\users\xaychru04\desktop\infected pipes\level.cpp
+1382544506 source:c:\users\xaychru04\desktop\infected pipes\level.cpp
 	"Level.h"
 	"IP.h"
 	"Map.h"
@@ -271,7 +271,7 @@
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1382518550 source:c:\users\xaychru04\desktop\infected pipes\spawner.cpp
+1382631747 source:c:\users\xaychru04\desktop\infected pipes\spawner.cpp
 	"Spawner.h"
 	"IP.h"
 	"EntityManager.h"
@@ -595,7 +595,7 @@
 	"SFML/System.hpp"
 	"Bullet.h"
 
-1382519551 source:c:\users\xaychru04\desktop\infected pipes\bullets\arrow.cpp
+1382632353 source:c:\users\xaychru04\desktop\infected pipes\bullets\arrow.cpp
 	"Arrow.h"
 	"IP.h"
 	"Character.h"
@@ -914,7 +914,7 @@
 	"ParticleManager.h"
 	"BulletManager.h"
 
-1382470381 source:c:\users\xaychru04\desktop\infected pipes\entities\ennemies\rockworm.cpp
+1382544388 source:c:\users\xaychru04\desktop\infected pipes\entities\ennemies\rockworm.cpp
 	"RockWorm.h"
 	"IP.h"
 	"Map.h"
@@ -936,7 +936,7 @@
 	"SFML/System.hpp"
 	"Ennemy.h"
 
-1382470381 source:c:\users\xaychru04\desktop\infected pipes\entities\ennemies\slime.cpp
+1382544388 source:c:\users\xaychru04\desktop\infected pipes\entities\ennemies\slime.cpp
 	"Slime.h"
 	"IP.h"
 	"Map.h"
@@ -956,7 +956,7 @@
 	"SFML/System.hpp"
 	"Ennemy.h"
 
-1382474457 source:c:\users\xaychru04\desktop\infected pipes\entities\ennemies\slimey.cpp
+1382544388 source:c:\users\xaychru04\desktop\infected pipes\entities\ennemies\slimey.cpp
 	"Slimey.h"
 	"IP.h"
 	"Map.h"
@@ -977,7 +977,7 @@
 	"SFML/System.hpp"
 	"Ennemy.h"
 
-1382470434 source:c:\users\xaychru04\desktop\infected pipes\entities\ennemies\snail.cpp
+1382544388 source:c:\users\xaychru04\desktop\infected pipes\entities\ennemies\snail.cpp
 	"Snail.h"
 	"IP.h"
 	"Map.h"
@@ -999,7 +999,7 @@
 	"SFML/System.hpp"
 	"Ennemy.h"
 
-1382470434 source:c:\users\xaychru04\desktop\infected pipes\entities\ennemies\snowballenemy.cpp
+1382544388 source:c:\users\xaychru04\desktop\infected pipes\entities\ennemies\snowballenemy.cpp
 	"SnowBallEnemy.h"
 	"IP.h"
 	"Map.h"
@@ -1039,7 +1039,7 @@
 	"SFML/System.hpp"
 	"Ennemy.h"
 
-1382544161 source:c:\users\xaychru04\desktop\infected pipes\entities\ennemies\wormboss.cpp
+1382640289 source:c:\users\xaychru04\desktop\infected pipes\entities\ennemies\wormboss.cpp
 	"WormBoss.h"
 	"Level.h"
 	"Character.h"
@@ -1052,6 +1052,8 @@
 	"Map.h"
 	"Bullet.h"
 	"Particle.h"
+	"AnimationTable.h"
+	"Animation.h"
 
 1380957574 source:c:\users\xaychru04\desktop\infected pipes\entities\entitymanager.cpp
 	"EntityManager.h"
@@ -1110,9 +1112,10 @@
 	"SFML/System.hpp"
 	"GameEntity.h"
 
-1382543404 c:\users\xaychru04\desktop\infected pipes\entities\ennemies\wormboss.h
+1382640080 c:\users\xaychru04\desktop\infected pipes\entities\ennemies\wormboss.h
 	<iostream>
+	<vector>
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
-	"Boss.h"
+	"Ennemy.h"
 

@@ -13,8 +13,8 @@
 #include "MathHelper.h"
 
 IP::IP() {
-    _window = new sf::RenderWindow(sf::VideoMode(1600, 900, 32), "Infected Pipes");
-    //_window = new sf::RenderWindow(sf::VideoMode::getFullscreenModes()[0], "Infected Pipes", sf::Style::None);
+    //_window = new sf::RenderWindow(sf::VideoMode(1600, 900, 32), "Infected Pipes");
+    _window = new sf::RenderWindow(sf::VideoMode::getFullscreenModes()[0], "Infected Pipes", sf::Style::None);
     _window->setVerticalSyncEnabled(true);
     _window->setFramerateLimit(60);
     _window->setMouseCursorVisible(false);
