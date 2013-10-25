@@ -142,6 +142,11 @@ void Character::EnterPipe(Level& level) {
     _enterTimer.restart();
 }
 
+void Character::LeavePipe() {
+    _leavingPipe = true;
+    SetVel(sf::Vector2f(0, 0.1));
+}
+
 bool Character::EnteringPipe() {
     return _enteringPipe;
 }

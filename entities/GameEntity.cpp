@@ -143,7 +143,7 @@ void GameEntity::ChangeDir() {
         setScale(-1, 1);
     }
     sf::Vector2f frameSize(GetAnims().GetAnimation().GetRect().width, GetAnims().GetAnimation().GetRect().height);
-    SetHitbox(sf::IntRect(frameSize.x-GetHitbox().left-GetHitbox().width, GetHitbox().top, GetHitbox().width, GetHitbox().height));
+    SetHitbox(sf::IntRect(frameSize.x-GetHitbox().left-GetHitbox().width+1, GetHitbox().top, GetHitbox().width, GetHitbox().height));
 }
 
 void GameEntity::PlatformDrop(Level& level) {

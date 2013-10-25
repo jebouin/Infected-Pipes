@@ -256,8 +256,8 @@ void WormBoss::Update(IP& ip, float eTime, Level& level, Character& character, E
         }
     }
 
-    static string stateS[7] = {"IDLE", "PREPARING", "JUMPING", "GOINGUP", "GOINGDOWN", "INGROUND", "DYING"};
-    cout << stateS[_curState] << endl;
+    /*static string stateS[7] = {"IDLE", "PREPARING", "JUMPING", "GOINGUP", "GOINGDOWN", "INGROUND", "DYING"};
+    cout << stateS[_curState] << endl;*/
 }
 
 void WormBoss::Draw(IP& ip) {

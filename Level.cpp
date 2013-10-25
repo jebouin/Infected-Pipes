@@ -24,12 +24,13 @@ Level::Level(IP& ip, Character& character) {
     _levelInfos["miniBoss1"] = LevelInfo{"miniBoss1", "rockyBackground", 0.2f, false, false};
     _levelInfos["miniBoss2"] = LevelInfo{"miniBoss2", "rockyBackground", 0.2f, false, false};
     _levelInfos["wetCave"] = LevelInfo{"level2", "rockyBackground", 0.2f, true, true};
+    _levelInfos["lavaCave"] = LevelInfo{"level3", "rockyBackground", 0.2f, true, true};
     _map = 0;
     _spawner = 0;
     _grass = 0;
     _background = 0;
     _difficulty = 2;
-    Load(ip, "miniBoss2", character);
+    Load(ip, "lavaCave", character);
     character.setPosition(character.getPosition() + sf::Vector2f(0, 50));
 }
 
@@ -64,7 +65,7 @@ Level::~Level() {
     _passiveEntities.clear();
 }
 
-void Level::Update(IP& ip, EntityManager& eManager, Character& character, float eTime, ParticleManager& pManager) {
+void Level::Update(IP& ip, EntityManager& eManager, Character& character, float eTime, ParticleManager& pManager, BulletManager& bManager) {
     _spawner->Update(ip, eManager, *this, character);
     _grass->Update(ip);
     _background->Update(ip, eTime);
@@ -79,6 +80,11 @@ void Level::Update(IP& ip, EntityManager& eManager, Character& character, float 
     }
     for(int i=0 ; i<_passiveEntities.size() ; i++) {
         _passiveEntities[i]->Update(ip, eTime, *this, eManager, pManager);
+    }
+
+    if(_curLevel == "miniBoss1" && _spawner->IsFinished()) {
+        NextLevel(ip, eManager, bManager, character);
+        character.LeavePipe();
     }
 }
 
@@ -123,7 +129,7 @@ void Level::Load(IP& ip, string name, Character& character) {
     _map = new Map(ip, sf::Vector2i(_levelImages[0].getSize()));
 
     delete _spawner;
-    if(name == "miniBoss1") {
+    if(name == "miniBoss1" || name == "miniBoss2") {
         _spawner = new Spawner(ip, 1, *this);
     } else {
         _spawner = new Spawner(ip, 20, *this);
@@ -169,6 +175,8 @@ void Level::Load(IP& ip, string name, Character& character) {
                     _map->SetTile(pos, 7, l);
                 } else if(c == sf::Color(51, 51, 51, 200)) {
                     _map->SetTile(pos, 8, l);
+                } else if(c == sf::Color(150, 22, 22)) {
+                    _map->SetTile(pos, 9, l);
                 } else if(c == sf::Color(106, 129, 193)) {
                     _map->SetTile(pos, 0, l);
                 } else if(c == sf::Color(255, 255, 255)) {
@@ -319,7 +327,18 @@ void Level::NextLevel(IP& ip, EntityManager& eManager, BulletManager& bManager, 
     } else {
         Load(ip, "rockyCave", character);
     }*/
-    Load(ip, /*"rockyCave"*/"miniBoss1", character);
+    //Load(ip, /*"rockyCave"*/"miniBoss1", character);
+    string toLoad;
+    if(_curLevel == "intro") {
+        toLoad = "rockyCave";
+    } else if(_curLevel == "rockyCave") {
+        toLoad = "miniBoss1";
+    } else if(_curLevel == "miniBoss1") {
+        toLoad = "wetCave";
+    } else if(_curLevel == "wetCave") {
+        toLoad = "miniBoss2";
+    }
+    Load(ip, toLoad, character);
     eManager.Clear();
     bManager.Clear();
 }

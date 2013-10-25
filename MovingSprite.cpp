@@ -76,10 +76,10 @@ void MovingSprite::Update(IP& ip, float eTime, Level& level, ParticleManager& pM
         _onPlatform = false;
     }
 
-    /*vector<sf::Vector2f> boxCorners = MathHelper::Rect2Corners(GetGlobalHitbox());
+    vector<sf::Vector2f> boxCorners = MathHelper::Rect2Corners(GetGlobalHitbox());
     for(int i=0 ; i<4 ; i++) {
         _box.setPoint(i, boxCorners[i]);
-    }*/
+    }
 
     WaterCollision(level, delta, pManager, ip);
 }

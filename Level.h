@@ -35,7 +35,7 @@ class Level {
     public:
     Level(IP& ip, Character& character);
     ~Level();
-    void Update(IP& ip, EntityManager& eManager, Character& character, float eTime, ParticleManager& pManager);
+    void Update(IP& ip, EntityManager& eManager, Character& character, float eTime, ParticleManager& pManager, BulletManager& bManager);
     void DrawBack(IP& ip, sf::View& prevView);
     void DrawFront(IP& ip);
     Map& GetMap() const;
