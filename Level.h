@@ -53,7 +53,7 @@ class Level {
     string GetName();
 
     private:
-    sf::Vector2i GetRectSizeInImageAt(sf::Image& img, sf::Vector2i pos, sf::Color& c);
+    sf::Vector2i GetRectSizeInImageAt(sf::Image& img, sf::Vector2i pos, sf::Color c);
 
     Map *_map;
     vector<sf::Image> _levelImages;

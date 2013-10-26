@@ -12,6 +12,7 @@ Duck::Duck(IP& ip)
     if(rand()%2==0) {
         setScale(-1, 1);
     }
+    SetCollideWithWater(false);
 }
 
 Duck::~Duck() {
@@ -32,11 +33,11 @@ void Duck::Update(IP& ip, float eTime, Level& level, EntityManager& eManager, Pa
         float dy=0;
         int nb=0;
         for(float x=GetGlobalHitbox().left ; x<=GetGlobalHitbox().left+GetGlobalHitbox().width ; x+=2) {
-            dy += f.GetHeight(x);
+            dy -= f.GetHeight(x);
             nb++;
         }
         dy /= float(nb);
-        setPosition(sf::Vector2f(getPosition().x, f.GetRect().top+dy-8));
+        setPosition(sf::Vector2f(getPosition().x, f.GetRect().top+dy+8));
         SetVel(sf::Vector2f(GetVel().x, 0));
         inSurface = true;
         break;

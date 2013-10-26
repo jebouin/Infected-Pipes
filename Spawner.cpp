@@ -62,7 +62,7 @@ void Spawner::Update(IP& ip, EntityManager& eManager, Level& level, Character& c
 
 void Spawner::Spawn(IP& ip, EntityManager& eManager, Level& level, Character& character) {
     string levelName = level.GetName();
-
+    return;
     if(levelName == "miniBoss1") {
         Slimey *slimey = new Slimey(ip, level);
         eManager.Add(slimey);

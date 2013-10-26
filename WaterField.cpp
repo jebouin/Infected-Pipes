@@ -5,12 +5,23 @@
 #include "Particle.h"
 #include "MathHelper.h"
 
-WaterField::WaterField(sf::FloatRect rect, float resolution, bool surface) {
+WaterField::WaterField(sf::FloatRect rect, float resolution, bool surface, bool lava) {
     _rect = rect;
     _surface = surface;
     _nbPoints = rect.width/resolution;
     _resolution = rect.width/_nbPoints;
     _vertexes.setPrimitiveType(sf::Quads);
+    _lava = lava;
+
+    sf::Color waterTopC(177, 181, 191, 200);
+    sf::Color waterC(106, 129, 193, 80);
+    sf::Color waterDownC(106, 129, 193, 80);
+    sf::Color lavaTopC(183, 153, 78, 230);
+    sf::Color lavaC(142, 90, 27, 200);
+    sf::Color lavaDownC(142, 90, 27, 200);
+    _topc = (_lava ? lavaTopC : waterTopC);
+    _c = (_lava ? lavaC : waterC);
+    _downc = (_lava ? lavaDownC : waterDownC);
 
     if(_surface) {
         for(int i=0 ; i<_nbPoints ; i++) {
@@ -18,9 +29,9 @@ WaterField::WaterField(sf::FloatRect rect, float resolution, bool surface) {
         }
     } else {
         vector<sf::Vector2f> corners = MathHelper::Rect2Corners(_rect);
-        sf::Color c(rand()%256, rand()%256, rand()%256, 80);
+        //sf::Color c(rand()%256, rand()%256, rand()%256, 80);
         for(int i=0 ; i<corners.size() ; i++) {
-            _vertexes.append(sf::Vertex(corners[i], sf::Color(106, 129, 193, 80)));
+            _vertexes.append(sf::Vertex(corners[i], _c));
         }
     }
 }
@@ -34,8 +45,8 @@ void WaterField::Update(float elapsedTime) {
         return;
     }
 
-    const float k = 0.65f;
-    const float d = 0.15f;
+    const float k = _lava ? 0.01 : 0.65f;
+    const float d = _lava ? .1 : 0.15f;
     const float spread = 0.2;
     for(int i=0 ; i<_nbPoints ; i++) {
         Spring& s(_springs[i]);
@@ -44,8 +55,8 @@ void WaterField::Update(float elapsedTime) {
         s._velocity += acc*elapsedTime/50.f;
         s._length += s._velocity*elapsedTime/50.f;
 
-        if(s._length < 0) {
-            s._length = 0;
+        if(s._length < -5) {
+            s._length = -5;
             s._velocity = 0;
         }
         if(s._length > _rect.height+6) {
@@ -84,11 +95,7 @@ void WaterField::Update(float elapsedTime) {
 }
 
 void WaterField::Draw(IP& ip){
-    static sf::Color topc(177, 181, 191, 200);
-    static sf::Color waterc(106, 129, 193, 80);
-    static sf::Color downc(106, 129, 193, 80);
-
-    if(_surface) {
+   if(_surface) {
         _vertexes.clear();
         float baseY = _rect.top+_rect.height;
         for(int i=0 ; i<_nbPoints-1 ; i++) {
@@ -97,15 +104,15 @@ void WaterField::Draw(IP& ip){
             sf::Vector2f p0 = sf::Vector2f(x0, baseY - _springs[i]._length);
             sf::Vector2f p1 = sf::Vector2f(x1, baseY - _springs[i+1]._length);
 
-            _vertexes.append(sf::Vertex(p0, topc));
-            _vertexes.append(sf::Vertex(p1, topc));
-            _vertexes.append(sf::Vertex(sf::Vector2f(p1.x, p1.y+4), waterc));
-            _vertexes.append(sf::Vertex(sf::Vector2f(p0.x, p0.y+4), waterc));
+            _vertexes.append(sf::Vertex(p0, _topc));
+            _vertexes.append(sf::Vertex(p1, _topc));
+            _vertexes.append(sf::Vertex(sf::Vector2f(p1.x, p1.y+4), _c));
+            _vertexes.append(sf::Vertex(sf::Vector2f(p0.x, p0.y+4), _c));
 
-            _vertexes.append(sf::Vertex(sf::Vector2f(p0.x, p0.y+4), waterc));
-            _vertexes.append(sf::Vertex(sf::Vector2f(p1.x, p1.y+4), waterc));
-            _vertexes.append(sf::Vertex(sf::Vector2f(x1, baseY), downc));
-            _vertexes.append(sf::Vertex(sf::Vector2f(x0, baseY), downc));
+            _vertexes.append(sf::Vertex(sf::Vector2f(p0.x, p0.y+4), _c));
+            _vertexes.append(sf::Vertex(sf::Vector2f(p1.x, p1.y+4), _c));
+            _vertexes.append(sf::Vertex(sf::Vector2f(x1, baseY), _downc));
+            _vertexes.append(sf::Vertex(sf::Vector2f(x0, baseY), _downc));
         }
     }
 
@@ -125,22 +132,24 @@ void WaterField::Splash(sf::Vector2f pos, float force, ParticleManager& pManager
     _springs[min(id+1, _nbPoints-1)]._velocity = force;
 
     float y = _rect.top+_rect.height - _springs[id]._length;
-    for(int i=0 ; i<5 ; i++) {
-        Particle *p = new Particle(ip, "waterParticle",
-                                   sf::Vector2f(pos.x, y),
-                                   MathHelper::Ang2Vec(MathHelper::Deg2Rad(MathHelper::RandFloat(-70, -110))) * MathHelper::RandFloat(0.1, 0.3),
-                                   0,
-                                   MathHelper::RandFloat(100, 500),
-                                   sf::Vector2f(1, 1),
-                                   sf::Vector2f(1, 1),
-                                   255,
-                                   0,
-                                   true,
-                                   true,
-                                   true,
-                                   sf::IntRect(1, 1, 3, 3));
-        p->SetCollideWithWater(false);
-        pManager.AddParticle(p);
+    if(!_lava) {
+        for(int i=0 ; i<5 ; i++) {
+            Particle *p = new Particle(ip, "waterParticle",
+                                       sf::Vector2f(pos.x, y),
+                                       MathHelper::Ang2Vec(MathHelper::Deg2Rad(MathHelper::RandFloat(-70, -110))) * MathHelper::RandFloat(0.1, 0.3),
+                                       0,
+                                       MathHelper::RandFloat(100, 500),
+                                       sf::Vector2f(1, 1),
+                                       sf::Vector2f(1, 1),
+                                       255,
+                                       0,
+                                       true,
+                                       true,
+                                       true,
+                                       sf::IntRect(1, 1, 3, 3));
+            p->SetCollideWithWater(false);
+            pManager.AddParticle(p);
+        }
     }
 }
 
