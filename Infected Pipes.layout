@@ -1,250 +1,419 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
 	<ActiveTarget name="Debug" />
-	<File name="Animation.cpp" open="0" top="0" tabpos="0">
-		<Cursor position="258" topLine="0" />
-	</File>
-	<File name="Animation.h" open="0" top="0" tabpos="0">
-		<Cursor position="427" topLine="0" />
-	</File>
-	<File name="AnimationTable.cpp" open="0" top="0" tabpos="0">
-		<Cursor position="676" topLine="0" />
-	</File>
-	<File name="AnimationTable.h" open="0" top="0" tabpos="0">
-		<Cursor position="33" topLine="0" />
-	</File>
-	<File name="Background.cpp" open="0" top="0" tabpos="0">
-		<Cursor position="2185" topLine="18" />
-	</File>
-	<File name="Background.h" open="0" top="0" tabpos="0">
-		<Cursor position="450" topLine="0" />
-	</File>
-	<File name="Character.cpp" open="0" top="0" tabpos="6">
-		<Cursor position="685" topLine="6" />
-	</File>
-	<File name="Character.h" open="0" top="0" tabpos="5">
-		<Cursor position="739" topLine="20" />
-	</File>
-	<File name="Chest.cpp" open="0" top="0" tabpos="0">
-		<Cursor position="535" topLine="0" />
-	</File>
-	<File name="Chest.h" open="0" top="0" tabpos="0">
-		<Cursor position="391" topLine="0" />
-	</File>
-	<File name="ChestOpened.cpp" open="0" top="0" tabpos="0">
-		<Cursor position="893" topLine="4" />
-	</File>
-	<File name="DamageParticle.cpp" open="0" top="0" tabpos="18">
-		<Cursor position="2192" topLine="14" />
-	</File>
-	<File name="DamageParticle.h" open="0" top="0" tabpos="17">
-		<Cursor position="520" topLine="0" />
-	</File>
-	<File name="EntityManager.cpp" open="0" top="0" tabpos="15">
-		<Cursor position="664" topLine="9" />
-	</File>
-	<File name="EntityManager.h" open="0" top="0" tabpos="14">
-		<Cursor position="487" topLine="0" />
-	</File>
-	<File name="GameEntity.cpp" open="0" top="0" tabpos="21">
-		<Cursor position="1694" topLine="40" />
-	</File>
-	<File name="GameEntity.h" open="0" top="0" tabpos="0">
-		<Cursor position="1585" topLine="29" />
-	</File>
-	<File name="Grass.cpp" open="0" top="0" tabpos="0">
-		<Cursor position="556" topLine="0" />
-	</File>
-	<File name="Grass.h" open="0" top="0" tabpos="0">
-		<Cursor position="530" topLine="0" />
-	</File>
-	<File name="IP.cpp" open="0" top="0" tabpos="2">
-		<Cursor position="371" topLine="0" />
-	</File>
-	<File name="IP.h" open="0" top="0" tabpos="1">
-		<Cursor position="531" topLine="0" />
-	</File>
-	<File name="Level.cpp" open="0" top="0" tabpos="5">
-		<Cursor position="1830" topLine="37" />
-	</File>
-	<File name="Level.h" open="0" top="0" tabpos="4">
-		<Cursor position="623" topLine="18" />
-	</File>
-	<File name="Map.cpp" open="0" top="0" tabpos="5">
-		<Cursor position="570" topLine="0" />
-	</File>
-	<File name="Map.h" open="0" top="0" tabpos="4">
-		<Cursor position="254" topLine="5" />
-	</File>
-	<File name="MathHelper.cpp" open="0" top="0" tabpos="23">
-		<Cursor position="63" topLine="0" />
-	</File>
-	<File name="MathHelper.h" open="0" top="0" tabpos="22">
-		<Cursor position="272" topLine="0" />
-	</File>
-	<File name="MovingSprite.cpp" open="0" top="0" tabpos="14">
-		<Cursor position="2794" topLine="53" />
-	</File>
-	<File name="MovingSprite.h" open="0" top="0" tabpos="8">
-		<Cursor position="934" topLine="8" />
-	</File>
-	<File name="Particle.cpp" open="0" top="0" tabpos="20">
-		<Cursor position="1377" topLine="19" />
-	</File>
-	<File name="Particle.h" open="0" top="0" tabpos="19">
-		<Cursor position="627" topLine="0" />
-	</File>
-	<File name="ParticleManager.cpp" open="0" top="0" tabpos="16">
-		<Cursor position="523" topLine="1" />
-	</File>
-	<File name="ParticleManager.h" open="0" top="0" tabpos="15">
-		<Cursor position="0" topLine="0" />
-	</File>
-	<File name="Pipe.cpp" open="0" top="0" tabpos="7">
-		<Cursor position="392" topLine="0" />
-	</File>
-	<File name="Pipe.h" open="0" top="0" tabpos="0">
-		<Cursor position="383" topLine="0" />
-	</File>
-	<File name="Player.cpp" open="0" top="0" tabpos="4">
-		<Cursor position="2028" topLine="31" />
-	</File>
-	<File name="Player.h" open="0" top="0" tabpos="18">
-		<Cursor position="674" topLine="0" />
-	</File>
-	<File name="Renderer.cpp" open="0" top="0" tabpos="0">
-		<Cursor position="772" topLine="9" />
-	</File>
-	<File name="Renderer.h" open="0" top="0" tabpos="0">
-		<Cursor position="293" topLine="0" />
-	</File>
-	<File name="Spawner.cpp" open="0" top="0" tabpos="6">
-		<Cursor position="1493" topLine="43" />
-	</File>
-	<File name="Spawner.h" open="0" top="0" tabpos="0">
-		<Cursor position="355" topLine="9" />
-	</File>
-	<File name="TextureLoader.cpp" open="0" top="0" tabpos="4">
-		<Cursor position="1507" topLine="7" />
-	</File>
-	<File name="TextureLoader.h" open="0" top="0" tabpos="0">
-		<Cursor position="318" topLine="0" />
-	</File>
-	<File name="WaterField.cpp" open="0" top="0" tabpos="0">
-		<Cursor position="3459" topLine="89" />
-	</File>
-	<File name="WaterField.h" open="0" top="0" tabpos="0">
-		<Cursor position="482" topLine="0" />
-	</File>
-	<File name="bullets\Arrow.cpp" open="0" top="0" tabpos="9">
-		<Cursor position="768" topLine="0" />
-	</File>
-	<File name="bullets\Arrow.h" open="0" top="0" tabpos="0">
-		<Cursor position="598" topLine="0" />
-	</File>
-	<File name="bullets\Bullet.cpp" open="0" top="0" tabpos="11">
-		<Cursor position="1862" topLine="30" />
-	</File>
-	<File name="bullets\Bullet.h" open="0" top="0" tabpos="10">
-		<Cursor position="952" topLine="3" />
-	</File>
-	<File name="bullets\BulletManager.cpp" open="0" top="0" tabpos="0">
-		<Cursor position="508" topLine="0" />
-	</File>
-	<File name="bullets\BulletManager.h" open="0" top="0" tabpos="0">
-		<Cursor position="506" topLine="0" />
-	</File>
-	<File name="bullets\LaserBullet.cpp" open="0" top="0" tabpos="0">
-		<Cursor position="357" topLine="0" />
-	</File>
-	<File name="bullets\LaserBullet.h" open="0" top="0" tabpos="0">
-		<Cursor position="603" topLine="0" />
-	</File>
-	<File name="bullets\RockBullet.cpp" open="0" top="0" tabpos="0">
-		<Cursor position="339" topLine="0" />
-	</File>
-	<File name="bullets\RockBullet.h" open="0" top="0" tabpos="0">
-		<Cursor position="163" topLine="0" />
-	</File>
-	<File name="ennemies\Bat.cpp" open="0" top="0" tabpos="3">
-		<Cursor position="379" topLine="0" />
-	</File>
-	<File name="ennemies\Bat.h" open="0" top="0" tabpos="0">
-		<Cursor position="338" topLine="0" />
-	</File>
-	<File name="ennemies\Ennemy.cpp" open="0" top="0" tabpos="10">
-		<Cursor position="635" topLine="6" />
-	</File>
-	<File name="ennemies\Ennemy.h" open="0" top="0" tabpos="9">
-		<Cursor position="562" topLine="0" />
-	</File>
-	<File name="ennemies\RockWorm.cpp" open="0" top="0" tabpos="13">
-		<Cursor position="515" topLine="0" />
-	</File>
-	<File name="ennemies\RockWorm.h" open="0" top="0" tabpos="0">
-		<Cursor position="358" topLine="0" />
-	</File>
-	<File name="ennemies\Snail.cpp" open="0" top="0" tabpos="2">
-		<Cursor position="392" topLine="0" />
-	</File>
-	<File name="ennemies\Snail.h" open="0" top="0" tabpos="1">
-		<Cursor position="346" topLine="0" />
-	</File>
-	<File name="ennemies\Spiderock.cpp" open="0" top="0" tabpos="14">
-		<Cursor position="402" topLine="0" />
-	</File>
-	<File name="ennemies\Spiderock.h" open="0" top="0" tabpos="0">
-		<Cursor position="362" topLine="0" />
-	</File>
-	<File name="gui\Cursor.cpp" open="0" top="0" tabpos="0">
-		<Cursor position="423" topLine="0" />
-	</File>
-	<File name="gui\Cursor.h" open="0" top="0" tabpos="0">
-		<Cursor position="431" topLine="0" />
-	</File>
-	<File name="gui\DifficultyIndicator.cpp" open="0" top="0" tabpos="3">
-		<Cursor position="944" topLine="12" />
-	</File>
-	<File name="gui\DifficultyIndicator.h" open="0" top="0" tabpos="2">
-		<Cursor position="657" topLine="0" />
-	</File>
-	<File name="gui\GUI.cpp" open="0" top="0" tabpos="7">
-		<Cursor position="662" topLine="9" />
-	</File>
-	<File name="gui\GUI.h" open="0" top="0" tabpos="6">
-		<Cursor position="461" topLine="0" />
-	</File>
-	<File name="gui\LevelIndicator.cpp" open="0" top="0" tabpos="0">
-		<Cursor position="715" topLine="0" />
-	</File>
-	<File name="gui\LevelIndicator.h" open="0" top="0" tabpos="0">
-		<Cursor position="535" topLine="0" />
-	</File>
-	<File name="gui\LifeBar.cpp" open="0" top="0" tabpos="0">
-		<Cursor position="623" topLine="3" />
-	</File>
-	<File name="gui\LifeBar.h" open="0" top="0" tabpos="0">
-		<Cursor position="494" topLine="0" />
-	</File>
-	<File name="gui\XPBar.cpp" open="0" top="0" tabpos="0">
-		<Cursor position="614" topLine="0" />
-	</File>
-	<File name="gui\XPBar.h" open="0" top="0" tabpos="0">
-		<Cursor position="24" topLine="0" />
-	</File>
-	<File name="main.cpp" open="0" top="0" tabpos="1">
-		<Cursor position="355" topLine="0" />
-	</File>
-	<File name="weapons\Bow.cpp" open="0" top="0" tabpos="8">
-		<Cursor position="649" topLine="0" />
-	</File>
-	<File name="weapons\Bow.h" open="0" top="0" tabpos="9">
-		<Cursor position="101" topLine="0" />
-	</File>
-	<File name="weapons\Weapon.cpp" open="0" top="0" tabpos="8">
-		<Cursor position="646" topLine="0" />
-	</File>
-	<File name="weapons\Weapon.h" open="0" top="0" tabpos="7">
-		<Cursor position="537" topLine="0" />
+	<File name="entities\ennemies\SnowBallEnemy.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1950" topLine="24" />
+		</Cursor>
+	</File>
+	<File name="gui\LevelIndicator.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="805" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="entities\Character.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="873" topLine="18" />
+		</Cursor>
+	</File>
+	<File name="WaterFall.h" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="217" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="Spawner.cpp" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1127" topLine="27" />
+		</Cursor>
+	</File>
+	<File name="gui\LevelIndicator.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="436" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="Chest.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="272" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="Spawner.h" open="1" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="26" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="Chest.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="375" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="entities\Duck.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="284" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="entities\ennemies\Spiderock.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="624" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="TextureLoader.cpp" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="801" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="ChestOpened.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="851" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="entities\EntityManager.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="281" topLine="15" />
+		</Cursor>
+	</File>
+	<File name="entities\ennemies\Slimey.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="4409" topLine="50" />
+		</Cursor>
+	</File>
+	<File name="entities\ennemies\Snail.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="4685" topLine="116" />
+		</Cursor>
+	</File>
+	<File name="TextureLoader.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="536" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="ChestOpened.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="30" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="entities\EntityManager.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="558" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="entities\ennemies\Ennemy.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1482" topLine="15" />
+		</Cursor>
+	</File>
+	<File name="entities\ennemies\Spiderock.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="4346" topLine="60" />
+		</Cursor>
+	</File>
+	<File name="WaterField.cpp" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1445" topLine="30" />
+		</Cursor>
+	</File>
+	<File name="DamageParticle.cpp" open="0" top="0" tabpos="18" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="entities\GameEntity.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="4428" topLine="78" />
+		</Cursor>
+	</File>
+	<File name="WaterFall.cpp" open="1" top="1" tabpos="3" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1007" topLine="10" />
+		</Cursor>
+	</File>
+	<File name="main.cpp" open="0" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="DamageParticle.h" open="0" top="0" tabpos="17" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="entities\GameEntity.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1763" topLine="38" />
+		</Cursor>
+	</File>
+	<File name="weapons\Bow.cpp" open="0" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="864" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="weapons\Bow.h" open="0" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="441" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="weapons\Weapon.cpp" open="0" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="455" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="entities\ennemies\WormBoss.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="13146" topLine="231" />
+		</Cursor>
+	</File>
+	<File name="weapons\Weapon.h" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="759" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="Background.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1002" topLine="7" />
+		</Cursor>
+	</File>
+	<File name="scenes\Game.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1226" topLine="21" />
+		</Cursor>
+	</File>
+	<File name="scenes\Game.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="233" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="IP.cpp" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1110" topLine="3" />
+		</Cursor>
+	</File>
+	<File name="Map.h" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="765" topLine="4" />
+		</Cursor>
+	</File>
+	<File name="IP.h" open="0" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="166" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="scenes\Scene.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="82" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="MathHelper.cpp" open="0" top="0" tabpos="23" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2429" topLine="60" />
+		</Cursor>
+	</File>
+	<File name="entities\ennemies\Bat.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2507" topLine="28" />
+		</Cursor>
+	</File>
+	<File name="Level.cpp" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1028" topLine="3" />
+		</Cursor>
+	</File>
+	<File name="scenes\Scene.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="203" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="WaterField.h" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="963" topLine="4" />
+		</Cursor>
+	</File>
+	<File name="MathHelper.h" open="0" top="0" tabpos="22" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="988" topLine="18" />
+		</Cursor>
+	</File>
+	<File name="Level.h" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1505" topLine="24" />
+		</Cursor>
+	</File>
+	<File name="scenes\SceneManager.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="402" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="bullets\Arrow.cpp" open="0" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="306" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="MovingSprite.cpp" open="0" top="0" tabpos="14" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="3254" topLine="66" />
+		</Cursor>
+	</File>
+	<File name="Map.cpp" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2090" topLine="30" />
+		</Cursor>
+	</File>
+	<File name="scenes\SceneManager.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="360" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="MovingSprite.h" open="0" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1774" topLine="19" />
+		</Cursor>
+	</File>
+	<File name="entities\ennemies\WormBoss.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="881" topLine="3" />
+		</Cursor>
+	</File>
+	<File name="bullets\Bullet.cpp" open="0" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="4164" topLine="96" />
+		</Cursor>
+	</File>
+	<File name="Particle.cpp" open="0" top="0" tabpos="20" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1497" topLine="18" />
+		</Cursor>
+	</File>
+	<File name="gui\SpeechBubble.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="598" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="bullets\Bullet.h" open="0" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1014" topLine="7" />
+		</Cursor>
+	</File>
+	<File name="Particle.h" open="0" top="0" tabpos="19" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="725" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="entities\Mouse.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="622" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="entities\ennemies\RockWorm.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="7042" topLine="138" />
+		</Cursor>
+	</File>
+	<File name="bullets\BulletManager.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="825" topLine="4" />
+		</Cursor>
+	</File>
+	<File name="ParticleManager.cpp" open="0" top="0" tabpos="16" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="entities\Duck.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1027" topLine="12" />
+		</Cursor>
+	</File>
+	<File name="entities\Mouse.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="851" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="ParticleManager.h" open="0" top="0" tabpos="15" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="bullets\LaserBullet.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="839" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="Pipe.cpp" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="507" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="gui\SpeechManager.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="32" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="gui\DifficultyIndicator.cpp" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1411" topLine="6" />
+		</Cursor>
+	</File>
+	<File name="gui\SpeechBubble.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2774" topLine="37" />
+		</Cursor>
+	</File>
+	<File name="bullets\RockBullet.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="167" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="Player.cpp" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="gui\DifficultyIndicator.h" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="gui\SpeechManager.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="703" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="Player.h" open="0" top="0" tabpos="18" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="gui\GUI.cpp" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="Background.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="604" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="entities\ennemies\Ennemy.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="274" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="Renderer.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="772" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="gui\GUI.h" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="entities\Character.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="482" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="entities\ennemies\Slime.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2479" topLine="40" />
+		</Cursor>
 	</File>
 </CodeBlocks_layout_file>

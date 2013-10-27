@@ -23,6 +23,11 @@ WaterFall::WaterFall(IP& ip, sf::Vector2i tilePos, bool big)
     setPosition(sf::Vector2f(tilePos*16) + sf::Vector2f(8, 4));
     _tilePos = tilePos;
     SetCollideWithWater(false);
+
+    _down = false;
+    _shape.setPointCount(2 + (big?16:6) + 1);
+    _shape.setPoint(0, sf::Vector2f(tilePos*16) + sf::Vector2f(big?16:11, -4));
+    _shape.setPoint(1, sf::Vector2f(tilePos*16) + sf::Vector2f(big?0:5, -4));
 }
 
 WaterFall::~WaterFall() {
@@ -44,10 +49,37 @@ void WaterFall::Update(IP& ip, float elapsedTime, Level& level, ParticleManager&
             }
         }
     }
+
+    _down = false;
+    for(int i=0 ; i<level.GetNbWaterFields() ; i++) {
+        WaterField& wf(level.GetWaterField(i));
+        if(!wf.IsSurface()) {
+            continue;
+        }
+        if(GetGlobalHitbox().intersects(wf.GetRect())) {
+            _down = true;
+            //set the points corresponding to the field
+            cout << _shape.getPointCount() << endl;
+            for(int i=2 ; i<_shape.getPointCount() ; i++) {
+                float x = i-2 + _shape.getPoint(1).x;
+                float l = wf.GetHeight(x);
+                _shape.setPoint(i, sf::Vector2f(x, (wf.GetRect().top+wf.GetRect().height)-l+1));
+            }
+            cout << _shape.getPointCount() << endl;
+        }
+    }
+
+    _shape.setTexture(getTexture());
+    _shape.setTextureRect(getTextureRect());
+
 }
 
 void WaterFall::Draw(IP& ip) {
-    MovingSprite::Draw(ip);
+    if(_down) {
+        ip._renderer->Draw(_shape);
+    } else {
+        MovingSprite::Draw(ip);
+    }
 }
 
 void WaterFall::Fall(IP& ip, Level& level) {

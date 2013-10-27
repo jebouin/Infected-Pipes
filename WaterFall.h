@@ -28,6 +28,8 @@ class WaterFall : public MovingSprite {
     sf::Clock _splashTimer;
     sf::Vector2i _tilePos;
     bool _big;
+    bool _down;
+    sf::ConvexShape _shape;
 };
 
 #endif // WATERFALL_H_INCLUDED
