@@ -16,6 +16,7 @@
 #include "Ennemy.h"
 #include "Slime.h"
 #include "WormBoss.h"
+#include "FireBall.h"
 
 Spawner::Spawner(IP& ip, int nbWaves, Level& l) {
     _curWave = 0;
@@ -61,8 +62,7 @@ void Spawner::Update(IP& ip, EntityManager& eManager, Level& level, Character& c
 }
 
 void Spawner::Spawn(IP& ip, EntityManager& eManager, Level& level, Character& character) {
-    string levelName = level.GetName();
-    return;
+    /*string levelName = level.GetName();
     if(levelName == "miniBoss1") {
         Slimey *slimey = new Slimey(ip, level);
         eManager.Add(slimey);
@@ -105,9 +105,15 @@ void Spawner::Spawn(IP& ip, EntityManager& eManager, Level& level, Character& ch
         }
 
         _difToSpawn -= d[et];
+    }*/
+
+    _difToSpawn--;
+    FireBall *f = new FireBall(ip, level);
+    if(!f->AutoSpawn(ip, level, eManager, character)) {
+        delete f;
+        return;
     }
-
-
+    eManager.Add(f);
 
 
     /*if(rand()%10==0) {

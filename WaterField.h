@@ -28,6 +28,7 @@ class WaterField {
     void Splash(sf::Vector2f pos, float force, ParticleManager& pManager, IP& ip);
     sf::FloatRect GetRect();
     bool IsSurface();
+    bool IsLava();
     float GetHeight(float x); //inverted!
 
     private:

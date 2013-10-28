@@ -16,9 +16,9 @@ WaterField::WaterField(sf::FloatRect rect, float resolution, bool surface, bool 
     sf::Color waterTopC(177, 181, 191, 200);
     sf::Color waterC(106, 129, 193, 80);
     sf::Color waterDownC(106, 129, 193, 80);
-    sf::Color lavaTopC(183, 153, 78, 230);
-    sf::Color lavaC(142, 90, 27, 200);
-    sf::Color lavaDownC(142, 90, 27, 200);
+    sf::Color lavaTopC(183, 153, 78, 255);
+    sf::Color lavaC(142, 90, 27, 255);
+    sf::Color lavaDownC(142, 90, 27, 255);
     _topc = (_lava ? lavaTopC : waterTopC);
     _c = (_lava ? lavaC : waterC);
     _downc = (_lava ? lavaDownC : waterDownC);
@@ -159,6 +159,10 @@ sf::FloatRect WaterField::GetRect() {
 
 bool WaterField::IsSurface() {
     return _surface;
+}
+
+bool WaterField::IsLava() {
+    return _lava;
 }
 
 float WaterField::GetHeight(float x) {

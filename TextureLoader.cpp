@@ -27,6 +27,7 @@ TextureLoader::TextureLoader(IP& ip) {
     AddTexture("slime.png", "slime");
     AddTexture("wormBossBody.png", "wormBossBody");
     AddTexture("wormBossHead.png", "wormBossHead");
+    AddTexture("fireBall.png", "fireBall");
 
     AddTexture("duck.png", "duck");
     AddTexture("mouse.png", "mouse");
@@ -68,6 +69,9 @@ TextureLoader::TextureLoader(IP& ip) {
     AddTexture("slimeParticle.png", "slimeParticle");
     AddTexture("littleBubble.png", "littleBubble");
     AddTexture("littleRockParticle.png", "littleRockParticle");
+    AddTexture("fireParticle.png", "fireParticle");
+    AddTexture("fireParticle2.png", "fireParticle2");
+    AddTexture("explosion.png", "explosion");
 
     AddTexture("fir.png", "fir");
     AddTexture("moon.png", "moon");

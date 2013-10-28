@@ -51,7 +51,7 @@ void GameEntity::Update(IP& ip, float elapsedTime, Level& level, EntityManager& 
     }
     Accelerate(sf::Vector2f(-_friction*GetVel().x, 0), elapsedTime);
 
-    if(_inWater) {
+    if(_inWater && GetCollidesWithWater()) {
         Accelerate(sf::Vector2f(-0.02*GetVel().x, -0.02*GetVel().y), elapsedTime);
     }
 

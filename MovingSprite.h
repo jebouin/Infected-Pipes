@@ -32,6 +32,7 @@ class MovingSprite : public sf::Sprite {
     AnimationTable& GetAnims();
     bool OnPlatform();
     bool IsInWater(Level& level);
+    bool GetCollidesWithWater();
     void SetVel(sf::Vector2f vel);
     void Accelerate(sf::Vector2f vec, float eTime);
     void SetRotVel(float rotVel);

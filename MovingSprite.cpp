@@ -153,6 +153,10 @@ bool MovingSprite::IsInWater(Level& level) {
     return false;
 }
 
+bool MovingSprite::GetCollidesWithWater() {
+    return _collidesWithWater;
+}
+
 sf::Vector2f MovingSprite::GetVel() {
     return _vel;
 }
