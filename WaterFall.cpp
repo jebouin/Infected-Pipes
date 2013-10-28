@@ -10,16 +10,19 @@
 #include "WaterField.h"
 #include "Map.h"
 
-WaterFall::WaterFall(IP& ip, sf::Vector2i tilePos, bool big)
-    : MovingSprite(ip, big ? "bigWaterFall" : "waterFall", big ? sf::IntRect(0, 0, 16, 16) : sf::IntRect(0, 0, 6, 16), true) {
+WaterFall::WaterFall(IP& ip, sf::Vector2i tilePos, bool big, bool lava)
+    : MovingSprite(ip, big ? "bigFalls" : "falls", big ? sf::IntRect(0, 0, 16, 16) : sf::IntRect(0, 0, 6, 16), true) {
     _big = big;
+    _lava = lava;
     AnimationTable& t(GetAnims());
     if(big) {
-        t.AddAnimation("fall", new Animation(8, 30, sf::Vector2i(0, 0), sf::Vector2i(16, 16), true));
+        t.AddAnimation("waterFall", new Animation(8, 30, sf::Vector2i(0, 0), sf::Vector2i(16, 16), true));
+        t.AddAnimation("lavaFall", new Animation(8, 50, sf::Vector2i(0, 16), sf::Vector2i(16, 16), true));
     } else {
-        t.AddAnimation("fall", new Animation(8, 30, sf::Vector2i(0, 0), sf::Vector2i(6, 16), true));
+        t.AddAnimation("waterFall", new Animation(8, 30, sf::Vector2i(0, 0), sf::Vector2i(6, 16), true));
+        t.AddAnimation("lavaFall", new Animation(8, 50, sf::Vector2i(0, 16), sf::Vector2i(6, 16), true));
     }
-    t.SetAnimation("fall");
+    t.SetAnimation((lava ? "lavaFall" : "waterFall"));
     setPosition(sf::Vector2f(tilePos*16) + sf::Vector2f(8, 4));
     _tilePos = tilePos;
     SetCollideWithWater(false);
@@ -37,7 +40,7 @@ WaterFall::~WaterFall() {
 void WaterFall::Update(IP& ip, float elapsedTime, Level& level, ParticleManager& pManager) {
     MovingSprite::Update(ip, elapsedTime);
 
-    if(_splashTimer.getElapsedTime().asMilliseconds() > 100) {
+    if(_splashTimer.getElapsedTime().asMilliseconds() > (_lava ? 400 : 100)) {
         _splashTimer.restart();
         for(int i=0 ; i<level.GetNbWaterFields() ; i++) {
             WaterField& wf(level.GetWaterField(i));
@@ -45,7 +48,7 @@ void WaterFall::Update(IP& ip, float elapsedTime, Level& level, ParticleManager&
                 continue;
             }
             if(GetGlobalHitbox().intersects(wf.GetRect())) {
-                wf.Splash(getPosition() + sf::Vector2f(MathHelper::RandFloat(-GetGlobalHitbox().width/2.f+1, GetGlobalHitbox().width/2.f-1), GetGlobalHitbox().height/2.f), -MathHelper::RandFloat(3., 5.), pManager, ip);
+                wf.Splash(getPosition() + sf::Vector2f(MathHelper::RandFloat(-GetGlobalHitbox().width/2.f+1, GetGlobalHitbox().width/2.f-1), GetGlobalHitbox().height/2.f), (_lava ? -MathHelper::RandFloat(1.7, 2.4) : -MathHelper::RandFloat(3., 5.)), pManager, ip);
             }
         }
     }
@@ -59,13 +62,11 @@ void WaterFall::Update(IP& ip, float elapsedTime, Level& level, ParticleManager&
         if(GetGlobalHitbox().intersects(wf.GetRect())) {
             _down = true;
             //set the points corresponding to the field
-            cout << _shape.getPointCount() << endl;
             for(int i=2 ; i<_shape.getPointCount() ; i++) {
                 float x = i-2 + _shape.getPoint(1).x;
                 float l = wf.GetHeight(x);
                 _shape.setPoint(i, sf::Vector2f(x, (wf.GetRect().top+wf.GetRect().height)-l+1));
             }
-            cout << _shape.getPointCount() << endl;
         }
     }
 
@@ -86,7 +87,7 @@ void WaterFall::Fall(IP& ip, Level& level) {
     for(int i=_tilePos.y+1 ; i<level.GetMap().GetSize().y ; i++) {
         sf::Vector2i curTilePos(_tilePos.x, i);
         sf::FloatRect curRect(sf::Vector2f(curTilePos)*16.f, sf::Vector2f(16, 16));
-        level.AddWaterFall(ip, curTilePos, _big);
+        level.AddWaterFall(ip, curTilePos, _big, _lava);
         for(int j=0 ; j<level.GetNbWaterFields() ; j++) {
             WaterField& wf(level.GetWaterField(j));
             if(!wf.IsSurface()) {
@@ -97,4 +98,8 @@ void WaterFall::Fall(IP& ip, Level& level) {
             }
         }
     }
+}
+
+bool WaterFall::IsLava() {
+    return _lava;
 }

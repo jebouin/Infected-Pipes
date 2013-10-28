@@ -67,7 +67,7 @@ void FireBall::Update(IP& ip, float eTime, Level& level, Character& character, E
             }
         }
     }
-    if(bid!=-42) { //always stays above lava
+    if(bid!=-42) {
         WaterField& belowWf(level.GetWaterField(bid));
         if(!_jumping && _jumpTimer.getElapsedTime().asMilliseconds() >= 500 && _inWater) {
             _jumping = true;

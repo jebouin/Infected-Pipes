@@ -202,6 +202,8 @@ void Level::Load(IP& ip, string name, Character& character) {
     sf::Color bigWaterFallC(70, 94, 160, 180);
     sf::Color lavaSufaceC(255, 159, 43);
     sf::Color lavaC(216, 135, 36);
+    sf::Color lavaFallC(216, 135, 36, 130);
+    sf::Color bigLavaFallC(216, 135, 36, 180);
     for(int i=0 ; i<w ; i++) {
         for(int j=0 ; j<h ; j++) {
             if(_levelImages[1].getPixel(i, j) == waterSufaceC || _levelImages[1].getPixel(i, j) == lavaSufaceC) {
@@ -235,9 +237,13 @@ void Level::Load(IP& ip, string name, Character& character) {
                 }
                 _waterFields.push_back(new WaterField(sf::FloatRect(i*16-offsets[0], j*16-offsets[2], s.x*16+offsets[0]+offsets[1], s.y*16+offsets[2]+offsets[3]), 2, false, _levelImages[1].getPixel(i, j)==lavaC));
             } else if(_levelImages[0].getPixel(i, j) == waterFallC) {
-                _waterFalls.push_back(new WaterFall(ip, sf::Vector2i(i, j), false));
+                _waterFalls.push_back(new WaterFall(ip, sf::Vector2i(i, j), false, false));
             } else if(_levelImages[0].getPixel(i, j) == bigWaterFallC) {
-                _waterFalls.push_back(new WaterFall(ip, sf::Vector2i(i, j), true));
+                _waterFalls.push_back(new WaterFall(ip, sf::Vector2i(i, j), true, false));
+            } else if(_levelImages[0].getPixel(i, j) == lavaFallC) {
+                _waterFalls.push_back(new WaterFall(ip, sf::Vector2i(i, j), false, true));
+            } else if(_levelImages[0].getPixel(i, j) == bigLavaFallC) {
+                _waterFalls.push_back(new WaterFall(ip, sf::Vector2i(i, j), true, true));
             }
         }
     }
@@ -370,8 +376,8 @@ WaterField& Level::GetWaterField(int id) {
     return *_waterFields[id];
 }
 
-void Level::AddWaterFall(IP& ip, sf::Vector2i tilePos, bool big) {
-    _waterFalls.push_back(new WaterFall(ip, tilePos, big));
+void Level::AddWaterFall(IP& ip, sf::Vector2i tilePos, bool big, bool lava) {
+    _waterFalls.push_back(new WaterFall(ip, tilePos, big, lava));
 }
 
 int Level::GetNbPassiveEntities() {

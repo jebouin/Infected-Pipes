@@ -77,8 +77,8 @@ TextureLoader::TextureLoader(IP& ip) {
     AddTexture("moon.png", "moon");
     AddTexture("cloud.png", "cloud");
     AddTexture("stars.png", "stars");
-    AddTexture("waterFall.png", "waterFall");
-    AddTexture("bigWaterFall.png", "bigWaterFall");
+    AddTexture("falls.png", "falls");
+    AddTexture("bigFalls.png", "bigFalls");
 
     AddTexture("arms.png", "arms");
 }

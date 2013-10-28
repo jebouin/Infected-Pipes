@@ -47,7 +47,7 @@ class Level {
     void OpenChest(Character& character, IP& ip);
     int GetNbWaterFields();
     WaterField& GetWaterField(int id);
-    void AddWaterFall(IP& ip, sf::Vector2i tilePos, bool big);
+    void AddWaterFall(IP& ip, sf::Vector2i tilePos, bool big, bool lava);
     int GetNbPassiveEntities();
     GameEntity* GetPassiveEntity(int id);
     string GetName();
