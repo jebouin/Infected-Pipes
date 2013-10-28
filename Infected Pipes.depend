@@ -7,10 +7,10 @@
 	"SFML/System.hpp"
 	"IP.h"
 
-1381677810 source:c:\users\xaychru04\desktop\infected pipes\renderer.cpp
+1382991495 source:c:\users\xaychru04\desktop\infected pipes\renderer.cpp
 	"Renderer.h"
 
-1380366365 c:\users\xaychru04\desktop\infected pipes\renderer.h
+1382991492 c:\users\xaychru04\desktop\infected pipes\renderer.h
 	<iostream>
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
@@ -34,7 +34,7 @@
 	"Game.h"
 	"MathHelper.h"
 
-1382983783 source:c:\users\xaychru04\desktop\infected pipes\textureloader.cpp
+1382994483 source:c:\users\xaychru04\desktop\infected pipes\textureloader.cpp
 	"TextureLoader.h"
 	"IP.h"
 
@@ -166,7 +166,7 @@
 	"IP.h"
 	"Renderer.h"
 
-1382983941 source:c:\users\xaychru04\desktop\infected pipes\level.cpp
+1382995223 source:c:\users\xaychru04\desktop\infected pipes\level.cpp
 	"Level.h"
 	"IP.h"
 	"Map.h"
@@ -185,9 +185,10 @@
 	"ParticleManager.h"
 	"Duck.h"
 	"Mouse.h"
+	"Skull.h"
 	"MathHelper.h"
 
-1382983941 c:\users\xaychru04\desktop\infected pipes\level.h
+1382994483 c:\users\xaychru04\desktop\infected pipes\level.h
 	<map>
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
@@ -1140,4 +1141,56 @@
 	"Animation.h"
 	"BulletManager.h"
 	"WaterField.h"
+
+1382776154 source:c:\users\xaychru04\desktop\infected pipes\entities\passive\duck.cpp
+	"Duck.h"
+	"IP.h"
+	"Level.h"
+	"EntityManager.h"
+	"ParticleManager.h"
+	"Renderer.h"
+	"WaterField.h"
+
+1382447692 c:\users\xaychru04\desktop\infected pipes\entities\passive\duck.h
+	"SFML/Graphics.hpp"
+	"SFML/System.hpp"
+	"GameEntity.h"
+
+1382710635 source:c:\users\xaychru04\desktop\infected pipes\entities\passive\mouse.cpp
+	"Mouse.h"
+	"IP.h"
+	"Level.h"
+	"Map.h"
+	"Spawner.h"
+	"EntityManager.h"
+	"ParticleManager.h"
+	"Renderer.h"
+	"WaterField.h"
+	"MathHelper.h"
+	"Animation.h"
+	"AnimationTable.h"
+
+1382459187 c:\users\xaychru04\desktop\infected pipes\entities\passive\mouse.h
+	"SFML/Graphics.hpp"
+	"SFML/System.hpp"
+	"GameEntity.h"
+
+1382994883 source:c:\users\xaychru04\desktop\infected pipes\entities\passive\skull.cpp
+	"Skull.h"
+	"IP.h"
+	"Level.h"
+	"Map.h"
+	"Spawner.h"
+	"EntityManager.h"
+	"ParticleManager.h"
+	"Renderer.h"
+	"WaterField.h"
+	"MathHelper.h"
+	"Animation.h"
+	"AnimationTable.h"
+
+1382994483 c:\users\xaychru04\desktop\infected pipes\entities\passive\skull.h
+	"SFML/Graphics.hpp"
+	"SFML/System.hpp"
+	"GameEntity.h"
 

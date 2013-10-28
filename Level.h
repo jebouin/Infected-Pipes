@@ -29,6 +29,7 @@ struct LevelInfo {
     float _backgroundZoom;
     bool _addDucks;
     bool _addMice;
+    bool _addSkulls;
 };
 
 class Level {

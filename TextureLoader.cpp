@@ -31,6 +31,7 @@ TextureLoader::TextureLoader(IP& ip) {
 
     AddTexture("duck.png", "duck");
     AddTexture("mouse.png", "mouse");
+    AddTexture("skull.png", "skull");
 
     AddTexture("pipe.png", "pipe");
     AddTexture("zombie.png", "zombie");

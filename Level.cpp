@@ -16,15 +16,16 @@
 #include "ParticleManager.h"
 #include "Duck.h"
 #include "Mouse.h"
+#include "Skull.h"
 #include "MathHelper.h"
 
 Level::Level(IP& ip, Character& character) {
-    _levelInfos["intro"] = LevelInfo{"level0", "nightBackground", 0.0001f, true, false};
-    _levelInfos["rockyCave"] = LevelInfo{"level1", "rockyBackground", 0.2f, true, true};
-    _levelInfos["miniBoss1"] = LevelInfo{"miniBoss1", "rockyBackground", 0.2f, false, false};
-    _levelInfos["miniBoss2"] = LevelInfo{"miniBoss2", "rockyBackground", 0.2f, false, false};
-    _levelInfos["wetCave"] = LevelInfo{"level2", "rockyBackground", 0.2f, true, true};
-    _levelInfos["lavaCave"] = LevelInfo{"level3", "rockyBackground", 0.2f, true, true};
+    _levelInfos["intro"] = LevelInfo{"level0", "nightBackground", 0.0001f, true, false, false};
+    _levelInfos["rockyCave"] = LevelInfo{"level1", "rockyBackground", 0.2f, true, true, false};
+    _levelInfos["miniBoss1"] = LevelInfo{"miniBoss1", "rockyBackground", 0.2f, false, false, false};
+    _levelInfos["miniBoss2"] = LevelInfo{"miniBoss2", "rockyBackground", 0.2f, false, false, false};
+    _levelInfos["wetCave"] = LevelInfo{"level2", "rockyBackground", 0.2f, true, true, false};
+    _levelInfos["lavaCave"] = LevelInfo{"level3", "rockyBackground", 0.2f, true, false, true};
     _map = 0;
     _spawner = 0;
     _grass = 0;
@@ -253,6 +254,7 @@ void Level::Load(IP& ip, string name, Character& character) {
     }
 
     //add some passive things
+    //mice
     if(_levelInfos[name]._addMice) {
         for(int i=0 ; i<_map->GetSize().x ; i++) {
             for(int j=0 ; j<_map->GetSize().y ; j++) {
@@ -266,6 +268,29 @@ void Level::Load(IP& ip, string name, Character& character) {
                     _passiveEntities.push_back(mouse);
                 }
             }
+        }
+    }
+
+    //skull
+    if(_levelInfos[name]._addSkulls) {
+        sf::Vector2i pos(42, 42);
+        bool correctPos = false;
+        Skull *skull(0);
+        while(!correctPos) {
+            correctPos = false;
+            pos = sf::Vector2i(MathHelper::RandInt(0, _map->GetSize().x), MathHelper::RandInt(0, _map->GetSize().y));
+            if(_map->GetTileType(pos, Map::FRONT)==Map::VOID && _map->GetTileType(pos+sf::Vector2i(0, 1), Map::FRONT)==Map::WALL) {
+                correctPos = true;
+            }
+            skull = new Skull(ip);
+            skull->setPosition(sf::Vector2f(pos)*16.f + sf::Vector2f(8, 8));
+            if(skull->IsInWater(*this) || _spawner->IsCollided(*skull)) {
+                skull = 0;
+                correctPos = false;
+            }
+        }
+        if(skull != 0) {
+            _passiveEntities.push_back(skull);
         }
     }
 

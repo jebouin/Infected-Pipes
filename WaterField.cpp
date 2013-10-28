@@ -55,12 +55,12 @@ void WaterField::Update(float elapsedTime) {
         s._velocity += acc*elapsedTime/50.f;
         s._length += s._velocity*elapsedTime/50.f;
 
-        if(s._length < -5) {
-            s._length = -5;
+        if(s._length < -4) {
+            s._length = -4;
             s._velocity = 0;
         }
-        if(s._length > _rect.height+6) {
-            s._length = _rect.height+6;
+        if(s._length > _rect.height+4) {
+            s._length = _rect.height+4;
             s._velocity = 0;
         }
     }
