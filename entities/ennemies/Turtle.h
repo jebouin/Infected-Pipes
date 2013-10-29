@@ -26,6 +26,7 @@ class Turtle : public Ennemy {
     sf::Clock _fireballTimer;
     sf::Clock _fireTimer;
     bool _inLava;
+    bool _attacking;
     float _mPos;
 };
 

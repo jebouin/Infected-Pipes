@@ -28,7 +28,7 @@ class Bullet : public MovingSprite {
     void Impact(GameEntity& entity, IP& ip, ParticleManager& pManager, sf::Color color, EntityManager& eManager, Level& level);
     bool IsAlive() const;
     bool IsDying() const;
-    bool Die();
+    virtual bool Die();
 
     private:
     bool _gravity;
