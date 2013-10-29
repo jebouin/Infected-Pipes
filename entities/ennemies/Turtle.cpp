@@ -144,6 +144,19 @@ void Turtle::Die(IP& ip, ParticleManager& pManager, EntityManager& eManager, Lev
         p->GetAnims().SetAnimation("base");
         pManager.AddParticle(p);
     }
+    pManager.AddParticle(new Particle(ip, "turtleHead",
+                                      getPosition()+sf::Vector2f((GetDir() ? 11 : -11), -5),
+                                      sf::Vector2f((GetDir() ? 1 : -1)*.2, -.2),
+                                      MathHelper::RandFloat(-.2, .2),
+                                      MathHelper::RandFloat(2000, 2300),
+                                      sf::Vector2f(1, 1),
+                                      sf::Vector2f(1, 1),
+                                      255,
+                                      0,
+                                      true,
+                                      true,
+                                      false,
+                                      sf::IntRect(1, 1, 4, 4), false));
     if(_inWater) {
         return;
     }
