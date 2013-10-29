@@ -115,7 +115,7 @@ void Level::DrawFront(IP& ip) {
     sf::Sprite spt;
     spt.setTexture(_lavaTexture.getTexture());
     _lavaShader.setParameter("texture", _lavaTexture.getTexture());
-    _lavaShader.setParameter("r", sf::Vector2f(ip._renderer->GetTexture().getSize()));
+    //_lavaShader.setParameter("r", sf::Vector2f(ip._renderer->GetTexture().getSize()));
     _lavaShader.setParameter("time", _timer.getElapsedTime().asSeconds());
     ip._renderer->Draw(spt, &_lavaShader);
 

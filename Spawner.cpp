@@ -63,7 +63,7 @@ void Spawner::Update(IP& ip, EntityManager& eManager, Level& level, Character& c
 }
 
 void Spawner::Spawn(IP& ip, EntityManager& eManager, Level& level, Character& character) {
-    /*string levelName = level.GetName();
+    string levelName = level.GetName();
     if(levelName == "miniBoss1") {
         Slimey *slimey = new Slimey(ip, level);
         eManager.Add(slimey);
@@ -74,7 +74,7 @@ void Spawner::Spawn(IP& ip, EntityManager& eManager, Level& level, Character& ch
             eManager.Add(wormBoss);
             _difToSpawn = 0;
         }
-    } else {
+    } else if(levelName == "rockyCave" || levelName == "wetCave") {
         int pipeId = rand()%_pipes.size();
         int et;
         static int d[4] = {1, 10, 20, 50};
@@ -106,19 +106,34 @@ void Spawner::Spawn(IP& ip, EntityManager& eManager, Level& level, Character& ch
         }
 
         _difToSpawn -= d[et];
-    }*/
+    } else if(levelName == "lavaCave") {
+        int pipeId = rand()%_pipes.size();
+        int et(-1);
+        static int d[2] = {2, 5};
+        for(int i=1 ; i>=0 ; i--) {
+            if(d[i] <= _difToSpawn) {
+                et = i;
+                break;
+            }
+        }
+        switch(et) {
+            case 0: {
+                FireBall *f = new FireBall(ip, level);
+                if(!f->AutoSpawn(ip, level, eManager, character)) {
+                    delete f;
+                    f = 0;
+                    return;
+                }
+                eManager.Add(f);
+                break;
+            } case 1: {
+                _pipes[pipeId]->Spawn(ip, eManager, new Turtle(ip, level));
+                break;
+            }
+        }
 
-    /*_difToSpawn--;
-    FireBall *f = new FireBall(ip, level);
-    if(!f->AutoSpawn(ip, level, eManager, character)) {
-        delete f;
-        return;
+        _difToSpawn -= d[et];
     }
-    eManager.Add(f);*/
-
-    int pipeId = rand()%_pipes.size();
-    _pipes[pipeId]->Spawn(ip, eManager, new Turtle(ip, level));
-    _difToSpawn--;
 
     /*if(rand()%10==0) {
         _pipes[pipeId]->Spawn(ip, eManager, new SnowBallEnemy(ip, level));

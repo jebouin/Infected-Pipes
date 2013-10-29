@@ -142,8 +142,11 @@ void WaterField::Draw(IP& ip, sf::RenderTexture& rt){
         }
     }
 
-    /*ip._renderer->Draw(_vertexes);*/
-    rt.draw(_vertexes);
+    if(_lava) {
+        rt.draw(_vertexes);
+    } else {
+        ip._renderer->Draw(_vertexes);
+    }
 }
 
 void WaterField::Splash(sf::Vector2f pos, float force, ParticleManager& pManager, IP& ip) {

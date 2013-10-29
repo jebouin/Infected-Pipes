@@ -72,7 +72,7 @@ void Turtle::Update(IP& ip, float eTime, Level& level, Character& character, Ent
                 _attacking = false;
                 bManager.AddBullet(new FireBallBullet(ip,
                                                       getPosition()+sf::Vector2f((GetDir() ? 11 : -11), -5),
-                                                      sf::Vector2f(GetDir() ? .1 : -.1 , MathHelper::RandFloat(.0, .02)),
+                                                      sf::Vector2f(GetDir() ? .1 : -.1 , MathHelper::RandFloat(-.02, .0)),
                                                       true));
                 t.SetAnimation("walk");
                 _fireballTimer.restart();
@@ -90,20 +90,10 @@ void Turtle::Update(IP& ip, float eTime, Level& level, Character& character, Ent
         }
     }
 
-    /*if(GetGlobalHitbox().intersects(character.GetGlobalHitbox()) && _attackTimer.getElapsedTime().asMilliseconds() > 800) {
-        Hit(&character, ip, pManager, sf::Color(255, 0, 0), MathHelper::RandInt(2, 3), eManager, level);
+    if(GetGlobalHitbox().intersects(character.GetGlobalHitbox()) && _attackTimer.getElapsedTime().asMilliseconds() > 800) {
+        Hit(&character, ip, pManager, sf::Color(255, 0, 0), MathHelper::RandInt(20, 24), eManager, level);
         _attackTimer.restart();
     }
-
-    if(level.GetMap().IsOnTileType(*this, Map::PLATFORM)) {
-        if(c.y - cc.y < -10.f) {
-            PlatformDrop(level);
-        }
-    }
-
-    if(abs(GetVel().x) < 0.05 && MathHelper::GetVecLength(c-cc) > 16) {
-        Jump(level);
-    }*/
 
     Ennemy::Update(ip, eTime, level, character, eManager, pManager, bManager);
 }
