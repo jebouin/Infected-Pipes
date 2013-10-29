@@ -33,6 +33,8 @@ Level::Level(IP& ip, Character& character) {
     _difficulty = 2;
     Load(ip, "lavaCave", character);
     character.setPosition(character.getPosition() + sf::Vector2f(0, 50));
+    _lavaTexture.create(_map->GetSize().x*16, _map->GetSize().y*16);
+    _lavaShader.loadFromFile("shaders/lava.frag", sf::Shader::Fragment);
 }
 
 Level::~Level() {
@@ -104,9 +106,19 @@ void Level::DrawBack(IP& ip, sf::View& prevView) {
 }
 
 void Level::DrawFront(IP& ip) {
+
+    _lavaTexture.clear(sf::Color(0, 0, 0, 0));
     for(int i=0 ; i<_waterFields.size() ; i++) {
-        _waterFields[i]->Draw(ip);
+        _waterFields[i]->Draw(ip, _lavaTexture);
     }
+    _lavaTexture.display();
+    sf::Sprite spt;
+    spt.setTexture(_lavaTexture.getTexture());
+    _lavaShader.setParameter("texture", _lavaTexture.getTexture());
+    _lavaShader.setParameter("r", sf::Vector2f(ip._renderer->GetTexture().getSize()));
+    _lavaShader.setParameter("time", _timer.getElapsedTime().asSeconds());
+    ip._renderer->Draw(spt, &_lavaShader);
+
     _spawner->Draw(ip);
     _map->DrawLayer(ip, Map::FRONT);
     _grass->Draw(ip);

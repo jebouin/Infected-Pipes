@@ -24,7 +24,7 @@ class WaterField {
     WaterField(sf::FloatRect rect, float resolution, bool surface, bool lava);
     ~WaterField();
     void Update(IP& ip, float elapsedTime, ParticleManager& pManager);
-    void Draw(IP& ip);
+    void Draw(IP& ip, sf::RenderTexture& rt);
     void Splash(sf::Vector2f pos, float force, ParticleManager& pManager, IP& ip);
     sf::FloatRect GetRect();
     bool IsSurface();

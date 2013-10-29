@@ -54,6 +54,7 @@ class Level {
     string GetName();
 
     private:
+    sf::Clock _timer;
     sf::Vector2i GetRectSizeInImageAt(sf::Image& img, sf::Vector2i pos, sf::Color c);
 
     Map *_map;
@@ -69,6 +70,9 @@ class Level {
     vector<WaterField*> _waterFields;
     vector<WaterFall*> _waterFalls;
     vector<GameEntity*> _passiveEntities;
+
+    sf::RenderTexture _lavaTexture;
+    sf::Shader _lavaShader;
 };
 
 #endif // LEVEL_H_INCLUDED

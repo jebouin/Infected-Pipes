@@ -1,13 +1,13 @@
+uniform sampler2D texture;
+uniform vec2 r;
 uniform float time;
-uniform vec2 mouse;
-uniform vec2 resolution;
 
 float Prec(float n, float p) {
 	return float(int(n*p))/p;	
 }
 
 vec2 Prec(vec2 n, float p) {
-	return vec2(Prec(n.x, p), Prec(n.y, p));	
+	return vec2(Prec(n.x, p), Prec(n.y, p));
 }
 
 float Rand(vec2 co){
@@ -34,14 +34,22 @@ float Lava(vec2 p) {
 	return t/sa;
 }
 
-void main( void ) {
-	vec2 p = (gl_FragCoord.xy / resolution.y);
+void main()
+{
+   vec4 pixel = texture2D(texture, gl_TexCoord[0].xy);
+	vec2 p = gl_TexCoord[0].xy;
 	p.y -= .5;
-	p.x -= .5*resolution.x/resolution.y;
-	p = Prec(p, 100.);
+	p.x -= .5/*r.x/r.y*/;
+	p = p*10.;
 	float c = Lava(p*10. - vec2(-time*.2, time*.5)) + Lava(p*5. - vec2(time*.2, time*.7)) * (.9+Lava(p)*sin(time));
-	c /= 3.;
-	vec3 color = vec3(Prec(c*2., 10.), Prec(c*2.-.5, 10.), 0);
-	gl_FragColor = vec4(color, 0.);
-
+	c *= 1.;
+	c += .2;
+	vec4 color = vec4(Prec(c*2., 10.), Prec(c*2.-.5, 10.), 0, 1);
+	
+	if(pixel.w > 0.) {
+	c = Prec(c, 4.);
+		gl_FragColor = vec4(pixel.r*c, pixel.g*c, pixel.b*c, 1.);
+	} else {
+		gl_FragColor = gl_Color * pixel;
+	}
 }

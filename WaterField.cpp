@@ -120,7 +120,7 @@ void WaterField::Update(IP& ip, float elapsedTime, ParticleManager& pManager) {
     }
 }
 
-void WaterField::Draw(IP& ip){
+void WaterField::Draw(IP& ip, sf::RenderTexture& rt){
    if(_surface) {
         _vertexes.clear();
         float baseY = _rect.top+_rect.height;
@@ -142,7 +142,8 @@ void WaterField::Draw(IP& ip){
         }
     }
 
-    ip._renderer->Draw(_vertexes);
+    /*ip._renderer->Draw(_vertexes);*/
+    rt.draw(_vertexes);
 }
 
 void WaterField::Splash(sf::Vector2f pos, float force, ParticleManager& pManager, IP& ip) {

@@ -26,7 +26,7 @@ void ParticleManager::Update(IP& ip, float elapsedTime, Level& level) {
             i--;
         }
     }
-    cout << _particles.size() << " particles..." << endl;
+    //cout << _particles.size() << " particles..." << endl;
 }
 
 void ParticleManager::DrawBack(IP& ip) {
