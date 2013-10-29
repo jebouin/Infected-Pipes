@@ -6,11 +6,12 @@
 #include "Spawner.h"
 #include "Renderer.h"
 
-Particle::Particle(IP& ip, string name, sf::Vector2f pos, sf::Vector2f velocity, float rotVel, float lifeTime, sf::Vector2f startScale, sf::Vector2f endScale, float startAlpha, float endAlpha, bool gravity, bool collision, bool animated, sf::IntRect hitbox)
+Particle::Particle(IP& ip, string name, sf::Vector2f pos, sf::Vector2f velocity, float rotVel, float lifeTime, sf::Vector2f startScale, sf::Vector2f endScale, float startAlpha, float endAlpha, bool gravity, bool collision, bool animated, sf::IntRect hitbox, bool zFront)
     : MovingSprite(ip, name, hitbox, animated) {
     _alive = true;
     _gravity = gravity;
     _collision = collision;
+    _front = zFront;
     setPosition(pos);
     SetVel(velocity);
     SetRotVel(rotVel);
@@ -49,8 +50,12 @@ void Particle::Update(IP& ip, float eTime, Level& level, ParticleManager& pManag
             SetVel(sf::Vector2f(GetVel().x/1.1f, GetVel().y));
         }
     }
-    if(inWater) {
+    if(inWater && GetCollidesWithWater()) {
         Accelerate(sf::Vector2f(-0.004*GetVel().x, -0.004*GetVel().y), eTime);
+    }
+
+    if(getPosition().y < 0) {
+        _alive = false;
     }
 
     setOrigin(sf::Vector2f(getTextureRect().width, getTextureRect().height)/2.f);
@@ -76,4 +81,8 @@ void Particle::Draw(IP& ip) {
 
 bool Particle::IsAlive() {
     return _alive;
+}
+
+bool Particle::IsFront() {
+    return _front;
 }

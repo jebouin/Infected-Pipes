@@ -66,7 +66,7 @@ void Slimey::Update(IP& ip, float eTime, Level& level, Character& character, Ent
                                               true,
                                               true,
                                               false,
-                                              type==0 ? sf::IntRect(1, 1, 4, 4) : sf::IntRect(1, 1, 5, 3)));
+                                              type==0 ? sf::IntRect(1, 1, 4, 4) : sf::IntRect(1, 1, 5, 3), false));
         }
         for(int i=0 ; i<8*(curState-_prevState) ; i++) {
             int type = rand()%2;
@@ -82,7 +82,7 @@ void Slimey::Update(IP& ip, float eTime, Level& level, Character& character, Ent
                                               true,
                                               true,
                                               false,
-                                              type==0 ? sf::IntRect(2, 2, 5, 5) : sf::IntRect(2, 2, 9, 7)));
+                                              type==0 ? sf::IntRect(2, 2, 5, 5) : sf::IntRect(2, 2, 9, 7), false));
         }
         t.SetAnimation(MathHelper::IntToString(curState));
         SetSpeed(0.002 + 0.0025*curState);
@@ -120,7 +120,7 @@ void Slimey::Die(IP& ip, ParticleManager& pManager, EntityManager& eManager, Lev
                                           true,
                                           true,
                                           false,
-                                          sf::IntRect(2, 2, 3, 3)));
+                                          sf::IntRect(2, 2, 3, 3), false));
     }
     for(int i=0 ; i<16 ; i++) {
         Slime *slime = new Slime(ip, level);

@@ -143,7 +143,7 @@ void FireBall::SpreadParticles(IP& ip, ParticleManager& pManager) {
                                           false,
                                           true,
                                           false,
-                                          sf::IntRect(1, 1, 3, 3)));
+                                          sf::IntRect(1, 1, 3, 3), false));
     }
     for(int i=0 ; i<3 ; i++) {
         Particle* p = new Particle(ip, "fireParticle2",
@@ -158,7 +158,7 @@ void FireBall::SpreadParticles(IP& ip, ParticleManager& pManager) {
                                   false,
                                   true,
                                   true,
-                                  sf::IntRect(1, 1, 5, 5));
+                                  sf::IntRect(1, 1, 5, 5), false);
         p->GetAnims().AddAnimation("base", new Animation(4, 60, sf::Vector2i(0, 0), sf::Vector2i(7, 7), false));
         p->GetAnims().SetAnimation("base");
         pManager.AddParticle(p);
@@ -176,7 +176,7 @@ void FireBall::SpreadParticles(IP& ip, ParticleManager& pManager) {
                                   false,
                                   false,
                                   true,
-                                  sf::IntRect(42, 42, 42, 42));
+                                  sf::IntRect(42, 42, 42, 42), false);
         p->GetAnims().AddAnimation("base", new Animation(7, 40, sf::Vector2i(0, 0), sf::Vector2i(13, 13), false));
         p->GetAnims().SetAnimation("base");
         pManager.AddParticle(p);

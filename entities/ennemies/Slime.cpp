@@ -74,6 +74,6 @@ void Slime::Die(IP& ip, ParticleManager& pManager, EntityManager& eManager, Leve
                                           true,
                                           true,
                                           false,
-                                          sf::IntRect(2, 2, 3, 3)));
+                                          sf::IntRect(2, 2, 3, 3), false));
     }
 }

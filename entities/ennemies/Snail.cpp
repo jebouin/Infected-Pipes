@@ -135,7 +135,7 @@ void Snail::Die(IP& ip, ParticleManager& pManager, EntityManager& eManager, Leve
                                           true,
                                           true,
                                           false,
-                                          type==0 ? sf::IntRect(2, 2, 7, 3) : sf::IntRect(2, 2, 5, 4)));
+                                          type==0 ? sf::IntRect(2, 2, 7, 3) : sf::IntRect(2, 2, 5, 4), false));
     }
     if(_inWater) {
         return;
@@ -153,6 +153,6 @@ void Snail::Die(IP& ip, ParticleManager& pManager, EntityManager& eManager, Leve
                                           false,
                                           false,
                                           false,
-                                          sf::IntRect(2, 2, 3, 3)));
+                                          sf::IntRect(2, 2, 3, 3), false));
     }
 }

@@ -74,7 +74,7 @@ void Level::Update(IP& ip, EntityManager& eManager, Character& character, float 
         _chests[i]->Update(ip, eTime, *this, pManager);
     }
     for(int i=0 ; i<_waterFields.size() ; i++) {
-        _waterFields[i]->Update(eTime);
+        _waterFields[i]->Update(ip, eTime, pManager);
     }
     for(int i=0 ; i<_waterFalls.size() ; i++) {
         _waterFalls[i]->Update(ip, eTime, *this, pManager);
@@ -207,6 +207,7 @@ void Level::Load(IP& ip, string name, Character& character) {
     sf::Color bigLavaFallC(216, 135, 36, 180);
     for(int i=0 ; i<w ; i++) {
         for(int j=0 ; j<h ; j++) {
+            //fluids
             if(_levelImages[1].getPixel(i, j) == waterSufaceC || _levelImages[1].getPixel(i, j) == lavaSufaceC) {
                 bool isLava = _levelImages[1].getPixel(i, j)==lavaSufaceC;
                 sf::Vector2i s(GetRectSizeInImageAt(_levelImages[1], sf::Vector2i(i, j), _levelImages[1].getPixel(i, j)));
@@ -237,7 +238,9 @@ void Level::Load(IP& ip, string name, Character& character) {
                     }
                 }
                 _waterFields.push_back(new WaterField(sf::FloatRect(i*16-offsets[0], j*16-offsets[2], s.x*16+offsets[0]+offsets[1], s.y*16+offsets[2]+offsets[3]), 2, false, _levelImages[1].getPixel(i, j)==lavaC));
-            } else if(_levelImages[0].getPixel(i, j) == waterFallC) {
+            }
+            //falls
+            if(_levelImages[0].getPixel(i, j) == waterFallC) {
                 _waterFalls.push_back(new WaterFall(ip, sf::Vector2i(i, j), false, false));
             } else if(_levelImages[0].getPixel(i, j) == bigWaterFallC) {
                 _waterFalls.push_back(new WaterFall(ip, sf::Vector2i(i, j), true, false));

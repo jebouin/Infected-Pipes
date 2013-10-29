@@ -61,6 +61,6 @@ void SnowBallEnemy::Die(IP& ip, ParticleManager& pManager, EntityManager& eManag
                                           true,
                                           true,
                                           false,
-                                          sf::IntRect(1, 1, 3, 2)));
+                                          sf::IntRect(1, 1, 3, 2), false));
     }
 }

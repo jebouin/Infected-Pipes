@@ -178,7 +178,7 @@ void Character::Damage(int dmg, IP& ip, ParticleManager& pManager, sf::Color col
                                    true,
                                    true,
                                    true,
-                                   sf::IntRect(2, 1, 2, 2));
+                                   sf::IntRect(2, 1, 2, 2), false);
         p->GetAnims().AddAnimation("base", new Animation(7, 50, sf::Vector2i(0, 0), sf::Vector2i(6, 6), false));
         p->GetAnims().SetAnimation("base");
         pManager.AddParticle(p);
@@ -197,7 +197,7 @@ void Character::Damage(int dmg, IP& ip, ParticleManager& pManager, sf::Color col
                                    true,
                                    true,
                                    true,
-                                   sf::IntRect(1, 0, 2, 1));
+                                   sf::IntRect(1, 0, 2, 1), false);
         p->GetAnims().AddAnimation("base", new Animation(6, 50, sf::Vector2i(0, 0), sf::Vector2i(4, 4), false));
         p->GetAnims().SetAnimation("base");
         pManager.AddParticle(p);

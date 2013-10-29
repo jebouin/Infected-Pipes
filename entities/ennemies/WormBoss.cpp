@@ -118,7 +118,7 @@ void WormBoss::Update(IP& ip, float eTime, Level& level, Character& character, E
                                                   true,
                                                   true,
                                                   false,
-                                                  type==0 ? sf::IntRect(1, 1, 4, 4) : sf::IntRect(1, 1, 5, 3)));
+                                                  type==0 ? sf::IntRect(1, 1, 4, 4) : sf::IntRect(1, 1, 5, 3), false));
             }
         }
         setRotation(90 + MathHelper::Rad2Deg(MathHelper::Vec2Ang(GetVel())));
@@ -194,7 +194,7 @@ void WormBoss::Update(IP& ip, float eTime, Level& level, Character& character, E
                                                   false,
                                                   false,
                                                   false,
-                                                  sf::IntRect(2, 2, 3, 3)));
+                                                  sf::IntRect(2, 2, 3, 3), false));
             }
             if(_curState == GOINGUP || _curState == GOINGDOWN) {
                 for(int i=0 ; i<3 ; i++) {
@@ -211,7 +211,7 @@ void WormBoss::Update(IP& ip, float eTime, Level& level, Character& character, E
                                                       true,
                                                       true,
                                                       false,
-                                                      type==0 ? sf::IntRect(1, 1, 4, 4) : sf::IntRect(1, 1, 5, 3)));
+                                                      type==0 ? sf::IntRect(1, 1, 4, 4) : sf::IntRect(1, 1, 5, 3), false));
                 }
             }
         }
@@ -247,7 +247,7 @@ void WormBoss::Update(IP& ip, float eTime, Level& level, Character& character, E
                                                       true,
                                                       true,
                                                       false,
-                                                      type==0 ? sf::IntRect(1, 1, 4, 4) : sf::IntRect(1, 1, 5, 3)));
+                                                      type==0 ? sf::IntRect(1, 1, 4, 4) : sf::IntRect(1, 1, 5, 3), false));
                 }
             } else {
                 ChangeState(GOINGUP);
@@ -323,7 +323,7 @@ void WormBoss::ExplodeParticles(IP& ip, ParticleManager& pManager, sf::Vector2f 
                                           true,
                                           true,
                                           false,
-                                          type==0 ? sf::IntRect(1, 1, 4, 4) : sf::IntRect(1, 1, 5, 3)));
+                                          type==0 ? sf::IntRect(1, 1, 4, 4) : sf::IntRect(1, 1, 5, 3), false));
     }
     for(int i=0 ; i<10 ; i++) {
         int type = rand()%2;
@@ -339,7 +339,7 @@ void WormBoss::ExplodeParticles(IP& ip, ParticleManager& pManager, sf::Vector2f 
                                           true,
                                           true,
                                           false,
-                                          type==0 ? sf::IntRect(2, 2, 5, 5) : sf::IntRect(2, 2, 9, 7)));
+                                          type==0 ? sf::IntRect(2, 2, 5, 5) : sf::IntRect(2, 2, 9, 7), false));
     }
     for(int i=0 ; i<10 ; i++) {
         pManager.AddParticle(new Particle(ip, "smokeParticle",
@@ -354,6 +354,6 @@ void WormBoss::ExplodeParticles(IP& ip, ParticleManager& pManager, sf::Vector2f 
                                           false,
                                           false,
                                           false,
-                                          sf::IntRect(2, 2, 3, 3)));
+                                          sf::IntRect(2, 2, 3, 3), false));
     }
 }

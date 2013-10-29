@@ -26,11 +26,21 @@ void ParticleManager::Update(IP& ip, float elapsedTime, Level& level) {
             i--;
         }
     }
+    cout << _particles.size() << " particles..." << endl;
 }
 
-void ParticleManager::Draw(IP& ip) {
+void ParticleManager::DrawBack(IP& ip) {
     for(int i=0 ; i<_particles.size() ; i++) {
-        if(!_particles[i]->IsAlive()) {
+        if(!_particles[i]->IsAlive() || _particles[i]->IsFront()) {
+            continue;
+        }
+        _particles[i]->Draw(ip);
+    }
+}
+
+void ParticleManager::DrawFront(IP& ip) {
+    for(int i=0 ; i<_particles.size() ; i++) {
+        if(!_particles[i]->IsAlive() || !_particles[i]->IsFront()) {
             continue;
         }
         _particles[i]->Draw(ip);

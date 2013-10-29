@@ -15,11 +15,12 @@ class ParticleManager;
 
 class Particle : public MovingSprite {
     public:
-    Particle(IP& ip, string name, sf::Vector2f pos, sf::Vector2f velocity, float rotVel, float lifeTime, sf::Vector2f startScale, sf::Vector2f endScale, float startAlpha, float endAlpha, bool gravity, bool collision, bool animated, sf::IntRect hitbox);
+    Particle(IP& ip, string name, sf::Vector2f pos, sf::Vector2f velocity, float rotVel, float lifeTime, sf::Vector2f startScale, sf::Vector2f endScale, float startAlpha, float endAlpha, bool gravity, bool collision, bool animated, sf::IntRect hitbox, bool zFront);
     ~Particle();
     virtual void Update(IP& ip, float eTime, Level& level, ParticleManager& pManager);
     virtual void Draw(IP& ip);
     bool IsAlive();
+    bool IsFront();
 
     private:
     bool _alive;
@@ -31,6 +32,7 @@ class Particle : public MovingSprite {
     sf::Clock _timer;
     bool _gravity;
     bool _collision;
+    bool _front;
 };
 
 #endif // PARTICLE_H_INCLUDED

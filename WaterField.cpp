@@ -40,7 +40,7 @@ WaterField::~WaterField() {
 
 }
 
-void WaterField::Update(float elapsedTime) {
+void WaterField::Update(IP& ip, float elapsedTime, ParticleManager& pManager) {
     if(!_surface) {
         return;
     }
@@ -92,6 +92,32 @@ void WaterField::Update(float elapsedTime) {
 
     delete [] rd;
     delete [] ld;
+
+    if(_lava && _surface) {
+        float pps = GetRect().width/16.f;
+        float particleTime = 1.f/pps;
+        float t = _particleTimer.getElapsedTime().asSeconds();
+        if(t >= particleTime) {
+            _particleTimer.restart();
+            for(int i=0 ; i<t/particleTime ; i++) {
+                Particle *p = new Particle(ip, "emberParticle",
+                                       sf::Vector2f(GetRect().left+MathHelper::RandFloat(0, GetRect().width), GetRect().top+MathHelper::RandFloat(0, GetRect().height)),
+                                       MathHelper::Ang2Vec(MathHelper::Deg2Rad(MathHelper::RandFloat(-70, -110))) * MathHelper::RandFloat(0.05, 0.1),
+                                       MathHelper::RandFloat(-.1, .1),
+                                       MathHelper::RandFloat(4000, 20000),
+                                       sf::Vector2f(1, 1),
+                                       sf::Vector2f(1, 1),
+                                       255,
+                                       0,
+                                       false,
+                                       false,
+                                       false,
+                                       sf::IntRect(1, 1, 3, 1), rand()%2==0);
+                p->SetCollideWithWater(false);
+                pManager.AddParticle(p);
+            }
+        }
+    }
 }
 
 void WaterField::Draw(IP& ip){
@@ -146,7 +172,7 @@ void WaterField::Splash(sf::Vector2f pos, float force, ParticleManager& pManager
                                        true,
                                        true,
                                        true,
-                                       sf::IntRect(1, 1, 3, 3));
+                                       sf::IntRect(1, 1, 3, 3), false);
             p->SetCollideWithWater(false);
             pManager.AddParticle(p);
         }

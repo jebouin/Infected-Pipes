@@ -23,7 +23,7 @@ class WaterField {
     public:
     WaterField(sf::FloatRect rect, float resolution, bool surface, bool lava);
     ~WaterField();
-    void Update(float elapsedTime);
+    void Update(IP& ip, float elapsedTime, ParticleManager& pManager);
     void Draw(IP& ip);
     void Splash(sf::Vector2f pos, float force, ParticleManager& pManager, IP& ip);
     sf::FloatRect GetRect();
@@ -43,6 +43,8 @@ class WaterField {
     sf::Color _topc;
     sf::Color _c;
     sf::Color _downc;
+
+    sf::Clock _particleTimer;
 };
 
 #endif // WATERFIELD_H_INCLUDED

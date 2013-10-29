@@ -62,6 +62,6 @@ void Bat::Die(IP& ip, ParticleManager& pManager, EntityManager& eManager, Level&
                                           false,
                                           true,
                                           false,
-                                          sf::IntRect(3, 1, 5, 3)));
+                                          sf::IntRect(3, 1, 5, 3), false));
     }
 }

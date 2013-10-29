@@ -57,10 +57,11 @@ void Game::Draw(IP& ip) {
     _level->DrawBack(ip, _player->GetView());
     _entityManager->Draw(ip);
     _player->Draw(ip);
-    _particleManager->Draw(ip);
+    _particleManager->DrawBack(ip);
     _bulletManager->Draw(ip);
     _level->DrawFront(ip);
     _speechManager->Draw(ip);
+    _particleManager->DrawFront(ip);
 
     ip._renderer->GetTexture().setView(ip._renderer->GetTexture().getDefaultView());
     _gui->Draw(ip);

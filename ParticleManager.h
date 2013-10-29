@@ -18,7 +18,8 @@ class ParticleManager {
     ParticleManager();
     ~ParticleManager();
     void Update(IP& ip, float elapsedTime, Level& level);
-    void Draw(IP& ip);
+    void DrawBack(IP& ip);
+    void DrawFront(IP& ip);
     void AddParticle(Particle *p);
     int GetCount();
     Particle* GetParticle(int id);

@@ -159,7 +159,7 @@ void RockWorm::Die(IP& ip, ParticleManager& pManager, EntityManager& eManager, L
                                    true,
                                    true,
                                    true,
-                                   sf::IntRect(2, 2, 2, 1));
+                                   sf::IntRect(2, 2, 2, 1), false);
         p->GetAnims().AddAnimation("base", new Animation(6, 80, sf::Vector2i(0, 0), sf::Vector2i(6, 5), false));
         p->GetAnims().SetAnimation("base");
         pManager.AddParticle(p);
@@ -176,5 +176,5 @@ void RockWorm::Die(IP& ip, ParticleManager& pManager, EntityManager& eManager, L
                                       true,
                                       true,
                                       false,
-                                      sf::IntRect(0, 0, 6, 5)));
+                                      sf::IntRect(0, 0, 6, 5), false));
 }
