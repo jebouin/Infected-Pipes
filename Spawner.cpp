@@ -17,6 +17,7 @@
 #include "Slime.h"
 #include "WormBoss.h"
 #include "FireBall.h"
+#include "Turtle.h"
 
 Spawner::Spawner(IP& ip, int nbWaves, Level& l) {
     _curWave = 0;
@@ -107,14 +108,17 @@ void Spawner::Spawn(IP& ip, EntityManager& eManager, Level& level, Character& ch
         _difToSpawn -= d[et];
     }*/
 
-    _difToSpawn--;
+    /*_difToSpawn--;
     FireBall *f = new FireBall(ip, level);
     if(!f->AutoSpawn(ip, level, eManager, character)) {
         delete f;
         return;
     }
-    eManager.Add(f);
+    eManager.Add(f);*/
 
+    int pipeId = rand()%_pipes.size();
+    _pipes[pipeId]->Spawn(ip, eManager, new Turtle(ip, level));
+    _difToSpawn--;
 
     /*if(rand()%10==0) {
         _pipes[pipeId]->Spawn(ip, eManager, new SnowBallEnemy(ip, level));

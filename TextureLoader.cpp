@@ -28,6 +28,7 @@ TextureLoader::TextureLoader(IP& ip) {
     AddTexture("wormBossBody.png", "wormBossBody");
     AddTexture("wormBossHead.png", "wormBossHead");
     AddTexture("fireBall.png", "fireBall");
+    AddTexture("turtle.png", "turtle");
 
     AddTexture("duck.png", "duck");
     AddTexture("mouse.png", "mouse");

@@ -101,13 +101,14 @@ void FireBall::Update(IP& ip, float eTime, Level& level, Character& character, E
         Accelerate(sf::Vector2f(0, .0006), eTime);
     }
 
-    if(!_inWater && m.IsCollided(*this, Map::WALL)) {
+    if(!_inWater && (m.IsCollided(*this, Map::WALL) || level.GetSpawner().IsCollided(*this))) {
         _jumping = false;
         SetPhysics(false);
         SetCollideWithWater(true);
         SetVel(sf::Vector2f(0, 0));
+        //Die(ip, pManager, eManager, level);
         SpreadParticles(ip, pManager);
-        AutoSpawn(ip, level, eManager, character);
+        SetAlive(false);
     }
 
     if(GetGlobalHitbox().intersects(character.GetGlobalHitbox())) {
