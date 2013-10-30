@@ -18,6 +18,7 @@ class BulletManager;
 class Ennemy;
 class Weapon;
 class Bow;
+class GUI;
 
 struct Arm {
     sf::IntRect _textureRect;

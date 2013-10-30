@@ -13,8 +13,8 @@
 #include "MathHelper.h"
 
 IP::IP() {
-    _window = new sf::RenderWindow(sf::VideoMode(1600, 900, 32), "Infected Pipes");
-    //_window = new sf::RenderWindow(sf::VideoMode::getFullscreenModes()[0], "Infected Pipes", sf::Style::None);
+    //_window = new sf::RenderWindow(sf::VideoMode(1600, 900, 32), "Infected Pipes");
+    _window = new sf::RenderWindow(sf::VideoMode::getFullscreenModes()[0], "Infected Pipes", sf::Style::None);
     _window->setVerticalSyncEnabled(true);
     _window->setFramerateLimit(60);
     _window->setMouseCursorVisible(false);
@@ -27,6 +27,9 @@ IP::IP() {
     }
     const_cast<sf::Texture&>(_font.getTexture(8)).setSmooth(false);
     const_cast<sf::Texture&>(_font.getTexture(16)).setSmooth(false);
+    const_cast<sf::Texture&>(_font.getTexture(32)).setSmooth(false);
+    const_cast<sf::Texture&>(_font.getTexture(48)).setSmooth(false);
+    const_cast<sf::Texture&>(_font.getTexture(64)).setSmooth(false);
 
     _textureLoader = new TextureLoader(*this);
     _window->setActive(true);

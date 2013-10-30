@@ -13,7 +13,7 @@
 #include "BulletManager.h"
 #include "WaterField.h"
 
-FireBall::FireBall(IP& ip, Level& level) : Ennemy(ip, "fireBall", sf::IntRect(1, 1, 14, 14), 7, 1, 1, level) {
+FireBall::FireBall(IP& ip, Level& level) : Ennemy(ip, "fireBall", sf::IntRect(1, 1, 14, 14), 20, 10, 20, level) {
     AnimationTable& t(GetAnims());
     t.AddAnimation("idle", new Animation(6, 50, sf::Vector2i(0, 0), sf::Vector2i(20, 16), true));
     t.SetAnimation("idle");

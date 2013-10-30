@@ -17,13 +17,15 @@ class LevelIndicator;
 class DifficultyIndicator;
 class Cursor;
 class Level;
+class WaveIndicator;
 
 class GUI {
     public:
     GUI(IP& ip, TextureLoader& tLoader, Character& character, Level& level);
     ~GUI();
-    void Update(IP& ip);
+    void Update(IP& ip, float eTime);
     void Draw(IP& ip);
+    WaveIndicator& GetWaveIndicator();
 
     private:
     LifeBar *_lifeBar;
@@ -31,6 +33,7 @@ class GUI {
     LevelIndicator *_levelIndicator;
     DifficultyIndicator *_difficultyIndicator;
     Cursor *_cursor;
+    WaveIndicator *_waveIndicator;
 };
 
 #endif // GUI_H_INCLUDED

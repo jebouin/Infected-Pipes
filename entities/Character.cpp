@@ -15,6 +15,7 @@
 #include "Bow.h"
 #include "Particle.h"
 #include "TextureLoader.h"
+#include "GUI.h"
 
 Character::Character(IP& ip) : GameEntity(ip, "character", sf::IntRect(4, 3, 7, 26), 10) {
     _arms[EMPTY] = Arm {sf::IntRect(0, 0, 6, 9), sf::Vector2f(2, 1), sf::Vector2f(5, 6)};

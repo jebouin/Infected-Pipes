@@ -9,6 +9,7 @@
 #include "Cursor.h"
 #include "DifficultyIndicator.h"
 #include "Level.h"
+#include "WaveIndicator.h"
 
 GUI::GUI(IP& ip, TextureLoader& tLoader, Character& character, Level& level) {
     _lifeBar = new LifeBar(ip, character, tLoader);
@@ -16,6 +17,8 @@ GUI::GUI(IP& ip, TextureLoader& tLoader, Character& character, Level& level) {
     _levelIndicator = new LevelIndicator(ip, character, tLoader);
     _difficultyIndicator = new DifficultyIndicator(ip, level, tLoader);
     _cursor = new Cursor(ip, tLoader);
+    _waveIndicator = new WaveIndicator(ip);
+    //_waveIndicator->AnnounceWave(ip, -42);
 }
 
 GUI::~GUI() {
@@ -29,14 +32,17 @@ GUI::~GUI() {
     _difficultyIndicator = 0;
     delete _cursor;
     _cursor = 0;
+    delete _waveIndicator;
+    _waveIndicator = 0;
 }
 
-void GUI::Update(IP& ip) {
+void GUI::Update(IP& ip, float eTime) {
     _lifeBar->Update(ip);
     _xpBar->Update(ip);
     _levelIndicator->Update(ip);
     _difficultyIndicator->Update(ip);
     _cursor->Update(ip);
+    _waveIndicator->Update(ip, eTime);
 }
 
 void GUI::Draw(IP& ip) {
@@ -45,4 +51,9 @@ void GUI::Draw(IP& ip) {
     _levelIndicator->Draw(ip);
     _difficultyIndicator->Draw(ip);
     _cursor->Draw(ip);
+    _waveIndicator->Draw(ip);
+}
+
+WaveIndicator& GUI::GetWaveIndicator() {
+    return *_waveIndicator;
 }

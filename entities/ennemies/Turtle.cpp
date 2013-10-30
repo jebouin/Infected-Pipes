@@ -14,7 +14,7 @@
 #include "WaterField.h"
 #include "FireBallBullet.h"
 
-Turtle::Turtle(IP& ip, Level& level) : Ennemy(ip, "turtle", sf::IntRect(12, 2, 21, 18), 100, 20, 10, level) {
+Turtle::Turtle(IP& ip, Level& level) : Ennemy(ip, "turtle", sf::IntRect(12, 2, 21, 18), 100, 25, 30, level) {
     AnimationTable& t(GetAnims());
     t.AddAnimation("walk", new Animation(4, 200, sf::Vector2i(0, 0), sf::Vector2i(36, 21), true));
     t.AddAnimation("attack", new Animation(4, 200, sf::Vector2i(0, 21), sf::Vector2i(36, 21), false));

@@ -18,6 +18,8 @@
 #include "WormBoss.h"
 #include "FireBall.h"
 #include "Turtle.h"
+#include "GUI.h"
+#include "WaveIndicator.h"
 
 Spawner::Spawner(IP& ip, int nbWaves, Level& l) {
     _curWave = 0;
@@ -25,8 +27,6 @@ Spawner::Spawner(IP& ip, int nbWaves, Level& l) {
     _spawning = true;
     _difToSpawn = _difficulty;
     _finished = false;
-
-    NextWave(l);
 }
 
 Spawner::~Spawner() {
@@ -37,7 +37,11 @@ Spawner::~Spawner() {
     _pipes.clear();
 }
 
-void Spawner::Update(IP& ip, EntityManager& eManager, Level& level, Character& character) {
+void Spawner::Update(IP& ip, float eTime, EntityManager& eManager, Level& level, Character& character, GUI& gui) {
+    if(_curWave==0 || (_curWave < _nbWaves && _nextWaveTimer.getElapsedTime().asSeconds() >= 20.f)) {
+        NextWave(ip, level, gui);
+    }
+
     if(_spawning) {
         if(_clock.getElapsedTime().asMilliseconds() > 100) {
             Spawn(ip, eManager, level, character);
@@ -46,7 +50,7 @@ void Spawner::Update(IP& ip, EntityManager& eManager, Level& level, Character& c
     }
 
     if(eManager.GetNbEnnemies() == 0 && !_finished && !_spawning) {
-        NextWave(level);
+        NextWave(ip, level, gui);
     }
 
     /*if(level.GetName() == "miniBoss1") {
@@ -108,8 +112,8 @@ void Spawner::Spawn(IP& ip, EntityManager& eManager, Level& level, Character& ch
         _difToSpawn -= d[et];
     } else if(levelName == "lavaCave") {
         int pipeId = rand()%_pipes.size();
-        int et(-1);
-        static int d[2] = {2, 5};
+        int et(0);
+        static int d[2] = {200, 500};
         for(int i=1 ; i>=0 ; i--) {
             if(d[i] <= _difToSpawn) {
                 et = i;
@@ -144,7 +148,8 @@ void Spawner::Spawn(IP& ip, EntityManager& eManager, Level& level, Character& ch
     }
 }
 
-void Spawner::NextWave(Level& level) {
+void Spawner::NextWave(IP& ip, Level& level, GUI& gui) {
+    _nextWaveTimer.restart();
     if(_curWave >= _nbWaves) {
         _finished = true;
         _spawning = false;
@@ -156,6 +161,11 @@ void Spawner::NextWave(Level& level) {
     _spawning = true;
     _clock.restart();
     cout << "Wave: " << _curWave << endl;
+    if(level.GetName() == "miniBoss1" || level.GetName() == "miniBoss2") {
+        gui.GetWaveIndicator().AnnounceWave(ip, -42);
+    } else {
+        gui.GetWaveIndicator().AnnounceWave(ip, _curWave);
+    }
 }
 
 void Spawner::Draw(IP& ip) {

@@ -14,6 +14,7 @@ class EntityManager;
 class Level;
 class ParticleManager;
 class BulletManager;
+class GUI;
 
 class Player {
     public:

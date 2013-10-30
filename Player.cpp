@@ -8,6 +8,7 @@
 #include "AnimationTable.h"
 #include "ParticleManager.h"
 #include "BulletManager.h"
+#include "GUI.h"
 
 Player::Player(IP& ip, EntityManager& eManager) {
     _character = new Character(ip);

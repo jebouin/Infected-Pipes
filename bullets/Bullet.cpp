@@ -44,7 +44,7 @@ void Bullet::Update(IP& ip, float eTime, Level& level, Character& character, Par
         //Accelerate(sf::Vector2f(-0.0003*GetVel().x, 0), eTime);
     }
 
-    if(_inWater) {
+    if(_inWater && GetCollidesWithWater()) {
         Accelerate(sf::Vector2f(-0.004*GetVel().x, -0.004*GetVel().y), eTime);
     }
 

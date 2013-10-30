@@ -18,6 +18,7 @@
 #include "Mouse.h"
 #include "Skull.h"
 #include "MathHelper.h"
+#include "GUI.h"
 
 Level::Level(IP& ip, Character& character) {
     _levelInfos["intro"] = LevelInfo{"level0", "nightBackground", 0.0001f, true, false, false};
@@ -31,7 +32,7 @@ Level::Level(IP& ip, Character& character) {
     _grass = 0;
     _background = 0;
     _difficulty = 2;
-    Load(ip, "lavaCave", character);
+    Load(ip, "rockyCave", character);
     character.setPosition(character.getPosition() + sf::Vector2f(0, 50));
     _lavaTexture.create(_map->GetSize().x*16, _map->GetSize().y*16);
     _lavaShader.loadFromFile("shaders/lava.frag", sf::Shader::Fragment);
@@ -68,8 +69,8 @@ Level::~Level() {
     _passiveEntities.clear();
 }
 
-void Level::Update(IP& ip, EntityManager& eManager, Character& character, float eTime, ParticleManager& pManager, BulletManager& bManager) {
-    _spawner->Update(ip, eManager, *this, character);
+void Level::Update(IP& ip, EntityManager& eManager, Character& character, float eTime, ParticleManager& pManager, BulletManager& bManager, GUI& gui) {
+    _spawner->Update(ip, eTime, eManager, *this, character, gui);
     _grass->Update(ip);
     _background->Update(ip, eTime);
     for(int i=0 ; i<_chests.size() ; i++) {
@@ -85,7 +86,7 @@ void Level::Update(IP& ip, EntityManager& eManager, Character& character, float 
         _passiveEntities[i]->Update(ip, eTime, *this, eManager, pManager);
     }
 
-    if(_curLevel == "miniBoss1" && _spawner->IsFinished()) {
+    if((_curLevel == "miniBoss1" || _curLevel == "miniBoss2") && _spawner->IsFinished()) {
         NextLevel(ip, eManager, bManager, character);
         character.LeavePipe();
     }
@@ -386,6 +387,8 @@ void Level::NextLevel(IP& ip, EntityManager& eManager, BulletManager& bManager, 
         toLoad = "wetCave";
     } else if(_curLevel == "wetCave") {
         toLoad = "miniBoss2";
+    } else if(_curLevel == "miniBoss2") {
+        toLoad = "lavaCave";
     }
     Load(ip, toLoad, character);
     eManager.Clear();

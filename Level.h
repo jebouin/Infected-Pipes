@@ -22,6 +22,7 @@ class ParticleManager;
 class WaterFall;
 class Duck;
 class GameEntity;
+class GUI;
 
 struct LevelInfo {
     string _imageName;
@@ -36,7 +37,7 @@ class Level {
     public:
     Level(IP& ip, Character& character);
     ~Level();
-    void Update(IP& ip, EntityManager& eManager, Character& character, float eTime, ParticleManager& pManager, BulletManager& bManager);
+    void Update(IP& ip, EntityManager& eManager, Character& character, float eTime, ParticleManager& pManager, BulletManager& bManager, GUI& gui);
     void DrawBack(IP& ip, sf::View& prevView);
     void DrawFront(IP& ip);
     Map& GetMap() const;
