@@ -38,6 +38,7 @@ TextureLoader::TextureLoader(IP& ip) {
     AddTexture("zombie.png", "zombie");
     AddTexture("nightBackground.png", "nightBackground");
     AddTexture("rockyBackground.png", "rockyBackground");
+    AddTexture("lavaBackground.png", "lavaBackground");
     AddTexture("lifeBar.png", "lifeBar");
     AddTexture("lifeBarBorder.png", "lifeBarBorder");
     AddTexture("xpBar.png", "xpBar");

@@ -26,13 +26,13 @@ Level::Level(IP& ip, Character& character) {
     _levelInfos["miniBoss1"] = LevelInfo{"miniBoss1", "rockyBackground", 0.2f, false, false, false};
     _levelInfos["miniBoss2"] = LevelInfo{"miniBoss2", "rockyBackground", 0.2f, false, false, false};
     _levelInfos["wetCave"] = LevelInfo{"level2", "rockyBackground", 0.2f, true, true, false};
-    _levelInfos["lavaCave"] = LevelInfo{"level3", "rockyBackground", 0.2f, true, false, true};
+    _levelInfos["lavaCave"] = LevelInfo{"level3", "lavaBackground", 0.2f, true, false, true};
     _map = 0;
     _spawner = 0;
     _grass = 0;
     _background = 0;
     _difficulty = 2;
-    Load(ip, "rockyCave", character);
+    Load(ip, "lavaCave", character);
     character.setPosition(character.getPosition() + sf::Vector2f(0, 50));
     _lavaTexture.create(_map->GetSize().x*16, _map->GetSize().y*16);
     _lavaShader.loadFromFile("shaders/lava.frag", sf::Shader::Fragment);
