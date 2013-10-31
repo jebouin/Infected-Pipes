@@ -18,11 +18,11 @@
 #include "TextureLoader.h"
 #include "GUI.h"
 
-Character::Character(IP& ip) : GameEntity(ip, "character", sf::IntRect(4, 3, 7, 26), 10) {
+Character::Character(IP& ip) : GameEntity(ip, "character", sf::IntRect(4, 3, 7, 26), 100) {
     _arms[EMPTY] = Arm {sf::IntRect(0, 0, 6, 9), sf::Vector2f(2, 1), sf::Vector2f(5, 6), 0};
     _arms[RAINBOW] = Arm {sf::IntRect(0, 9, 15, 9), sf::Vector2f(4, 1), sf::Vector2f(2, 2), 0};
     _arms[BOW] = Arm {sf::IntRect(0, 18, 10, 17), sf::Vector2f(2, 3), sf::Vector2f(4, 4), 0};
-    _arms[SHOTGUN] = Arm{sf::IntRect(0, 35, 21, 10), sf::Vector2f(3, 1), sf::Vector2f(17, 4), -90};
+    _arms[SHOTGUN] = Arm{sf::IntRect(0, 35, 21, 10), sf::Vector2f(5, 1), sf::Vector2f(10, 4), -90};
 
     SetWeight(0.5f);
     AnimationTable& t(GetAnims());
@@ -114,8 +114,12 @@ void Character::Update(IP& ip, float eTime, Level& level, EntityManager& eManage
     }
     sf::Vector2f newRelPos = MathHelper::Ang2Vec(MathHelper::Deg2Rad(a+_arm.getRotation()))*l;
     _weapon->SetRelPosition(_arm.getPosition() - GetGlobalUpperLeftPos() + newRelPos/*+ _arms[_curArmType]._bulletPos*/);
-
     _weapon->Update(ip, eTime, bManager);
+
+    if(_regenTimer.getElapsedTime().asMilliseconds() >= 100) {
+        _regenTimer.restart();
+        SetHP(GetHP()+1);
+    }
 }
 
 void Character::Draw(IP& ip) {

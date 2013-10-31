@@ -57,9 +57,9 @@ void Player::Update(IP& ip, float eTime, Level& level, EntityManager& eManager, 
     if(vrect.left+vrect.width > map.GetSize().x*16.f-16) {
         _view->setCenter(sf::Vector2f(map.GetSize().x*16.f - _view->getSize().x/2.f - 16, _view->getCenter().y));
     }
-    /*if(vrect.top < 0) {
+    if(vrect.top < 0) {
         _view->setCenter(sf::Vector2f(_view->getCenter().x, _view->getSize().y/2.f));
-    }*/
+    }
     if(vrect.top+vrect.height > map.GetSize().y*16.f) {
         _view->setCenter(sf::Vector2f(_view->getCenter().x, map.GetSize().y*16.f - _view->getSize().y/2.f));
     }

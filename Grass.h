@@ -9,7 +9,7 @@
 using namespace std;
 
 class IP;
-class Level;
+class Map;
 
 struct GrassBlade {
     sf::Vector2f pos;
@@ -19,7 +19,7 @@ struct GrassBlade {
 
 class Grass {
     public:
-    Grass(IP& ip, Level& level);
+    Grass(IP& ip, Map& map);
     ~Grass();
     void Update(IP& ip);
     void Draw(IP& ip);

@@ -56,6 +56,7 @@ class Character : public GameEntity {
     bool _enteringPipe;
     bool _leavingPipe;
     sf::Clock _enterTimer;
+    sf::Clock _regenTimer;
     ArmType _curArmType;
 
     Weapon *_weapon;

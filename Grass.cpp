@@ -1,13 +1,11 @@
 #include "Grass.h"
 #include "IP.h"
-#include "Level.h"
 #include "Map.h"
 #include "Renderer.h"
 #include "MathHelper.h"
 
-Grass::Grass(IP& ip, Level& level) {
+Grass::Grass(IP& ip, Map& map) {
     _grass.setPrimitiveType(sf::Lines);
-    Map& map(level.GetMap());
     for(int i=0 ; i<map.GetSize().x ; i++) {
         for(int j=0 ; j<map.GetSize().y ; j++) {
             if(map.GetTile(sf::Vector2i(i, j), Map::FRONT) == 0 && map.GetTile(sf::Vector2i(i, j+1), Map::FRONT) == 1) {

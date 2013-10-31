@@ -18,11 +18,11 @@ class IP {
     Renderer *_renderer;
     TextureLoader *_textureLoader;
     sf::RenderWindow *_window;
+    SceneManager *_sceneManager;
     sf::Font _font;
 
     private:
     sf::Clock _clock;
-    SceneManager *_sceneManager;
     bool _focused;
 };
 

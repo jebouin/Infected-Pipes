@@ -32,9 +32,9 @@ Level::Level(IP& ip, Character& character) {
     _grass = 0;
     _background = 0;
     _difficulty = 2;
-    Load(ip, "rockyCave", character);
-    character.setPosition(character.getPosition() + sf::Vector2f(0, 50));
-    _lavaTexture.create(_map->GetSize().x*16, _map->GetSize().y*16);
+    Load(ip, "intro", character);
+    //character.setPosition(character.getPosition() + sf::Vector2f(0, 50));
+    _lavaTexture.create(/*_map->GetSize().x*/64*16, /*_map->GetSize().y*/38*16);
     _lavaShader.loadFromFile("shaders/lava.frag", sf::Shader::Fragment);
 }
 
@@ -107,7 +107,6 @@ void Level::DrawBack(IP& ip, sf::View& prevView) {
 }
 
 void Level::DrawFront(IP& ip) {
-
     _lavaTexture.clear(sf::Color(0, 0, 0, 0));
     for(int i=0 ; i<_waterFields.size() ; i++) {
         _waterFields[i]->Draw(ip, _lavaTexture);
@@ -316,9 +315,9 @@ void Level::Load(IP& ip, string name, Character& character) {
 
 
     delete _background;
-    _background = new Background(ip, _levelInfos[name]._backgroundName, _levelInfos[name]._backgroundZoom, *this);
+    _background = new Background(ip, _levelInfos[name]._backgroundName, _levelInfos[name]._backgroundZoom, *_map);
     delete _grass;
-    _grass = new Grass(ip, *this);
+    _grass = new Grass(ip, *_map);
     for(int i=0 ; i<_chests.size() ; i++) {
         delete _chests[i];
         _chests[i] = 0;

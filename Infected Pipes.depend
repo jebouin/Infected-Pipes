@@ -15,11 +15,11 @@
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1382464971 c:\users\xaychru04\desktop\infected pipes\ip.h
+1383227535 c:\users\xaychru04\desktop\infected pipes\ip.h
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1383208689 source:c:\users\xaychru04\desktop\infected pipes\ip.cpp
+1383243987 source:c:\users\xaychru04\desktop\infected pipes\ip.cpp
 	"IP.h"
 	"Renderer.h"
 	"TextureLoader.h"
@@ -32,6 +32,7 @@
 	"BulletManager.h"
 	"SceneManager.h"
 	"Game.h"
+	"MainMenu.h"
 	"MathHelper.h"
 
 1383210944 source:c:\users\xaychru04\desktop\infected pipes\textureloader.cpp
@@ -43,12 +44,12 @@
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1381572232 c:\users\xaychru04\desktop\infected pipes\map.h
+1383237171 c:\users\xaychru04\desktop\infected pipes\map.h
 	<vector>
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1382705803 source:c:\users\xaychru04\desktop\infected pipes\map.cpp
+1383237190 source:c:\users\xaychru04\desktop\infected pipes\map.cpp
 	"Map.h"
 	"IP.h"
 	"TextureLoader.h"
@@ -137,7 +138,7 @@
 	"DamageParticle.h"
 	"WaterField.h"
 
-1383080161 source:c:\users\xaychru04\desktop\infected pipes\player.cpp
+1383219123 source:c:\users\xaychru04\desktop\infected pipes\player.cpp
 	"Player.h"
 	"IP.h"
 	"Character.h"
@@ -167,7 +168,7 @@
 	"IP.h"
 	"Renderer.h"
 
-1383212408 source:c:\users\xaychru04\desktop\infected pipes\level.cpp
+1383229140 source:c:\users\xaychru04\desktop\infected pipes\level.cpp
 	"Level.h"
 	"IP.h"
 	"Map.h"
@@ -225,16 +226,15 @@
 	"TextureLoader.h"
 	"MathHelper.h"
 
-1383209843 source:c:\users\xaychru04\desktop\infected pipes\background.cpp
+1383243831 source:c:\users\xaychru04\desktop\infected pipes\background.cpp
 	"Background.h"
 	"IP.h"
 	"TextureLoader.h"
 	"Renderer.h"
 	"MathHelper.h"
-	"Level.h"
 	"Map.h"
 
-1383209220 c:\users\xaychru04\desktop\infected pipes\background.h
+1383229879 c:\users\xaychru04\desktop\infected pipes\background.h
 	<iostream>
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
@@ -255,15 +255,14 @@
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1378541176 c:\users\xaychru04\desktop\infected pipes\grass.h
+1383228138 c:\users\xaychru04\desktop\infected pipes\grass.h
 	<vector>
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1380119637 source:c:\users\xaychru04\desktop\infected pipes\grass.cpp
+1383236939 source:c:\users\xaychru04\desktop\infected pipes\grass.cpp
 	"Grass.h"
 	"IP.h"
-	"Level.h"
 	"Map.h"
 	"Renderer.h"
 	"MathHelper.h"
@@ -274,7 +273,7 @@
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1383083787 source:c:\users\xaychru04\desktop\infected pipes\spawner.cpp
+1383218204 source:c:\users\xaychru04\desktop\infected pipes\spawner.cpp
 	"Spawner.h"
 	"IP.h"
 	"EntityManager.h"
@@ -458,7 +457,7 @@
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1383212598 source:c:\users\xaychru04\desktop\infected pipes\bullets\bullet.cpp
+1383218615 source:c:\users\xaychru04\desktop\infected pipes\bullets\bullet.cpp
 	"Bullet.h"
 	"TextureLoader.h"
 	"IP.h"
@@ -831,7 +830,7 @@
 	"BulletManager.h"
 	"Renderer.h"
 
-1383212994 c:\users\xaychru04\desktop\infected pipes\entities\character.h
+1383217579 c:\users\xaychru04\desktop\infected pipes\entities\character.h
 	<vector>
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
@@ -855,7 +854,7 @@
 	"SFML/System.hpp"
 	"GameEntity.h"
 
-1383213604 source:c:\users\xaychru04\desktop\infected pipes\entities\character.cpp
+1383226769 source:c:\users\xaychru04\desktop\infected pipes\entities\character.cpp
 	"Character.h"
 	"IP.h"
 	"Animation.h"
@@ -1256,7 +1255,7 @@
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1383213246 source:c:\users\xaychru04\desktop\infected pipes\bullets\gunbullet.cpp
+1383219192 source:c:\users\xaychru04\desktop\infected pipes\bullets\gunbullet.cpp
 	"GunBullet.h"
 	"IP.h"
 	"Character.h"
@@ -1280,12 +1279,25 @@
 	"SFML/System.hpp"
 	"Weapon.h"
 
-1383213714 source:c:\users\xaychru04\desktop\infected pipes\weapons\shotgun.cpp
+1383217114 source:c:\users\xaychru04\desktop\infected pipes\weapons\shotgun.cpp
 	"Shotgun.h"
 	"IP.h"
 	"GameEntity.h"
 	"BulletManager.h"
 	"GunBullet.h"
 	"MathHelper.h"
+	"Renderer.h"
+
+1383229983 c:\users\xaychru04\desktop\infected pipes\scenes\mainmenu.h
+	"SFML/Graphics.hpp"
+	"SFML/System.hpp"
+	"Scene.h"
+
+1383237246 source:c:\users\xaychru04\desktop\infected pipes\scenes\mainmenu.cpp
+	"MainMenu.h"
+	"IP.h"
+	"Map.h"
+	"Grass.h"
+	"Background.h"
 	"Renderer.h"
 

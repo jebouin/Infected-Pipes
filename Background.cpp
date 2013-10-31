@@ -3,18 +3,16 @@
 #include "TextureLoader.h"
 #include "Renderer.h"
 #include "MathHelper.h"
-#include "Level.h"
 #include "Map.h"
 
-Background::Background(IP& ip, string name, float zoom, Level& level) : _level(level){
-    Map& map(level.GetMap());
+Background::Background(IP& ip, string name, float zoom, Map& map) {
     _back.setTexture(ip._textureLoader->GetTexture(name));
     _view = sf::View(sf::FloatRect(0, 0, ip._renderer->GetTexture().getSize().x, ip._renderer->GetTexture().getSize().y));
     _zoom = zoom;
     _name = name;
 
     if(_name == "nightBackground") {
-        for(int i=0 ; i<map.GetSize().x*2.5f ; i++) {
+        for(int i=0 ; i<map.GetSize().x*2.5 ; i++) {
             if(rand()%3==0) {
                 sf::Sprite fir;
                 fir.setTexture(ip._textureLoader->GetTexture("fir"));
@@ -23,8 +21,7 @@ Background::Background(IP& ip, string name, float zoom, Level& level) : _level(l
             }
         }
 
-        //!!! star density
-        for(int i=0 ; i<100 ; i++) {
+        for(int i=0 ; i<(ip._renderer->GetTexture().getSize().x*ip._renderer->GetTexture().getSize().y/900) ; i++) {
             int starType = rand()%4;
             sf::Sprite star;
             star.setTexture(ip._textureLoader->GetTexture("stars"));
@@ -43,7 +40,7 @@ Background::Background(IP& ip, string name, float zoom, Level& level) : _level(l
                 break;
             }
             /*correct that!*/star.setPosition(MathHelper::RandInt(0, ip._renderer->GetTexture().getSize().x-star.getLocalBounds().width), MathHelper::RandInt(0, ip._renderer->GetTexture().getSize().y-star.getLocalBounds().height));
-            star.setOrigin(sf::Vector2f(star.getTextureRect().width, star.getTextureRect().height)/2.f);
+            star.setOrigin(sf::Vector2f(sf::Vector2i(sf::Vector2f(star.getTextureRect().width, star.getTextureRect().height)/2.f)));
             _backSprites2.push_back(star);
         }
 
@@ -65,17 +62,17 @@ Background::~Background() {
 void Background::Update(IP& ip, float elapsedTime) {
     if(_name == "nightBackground") {
         static sf::IntRect tRects[4] = {sf::IntRect(0, 0, 5, 5), sf::IntRect(0, 5, 3, 3), sf::IntRect(0, 8, 1, 1), sf::IntRect(0, 9, 1, 1)};
-        for(int i=0 ; i<100 ; i++) {
+        for(int i=0 ; i<_backSprites2.size()-1 ; i++) {
             if(rand()%3==0) {
                 sf::Sprite& s(_backSprites2[i]);
                 s.setTextureRect(tRects[rand()%2 + 2*(i%2)]);
-                s.setOrigin(sf::Vector2f(s.getTextureRect().width, s.getTextureRect().height)/2.f);
+                s.setOrigin(sf::Vector2f(sf::Vector2i(sf::Vector2f(s.getTextureRect().width, s.getTextureRect().height)/2.f)));
             }
         }
     }
 }
 
-void Background::Draw(IP& ip, sf::View& prevView) {
+void Background::Draw(IP& ip, const sf::View& prevView) {
     _view = sf::View(sf::FloatRect(0, 0, ip._renderer->GetTexture().getSize().x, ip._renderer->GetTexture().getSize().y));
     _view.setCenter(prevView.getCenter()*_zoom + sf::Vector2f(ip._renderer->GetTexture().getSize().x, ip._renderer->GetTexture().getSize().y)/2.f);
     sf::RenderTexture& t(ip._renderer->GetTexture());

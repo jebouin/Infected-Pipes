@@ -9,14 +9,14 @@
 using namespace std;
 
 class IP;
-class Level;
+class Map;
 
 class Background {
     public:
-    Background(IP& ip, string name, float zoom, Level& level);
+    Background(IP& ip, string name, float zoom, Map& map);
     ~Background();
     void Update(IP& ip, float elapsedTime);
-    void Draw(IP& ip, sf::View& prevView);
+    void Draw(IP& ip, const sf::View& prevView);
 
     private:
     string _name;
@@ -27,7 +27,7 @@ class Background {
     sf::View _view;
     float _zoom;
 
-    const Level& _level;
+    //const Level& _level;
 };
 
 #endif // BACKGROUND_H_INCLUDED
