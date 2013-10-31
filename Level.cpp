@@ -26,7 +26,7 @@ Level::Level(IP& ip, Character& character) {
     _levelInfos["miniBoss1"] = LevelInfo{"miniBoss1", "rockyBackground", 0.2f, false, false, false};
     _levelInfos["miniBoss2"] = LevelInfo{"miniBoss2", "rockyBackground", 0.2f, false, false, false};
     _levelInfos["wetCave"] = LevelInfo{"level2", "rockyBackground", 0.2f, true, true, false};
-    _levelInfos["lavaCave"] = LevelInfo{"level3", "lavaBackground", 0.2f, true, false, true};
+    _levelInfos["lavaCave"] = LevelInfo{"level3", "lavaBackground", 0.3f, true, false, true};
     _map = 0;
     _spawner = 0;
     _grass = 0;

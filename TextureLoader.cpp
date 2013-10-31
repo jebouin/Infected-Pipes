@@ -39,6 +39,7 @@ TextureLoader::TextureLoader(IP& ip) {
     AddTexture("nightBackground.png", "nightBackground");
     AddTexture("rockyBackground.png", "rockyBackground");
     AddTexture("lavaBackground.png", "lavaBackground");
+    AddTexture("lavaBackground2.png", "lavaBackground2");
     AddTexture("lifeBar.png", "lifeBar");
     AddTexture("lifeBarBorder.png", "lifeBarBorder");
     AddTexture("xpBar.png", "xpBar");

@@ -52,6 +52,10 @@ Background::Background(IP& ip, string name, float zoom, Level& level) : _level(l
         moon.setPosition(sf::Vector2f(ip._renderer->GetTexture().getSize().x/4.f*3.f, ip._renderer->GetTexture().getSize().y/4.f));
         _backSprites2.push_back(moon);
     }
+
+    if(_name == "lavaBackground") {
+        _back2.setTexture(ip._textureLoader->GetTexture("lavaBackground2"));
+    }
 }
 
 Background::~Background() {
@@ -75,6 +79,21 @@ void Background::Draw(IP& ip, sf::View& prevView) {
     _view = sf::View(sf::FloatRect(0, 0, ip._renderer->GetTexture().getSize().x, ip._renderer->GetTexture().getSize().y));
     _view.setCenter(prevView.getCenter()*_zoom + sf::Vector2f(ip._renderer->GetTexture().getSize().x, ip._renderer->GetTexture().getSize().y)/2.f);
     sf::RenderTexture& t(ip._renderer->GetTexture());
+
+    if(_name == "lavaBackground") {
+        _view.setCenter(sf::Vector2f(_view.getCenter().x / 2.f, _view.getCenter().y / 2.f));
+        t.setView(_view);
+        sf::FloatRect r2 = MathHelper::View2Rect(_view);
+        sf::IntRect tr2(_back2.getTextureRect());
+        for(int i=r2.left/tr2.width-1 ; i<(r2.left+r2.width)/tr2.width+1 ; i++) {
+            for(int j=r2.top/tr2.height-1 ; j<(r2.top+r2.height)/tr2.height+1 ; j++) {
+                _back2.setPosition(sf::Vector2f(_back2.getTextureRect().width*i, _back2.getTextureRect().height*j));
+                ip._renderer->Draw(_back2);
+            }
+        }
+    }
+
+    _view.setCenter(prevView.getCenter()*_zoom + sf::Vector2f(ip._renderer->GetTexture().getSize().x, ip._renderer->GetTexture().getSize().y)/2.f);
     t.setView(_view);
     sf::FloatRect r = MathHelper::View2Rect(_view);
     sf::IntRect tr(_back.getTextureRect());
