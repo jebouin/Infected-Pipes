@@ -34,7 +34,7 @@
 	"Game.h"
 	"MathHelper.h"
 
-1383209452 source:c:\users\xaychru04\desktop\infected pipes\textureloader.cpp
+1383210944 source:c:\users\xaychru04\desktop\infected pipes\textureloader.cpp
 	"TextureLoader.h"
 	"IP.h"
 
@@ -155,7 +155,7 @@
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1381068994 c:\users\xaychru04\desktop\infected pipes\mathhelper.h
+1383212128 c:\users\xaychru04\desktop\infected pipes\mathhelper.h
 	<iostream>
 	<cmath>
 	<sstream>
@@ -167,7 +167,7 @@
 	"IP.h"
 	"Renderer.h"
 
-1383209622 source:c:\users\xaychru04\desktop\infected pipes\level.cpp
+1383212408 source:c:\users\xaychru04\desktop\infected pipes\level.cpp
 	"Level.h"
 	"IP.h"
 	"Map.h"
@@ -225,7 +225,7 @@
 	"TextureLoader.h"
 	"MathHelper.h"
 
-1383209565 source:c:\users\xaychru04\desktop\infected pipes\background.cpp
+1383209843 source:c:\users\xaychru04\desktop\infected pipes\background.cpp
 	"Background.h"
 	"IP.h"
 	"TextureLoader.h"
@@ -458,7 +458,7 @@
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1383080830 source:c:\users\xaychru04\desktop\infected pipes\bullets\bullet.cpp
+1383212598 source:c:\users\xaychru04\desktop\infected pipes\bullets\bullet.cpp
 	"Bullet.h"
 	"TextureLoader.h"
 	"IP.h"
@@ -579,7 +579,7 @@
 	"SFML/System.hpp"
 	"Weapon.h"
 
-1382959801 source:c:\users\xaychru04\desktop\infected pipes\weapons\bow.cpp
+1383211600 source:c:\users\xaychru04\desktop\infected pipes\weapons\bow.cpp
 	"Bow.h"
 	"IP.h"
 	"GameEntity.h"
@@ -831,7 +831,7 @@
 	"BulletManager.h"
 	"Renderer.h"
 
-1383080109 c:\users\xaychru04\desktop\infected pipes\entities\character.h
+1383212994 c:\users\xaychru04\desktop\infected pipes\entities\character.h
 	<vector>
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
@@ -855,7 +855,7 @@
 	"SFML/System.hpp"
 	"GameEntity.h"
 
-1383080109 source:c:\users\xaychru04\desktop\infected pipes\entities\character.cpp
+1383213604 source:c:\users\xaychru04\desktop\infected pipes\entities\character.cpp
 	"Character.h"
 	"IP.h"
 	"Animation.h"
@@ -871,6 +871,7 @@
 	"Renderer.h"
 	"Weapon.h"
 	"Bow.h"
+	"ShotGun.h"
 	"Particle.h"
 	"TextureLoader.h"
 	"GUI.h"
@@ -1254,4 +1255,37 @@
 	<iostream>
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
+
+1383213246 source:c:\users\xaychru04\desktop\infected pipes\bullets\gunbullet.cpp
+	"GunBullet.h"
+	"IP.h"
+	"Character.h"
+	"Level.h"
+	"EntityManager.h"
+	"ParticleManager.h"
+	"MathHelper.h"
+	"AnimationTable.h"
+	"Animation.h"
+	"Particle.h"
+
+1383211600 c:\users\xaychru04\desktop\infected pipes\bullets\gunbullet.h
+	<iostream>
+	"SFML/Graphics.hpp"
+	"SFML/System.hpp"
+	"Bullet.h"
+
+1383211600 c:\users\xaychru04\desktop\infected pipes\weapons\shotgun.h
+	<iostream>
+	"SFML/Graphics.hpp"
+	"SFML/System.hpp"
+	"Weapon.h"
+
+1383213714 source:c:\users\xaychru04\desktop\infected pipes\weapons\shotgun.cpp
+	"Shotgun.h"
+	"IP.h"
+	"GameEntity.h"
+	"BulletManager.h"
+	"GunBullet.h"
+	"MathHelper.h"
+	"Renderer.h"
 

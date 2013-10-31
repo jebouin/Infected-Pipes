@@ -55,6 +55,7 @@ TextureLoader::TextureLoader(IP& ip) {
     AddTexture("arrow.png", "arrow");
     AddTexture("laser.png", "laser");
     AddTexture("fireBallBullet.png", "fireBallBullet");
+    AddTexture("bullet.png", "bullet");
 
     AddTexture("blood0.png", "blood0");
     AddTexture("blood1.png", "blood1");

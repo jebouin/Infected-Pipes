@@ -13,14 +13,16 @@
 #include "Renderer.h"
 #include "Weapon.h"
 #include "Bow.h"
+#include "ShotGun.h"
 #include "Particle.h"
 #include "TextureLoader.h"
 #include "GUI.h"
 
 Character::Character(IP& ip) : GameEntity(ip, "character", sf::IntRect(4, 3, 7, 26), 10) {
-    _arms[EMPTY] = Arm {sf::IntRect(0, 0, 6, 9), sf::Vector2f(2, 1), sf::Vector2f(5, 6)};
-    _arms[RAINBOW] = Arm {sf::IntRect(0, 9, 15, 9), sf::Vector2f(4, 1), sf::Vector2f(2, 2)};
-    _arms[BOW] = Arm {sf::IntRect(0, 18, 10, 17), sf::Vector2f(2, 3), sf::Vector2f(4, 4)};
+    _arms[EMPTY] = Arm {sf::IntRect(0, 0, 6, 9), sf::Vector2f(2, 1), sf::Vector2f(5, 6), 0};
+    _arms[RAINBOW] = Arm {sf::IntRect(0, 9, 15, 9), sf::Vector2f(4, 1), sf::Vector2f(2, 2), 0};
+    _arms[BOW] = Arm {sf::IntRect(0, 18, 10, 17), sf::Vector2f(2, 3), sf::Vector2f(4, 4), 0};
+    _arms[SHOTGUN] = Arm{sf::IntRect(0, 35, 21, 10), sf::Vector2f(3, 1), sf::Vector2f(17, 4), -90};
 
     SetWeight(0.5f);
     AnimationTable& t(GetAnims());
@@ -34,10 +36,10 @@ Character::Character(IP& ip) : GameEntity(ip, "character", sf::IntRect(4, 3, 7, 
     _xp = 0;
     _nextXP = 10;
 
-    _weapon = new Bow(ip, (const GameEntity&)*this, sf::Vector2f(4, 1));
+    _weapon = new Shotgun(ip, (const GameEntity&)*this, sf::Vector2f(0, 0));
 
     _arm.setTexture(ip._textureLoader->GetTexture("arms"));
-    LoadArm(BOW);
+    LoadArm(SHOTGUN);
 
     SetAutoDir(false);
     SetCollisionPrecision(.05);
@@ -51,10 +53,9 @@ Character::~Character() {
 void Character::Update(IP& ip, float eTime, Level& level, EntityManager& eManager, ParticleManager& pManager, BulletManager& bManager) {
     sf::Vector2f mpos = MathHelper::GetMousePos(ip);
     AnimationTable& t(GetAnims());
-    _weapon->SetRelPosition(_arm.getPosition()-GetGlobalUpperLeftPos()+_arms[_curArmType]._bulletPos);
 
     if(_enteringPipe) {
-        _arm.setRotation(0);
+        _arm.setRotation(_arms[_curArmType]._onPipeRotation);
         SetVel(sf::Vector2f(0, 0.1));
         MovingSprite::Update(ip, eTime);
         if(_enterTimer.getElapsedTime().asMilliseconds() > 500) {
@@ -64,7 +65,7 @@ void Character::Update(IP& ip, float eTime, Level& level, EntityManager& eManage
             _enterTimer.restart();
         }
     } else if (_leavingPipe) {
-        _arm.setRotation(0);
+        _arm.setRotation(_arms[_curArmType]._onPipeRotation);
         SetVel(sf::Vector2f(0, 0.1));
         MovingSprite::Update(ip, eTime);
         if(!level.GetSpawner().IsCollided(*this)) {
@@ -104,6 +105,16 @@ void Character::Update(IP& ip, float eTime, Level& level, EntityManager& eManage
         }
         _arm.setPosition(GetGlobalUpperLeftPos() + sf::Vector2f(getLocalBounds().width-4, 12) + framed);
     }
+
+    float l = MathHelper::GetVecLength(_arms[_curArmType]._bulletPos);
+    float a = MathHelper::Rad2Deg(MathHelper::Vec2Ang(_arms[_curArmType]._bulletPos));
+    if(!GetDir()) {
+        a *= -1;
+        a -= 180;
+    }
+    sf::Vector2f newRelPos = MathHelper::Ang2Vec(MathHelper::Deg2Rad(a+_arm.getRotation()))*l;
+    _weapon->SetRelPosition(_arm.getPosition() - GetGlobalUpperLeftPos() + newRelPos/*+ _arms[_curArmType]._bulletPos*/);
+
     _weapon->Update(ip, eTime, bManager);
 }
 

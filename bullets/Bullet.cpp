@@ -112,6 +112,9 @@ void Bullet::TestCollisions(IP& ip, float eTime, Level& level, sf::Vector2f delt
 }
 
 void Bullet::Impact(GameEntity& entity, IP& ip, ParticleManager& pManager, sf::Color color, EntityManager& eManager, Level& level) {
+    if(!entity.IsAlive()) {
+        return;
+    }
     _dying = true;
     _instantDie = true;
     _deadTimer.restart();

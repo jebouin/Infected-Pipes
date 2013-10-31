@@ -24,11 +24,12 @@ struct Arm {
     sf::IntRect _textureRect;
     sf::Vector2f _origin;
     sf::Vector2f _bulletPos;
+    float _onPipeRotation;
 };
 
 class Character : public GameEntity {
     public:
-    enum ArmType {EMPTY, RAINBOW, BOW};
+    enum ArmType {EMPTY, RAINBOW, BOW, SHOTGUN};
 
     Character(IP& ip);
     ~Character();
