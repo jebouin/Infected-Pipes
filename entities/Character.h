@@ -60,6 +60,7 @@ class Character : public GameEntity {
     ArmType _curArmType;
 
     Weapon *_weapon;
+    Weapon *_sWeapon;
     sf::Sprite _arm;
 
     map<ArmType, Arm> _arms;

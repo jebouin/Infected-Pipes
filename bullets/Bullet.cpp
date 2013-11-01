@@ -12,7 +12,7 @@
 #include "Ennemy.h"
 #include "MathHelper.h"
 
-Bullet::Bullet(IP& ip, string name, sf::IntRect hitbox, sf::Vector2f position, sf::Vector2f vel, int damage, float knockBack, bool animated, bool ennemy, bool gravity, bool instantDie, bool sticky)
+Bullet::Bullet(IP& ip, string name, sf::IntRect hitbox, sf::Vector2f position, sf::Vector2f vel, int damage, float knockBack, bool animated, bool ennemy, bool gravity, bool instantDie, bool sticky, bool dieOnWall, bool bounce)
     : MovingSprite(ip, name, hitbox, animated) {
     setPosition(position);
     SetVel(vel);
@@ -25,6 +25,8 @@ Bullet::Bullet(IP& ip, string name, sf::IntRect hitbox, sf::Vector2f position, s
     _sticky = sticky;
     _inWater = false;
     _knockBack = knockBack;
+    _dieOnWall = dieOnWall;
+    _bounce = bounce;
 }
 
 Bullet::~Bullet() {
@@ -57,19 +59,23 @@ void Bullet::Update(IP& ip, float eTime, Level& level, Character& character, Par
     }
 
     if(!_dying) {
-        MovingSprite::Update(ip, eTime);
+        if(!_bounce) {
+            MovingSprite::Update(ip, eTime);
+        }
         TestCollisions(ip, eTime, level, GetVel()*eTime);
         WaterCollision(level, GetVel()*eTime, pManager, ip);
-        if(_ennemy) {
-            if(GetGlobalHitbox().intersects(character.GetGlobalHitbox())) {
-                Impact((GameEntity&)(character), ip, pManager, sf::Color(255, 0, 0), eManager, level);
-            }
-        } else {
-            for(int i=0 ; i<eManager.GetNbEnnemies() ; i++) {
-                Ennemy *e = eManager.GetEnnemy(i);
-                if(e->GetGlobalHitbox().intersects(GetGlobalHitbox())) {
-                    Impact((GameEntity&)(*e), ip, pManager, sf::Color(255, 255, 0), eManager, level);
-                    break;
+        if(_collisionWithEnnemies) {
+            if(_ennemy) {
+                if(GetGlobalHitbox().intersects(character.GetGlobalHitbox())) {
+                    Impact((GameEntity&)(character), ip, pManager, sf::Color(255, 0, 0), eManager, level);
+                }
+            } else {
+                for(int i=0 ; i<eManager.GetNbEnnemies() ; i++) {
+                    Ennemy *e = eManager.GetEnnemy(i);
+                    if(e->GetGlobalHitbox().intersects(GetGlobalHitbox())) {
+                        Impact((GameEntity&)(*e), ip, pManager, sf::Color(255, 255, 0), eManager, level);
+                        break;
+                    }
                 }
             }
         }
@@ -97,16 +103,38 @@ void Bullet::TestCollisions(IP& ip, float eTime, Level& level, sf::Vector2f delt
         return;
     }
 
-    if(level.GetMap().IsCollided(*this, GetGlobalUpperLeftPos()+delta, Map::WALL) || level.GetSpawner().IsCollided(*this, GetGlobalUpperLeftPos()+delta)) {
-        _dying = true;
-        _deadTimer.restart();
-        setPosition(getPosition() + delta);
-    }
-    if(GetVel().y >= 0 && !((int)(GetGlobalHitbox().top + GetGlobalHitbox().height + delta.y)%16 > 3) && _gravity) {
-        if(level.GetMap().IsOnTileType(*this, GetGlobalUpperLeftPos()+delta, Map::PLATFORM)) {
-            _dying = true;
-            _deadTimer.restart();
-            setPosition(getPosition() + delta);
+    if(_bounce) {
+        static float p = .01f;
+        if(!TryMove(delta, level)) {
+            for(float i=p ; i<MathHelper::ABS(delta.x)-p ; i+=p) {
+                if(!TryMove(sf::Vector2f(MathHelper::SGN(delta.x)/(1./p), 0), level)) {
+                    SetVel(sf::Vector2f(-GetVel().x*.5, GetVel().y));
+                    //SetRotVel(GetRotVel()/2.f);
+                    break;
+                }
+            }
+            for(float i=p ; i<MathHelper::ABS(delta.y)-p ; i+=p) {
+                if(!TryMove(sf::Vector2f(0, MathHelper::SGN(delta.y)/(1./p)), level)) {
+                    SetVel(sf::Vector2f(GetVel().x, -GetVel().y*.5));
+                    //SetRotVel(GetRotVel()/2.f);
+                    break;
+                }
+            }
+
+            if(_dieOnWall) {
+                _dying = true;
+                _deadTimer.restart();
+            }
+        } else {
+
+        }
+    } else {
+        if(level.GetMap().IsCollided(*this, GetGlobalUpperLeftPos()+delta, Map::WALL) || level.GetSpawner().IsCollided(*this, GetGlobalUpperLeftPos()+delta)) {
+            if(_dieOnWall) {
+                _dying = true;
+                _deadTimer.restart();
+                //setPosition(getPosition() + delta);
+            }
         }
     }
 }
@@ -130,6 +158,14 @@ bool Bullet::IsAlive() const {
 
 bool Bullet::IsDying() const {
     return _dying;
+}
+
+bool Bullet::CollisionWithEnnemies() const {
+    return _collisionWithEnnemies;
+}
+
+void Bullet::SetCollisionWithEnnemies(bool c) {
+    _collisionWithEnnemies = c;
 }
 
 bool Bullet::Die() {

@@ -7,9 +7,7 @@
 #include "Scene.h"
 
 class IP;
-class Map;
-class Grass;
-class Background;
+class MainMenuBackground;
 
 class MainMenu : public Scene {
 public:
@@ -19,10 +17,8 @@ public:
     void Draw(IP& ip);
 
 private:
-    Map *_map;
-    Grass *_grass;
-    Background *_background;
-    sf::View *_view;
+    sf::Sprite _title;
+    MainMenuBackground *_background;
 };
 
 #endif //MAINMENU_H_INCLUDED

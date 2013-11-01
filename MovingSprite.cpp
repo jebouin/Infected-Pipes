@@ -26,6 +26,7 @@ MovingSprite::MovingSprite(IP& ip, string name, bool animated) : sf::Sprite() {
     _collidesWithPlatform = true;
     _collidesWithWater = true;
     _collisionPrecision = .2;
+    _bounce = false;
 }
 
 MovingSprite::MovingSprite(IP& ip, string name, sf::IntRect hitbox, bool animated) {
@@ -43,6 +44,7 @@ MovingSprite::MovingSprite(IP& ip, string name, sf::IntRect hitbox, bool animate
     _collidesWithPlatform = true;
     _collidesWithWater = true;
     _collisionPrecision = .2;
+    _bounce = false;
 }
 
 MovingSprite::~MovingSprite() {
@@ -97,6 +99,9 @@ void MovingSprite::MoveCollidingMap(sf::Vector2f delta, Level& level) {
     }
     float p = _collisionPrecision;
     if(!TryMove(delta, level)) {
+        /*if(_bounce) {
+            SetVel(-GetVel());
+        }*/
         for(float i=p ; i<MathHelper::ABS(delta.x)-p ; i+=p) {
             if(!TryMove(sf::Vector2f(MathHelper::SGN(delta.x)/(1./p), 0), level)) {
                 SetVel(sf::Vector2f(0, GetVel().y));
@@ -189,6 +194,10 @@ bool MovingSprite::OnPlatform() {
     return _onPlatform;
 }
 
+bool MovingSprite::GetBounce() {
+    return _bounce;
+}
+
 void MovingSprite::SetVel(sf::Vector2f vel) {
     _vel = vel;
 }
@@ -224,4 +233,8 @@ void MovingSprite::SetCollideWithWater(bool c) {
 
 void MovingSprite::SetCollisionPrecision(float p) {
     _collisionPrecision = p;
+}
+
+void MovingSprite::SetBounce(bool b) {
+    _bounce = b;
 }

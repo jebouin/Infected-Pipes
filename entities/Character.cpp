@@ -14,6 +14,7 @@
 #include "Weapon.h"
 #include "Bow.h"
 #include "ShotGun.h"
+#include "grenadeLauncher.h"
 #include "Particle.h"
 #include "TextureLoader.h"
 #include "GUI.h"
@@ -22,7 +23,7 @@ Character::Character(IP& ip) : GameEntity(ip, "character", sf::IntRect(4, 3, 7, 
     _arms[EMPTY] = Arm {sf::IntRect(0, 0, 6, 9), sf::Vector2f(2, 1), sf::Vector2f(5, 6), 0};
     _arms[RAINBOW] = Arm {sf::IntRect(0, 9, 15, 9), sf::Vector2f(4, 1), sf::Vector2f(2, 2), 0};
     _arms[BOW] = Arm {sf::IntRect(0, 18, 10, 17), sf::Vector2f(2, 3), sf::Vector2f(4, 4), 0};
-    _arms[SHOTGUN] = Arm{sf::IntRect(0, 35, 21, 10), sf::Vector2f(5, 1), sf::Vector2f(10, 4), -90};
+    _arms[SHOTGUN] = Arm{sf::IntRect(0, 35, 21, 10), sf::Vector2f(5, 1), sf::Vector2f(6, 4), -90};
 
     SetWeight(0.5f);
     AnimationTable& t(GetAnims());
@@ -37,6 +38,7 @@ Character::Character(IP& ip) : GameEntity(ip, "character", sf::IntRect(4, 3, 7, 
     _nextXP = 10;
 
     _weapon = new Shotgun(ip, (const GameEntity&)*this, sf::Vector2f(0, 0));
+    _sWeapon = new GrenadeLauncher(ip, (const GameEntity&)*this, sf::Vector2f(0, 0));
 
     _arm.setTexture(ip._textureLoader->GetTexture("arms"));
     LoadArm(SHOTGUN);
@@ -48,6 +50,8 @@ Character::Character(IP& ip) : GameEntity(ip, "character", sf::IntRect(4, 3, 7, 
 Character::~Character() {
     delete _weapon;
     _weapon = 0;
+    delete _sWeapon;
+    _sWeapon = 0;
 }
 
 void Character::Update(IP& ip, float eTime, Level& level, EntityManager& eManager, ParticleManager& pManager, BulletManager& bManager) {
@@ -77,6 +81,9 @@ void Character::Update(IP& ip, float eTime, Level& level, EntityManager& eManage
         float r = MathHelper::Rad2Deg(MathHelper::Vec2Ang(mpos-_arm.getPosition()));
         if(sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
             _weapon->Use(ip, bManager, r);
+        }
+        if(sf::Mouse::isButtonPressed(sf::Mouse::Right)) {
+            _sWeapon->Use(ip, bManager, r);
         }
         if(!GetDir()) {
             _arm.setScale(-1, 1);
@@ -115,6 +122,8 @@ void Character::Update(IP& ip, float eTime, Level& level, EntityManager& eManage
     sf::Vector2f newRelPos = MathHelper::Ang2Vec(MathHelper::Deg2Rad(a+_arm.getRotation()))*l;
     _weapon->SetRelPosition(_arm.getPosition() - GetGlobalUpperLeftPos() + newRelPos/*+ _arms[_curArmType]._bulletPos*/);
     _weapon->Update(ip, eTime, bManager);
+    _sWeapon->SetRelPosition(_arm.getPosition() - GetGlobalUpperLeftPos() + newRelPos/*+ _arms[_curArmType]._bulletPos*/);
+    _sWeapon->Update(ip, eTime, bManager);
 
     if(_regenTimer.getElapsedTime().asMilliseconds() >= 100) {
         _regenTimer.restart();

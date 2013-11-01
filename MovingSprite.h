@@ -33,6 +33,7 @@ class MovingSprite : public sf::Sprite {
     bool OnPlatform();
     bool IsInWater(Level& level);
     bool GetCollidesWithWater();
+    bool GetBounce();
     void SetVel(sf::Vector2f vel);
     void Accelerate(sf::Vector2f vec, float eTime);
     void SetRotVel(float rotVel);
@@ -42,6 +43,7 @@ class MovingSprite : public sf::Sprite {
     void SetCollideOnPlatform(bool c);
     void SetCollideWithWater(bool c);
     void SetCollisionPrecision(float p);
+    void SetBounce(bool b);
 
     protected:
     void WaterCollision(Level& l, sf::Vector2f deltaPos, ParticleManager& pManager, IP& ip);
@@ -58,6 +60,7 @@ class MovingSprite : public sf::Sprite {
     bool _collidesWithPlatform;
     bool _collidesWithWater;
     bool _animated;
+    bool _bounce;
 
     sf::ConvexShape _box;
 };

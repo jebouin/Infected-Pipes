@@ -49,13 +49,12 @@ TextureLoader::TextureLoader(IP& ip) {
     AddTexture("difficultyIndicator.png", "difficultyIndicator");
     AddTexture("chest.png", "chest");
 
-    AddTexture("bow.png", "bow");
-
     AddTexture("littleRockBullet.png", "littleRockBullet");
     AddTexture("arrow.png", "arrow");
     AddTexture("laser.png", "laser");
     AddTexture("fireBallBullet.png", "fireBallBullet");
     AddTexture("bullet.png", "bullet");
+    AddTexture("grenade.png", "grenade");
 
     AddTexture("blood0.png", "blood0");
     AddTexture("blood1.png", "blood1");
@@ -78,6 +77,7 @@ TextureLoader::TextureLoader(IP& ip) {
     AddTexture("fireParticle.png", "fireParticle");
     AddTexture("fireParticle2.png", "fireParticle2");
     AddTexture("explosion.png", "explosion");
+    AddTexture("bigExplosion.png", "bigExplosion");
     AddTexture("emberParticle.png", "emberParticle");
     AddTexture("turtleParticle.png", "turtleParticle");
     AddTexture("turtleParticle2.png", "turtleParticle2");
@@ -89,6 +89,7 @@ TextureLoader::TextureLoader(IP& ip) {
     AddTexture("stars.png", "stars");
     AddTexture("falls.png", "falls");
     AddTexture("bigFalls.png", "bigFalls");
+    AddTexture("title.png", "title");
 
     AddTexture("arms.png", "arms");
 }

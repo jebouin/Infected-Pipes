@@ -14,8 +14,8 @@
 #include "MathHelper.h"
 
 IP::IP() {
-    //_window = new sf::RenderWindow(sf::VideoMode(1600, 900, 32), "Infected Pipes");
-    _window = new sf::RenderWindow(sf::VideoMode::getFullscreenModes()[0], "Infected Pipes", sf::Style::None);
+    _window = new sf::RenderWindow(sf::VideoMode(1600, 900, 32), "Infected Pipes");
+    //_window = new sf::RenderWindow(sf::VideoMode::getFullscreenModes()[0], "Infected Pipes", sf::Style::None);
     _window->setVerticalSyncEnabled(true);
     _window->setFramerateLimit(60);
     _window->setMouseCursorVisible(false);
@@ -34,8 +34,8 @@ IP::IP() {
 
     _textureLoader = new TextureLoader(*this);
     _window->setActive(true);
-    _sceneManager->AddScene(new MainMenu(*this));
-    //_sceneManager->AddScene(new Game(*this));
+    //_sceneManager->AddScene(new MainMenu(*this));
+    _sceneManager->AddScene(new Game(*this));
     _focused = true;
 
     while(_window->isOpen()) {
