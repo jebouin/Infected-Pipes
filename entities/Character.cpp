@@ -59,7 +59,7 @@ void Character::Update(IP& ip, float eTime, Level& level, EntityManager& eManage
     AnimationTable& t(GetAnims());
 
     if(_enteringPipe) {
-        _arm.setRotation(_arms[_curArmType]._onPipeRotation);
+        _arm.setRotation(_arms[_curArmType]._onPipeRotation + (GetDir() ? 0 : 180));
         SetVel(sf::Vector2f(0, 0.1));
         MovingSprite::Update(ip, eTime);
         if(_enterTimer.getElapsedTime().asMilliseconds() > 500) {
@@ -69,7 +69,7 @@ void Character::Update(IP& ip, float eTime, Level& level, EntityManager& eManage
             _enterTimer.restart();
         }
     } else if (_leavingPipe) {
-        _arm.setRotation(_arms[_curArmType]._onPipeRotation);
+        _arm.setRotation(_arms[_curArmType]._onPipeRotation + (GetDir() ? 0 : 180));
         SetVel(sf::Vector2f(0, 0.1));
         MovingSprite::Update(ip, eTime);
         if(!level.GetSpawner().IsCollided(*this)) {
