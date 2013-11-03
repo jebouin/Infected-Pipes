@@ -25,6 +25,7 @@ private:
     Grass *_grass;
     Background *_background;
     sf::View *_view;
+    sf::RenderTexture *_rt;
 };
 
 #endif // MAINMENUBACKGROUND_H_INCLUDED

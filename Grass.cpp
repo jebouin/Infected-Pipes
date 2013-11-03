@@ -36,6 +36,6 @@ void Grass::Update(IP& ip) {
     }
 }
 
-void Grass::Draw(IP& ip) {
-    ip._renderer->Draw(_grass);
+void Grass::Draw(sf::RenderTexture& rt) {
+    rt.draw(_grass);
 }

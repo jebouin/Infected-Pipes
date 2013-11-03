@@ -22,7 +22,7 @@ class Grass {
     Grass(IP& ip, Map& map);
     ~Grass();
     void Update(IP& ip);
-    void Draw(IP& ip);
+    void Draw(sf::RenderTexture& rt);
 
     private:
     sf::Clock _timer;

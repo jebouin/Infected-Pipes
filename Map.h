@@ -18,7 +18,7 @@ class Map {
 
     Map(IP& ip, sf::Vector2i size);
     ~Map();
-    void DrawLayer(IP& ip, Layer layer);
+    void DrawLayer(sf::RenderTexture& rt, Layer layer);
     bool IsOnMap(sf::Vector2i pos);
     int GetTile(sf::Vector2i pos, Layer layer);
     int GetTileType(int tileId);

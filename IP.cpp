@@ -34,8 +34,8 @@ IP::IP() {
 
     _textureLoader = new TextureLoader(*this);
     _window->setActive(true);
-    //_sceneManager->AddScene(new MainMenu(*this));
-    _sceneManager->AddScene(new Game(*this));
+    _sceneManager->AddScene(new MainMenu(*this));
+    //_sceneManager->AddScene(new Game(*this));
     _focused = true;
 
     while(_window->isOpen()) {

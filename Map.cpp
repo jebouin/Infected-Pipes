@@ -25,8 +25,8 @@ Map::~Map() {
 
 }
 
-void Map::DrawLayer(IP& ip, Layer l) {
-    sf::FloatRect vrect = MathHelper::View2Rect(ip._renderer->GetTexture().getView());
+void Map::DrawLayer(sf::RenderTexture& rt, Layer l) {
+    sf::FloatRect vrect = MathHelper::View2Rect(rt.getView());
     for(int i=vrect.left/16.f ; i<(vrect.left+vrect.width)/16.f ; i++) {
         for(int j=vrect.top/16.f ; j<(vrect.top+vrect.height)/16.f ; j++) {
             sf::Vector2i pos(i, j);
@@ -62,7 +62,7 @@ void Map::DrawLayer(IP& ip, Layer l) {
 
             _tileset.setPosition(sf::Vector2f(i, j)*16.f);
             _tileset.setTextureRect(sf::IntRect(tileX*16, GetTile(pos, l)*16, 16, 16));
-            ip._renderer->Draw(_tileset);
+            rt.draw(_tileset);
         }
     }
 }

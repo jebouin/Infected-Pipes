@@ -16,6 +16,8 @@ MainMenuBackground::MainMenuBackground(IP& ip) {
     _view->setCenter(sf::Vector2f(_view->getCenter().x, _map->GetSize().y*16.f - _view->getSize().y/2.f));
     _view->setCenter(sf::Vector2f(sf::Vector2i(_view->getCenter())));
     _background = new Background(ip, "nightBackground", 0., *_map);
+    _rt = new sf::RenderTexture();
+    _rt->create(ip._renderer->GetTexture().getSize().x, ip._renderer->GetTexture().getSize().y);
 }
 
 MainMenuBackground::~MainMenuBackground() {
@@ -27,18 +29,37 @@ MainMenuBackground::~MainMenuBackground() {
     _background = 0;
     delete _view;
     _view = 0;
+    delete _rt;
+    _rt = 0;
 }
 
 void MainMenuBackground::Update(IP& ip, float eTime) {
-    _view->move(eTime*0.02f, 0);
+    _view->move(eTime*0.05f, 0);
     _grass->Update(ip);
     _background->Update(ip, eTime);
 }
 
 void MainMenuBackground::Draw(IP& ip) {
+    _rt->clear(sf::Color(0, 0, 0, 0));
+    _map->DrawLayer(*_rt, Map::BACK);
+    _map->DrawLayer(*_rt, Map::FRONT);
+    _grass->Draw(*_rt);
+    _rt->display();
+
     ip._renderer->GetTexture().setView(*_view);
     _background->Draw(ip, *_view);
-    _map->DrawLayer(ip, Map::BACK);
-    _map->DrawLayer(ip, Map::FRONT);
-    _grass->Draw(ip);
+
+    if(_view->getCenter().x+_view->getSize().x/2.f >= 1024) {
+        sf::Sprite loopSprite;
+        loopSprite.setTexture(_rt->getTexture());
+        loopSprite.setPosition(sf::Vector2f(1024, 1));
+        ip._renderer->Draw(loopSprite);
+    }
+    if(_view->getCenter().x-_view->getSize().x/2.f >= 1024) {
+        _view->setCenter(sf::Vector2f(_view->getSize().x/2.f, _view->getCenter().y));
+    }
+
+    _map->DrawLayer(ip._renderer->GetTexture(), Map::BACK);
+    _map->DrawLayer(ip._renderer->GetTexture(), Map::FRONT);
+    _grass->Draw(ip._renderer->GetTexture());
 }

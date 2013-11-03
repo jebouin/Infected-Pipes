@@ -94,7 +94,7 @@ void Level::Update(IP& ip, EntityManager& eManager, Character& character, float 
 
 void Level::DrawBack(IP& ip, sf::View& prevView) {
     _background->Draw(ip, prevView);
-    _map->DrawLayer(ip, Map::BACK);
+    _map->DrawLayer(ip._renderer->GetTexture(), Map::BACK);
     for(int i=0 ; i<_waterFalls.size() ; i++) {
         _waterFalls[i]->Draw(ip);
     }
@@ -120,8 +120,8 @@ void Level::DrawFront(IP& ip) {
     ip._renderer->Draw(spt, &_lavaShader);
 
     _spawner->Draw(ip);
-    _map->DrawLayer(ip, Map::FRONT);
-    _grass->Draw(ip);
+    _map->DrawLayer(ip._renderer->GetTexture(), Map::FRONT);
+    _grass->Draw(ip._renderer->GetTexture());
 }
 
 Map& Level::GetMap() const {
