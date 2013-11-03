@@ -15,11 +15,11 @@
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1383227535 c:\users\xaychru04\desktop\infected pipes\ip.h
+1383489281 c:\users\xaychru04\desktop\infected pipes\ip.h
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1383412249 source:c:\users\xaychru04\desktop\infected pipes\ip.cpp
+1383487850 source:c:\users\xaychru04\desktop\infected pipes\ip.cpp
 	"IP.h"
 	"Renderer.h"
 	"TextureLoader.h"
@@ -34,6 +34,7 @@
 	"Game.h"
 	"MainMenu.h"
 	"MathHelper.h"
+	"ShaderManager.h"
 
 1383323351 source:c:\users\xaychru04\desktop\infected pipes\textureloader.cpp
 	"TextureLoader.h"
@@ -168,7 +169,7 @@
 	"IP.h"
 	"Renderer.h"
 
-1383472865 source:c:\users\xaychru04\desktop\infected pipes\level.cpp
+1383474656 source:c:\users\xaychru04\desktop\infected pipes\level.cpp
 	"Level.h"
 	"IP.h"
 	"Map.h"
@@ -226,7 +227,7 @@
 	"TextureLoader.h"
 	"MathHelper.h"
 
-1383243831 source:c:\users\xaychru04\desktop\infected pipes\background.cpp
+1383483638 source:c:\users\xaychru04\desktop\infected pipes\background.cpp
 	"Background.h"
 	"IP.h"
 	"TextureLoader.h"
@@ -234,7 +235,7 @@
 	"MathHelper.h"
 	"Map.h"
 
-1383229879 c:\users\xaychru04\desktop\infected pipes\background.h
+1383474338 c:\users\xaychru04\desktop\infected pipes\background.h
 	<iostream>
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
@@ -1301,7 +1302,7 @@
 	"Renderer.h"
 	"TextureLoader.h"
 
-1383470651 source:c:\users\xaychru04\desktop\infected pipes\mainmenubackground.cpp
+1383483638 source:c:\users\xaychru04\desktop\infected pipes\mainmenubackground.cpp
 	"MainMenuBackground.h"
 	"IP.h"
 	"Map.h"
@@ -1310,7 +1311,7 @@
 	"Renderer.h"
 	"TextureLoader.h"
 
-1383470565 c:\users\xaychru04\desktop\infected pipes\mainmenubackground.h
+1383483638 c:\users\xaychru04\desktop\infected pipes\mainmenubackground.h
 	<iostream>
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
@@ -1347,4 +1348,13 @@
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 	"Weapon.h"
+
+1383487907 c:\users\xaychru04\desktop\infected pipes\shadermanager.h
+	<iostream>
+	<vector>
+	"SFML/Graphics.hpp"
+	"SFML/System.hpp"
+
+1383489281 source:c:\users\xaychru04\desktop\infected pipes\shadermanager.cpp
+	"ShaderManager.h"
 

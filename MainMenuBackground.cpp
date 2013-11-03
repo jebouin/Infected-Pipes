@@ -18,6 +18,8 @@ MainMenuBackground::MainMenuBackground(IP& ip) {
     _background = new Background(ip, "nightBackground", 0., *_map);
     _rt = new sf::RenderTexture();
     _rt->create(ip._renderer->GetTexture().getSize().x, ip._renderer->GetTexture().getSize().y);
+
+
 }
 
 MainMenuBackground::~MainMenuBackground() {
@@ -34,20 +36,20 @@ MainMenuBackground::~MainMenuBackground() {
 }
 
 void MainMenuBackground::Update(IP& ip, float eTime) {
-    _view->move(eTime*0.05f, 0);
+    _view->move(eTime*0.15f, 0);
     _grass->Update(ip);
     _background->Update(ip, eTime);
 }
 
 void MainMenuBackground::Draw(IP& ip) {
     _rt->clear(sf::Color(0, 0, 0, 0));
+    _rt->setView(_rt->getDefaultView());
     _map->DrawLayer(*_rt, Map::BACK);
     _map->DrawLayer(*_rt, Map::FRONT);
     _grass->Draw(*_rt);
     _rt->display();
 
-    ip._renderer->GetTexture().setView(*_view);
-    _background->Draw(ip, *_view);
+    _background->Draw(ip._renderer->GetTexture(), *_view);
 
     if(_view->getCenter().x+_view->getSize().x/2.f >= 1024) {
         sf::Sprite loopSprite;

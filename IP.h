@@ -7,6 +7,7 @@
 class Renderer;
 class TextureLoader;
 class SceneManager;
+class ShaderManager;
 
 class IP {
     public:
@@ -19,11 +20,13 @@ class IP {
     TextureLoader *_textureLoader;
     sf::RenderWindow *_window;
     SceneManager *_sceneManager;
+    //ShaderManager *_shaderManager;
     sf::Font _font;
 
     private:
     sf::Clock _clock;
     bool _focused;
+    //sf::Shader _test;
 };
 
 #endif // IP_H_INCLUDED

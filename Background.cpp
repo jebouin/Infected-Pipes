@@ -72,44 +72,43 @@ void Background::Update(IP& ip, float elapsedTime) {
     }
 }
 
-void Background::Draw(IP& ip, const sf::View& prevView) {
-    _view = sf::View(sf::FloatRect(0, 0, ip._renderer->GetTexture().getSize().x, ip._renderer->GetTexture().getSize().y));
-    _view.setCenter(prevView.getCenter()*_zoom + sf::Vector2f(ip._renderer->GetTexture().getSize().x, ip._renderer->GetTexture().getSize().y)/2.f);
-    sf::RenderTexture& t(ip._renderer->GetTexture());
+void Background::Draw(sf::RenderTexture& rt, const sf::View& prevView) {
+    _view = sf::View(sf::FloatRect(0, 0, rt.getSize().x, rt.getSize().y));
+    _view.setCenter(prevView.getCenter()*_zoom + sf::Vector2f(rt.getSize().x, rt.getSize().y)/2.f);
 
     if(_name == "lavaBackground") {
         _view.setCenter(sf::Vector2f(_view.getCenter().x / 2.f, _view.getCenter().y / 2.f));
-        t.setView(_view);
+        rt.setView(_view);
         sf::FloatRect r2 = MathHelper::View2Rect(_view);
         sf::IntRect tr2(_back2.getTextureRect());
         for(int i=r2.left/tr2.width-1 ; i<(r2.left+r2.width)/tr2.width+1 ; i++) {
             for(int j=r2.top/tr2.height-1 ; j<(r2.top+r2.height)/tr2.height+1 ; j++) {
                 _back2.setPosition(sf::Vector2f(_back2.getTextureRect().width*i, _back2.getTextureRect().height*j));
-                ip._renderer->Draw(_back2);
+                rt.draw(_back2);
             }
         }
     }
 
-    _view.setCenter(prevView.getCenter()*_zoom + sf::Vector2f(ip._renderer->GetTexture().getSize().x, ip._renderer->GetTexture().getSize().y)/2.f);
-    t.setView(_view);
+    _view.setCenter(prevView.getCenter()*_zoom + sf::Vector2f(rt.getSize().x, rt.getSize().y)/2.f);
+    rt.setView(_view);
     sf::FloatRect r = MathHelper::View2Rect(_view);
     sf::IntRect tr(_back.getTextureRect());
     for(int i=r.left/tr.width-1 ; i<(r.left+r.width)/tr.width+1 ; i++) {
         for(int j=r.top/tr.height-1 ; j<(r.top+r.height)/tr.height+1 ; j++) {
             _back.setPosition(sf::Vector2f(_back.getTextureRect().width*i, _back.getTextureRect().height*j));
-            ip._renderer->Draw(_back);
+            rt.draw(_back);
         }
     }
 
     for(int i=0 ; i<_backSprites2.size() ; i++) {
-        ip._renderer->Draw(_backSprites2[i]);
+        rt.draw(_backSprites2[i]);
     }
 
-    _view.setCenter(sf::Vector2f(prevView.getCenter().x / 2.5f, prevView.getCenter().y));
-    t.setView(_view);
+    _view.setCenter(sf::Vector2f(prevView.getCenter().x / 2., prevView.getCenter().y));
+    rt.setView(_view);
     for(int i=0 ; i<_backSprites.size() ; i++) {
-        ip._renderer->Draw(_backSprites[i]);
+        rt.draw(_backSprites[i]);
     }
 
-    t.setView(prevView);
+    rt.setView(prevView);
 }

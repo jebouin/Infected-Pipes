@@ -26,6 +26,7 @@ private:
     Background *_background;
     sf::View *_view;
     sf::RenderTexture *_rt;
+    vector<sf::Sprite> _trees;
 };
 
 #endif // MAINMENUBACKGROUND_H_INCLUDED

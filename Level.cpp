@@ -32,8 +32,8 @@ Level::Level(IP& ip, Character& character) {
     _grass = 0;
     _background = 0;
     _difficulty = 2;
-    Load(ip, "rockyCave", character);
-    character.setPosition(character.getPosition() + sf::Vector2f(0, 50));
+    Load(ip, "intro", character);
+    //character.setPosition(character.getPosition() + sf::Vector2f(0, 50));
     _lavaTexture.create(/*_map->GetSize().x*/64*16, /*_map->GetSize().y*/38*16);
     _lavaShader.loadFromFile("shaders/lava.frag", sf::Shader::Fragment);
 }
@@ -93,7 +93,7 @@ void Level::Update(IP& ip, EntityManager& eManager, Character& character, float 
 }
 
 void Level::DrawBack(IP& ip, sf::View& prevView) {
-    _background->Draw(ip, prevView);
+    _background->Draw(ip._renderer->GetTexture(), prevView);
     _map->DrawLayer(ip._renderer->GetTexture(), Map::BACK);
     for(int i=0 ; i<_waterFalls.size() ; i++) {
         _waterFalls[i]->Draw(ip);
@@ -115,7 +115,6 @@ void Level::DrawFront(IP& ip) {
     sf::Sprite spt;
     spt.setTexture(_lavaTexture.getTexture());
     _lavaShader.setParameter("texture", _lavaTexture.getTexture());
-    //_lavaShader.setParameter("r", sf::Vector2f(ip._renderer->GetTexture().getSize()));
     _lavaShader.setParameter("time", _timer.getElapsedTime().asSeconds());
     ip._renderer->Draw(spt, &_lavaShader);
 

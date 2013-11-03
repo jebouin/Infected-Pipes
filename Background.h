@@ -16,7 +16,7 @@ class Background {
     Background(IP& ip, string name, float zoom, Map& map);
     ~Background();
     void Update(IP& ip, float elapsedTime);
-    void Draw(IP& ip, const sf::View& prevView);
+    void Draw(sf::RenderTexture& rt, const sf::View& prevView);
 
     private:
     string _name;
