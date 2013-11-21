@@ -9,16 +9,17 @@
 #include "ParticleManager.h"
 #include "BulletManager.h"
 #include "GUI.h"
+#include "Camera.h"
 
 Player::Player(IP& ip, EntityManager& eManager) {
     _character = new Character(ip);
     _character->setPosition(sf::Vector2f(48, 32));
-    _view = new sf::View(sf::FloatRect(0, 0, ip._renderer->GetTexture().getSize().x, ip._renderer->GetTexture().getSize().y));
+    _camera = new Camera(sf::FloatRect(0, 0, ip._renderer->GetTexture().getSize().x, ip._renderer->GetTexture().getSize().y));
 }
 
 Player::~Player() {
-    delete _view;
-    _view = 0;
+    delete _camera;
+    _camera = 0;
     delete _character;
     _character = 0;
 }
@@ -48,24 +49,9 @@ void Player::Update(IP& ip, float eTime, Level& level, EntityManager& eManager, 
     }
 
     _character->Update(ip, eTime, level, eManager, pManager, bManager);
-    _view->setCenter(_character->getPosition());
+    _camera->Update(ip, eTime, level, *_character);
 
-    sf::FloatRect vrect = MathHelper::View2Rect(*_view);
-    if(vrect.left < 16) {
-        _view->setCenter(sf::Vector2f(_view->getSize().x/2.f+16, _view->getCenter().y));
-    }
-    if(vrect.left+vrect.width > map.GetSize().x*16.f-16) {
-        _view->setCenter(sf::Vector2f(map.GetSize().x*16.f - _view->getSize().x/2.f - 16, _view->getCenter().y));
-    }
-    if(vrect.top < 0) {
-        _view->setCenter(sf::Vector2f(_view->getCenter().x, _view->getSize().y/2.f));
-    }
-    if(vrect.top+vrect.height > map.GetSize().y*16.f) {
-        _view->setCenter(sf::Vector2f(_view->getCenter().x, map.GetSize().y*16.f - _view->getSize().y/2.f));
-    }
-
-    _view->setCenter(sf::Vector2f(sf::Vector2i(_view->getCenter())));
-    ip._renderer->GetTexture().setView(*_view);
+    ip._renderer->GetTexture().setView(*_camera);
 }
 
 void Player::Draw(IP& ip) {
@@ -73,13 +59,13 @@ void Player::Draw(IP& ip) {
 }
 
 sf::View& Player::GetView() {
-    return *_view;
+    return *_camera;
 }
 
 Character& Player::GetCharacter() {
     return *_character;
 }
 
-void Player::SetView(sf::View v) {
+/*void Player::SetView(sf::View v) {
     _view = new sf::View(v);
-}
+}*/

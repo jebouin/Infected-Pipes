@@ -15,6 +15,7 @@ class Level;
 class ParticleManager;
 class BulletManager;
 class GUI;
+class Camera;
 
 class Player {
     public:
@@ -24,10 +25,10 @@ class Player {
     void Draw(IP& ip);
     sf::View& GetView();
     Character& GetCharacter();
-    void SetView(sf::View v);
+    //void SetView(sf::View v);
 
     private:
-    sf::View *_view;
+    Camera *_camera;
     Character *_character;
 };
 
