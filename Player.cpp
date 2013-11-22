@@ -30,10 +30,13 @@ void Player::Update(IP& ip, float eTime, Level& level, EntityManager& eManager, 
     if(!_character->EnteringPipe()) {
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
             _character->GoRight(eTime);
+            _camera->GoRight();
         } else if(sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
             _character->GoLeft(eTime);
+            _camera->GoLeft();
         } else {
             _character->GetAnims().SetAnimation("idle");
+            _camera->GoCenter();
         }
 
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {

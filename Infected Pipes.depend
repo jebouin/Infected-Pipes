@@ -139,7 +139,7 @@
 	"DamageParticle.h"
 	"WaterField.h"
 
-1385064782 source:c:\users\xaychru04\desktop\infected pipes\player.cpp
+1385142897 source:c:\users\xaychru04\desktop\infected pipes\player.cpp
 	"Player.h"
 	"IP.h"
 	"Character.h"
@@ -1693,16 +1693,17 @@
 	<string>
 	<vector>
 
-1385064759 source:c:\users\xaychru04\desktop\infected pipes\camera.cpp
+1385144853 source:c:\users\xaychru04\desktop\infected pipes\camera.cpp
 	"Camera.h"
 	"IP.h"
 	"Character.h"
 	"Player.h"
 	"Level.h"
 	"Map.h"
-	"mathHelper.h"
+	"MathHelper.h"
+	"Spawner.h"
 
-1385064746 c:\users\xaychru04\desktop\infected pipes\camera.h
+1385144224 c:\users\xaychru04\desktop\infected pipes\camera.h
 	<iostream>
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
