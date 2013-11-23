@@ -27,12 +27,13 @@ Level::Level(IP& ip, Character& character) {
     _levelInfos["miniBoss2"] = LevelInfo{"miniBoss2", "rockyBackground", 0.2f, false, false, false};
     _levelInfos["wetCave"] = LevelInfo{"level2", "rockyBackground", 0.2f, true, true, false};
     _levelInfos["lavaCave"] = LevelInfo{"level3", "lavaBackground", 0.3f, true, false, true};
+    _levelInfos["iceCave"] = LevelInfo{"level4", "iceBackground", 0.3f, false, false, false};
     _map = 0;
     _spawner = 0;
     _grass = 0;
     _background = 0;
     _difficulty = 2;
-    Load(ip, "lavaCave", character);
+    Load(ip, "iceCave", character);
     character.setPosition(character.getPosition() + sf::Vector2f(0, 50));
     _lavaTexture.create(/*_map->GetSize().x*/64*16, /*_map->GetSize().y*/38*16);
     _lavaShader.loadFromFile("shaders/lava.frag", sf::Shader::Fragment);
@@ -189,6 +190,12 @@ void Level::Load(IP& ip, string name, Character& character) {
                     _map->SetTile(pos, 8, l);
                 } else if(c == sf::Color(150, 22, 22)) {
                     _map->SetTile(pos, 9, l);
+                } else if(c == sf::Color(25, 139, 168)) {
+                    _map->SetTile(pos, 10, l);
+                } else if(c == sf::Color(48, 75, 96)) {
+                    _map->SetTile(pos, 11, l);
+                } else if(c == sf::Color(142, 125, 95)) {
+                    _map->SetTile(pos, 12, l);
                 } else if(c == sf::Color(106, 129, 193)) {
                     _map->SetTile(pos, 0, l);
                 } else if(c == sf::Color(255, 255, 255)) {

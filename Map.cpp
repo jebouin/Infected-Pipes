@@ -19,6 +19,9 @@ Map::Map(IP& ip, sf::Vector2i size) {
     _tileTypes.push_back(VOID);
     _tileTypes.push_back(VOID);
     _tileTypes.push_back(WALL);
+    _tileTypes.push_back(WALL);
+    _tileTypes.push_back(WALL);
+    _tileTypes.push_back(PLATFORM);
 }
 
 Map::~Map() {
@@ -46,14 +49,14 @@ void Map::DrawLayer(sf::RenderTexture& rt, Layer l) {
                 }
             }
 
-            if(tileId == 2 || tileId == 3 || tileId == 6 || tileId == 9) {
+            if(tileId == 2 || tileId == 3 || tileId == 6 || tileId == 9 || tileId == 10 || tileId == 11) {
                 tileX = GetNbDirNeigboursCode(pos, l);
             }
 
-            if(tileId == 4) {
-                if(GetTile(sf::Vector2i(i+1, j), l) != 4 && GetTileType(sf::Vector2i(i+1, j), l) == Map::WALL) {
+            if(tileId == 4 || tileId == 12) {
+                if(GetTile(sf::Vector2i(i+1, j), l) != tileId && GetTileType(sf::Vector2i(i+1, j), l) == Map::WALL) {
                     tileX = 2;
-                } else if(GetTile(sf::Vector2i(i-1, j), l) != 4 && GetTileType(sf::Vector2i(i-1, j), l) == Map::WALL) {
+                } else if(GetTile(sf::Vector2i(i-1, j), l) != tileId && GetTileType(sf::Vector2i(i-1, j), l) == Map::WALL) {
                     tileX = 0;
                 } else {
                     tileX = 1;

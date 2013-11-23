@@ -17,6 +17,8 @@ TextureLoader::TextureLoader(IP& ip) {
     AddTexture("level2front.png", "level2front");
     AddTexture("level3back.png", "level3back");
     AddTexture("level3front.png", "level3front");
+    AddTexture("level4back.png", "level4back");
+    AddTexture("level4front.png", "level4front");
 
     AddTexture("spiderock.png", "spiderock");
     AddTexture("rockWorm.png", "rockWorm");
@@ -40,6 +42,7 @@ TextureLoader::TextureLoader(IP& ip) {
     AddTexture("rockyBackground.png", "rockyBackground");
     AddTexture("lavaBackground.png", "lavaBackground");
     AddTexture("lavaBackground2.png", "lavaBackground2");
+    AddTexture("iceBackground.png", "iceBackground");
     AddTexture("lifeBar.png", "lifeBar");
     AddTexture("lifeBarBorder.png", "lifeBarBorder");
     AddTexture("xpBar.png", "xpBar");

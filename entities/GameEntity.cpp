@@ -34,6 +34,7 @@ GameEntity::~GameEntity() {
 
 void GameEntity::Update(IP& ip, float elapsedTime, Level& level, EntityManager& eManager, ParticleManager& pManager) {
     _inWater = IsInWater(level);
+    bool onGround = (level.GetSpawner().IsOnGround(*this) || level.GetMap().IsOnTileType(*this, Map::WALL) || level.GetMap().IsOnTileType(*this, Map::PLATFORM));
 
     if(!_havePhysics) {
         MovingSprite::Update(ip, elapsedTime);
@@ -49,6 +50,7 @@ void GameEntity::Update(IP& ip, float elapsedTime, Level& level, EntityManager& 
     } else {
         Accelerate(sf::Vector2f(0, -0.008*GetVel().y), elapsedTime);
     }
+    //ice friction here
     Accelerate(sf::Vector2f(-_friction*GetVel().x, 0), elapsedTime);
 
     if(_inWater && GetCollidesWithWater()) {
