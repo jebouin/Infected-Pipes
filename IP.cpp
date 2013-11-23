@@ -21,7 +21,6 @@ IP::IP() {
     _window->setFramerateLimit(60);
     _window->setMouseCursorVisible(false);
     _renderer = new Renderer(sf::Vector2i(sf::Vector2f(_window->getSize())/4.f));
-    //_shaderManager = new ShaderManager();
     _sceneManager = new SceneManager(*this);
 
     _font.loadFromFile("font/font.ttf");
@@ -39,8 +38,6 @@ IP::IP() {
     //_sceneManager->AddScene(new MainMenu(*this));
     _sceneManager->AddScene(new Game(*this));
     _focused = true;
-
-    //_test.loadFromFile("shaders/test.frag", sf::Shader::Fragment);
 
     while(_window->isOpen()) {
         sf::Event e;
@@ -74,8 +71,6 @@ IP::~IP() {
     _textureLoader = 0;
     delete _sceneManager;
     _sceneManager = 0;
-    /*delete _shaderManager;
-    _shaderManager = 0;*/
 }
 
 void IP::Update() {
@@ -88,9 +83,7 @@ void IP::Update() {
         _window->close();
     }
 
-    /*_shaderManager->Update(eTime);
-    _test.setParameter("texture", sf::Shader::CurrentTexture);
-    _shaderManager->AddShader(&_test);*/
+    _renderer->Update(*this, eTime);
 }
 
 void IP::Draw() {
@@ -98,11 +91,7 @@ void IP::Draw() {
     _renderer->Clear();
 
     _sceneManager->Draw(*this);
-    /*const sf::View* prevView = &(_renderer->GetTexture().getView());
-    _renderer->GetTexture().setView(_renderer->GetTexture().getDefaultView());
-    _shaderManager->Draw(_renderer->GetTexture());
-    _renderer->GetTexture().setView(*prevView);*/
 
-    _renderer->DrawToWindow(*_window);
+    _renderer->DrawToWindow(*_window, *this);
     _window->display();
 }

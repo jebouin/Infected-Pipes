@@ -1,5 +1,6 @@
 uniform sampler2D texture;
 uniform vec2 r;
+uniform float amp;
 
 void main()
 {
@@ -17,5 +18,5 @@ void main()
 		c = 1.3;
 	}
 	
-   gl_FragColor = pixel * c;
+   gl_FragColor = pixel * c * (1.+amp);
 }

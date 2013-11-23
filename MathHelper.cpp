@@ -14,6 +14,10 @@ float MathHelper::SGN(float n) {
     return (n==0 ? 0 : n/ABS(n));
 }
 
+float MathHelper::SuperSGN(float n) {
+    return (ABS(n) > 1 ? SGN(n) : n);
+}
+
 float MathHelper::Interpolate(float x, float y0, float y1) {
     return x*(y1-y0) + y0;
 }

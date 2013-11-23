@@ -116,6 +116,20 @@ void MovingSprite::MoveCollidingMap(sf::Vector2f delta, Level& level) {
                 break;
             }
         }
+        /*for(float i=0. ; i<MathHelper::ABS(delta.x) ; i++) {
+            if(!TryMove(sf::Vector2f(MathHelper::SuperSGN(delta.x), 0), level)) {
+                SetVel(sf::Vector2f(0, GetVel().y));
+                SetRotVel(GetRotVel()/2.f);
+                break;
+            }
+        }
+        for(float i=0. ; i<MathHelper::ABS(delta.y) ; i++) {
+            if(!TryMove(sf::Vector2f(0, MathHelper::SuperSGN(delta.y)), level)) {
+                SetVel(sf::Vector2f(GetVel().x, 0));
+                SetRotVel(GetRotVel()/2.f);
+                break;
+            }
+        }*/
     }
 }
 

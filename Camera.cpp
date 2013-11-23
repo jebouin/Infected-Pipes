@@ -63,7 +63,7 @@ void Camera::Update(IP& ip, float eTime, Level& level, Character& character) {
     setCenter(sf::Vector2f(character.getPosition().x + _curRelPosX, getCenter().y));
 
     //if we are really far from the player (changed level or some teleportation, jump to the player)
-    if(MathHelper::ABS(getCenter().x - character.getPosition().x) > 400 || MathHelper::ABS(getCenter().y - character.getPosition().y) > 300) {
+    if(MathHelper::ABS(getCenter().x - character.getPosition().x) > 100 || MathHelper::ABS(getCenter().y - character.getPosition().y) > 150) {
         setCenter(character.getPosition());
     }
 

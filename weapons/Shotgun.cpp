@@ -32,6 +32,7 @@ bool Shotgun::Use(IP& ip, BulletManager& bManager, float angle) {
                                      GetPosition(),
                                      d*MathHelper::RandFloat(0.6, 0.9),
                                      false));
-        }
+    }
+    ip._renderer->AddFlash(80, .2);
     return true;
 }

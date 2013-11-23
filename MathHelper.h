@@ -26,6 +26,7 @@ class MathHelper {
     static float ABS(float n);
     static sf::Vector2f ABS(sf::Vector2f v);
     static float SGN(float n);
+    static float SuperSGN(float n);
     static float Interpolate(float x, float y0, float y1);
     static sf::Vector2f Interpolate(float x, sf::Vector2f v0, sf::Vector2f v1);
     static int RandInt(int min, int max);
