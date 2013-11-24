@@ -31,10 +31,12 @@ TextureLoader::TextureLoader(IP& ip) {
     AddTexture("wormBossHead.png", "wormBossHead");
     AddTexture("fireBall.png", "fireBall");
     AddTexture("turtle.png", "turtle");
+    AddTexture("snowMan.png", "snowMan");
 
     AddTexture("duck.png", "duck");
     AddTexture("mouse.png", "mouse");
     AddTexture("skull.png", "skull");
+    AddTexture("igloo.png", "igloo");
 
     AddTexture("pipe.png", "pipe");
     AddTexture("zombie.png", "zombie");

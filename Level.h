@@ -71,6 +71,7 @@ class Level {
     vector<WaterField*> _waterFields;
     vector<WaterFall*> _waterFalls;
     vector<GameEntity*> _passiveEntities;
+    vector<sf::Sprite> _backSprites;
 
     sf::RenderTexture _lavaTexture;
     sf::Shader _lavaShader;

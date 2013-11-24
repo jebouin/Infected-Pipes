@@ -29,7 +29,7 @@ struct Arm {
 
 class Character : public GameEntity {
     public:
-    enum ArmType {EMPTY, RAINBOW, BOW, SHOTGUN};
+    enum ArmType {EMPTY, RAINBOW, BOW, SHOTGUN, MACHINEGUN, RIFLE};
 
     Character(IP& ip);
     ~Character();

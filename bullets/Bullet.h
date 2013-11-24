@@ -47,6 +47,7 @@ class Bullet : public MovingSprite {
     float _knockBack;
     sf::Clock _deadTimer;
     sf::Clock _timer;
+    sf::Vector2f _prevPos;
 };
 
 #endif // BULLET_H_INCLUDED

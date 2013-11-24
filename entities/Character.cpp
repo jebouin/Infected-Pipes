@@ -14,7 +14,9 @@
 #include "Weapon.h"
 #include "Bow.h"
 #include "ShotGun.h"
-#include "grenadeLauncher.h"
+#include "MachineGun.h"
+#include "Rifle.h"
+#include "GrenadeLauncher.h"
 #include "Particle.h"
 #include "TextureLoader.h"
 #include "GUI.h"
@@ -24,6 +26,8 @@ Character::Character(IP& ip) : GameEntity(ip, "character", sf::IntRect(4, 3, 7, 
     _arms[RAINBOW] = Arm {sf::IntRect(0, 9, 15, 9), sf::Vector2f(4, 1), sf::Vector2f(2, 2), 0};
     _arms[BOW] = Arm {sf::IntRect(0, 18, 10, 17), sf::Vector2f(2, 3), sf::Vector2f(4, 4), 0};
     _arms[SHOTGUN] = Arm{sf::IntRect(0, 35, 21, 10), sf::Vector2f(5, 1), sf::Vector2f(6, 4), -90};
+    _arms[MACHINEGUN] = Arm{sf::IntRect(0, 44, 23, 10), sf::Vector2f(8, 1), sf::Vector2f(8, 2), -90};
+    _arms[RIFLE] = Arm{sf::IntRect(0, 54, 28, 9), sf::Vector2f(8, 1), sf::Vector2f(10, 3), -90};
 
     SetWeight(0.5f);
     AnimationTable& t(GetAnims());
@@ -37,11 +41,11 @@ Character::Character(IP& ip) : GameEntity(ip, "character", sf::IntRect(4, 3, 7, 
     _xp = 0;
     _nextXP = 10;
 
-    _weapon = new Shotgun(ip, (const GameEntity&)*this, sf::Vector2f(0, 0));
+    _weapon = new Rifle(ip, (const GameEntity&)*this, sf::Vector2f(0, 0));
     _sWeapon = new GrenadeLauncher(ip, (const GameEntity&)*this, sf::Vector2f(0, 0));
 
     _arm.setTexture(ip._textureLoader->GetTexture("arms"));
-    LoadArm(SHOTGUN);
+    LoadArm(RIFLE);
 
     SetAutoDir(false);
     SetCollisionPrecision(.05);

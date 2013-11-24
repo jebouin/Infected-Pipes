@@ -105,6 +105,9 @@ void Level::DrawBack(IP& ip, sf::View& prevView) {
     for(int i=0 ; i<_passiveEntities.size() ; i++) {
         _passiveEntities[i]->Draw(ip);
     }
+    for(int i=0 ; i<_backSprites.size() ; i++) {
+        ip._renderer->Draw(_backSprites[i]);
+    }
 }
 
 void Level::DrawFront(IP& ip) {
@@ -198,6 +201,14 @@ void Level::Load(IP& ip, string name, Character& character) {
                     _map->SetTile(pos, 12, l);
                 } else if(c == sf::Color(91, 80, 61)) {
                     _map->SetTile(pos, 13, l);
+                } else if(c == sf::Color(81, 73, 61)) {
+                    _map->SetTile(pos, 14, l);
+                } else if(c == sf::Color(145, 165, 173)) {
+                    //igloo
+                    sf::Sprite s(ip._textureLoader->GetTexture("igloo"));
+                    s.setOrigin(sf::Vector2f(sf::Vector2i(sf::Vector2f(s.getTextureRect().width/2.f, s.getTextureRect().height))));
+                    s.setPosition(sf::Vector2f(sf::Vector2i(sf::Vector2f(pos*16) + sf::Vector2f(8, 17))));
+                    _backSprites.push_back(s);
                 } else if(c == sf::Color(106, 129, 193)) {
                     _map->SetTile(pos, 0, l);
                 } else if(c == sf::Color(255, 255, 255)) {

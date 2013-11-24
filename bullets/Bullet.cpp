@@ -34,6 +34,7 @@ Bullet::~Bullet() {
 }
 
 void Bullet::Update(IP& ip, float eTime, Level& level, Character& character, ParticleManager& pManager, EntityManager& eManager) {
+    _prevPos = getPosition();
     _inWater = IsInWater(level);
 
     if(_gravity && !_inWater) {
@@ -70,10 +71,18 @@ void Bullet::Update(IP& ip, float eTime, Level& level, Character& character, Par
                     Impact((GameEntity&)(character), ip, pManager, sf::Color(255, 0, 0), eManager, level);
                 }
             } else {
+                sf::Vector2f dir = MathHelper::Normalize(getPosition() - _prevPos);
+                float l = MathHelper::GetVecLength(getPosition() - _prevPos);
+                cout << l << endl;
                 for(int i=0 ; i<eManager.GetNbEnnemies() ; i++) {
                     Ennemy *e = eManager.GetEnnemy(i);
-                    if(e->GetGlobalHitbox().intersects(GetGlobalHitbox())) {
-                        Impact((GameEntity&)(*e), ip, pManager, sf::Color(255, 255, 0), eManager, level);
+                    for(float j=0 ; j<l ; j+=4) {
+                        if(sf::FloatRect(sf::Vector2f(_prevPos + j*dir), sf::Vector2f(e->GetGlobalHitbox().width, e->GetGlobalHitbox().height)).intersects(e->GetGlobalHitbox())) {
+                            Impact((GameEntity&)(*e), ip, pManager, sf::Color(255, 255, 0), eManager, level);
+                            break;
+                        }
+                    }
+                    if(_dying) {
                         break;
                     }
                 }
