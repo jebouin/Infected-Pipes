@@ -196,6 +196,8 @@ void Level::Load(IP& ip, string name, Character& character) {
                     _map->SetTile(pos, 11, l);
                 } else if(c == sf::Color(142, 125, 95)) {
                     _map->SetTile(pos, 12, l);
+                } else if(c == sf::Color(91, 80, 61)) {
+                    _map->SetTile(pos, 13, l);
                 } else if(c == sf::Color(106, 129, 193)) {
                     _map->SetTile(pos, 0, l);
                 } else if(c == sf::Color(255, 255, 255)) {
@@ -394,6 +396,8 @@ void Level::NextLevel(IP& ip, EntityManager& eManager, BulletManager& bManager, 
         toLoad = "miniBoss2";
     } else if(_curLevel == "miniBoss2") {
         toLoad = "lavaCave";
+    } else if(_curLevel == "lavaCave") {
+        toLoad = "iceCave";
     }
     Load(ip, toLoad, character);
     eManager.Clear();

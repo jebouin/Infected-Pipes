@@ -53,6 +53,9 @@ Background::Background(IP& ip, string name, float zoom, Map& map) {
     if(_name == "lavaBackground") {
         _back2.setTexture(ip._textureLoader->GetTexture("lavaBackground2"));
     }
+    if(_name == "iceBackground") {
+        _back2.setTexture(ip._textureLoader->GetTexture("iceBackground2"));
+    }
 }
 
 Background::~Background() {
@@ -76,7 +79,7 @@ void Background::Draw(sf::RenderTexture& rt, const sf::View& prevView) {
     _view = sf::View(sf::FloatRect(0, 0, rt.getSize().x, rt.getSize().y));
     _view.setCenter(prevView.getCenter()*_zoom + sf::Vector2f(rt.getSize().x, rt.getSize().y)/2.f);
 
-    if(_name == "lavaBackground") {
+    if(_name == "lavaBackground" || _name == "iceBackground") {
         _view.setCenter(sf::Vector2f(_view.getCenter().x / 2.f, _view.getCenter().y / 2.f));
         rt.setView(_view);
         sf::FloatRect r2 = MathHelper::View2Rect(_view);
