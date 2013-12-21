@@ -41,11 +41,11 @@ Character::Character(IP& ip) : GameEntity(ip, "character", sf::IntRect(4, 3, 7, 
     _xp = 0;
     _nextXP = 10;
 
-    _weapon = new Rifle(ip, (const GameEntity&)*this, sf::Vector2f(0, 0));
+    _weapon = new Shotgun(ip, (const GameEntity&)*this, sf::Vector2f(0, 0));
     _sWeapon = new GrenadeLauncher(ip, (const GameEntity&)*this, sf::Vector2f(0, 0));
 
     _arm.setTexture(ip._textureLoader->GetTexture("arms"));
-    LoadArm(RIFLE);
+    LoadArm(SHOTGUN);
 
     SetAutoDir(false);
     SetCollisionPrecision(.05);

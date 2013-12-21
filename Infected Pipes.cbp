@@ -21,9 +21,6 @@
 				<Option object_output="obj/Release/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
-				<Compiler>
-					<Add option="-O2" />
-				</Compiler>
 				<Linker>
 					<Add option="-s" />
 				</Linker>
@@ -32,7 +29,6 @@
 		<Compiler>
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
-			<Add directory="../Infected Pipes" />
 			<Add directory="gui" />
 			<Add directory="bullets" />
 			<Add directory="weapons" />
@@ -40,6 +36,7 @@
 			<Add directory="entities" />
 			<Add directory="entities/ennemies" />
 			<Add directory="entities/passive" />
+			<Add directory="../Infected Pipes" />
 		</Compiler>
 		<Unit filename="Animation.cpp" />
 		<Unit filename="Animation.h" />
@@ -47,6 +44,8 @@
 		<Unit filename="AnimationTable.h" />
 		<Unit filename="Background.cpp" />
 		<Unit filename="Background.h" />
+		<Unit filename="Camera.cpp" />
+		<Unit filename="Camera.h" />
 		<Unit filename="Chest.cpp" />
 		<Unit filename="Chest.h" />
 		<Unit filename="ChestOpened.cpp" />
@@ -125,6 +124,8 @@
 		<Unit filename="entities/ennemies/Snail.h" />
 		<Unit filename="entities/ennemies/SnowBallEnemy.cpp" />
 		<Unit filename="entities/ennemies/SnowBallEnemy.h" />
+		<Unit filename="entities/ennemies/SnowMan.cpp" />
+		<Unit filename="entities/ennemies/SnowMan.h" />
 		<Unit filename="entities/ennemies/Spiderock.cpp" />
 		<Unit filename="entities/ennemies/Spiderock.h" />
 		<Unit filename="entities/ennemies/Turtle.cpp" />
@@ -168,6 +169,10 @@
 		<Unit filename="weapons/Bow.h" />
 		<Unit filename="weapons/GrenadeLauncher.cpp" />
 		<Unit filename="weapons/GrenadeLauncher.h" />
+		<Unit filename="weapons/MachineGun.cpp" />
+		<Unit filename="weapons/MachineGun.h" />
+		<Unit filename="weapons/Rifle.cpp" />
+		<Unit filename="weapons/Rifle.h" />
 		<Unit filename="weapons/Shotgun.cpp" />
 		<Unit filename="weapons/Shotgun.h" />
 		<Unit filename="weapons/Weapon.cpp" />

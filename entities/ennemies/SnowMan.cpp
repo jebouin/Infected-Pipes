@@ -13,9 +13,11 @@
 #include "BulletManager.h"
 #include "WaterField.h"
 
-SnowMan::SnowMan(IP& ip, Level& level) : Ennemy(ip, "snowMan", sf::IntRect(14, 3, 18, 30), 192, 25, 30, level) {
+SnowMan::SnowMan(IP& ip, Level& level) : Ennemy(ip, "snowMan", sf::IntRect(16, 3, 14, 30), 192, 25, 30, level) {
     AnimationTable& t(GetAnims());
-    t.AddAnimation("idle", new Animation(4, 200, sf::Vector2i(0, 0), sf::Vector2i(45, 33), true));
+    t.AddAnimation("idle", new Animation(4, 80, sf::Vector2i(0, 0), sf::Vector2i(45, 33), true));
+    t.AddAnimation("attackingR", new Animation(6, 70, sf::Vector2i(0, 33), sf::Vector2i(26, 31), true));
+    t.AddAnimation("attackingL", new Animation(6, 70, sf::Vector2i(0, 64), sf::Vector2i(26, 31), true));
     t.SetAnimation("idle");
     SetSpeed(.002);
     SetJumpPower(.46);
