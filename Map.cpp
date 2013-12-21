@@ -1,12 +1,12 @@
 #include "Map.h"
 #include "IP.h"
-#include "TextureLoader.h"
+#include "ResourceLoader.h"
 #include "Renderer.h"
 #include "MathHelper.h"
 #include "MovingSprite.h"
 
 Map::Map(IP& ip, sf::Vector2i size) {
-    _tileset.setTexture(ip._textureLoader->GetTexture("tileset"));
+    _tileset.setTexture(ResourceLoader::GetTexture("tileset"));
     _size = size;
     _tiles = vector<vector<vector<int> > >(2, vector<vector<int> >(_size.x, vector<int>(_size.y, 0)));
     _tileTypes.push_back(VOID);

@@ -18,7 +18,7 @@
 #include "Rifle.h"
 #include "GrenadeLauncher.h"
 #include "Particle.h"
-#include "TextureLoader.h"
+#include "ResourceLoader.h"
 #include "GUI.h"
 
 Character::Character(IP& ip) : GameEntity(ip, "character", sf::IntRect(4, 3, 7, 26), 100) {
@@ -44,7 +44,7 @@ Character::Character(IP& ip) : GameEntity(ip, "character", sf::IntRect(4, 3, 7, 
     _weapon = new Shotgun(ip, (const GameEntity&)*this, sf::Vector2f(0, 0));
     _sWeapon = new GrenadeLauncher(ip, (const GameEntity&)*this, sf::Vector2f(0, 0));
 
-    _arm.setTexture(ip._textureLoader->GetTexture("arms"));
+    _arm.setTexture(ResourceLoader::GetTexture("arms"));
     LoadArm(SHOTGUN);
 
     SetAutoDir(false);

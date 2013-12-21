@@ -5,7 +5,6 @@
 #include "SFML/System.hpp"
 
 class Renderer;
-class TextureLoader;
 class SceneManager;
 class ShaderManager;
 
@@ -17,12 +16,13 @@ class IP {
     void Draw();
 
     Renderer *_renderer;
-    TextureLoader *_textureLoader;
     sf::RenderWindow *_window;
     SceneManager *_sceneManager;
     sf::Font _font;
 
     private:
+    void LoadResources();
+
     sf::Clock _clock;
     bool _focused;
 };

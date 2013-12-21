@@ -1,11 +1,11 @@
 #include "Cursor.h"
 #include "IP.h"
-#include "TextureLoader.h"
+#include "ResourceLoader.h"
 #include "MathHelper.h"
 #include "Renderer.h"
 
-Cursor::Cursor(IP& ip, TextureLoader& tLoader) : sf::Sprite() {
-    setTexture(tLoader.GetTexture("cursor"));
+Cursor::Cursor(IP& ip) : sf::Sprite() {
+    setTexture(ResourceLoader::GetTexture("cursor"));
     _prevPos = getPosition();
 }
 

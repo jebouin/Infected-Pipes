@@ -10,11 +10,10 @@ using namespace std;
 
 class IP;
 class Character;
-class TextureLoader;
 
 class XPBar : public sf::Sprite {
     public:
-    XPBar(IP& ip, Character& character, TextureLoader& tLoader);
+    XPBar(IP& ip, Character& character);
     ~XPBar();
     void Update(IP& ip);
     void Draw(IP& ip);

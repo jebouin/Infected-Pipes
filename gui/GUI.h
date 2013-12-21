@@ -21,7 +21,7 @@ class WaveIndicator;
 
 class GUI {
     public:
-    GUI(IP& ip, TextureLoader& tLoader, Character& character, Level& level);
+    GUI(IP& ip, Character& character, Level& level);
     ~GUI();
     void Update(IP& ip, float eTime);
     void Draw(IP& ip);

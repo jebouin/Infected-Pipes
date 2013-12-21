@@ -3,7 +3,7 @@
 #include "Map.h"
 #include "Level.h"
 #include "Spawner.h"
-#include "TextureLoader.h"
+#include "ResourceLoader.h"
 #include "MathHelper.h"
 #include "Animation.h"
 #include "AnimationTable.h"
@@ -14,7 +14,7 @@
 MovingSprite::MovingSprite(IP& ip, string name, bool animated) : sf::Sprite() {
     _vel = sf::Vector2f(0, 0);
     _rotVel = 0;
-    setTexture(ip._textureLoader->GetTexture(name));
+    setTexture(ResourceLoader::GetTexture(name));
     _hitbox = getTextureRect();
     setOrigin(sf::Vector2f(sf::Vector2i(MathHelper::GetCenter(sf::FloatRect(_hitbox)))));
     _animTable = new AnimationTable();
@@ -32,7 +32,7 @@ MovingSprite::MovingSprite(IP& ip, string name, bool animated) : sf::Sprite() {
 MovingSprite::MovingSprite(IP& ip, string name, sf::IntRect hitbox, bool animated) {
     _vel = sf::Vector2f(0, 0);
     _rotVel = 0;
-    setTexture(ip._textureLoader->GetTexture(name));
+    setTexture(ResourceLoader::GetTexture(name));
     setOrigin(sf::Vector2f(sf::Vector2i(MathHelper::GetCenter(sf::FloatRect(hitbox)))));
     _hitbox = hitbox;
     _animTable = new AnimationTable();

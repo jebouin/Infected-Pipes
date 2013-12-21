@@ -1,7 +1,7 @@
 #include "GUI.h"
 #include "IP.h"
 #include "Character.h"
-#include "TextureLoader.h"
+#include "ResourceLoader.h"
 #include "MathHelper.h"
 #include "LifeBar.h"
 #include "XPBar.h"
@@ -11,12 +11,12 @@
 #include "Level.h"
 #include "WaveIndicator.h"
 
-GUI::GUI(IP& ip, TextureLoader& tLoader, Character& character, Level& level) {
-    _lifeBar = new LifeBar(ip, character, tLoader);
-    _xpBar = new XPBar(ip, character, tLoader);
-    _levelIndicator = new LevelIndicator(ip, character, tLoader);
-    _difficultyIndicator = new DifficultyIndicator(ip, level, tLoader);
-    _cursor = new Cursor(ip, tLoader);
+GUI::GUI(IP& ip, Character& character, Level& level) {
+    _lifeBar = new LifeBar(ip, character);
+    _xpBar = new XPBar(ip, character);
+    _levelIndicator = new LevelIndicator(ip, character);
+    _difficultyIndicator = new DifficultyIndicator(ip, level);
+    _cursor = new Cursor(ip);
     _waveIndicator = new WaveIndicator(ip);
     //_waveIndicator->AnnounceWave(ip, -42);
 }

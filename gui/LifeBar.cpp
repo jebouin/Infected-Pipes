@@ -1,17 +1,17 @@
 #include "LifeBar.h"
 #include "IP.h"
 #include "Character.h"
-#include "TextureLoader.h"
+#include "ResourceLoader.h"
 #include "MathHelper.h"
 #include "Renderer.h"
 
-LifeBar::LifeBar(IP& ip, Character& character, TextureLoader& tLoader) :
+LifeBar::LifeBar(IP& ip, Character& character) :
     sf::Sprite(), _character(character) {
-    setTexture(tLoader.GetTexture("lifeBarBorder"));
+    setTexture(ResourceLoader::GetTexture("lifeBarBorder"));
     setOrigin(sf::Vector2f(40, 0));
     setPosition(sf::Vector2f(ip._renderer->GetTexture().getSize().x/2, 1));
 
-    _bar.setTexture(tLoader.GetTexture("lifeBar"));
+    _bar.setTexture(ResourceLoader::GetTexture("lifeBar"));
     _bar.setOrigin(sf::Vector2f(40, 0));
     _bar.setPosition(getPosition());
 

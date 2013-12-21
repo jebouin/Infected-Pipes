@@ -1,13 +1,13 @@
 #include "DifficultyIndicator.h"
 #include "IP.h"
 #include "Level.h"
-#include "TextureLoader.h"
+#include "ResourceLoader.h"
 #include "MathHelper.h"
 #include "Renderer.h"
 
-DifficultyIndicator::DifficultyIndicator(IP& ip, Level& level, TextureLoader& tLoader)
+DifficultyIndicator::DifficultyIndicator(IP& ip, Level& level)
     : sf::Sprite(), _level(level) {
-    setTexture(tLoader.GetTexture("difficultyIndicator"));
+    setTexture(ResourceLoader::GetTexture("difficultyIndicator"));
     setPosition(sf::Vector2f(ip._renderer->GetTexture().getSize().x - getTextureRect().width - 1, 1));
 
     _difficultyText.setFont(ip._font);

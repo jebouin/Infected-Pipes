@@ -14,7 +14,7 @@ class TextureLoader;
 
 class LevelIndicator : public sf::Sprite {
     public:
-    LevelIndicator(IP& ip, Character& character, TextureLoader& tLoader);
+    LevelIndicator(IP& ip, Character& character);
     ~LevelIndicator();
     void Update(IP& ip);
     void Draw(IP& ip);

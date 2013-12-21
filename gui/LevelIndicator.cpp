@@ -1,13 +1,13 @@
 #include "LevelIndicator.h"
 #include "IP.h"
 #include "Character.h"
-#include "TextureLoader.h"
+#include "ResourceLoader.h"
 #include "MathHelper.h"
 #include "Renderer.h"
 
-LevelIndicator::LevelIndicator(IP& ip, Character& character, TextureLoader& tLoader)
+LevelIndicator::LevelIndicator(IP& ip, Character& character)
     : sf::Sprite(), _character(character) {
-    setTexture(tLoader.GetTexture("levelIndicator"));
+    setTexture(ResourceLoader::GetTexture("levelIndicator"));
     setPosition(sf::Vector2f(1, 1));
 
     _levelText.setFont(ip._font);

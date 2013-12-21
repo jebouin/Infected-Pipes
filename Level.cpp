@@ -1,7 +1,7 @@
 #include "Level.h"
 #include "IP.h"
 #include "Map.h"
-#include "TextureLoader.h"
+#include "ResourceLoader.h"
 #include "Renderer.h"
 #include "Pipe.h"
 #include "Spawner.h"
@@ -139,8 +139,8 @@ void Level::Load(IP& ip, string name, Character& character) {
     _curLevel = name;
     LevelInfo& info(_levelInfos[name]);
     _levelImages = vector<sf::Image>(2);
-    _levelImages[0] = sf::Image(ip._textureLoader->GetImage(info._imageName + "back"));
-    _levelImages[1] = sf::Image(ip._textureLoader->GetImage(info._imageName + "front"));
+    _levelImages[0] = sf::Image(ResourceLoader::GetImage(info._imageName + "back"));
+    _levelImages[1] = sf::Image(ResourceLoader::GetImage(info._imageName + "front"));
     delete _map;
     _map = new Map(ip, sf::Vector2i(_levelImages[0].getSize()));
 
@@ -205,7 +205,7 @@ void Level::Load(IP& ip, string name, Character& character) {
                     _map->SetTile(pos, 14, l);
                 } else if(c == sf::Color(145, 165, 173)) {
                     //igloo
-                    sf::Sprite s(ip._textureLoader->GetTexture("igloo"));
+                    sf::Sprite s(ResourceLoader::GetTexture("igloo"));
                     s.setOrigin(sf::Vector2f(sf::Vector2i(sf::Vector2f(s.getTextureRect().width/2.f, s.getTextureRect().height))));
                     s.setPosition(sf::Vector2f(sf::Vector2i(sf::Vector2f(pos*16) + sf::Vector2f(8, 17))));
                     _backSprites.push_back(s);

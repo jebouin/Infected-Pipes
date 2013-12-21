@@ -1,17 +1,17 @@
 #include "XPBar.h"
 #include "IP.h"
 #include "Character.h"
-#include "TextureLoader.h"
+#include "ResourceLoader.h"
 #include "MathHelper.h"
 #include "Renderer.h"
 
-XPBar::XPBar(IP& ip, Character& character, TextureLoader& tLoader) :
+XPBar::XPBar(IP& ip, Character& character) :
     sf::Sprite(), _character(character) {
-    setTexture(tLoader.GetTexture("xpBarBorder"));
+    setTexture(ResourceLoader::GetTexture("xpBarBorder"));
     setOrigin(sf::Vector2f(30, 0));
     setPosition(sf::Vector2f(ip._renderer->GetTexture().getSize().x/2.f, 11.));
 
-    _bar.setTexture(tLoader.GetTexture("xpBar"));
+    _bar.setTexture(ResourceLoader::GetTexture("xpBar"));
     _bar.setOrigin(sf::Vector2f(30, 0));
     _bar.setPosition(getPosition());
 }

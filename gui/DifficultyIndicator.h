@@ -9,7 +9,6 @@
 using namespace std;
 
 class IP;
-class TextureLoader;
 class Level;
 
 struct Comment {
@@ -19,7 +18,7 @@ struct Comment {
 
 class DifficultyIndicator : public sf::Sprite {
     public:
-    DifficultyIndicator(IP& ip, Level& level, TextureLoader& tLoader);
+    DifficultyIndicator(IP& ip, Level& level);
     ~DifficultyIndicator();
     void Update(IP& ip);
     void Draw(IP& ip);

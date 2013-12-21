@@ -2,10 +2,10 @@
 #include "IP.h"
 #include "MainMenuBackground.h"
 #include "Renderer.h"
-#include "TextureLoader.h"
+#include "ResourceLoader.h"
 
 MainMenu::MainMenu(IP& ip) : Scene(ip) {
-    _title.setTexture(ip._textureLoader->GetTexture("title"));
+    _title.setTexture(ResourceLoader::GetTexture("title"));
     _title.setOrigin(sf::Vector2f(sf::Vector2i(_title.getTextureRect().width, _title.getTextureRect().height)/2));
     _title.setPosition(sf::Vector2f(ip._renderer->GetTexture().getSize().x/2.f, ip._renderer->GetTexture().getSize().y/5.f));
 

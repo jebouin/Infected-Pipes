@@ -1,6 +1,6 @@
 #include "WaveIndicator.h"
 #include "IP.h"
-#include "TextureLoader.h"
+#include "ResourceLoader.h"
 #include "Level.h"
 #include "MathHelper.h"
 #include "Renderer.h"

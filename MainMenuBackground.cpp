@@ -4,7 +4,7 @@
 #include "Grass.h"
 #include "Background.h"
 #include "Renderer.h"
-#include "TextureLoader.h"
+#include "ResourceLoader.h"
 
 MainMenuBackground::MainMenuBackground(IP& ip) {
     _map = new Map(ip, sf::Vector2i(64, 2));

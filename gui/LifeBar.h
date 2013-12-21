@@ -10,11 +10,10 @@ using namespace std;
 
 class IP;
 class Character;
-class TextureLoader;
 
 class LifeBar : public sf::Sprite {
     public:
-    LifeBar(IP& ip, Character& character, TextureLoader& tLoader);
+    LifeBar(IP& ip, Character& character);
     ~LifeBar();
     void Update(IP& ip);
     void Draw(IP& ip);

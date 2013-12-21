@@ -1,12 +1,12 @@
 #include "Background.h"
 #include "IP.h"
-#include "TextureLoader.h"
+#include "ResourceLoader.h"
 #include "Renderer.h"
 #include "MathHelper.h"
 #include "Map.h"
 
 Background::Background(IP& ip, string name, float zoom, Map& map) {
-    _back.setTexture(ip._textureLoader->GetTexture(name));
+    _back.setTexture(ResourceLoader::GetTexture(name));
     _view = sf::View(sf::FloatRect(0, 0, ip._renderer->GetTexture().getSize().x, ip._renderer->GetTexture().getSize().y));
     _zoom = zoom;
     _name = name;
@@ -15,7 +15,7 @@ Background::Background(IP& ip, string name, float zoom, Map& map) {
         for(int i=0 ; i<map.GetSize().x*2.5 ; i++) {
             if(rand()%3==0) {
                 sf::Sprite fir;
-                fir.setTexture(ip._textureLoader->GetTexture("fir"));
+                fir.setTexture(ResourceLoader::GetTexture("fir"));
                 fir.setPosition(sf::Vector2f(-1.25*16.f*map.GetSize().x, 0) + sf::Vector2f(sf::Vector2i(i, 9))*16.f + sf::Vector2f(0, -fir.getGlobalBounds().height + 16));
                 _backSprites.push_back(fir);
             }
@@ -24,7 +24,7 @@ Background::Background(IP& ip, string name, float zoom, Map& map) {
         for(int i=0 ; i<(ip._renderer->GetTexture().getSize().x*ip._renderer->GetTexture().getSize().y/900) ; i++) {
             int starType = rand()%4;
             sf::Sprite star;
-            star.setTexture(ip._textureLoader->GetTexture("stars"));
+            star.setTexture(ResourceLoader::GetTexture("stars"));
             switch(starType) {
             case 0:
                 star.setTextureRect(sf::IntRect(0, 0, 5, 5));
@@ -45,16 +45,16 @@ Background::Background(IP& ip, string name, float zoom, Map& map) {
         }
 
         sf::Sprite moon;
-        moon.setTexture(ip._textureLoader->GetTexture("moon"));
+        moon.setTexture(ResourceLoader::GetTexture("moon"));
         moon.setPosition(sf::Vector2f(ip._renderer->GetTexture().getSize().x/4.f*3.f, ip._renderer->GetTexture().getSize().y/4.f));
         _backSprites2.push_back(moon);
     }
 
     if(_name == "lavaBackground") {
-        _back2.setTexture(ip._textureLoader->GetTexture("lavaBackground2"));
+        _back2.setTexture(ResourceLoader::GetTexture("lavaBackground2"));
     }
     if(_name == "iceBackground") {
-        _back2.setTexture(ip._textureLoader->GetTexture("iceBackground2"));
+        _back2.setTexture(ResourceLoader::GetTexture("iceBackground2"));
     }
 }
 

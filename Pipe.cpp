@@ -3,11 +3,11 @@
 #include "EntityManager.h"
 #include "Ennemy.h"
 #include "Spiderock.h"
-#include "TextureLoader.h"
+#include "ResourceLoader.h"
 #include "MathHelper.h"
 
 Pipe::Pipe(IP& ip, sf::Vector2f pos, float angle) : sf::Sprite() {
-    setTexture(ip._textureLoader->GetTexture("pipe"));
+    setTexture(ResourceLoader::GetTexture("pipe"));
     setOrigin(sf::Vector2f(getTextureRect().width, getTextureRect().height/2.f));
     setPosition(pos);
     setRotation(angle);
