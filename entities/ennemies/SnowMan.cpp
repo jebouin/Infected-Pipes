@@ -12,16 +12,19 @@
 #include "Animation.h"
 #include "BulletManager.h"
 #include "WaterField.h"
+#include "Bullet.h"
 
-SnowMan::SnowMan(IP& ip, Level& level) : Ennemy(ip, "snowMan", sf::IntRect(16, 3, 14, 30), 192, 25, 30, level) {
+SnowMan::SnowMan(IP& ip, Level& level) : Ennemy(ip, "snowMan", sf::IntRect(16, 3, 14, 29), 192, 25, 30, level) {
     AnimationTable& t(GetAnims());
     t.AddAnimation("idle", new Animation(4, 80, sf::Vector2i(0, 0), sf::Vector2i(45, 33), true));
     t.AddAnimation("attackingR", new Animation(6, 70, sf::Vector2i(0, 33), sf::Vector2i(26, 31), true));
     t.AddAnimation("attackingL", new Animation(6, 70, sf::Vector2i(0, 64), sf::Vector2i(26, 31), true));
     t.SetAnimation("idle");
     SetSpeed(.002);
-    SetJumpPower(.46);
+    SetJumpPower(.7);
     SetWeight(0.6f);
+    _stateTime = 2000;
+    _curState = WALKING;
 }
 
 SnowMan::~SnowMan() {
@@ -38,6 +41,74 @@ void SnowMan::Update(IP& ip, float eTime, Level& level, Character& character, En
     if(GetGlobalHitbox().intersects(character.GetGlobalHitbox()) && _attackTimer.getElapsedTime().asMilliseconds() > 800) {
         Hit(&character, ip, pManager, sf::Color(255, 0, 0), MathHelper::RandInt(20, 24), eManager, level);
         _attackTimer.restart();
+    }
+
+    switch(_curState) {
+    case IDLE:
+
+        break;
+    case WALKING:
+        if(_jumpTimer.getElapsedTime().asMilliseconds() >= 700) {
+            _jumpTimer.restart();
+            Jump(level);
+        }
+        if(IsInWater(level)) {
+            Jump(level);
+        } else {
+            if(!level.GetMap().IsOnTileType(*this, Map::WALL) && !level.GetSpawner().IsOnGround(*this)) {
+                if(getPosition().x > character.getPosition().x) {
+                    GoLeft(eTime);
+                } else {
+                    GoRight(eTime);
+                }
+            }
+        }
+        break;
+    case ATT:
+        if(!GetDir()) {
+            ChangeDir();
+        }
+        bool attdir = true;
+        if(character.getPosition().x > getPosition().x) {
+            if(t.GetAnimationName() != "attackingR") {
+                t.SetAnimation("attackingR");
+                SetHitbox(sf::IntRect(2, 2, 18, 28));
+            }
+            attdir = true;
+        } else {
+            if(t.GetAnimationName() != "attackingL") {
+                t.SetAnimation("attackingL");
+                SetHitbox(sf::IntRect(6, 2, 18, 28));
+            }
+            attdir = false;
+        }
+        if(_ballTimer.getElapsedTime().asMilliseconds() >= 100 && t.GetAnimation().GetCurFrame() == 0) {
+            _ballTimer.restart();
+            sf::Vector2f rp = (attdir ? sf::Vector2f(-2, -5) : sf::Vector2f(-8, 0));
+            sf::Vector2f vel = MathHelper::Ang2Vec(MathHelper::Deg2Rad(attdir ? MathHelper::RandFloat(-40, -10) : MathHelper::RandFloat(190, 220))) * MathHelper::RandFloat(.2, .4);
+            Bullet *b = new Bullet(ip, "snowBallBullet", sf::IntRect(1, 1, 6, 6), getPosition()+rp, vel, 24, .1, false, true, true, true, false, true, false);
+            bManager.AddBullet(b);
+        }
+        break;
+    }
+
+    if(_stateTimer.getElapsedTime().asMilliseconds() >= _stateTime) {
+        _stateTimer.restart();
+        if(rand()%2) {
+            if(MathHelper::GetVecLength(getPosition()-character.getPosition()) < 500) {
+                _curState = ATT;
+                _stateTime = 2500;
+            } else {
+                _curState = IDLE;
+                _stateTime = 1500;
+                t.SetAnimation("idle");
+            }
+        } else {
+            _curState = WALKING;
+            _stateTime = 4000;
+            t.SetAnimation("idle");
+            SetHitbox(sf::IntRect(16, 3, 14, 29));
+        }
     }
 
     Ennemy::Update(ip, eTime, level, character, eManager, pManager, bManager);

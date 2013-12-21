@@ -154,6 +154,7 @@ void IP::LoadResources() {
     ResourceLoader::LoadTexture("gfx/laser.png", "laser");
     ResourceLoader::LoadTexture("gfx/fireBallBullet.png", "fireBallBullet");
     ResourceLoader::LoadTexture("gfx/bullet.png", "bullet");
+    ResourceLoader::LoadTexture("gfx/snowBallBullet.png", "snowBallBullet");
     ResourceLoader::LoadTexture("gfx/grenade.png", "grenade");
 
     ResourceLoader::LoadTexture("gfx/blood0.png", "blood0");
