@@ -36,7 +36,7 @@ Level::Level(IP& ip, Character& character) {
     _grass = 0;
     _background = 0;
     _difficulty = 2;
-    Load(ip, "miniBoss3", character);
+    Load(ip, "wetCave", character);
     character.setPosition(character.getPosition() + sf::Vector2f(0, 50));
     _lavaTexture.create(/*_map->GetSize().x*/64*16, /*_map->GetSize().y*/38*16);
     _lavaShader.loadFromFile("shaders/lava.frag", sf::Shader::Fragment);
@@ -452,6 +452,9 @@ void Level::NextLevel(IP& ip, EntityManager& eManager, BulletManager& bManager, 
     Load(ip, toLoad, character);
     eManager.Clear();
     bManager.Clear();
+    if(toLoad == "iceCave") {
+        _snowFlakesTimer.restart();
+    }
 }
 
 int Level::GetDifficulty() const {

@@ -14,8 +14,8 @@
 #include "Animation.h"
 
 FireWormBoss::FireWormBoss(IP& ip, Level& level)
-    : Ennemy(ip, "fireWormBoss", sf::IntRect(0, 0, 43, 66), 4200, 1000, 500, level) {
-    setPosition(sf::Vector2f(200, 279));
+    : Ennemy(ip, "fireWormBoss", sf::IntRect(0, 6, 43, 60), 4200, 1000, 500, level) {
+    setPosition(sf::Vector2f(200, 284));
     SetFlying(true);
 }
 

@@ -23,9 +23,9 @@ void Camera::Update(IP& ip, float eTime, Level& level, Character& character) {
     sf::Vector2f charPos = character.getPosition();
 
     //x
-    /*if(character.IsInWater(level)) {
+    if(character.IsInWater(level)) {
         _nextRelPosX = 0;
-    }*/
+    }
     if(_curRelPosX > _nextRelPosX) {
         _curRelPosX -= eTime*.1f;
         if(_curRelPosX < _nextRelPosX) {
@@ -54,6 +54,10 @@ void Camera::Update(IP& ip, float eTime, Level& level, Character& character) {
         if(ypos > _prevY) {
             ypos = _prevY;
         }
+    }
+    if(character.IsInWater(level)) {
+        _prevY = character.getPosition().y;
+        ypos = 0;
     }
     if(character.getPosition().y > getCenter().y && character.GetVel().y > 0.) {
         setCenter(sf::Vector2f(getCenter().x, character.getPosition().y));
