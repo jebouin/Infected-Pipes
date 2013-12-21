@@ -20,6 +20,7 @@
 #include "Skull.h"
 #include "MathHelper.h"
 #include "GUI.h"
+#include "Stalactite.h"
 
 Level::Level(IP& ip, Character& character) {
     _levelInfos["intro"] = LevelInfo{"level0", "nightBackground", 0.0001f, true, false, false};
@@ -34,7 +35,7 @@ Level::Level(IP& ip, Character& character) {
     _grass = 0;
     _background = 0;
     _difficulty = 2;
-    Load(ip, "lavaCave", character);
+    Load(ip, "iceCave", character);
     character.setPosition(character.getPosition() + sf::Vector2f(0, 50));
     _lavaTexture.create(/*_map->GetSize().x*/64*16, /*_map->GetSize().y*/38*16);
     _lavaShader.loadFromFile("shaders/lava.frag", sf::Shader::Fragment);
@@ -70,6 +71,11 @@ Level::~Level() {
         _passiveEntities[i] = 0;
     }
     _passiveEntities.clear();
+    for(int i=0 ; i<_stalactites.size() ; i++) {
+        delete _stalactites[i];
+        _stalactites[i] = 0;
+    }
+    _stalactites.clear();
 }
 
 void Level::Update(IP& ip, EntityManager& eManager, Character& character, float eTime, ParticleManager& pManager, BulletManager& bManager, GUI& gui) {
@@ -88,7 +94,9 @@ void Level::Update(IP& ip, EntityManager& eManager, Character& character, float 
     for(int i=0 ; i<_passiveEntities.size() ; i++) {
         _passiveEntities[i]->Update(ip, eTime, *this, eManager, pManager);
     }
-
+    for(int i=0 ; i<_stalactites.size() ; i++) {
+        _stalactites[i]->Update(ip, eTime, *this, character, pManager, eManager);
+    }
     if((_curLevel == "miniBoss1" || _curLevel == "miniBoss2") && _spawner->IsFinished()) {
         NextLevel(ip, eManager, bManager, character);
         character.LeavePipe();
@@ -127,6 +135,9 @@ void Level::DrawBack(IP& ip, sf::View& prevView) {
     }
     for(int i=0 ; i<_backSprites.size() ; i++) {
         ip._renderer->Draw(_backSprites[i]);
+    }
+    for(int i=0 ; i<_stalactites.size() ; i++) {
+        _stalactites[i]->Draw(ip);
     }
 }
 
@@ -229,6 +240,9 @@ void Level::Load(IP& ip, string name, Character& character) {
                     s.setOrigin(sf::Vector2f(sf::Vector2i(sf::Vector2f(s.getTextureRect().width/2.f, s.getTextureRect().height))));
                     s.setPosition(sf::Vector2f(sf::Vector2i(sf::Vector2f(pos*16) + sf::Vector2f(8, 17))));
                     _backSprites.push_back(s);
+                } else if(c == sf::Color(204, 220, 224)) {
+                    Stalactite *s = new Stalactite(pos);
+                    _stalactites.push_back(s);
                 } else if(c == sf::Color(106, 129, 193)) {
                     _map->SetTile(pos, 0, l);
                 } else if(c == sf::Color(255, 255, 255)) {

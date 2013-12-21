@@ -20,7 +20,7 @@
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1387630934 source:c:\users\xaychru04\desktop\infected pipes\ip.cpp
+1387636364 source:c:\users\xaychru04\desktop\infected pipes\ip.cpp
 	"IP.h"
 	"Renderer.h"
 	"ResourceLoader.h"
@@ -171,7 +171,7 @@
 	"IP.h"
 	"Renderer.h"
 
-1387632537 source:c:\users\xaychru04\desktop\infected pipes\level.cpp
+1387637011 source:c:\users\xaychru04\desktop\infected pipes\level.cpp
 	"Level.h"
 	"IP.h"
 	"Map.h"
@@ -194,8 +194,9 @@
 	"Skull.h"
 	"MathHelper.h"
 	"GUI.h"
+	"Stalactite.h"
 
-1387631086 c:\users\xaychru04\desktop\infected pipes\level.h
+1387636220 c:\users\xaychru04\desktop\infected pipes\level.h
 	<map>
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
@@ -859,7 +860,7 @@
 	"SFML/System.hpp"
 	"GameEntity.h"
 
-1387633657 source:c:\users\xaychru04\desktop\infected pipes\entities\character.cpp
+1387634828 source:c:\users\xaychru04\desktop\infected pipes\entities\character.cpp
 	"Character.h"
 	"IP.h"
 	"Animation.h"
@@ -1785,4 +1786,20 @@
 
 1387623461 source:c:\users\xaychru04\desktop\infected pipes\resourceloader.cpp
 	"ResourceLoader.h"
+
+1387638143 c:\users\xaychru04\desktop\infected pipes\stalactite.h
+	<iostream>
+	"SFML/Graphics.hpp"
+	"SFML/System.hpp"
+
+1387637335 source:c:\users\xaychru04\desktop\infected pipes\stalactite.cpp
+	"Stalactite.h"
+	"Level.h"
+	"IP.h"
+	"ResourceLoader.h"
+	"Character.h"
+	"ParticleManager.h"
+	"Particle.h"
+	"Renderer.h"
+	"MathHelper.h"
 

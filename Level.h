@@ -23,6 +23,7 @@ class WaterFall;
 class Duck;
 class GameEntity;
 class GUI;
+class Stalactite;
 
 struct LevelInfo {
     string _imageName;
@@ -74,6 +75,7 @@ class Level {
     vector<WaterFall*> _waterFalls;
     vector<GameEntity*> _passiveEntities;
     vector<sf::Sprite> _backSprites;
+    vector<Stalactite*> _stalactites;
 
     sf::RenderTexture _lavaTexture;
     sf::Shader _lavaShader;
