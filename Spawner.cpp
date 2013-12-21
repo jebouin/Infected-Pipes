@@ -21,6 +21,7 @@
 #include "GUI.h"
 #include "WaveIndicator.h"
 #include "SnowMan.h"
+#include "FireWormBoss.h"
 
 Spawner::Spawner(IP& ip, int nbWaves, Level& l) {
     _curWave = 0;
@@ -79,6 +80,10 @@ void Spawner::Spawn(IP& ip, EntityManager& eManager, Level& level, Character& ch
             eManager.Add(wormBoss);
             _difToSpawn = 0;
         }
+    } else if(levelName == "miniBoss3") {
+        FireWormBoss *fireWormBoss = new FireWormBoss(ip, level);
+        eManager.Add(fireWormBoss);
+        _difToSpawn = 0;
     } else if(levelName == "rockyCave" || levelName == "wetCave") {
         int pipeId = rand()%_pipes.size();
         int et;
@@ -189,7 +194,7 @@ void Spawner::NextWave(IP& ip, Level& level, GUI& gui) {
     _spawning = true;
     _clock.restart();
     cout << "Wave: " << _curWave << endl;
-    if(level.GetName() == "miniBoss1" || level.GetName() == "miniBoss2") {
+    if(level.GetName() == "miniBoss1" || level.GetName() == "miniBoss2" || level.GetName() == "miniBoss3") {
         gui.GetWaveIndicator().AnnounceWave(ip, -42);
     } else {
         gui.GetWaveIndicator().AnnounceWave(ip, _curWave);

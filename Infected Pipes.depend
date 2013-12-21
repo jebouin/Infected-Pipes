@@ -20,7 +20,7 @@
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1387636364 source:c:\users\xaychru04\desktop\infected pipes\ip.cpp
+1387641636 source:c:\users\xaychru04\desktop\infected pipes\ip.cpp
 	"IP.h"
 	"Renderer.h"
 	"ResourceLoader.h"
@@ -171,7 +171,7 @@
 	"IP.h"
 	"Renderer.h"
 
-1387637011 source:c:\users\xaychru04\desktop\infected pipes\level.cpp
+1387641436 source:c:\users\xaychru04\desktop\infected pipes\level.cpp
 	"Level.h"
 	"IP.h"
 	"Map.h"
@@ -278,7 +278,7 @@
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1385313599 source:c:\users\xaychru04\desktop\infected pipes\spawner.cpp
+1387642275 source:c:\users\xaychru04\desktop\infected pipes\spawner.cpp
 	"Spawner.h"
 	"IP.h"
 	"EntityManager.h"
@@ -302,6 +302,7 @@
 	"GUI.h"
 	"WaveIndicator.h"
 	"SnowMan.h"
+	"FireWormBoss.h"
 
 1383036518 c:\users\xaychru04\desktop\infected pipes\particlemanager.h
 	<iostream>
@@ -1792,7 +1793,7 @@
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1387637335 source:c:\users\xaychru04\desktop\infected pipes\stalactite.cpp
+1387638420 source:c:\users\xaychru04\desktop\infected pipes\stalactite.cpp
 	"Stalactite.h"
 	"Level.h"
 	"IP.h"
@@ -1802,4 +1803,26 @@
 	"Particle.h"
 	"Renderer.h"
 	"MathHelper.h"
+	"Map.h"
+
+1387643006 source:c:\users\xaychru04\desktop\infected pipes\firewormboss.cpp
+	"FireWormBoss.h"
+	"Level.h"
+	"Character.h"
+	"EntityManager.h"
+	"ParticleManager.h"
+	"BulletManager.h"
+	"Renderer.h"
+	"IP.h"
+	"MathHelper.h"
+	"Map.h"
+	"Bullet.h"
+	"Particle.h"
+	"AnimationTable.h"
+	"Animation.h"
+
+1387642253 c:\users\xaychru04\desktop\infected pipes\firewormboss.h
+	"SFML/Graphics.hpp"
+	"SFML/System.hpp"
+	"Ennemy.h"
 

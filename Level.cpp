@@ -27,6 +27,7 @@ Level::Level(IP& ip, Character& character) {
     _levelInfos["rockyCave"] = LevelInfo{"level1", "rockyBackground", 0.2f, true, true, false};
     _levelInfos["miniBoss1"] = LevelInfo{"miniBoss1", "rockyBackground", 0.2f, false, false, false};
     _levelInfos["miniBoss2"] = LevelInfo{"miniBoss2", "rockyBackground", 0.2f, false, false, false};
+    _levelInfos["miniBoss3"] = LevelInfo{"miniBoss3", "lavaBackground", 0.3f, true, false, false};
     _levelInfos["wetCave"] = LevelInfo{"level2", "rockyBackground", 0.2f, true, true, false};
     _levelInfos["lavaCave"] = LevelInfo{"level3", "lavaBackground", 0.3f, true, false, true};
     _levelInfos["iceCave"] = LevelInfo{"level4", "iceBackground", 0.3f, false, false, false};
@@ -35,7 +36,7 @@ Level::Level(IP& ip, Character& character) {
     _grass = 0;
     _background = 0;
     _difficulty = 2;
-    Load(ip, "iceCave", character);
+    Load(ip, "miniBoss3", character);
     character.setPosition(character.getPosition() + sf::Vector2f(0, 50));
     _lavaTexture.create(/*_map->GetSize().x*/64*16, /*_map->GetSize().y*/38*16);
     _lavaShader.loadFromFile("shaders/lava.frag", sf::Shader::Fragment);
@@ -97,7 +98,7 @@ void Level::Update(IP& ip, EntityManager& eManager, Character& character, float 
     for(int i=0 ; i<_stalactites.size() ; i++) {
         _stalactites[i]->Update(ip, eTime, *this, character, pManager, eManager);
     }
-    if((_curLevel == "miniBoss1" || _curLevel == "miniBoss2") && _spawner->IsFinished()) {
+    if((_curLevel == "miniBoss1" || _curLevel == "miniBoss2" || _curLevel == "miniBoss3") && _spawner->IsFinished()) {
         NextLevel(ip, eManager, bManager, character);
         character.LeavePipe();
     }
@@ -176,7 +177,7 @@ void Level::Load(IP& ip, string name, Character& character) {
     _map = new Map(ip, sf::Vector2i(_levelImages[0].getSize()));
 
     delete _spawner;
-    if(name == "miniBoss1" || name == "miniBoss2") {
+    if(name == "miniBoss1" || name == "miniBoss2" || name == "miniBoss3") {
         _spawner = new Spawner(ip, 1, *this);
     } else {
         _spawner = new Spawner(ip, 20, *this);
@@ -442,6 +443,10 @@ void Level::NextLevel(IP& ip, EntityManager& eManager, BulletManager& bManager, 
     } else if(_curLevel == "miniBoss2") {
         toLoad = "lavaCave";
     } else if(_curLevel == "lavaCave") {
+        toLoad = "miniBoss3";
+    } else if(_curLevel == "miniBoss3") {
+        toLoad = "iceCave";
+    } else {
         toLoad = "iceCave";
     }
     Load(ip, toLoad, character);
