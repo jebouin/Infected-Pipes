@@ -183,6 +183,7 @@ void IP::LoadResources() {
     ResourceLoader::LoadTexture("gfx/turtleParticle.png", "turtleParticle");
     ResourceLoader::LoadTexture("gfx/turtleParticle2.png", "turtleParticle2");
     ResourceLoader::LoadTexture("gfx/turtleHead.png", "turtleHead");
+    ResourceLoader::LoadTexture("gfx/snowFlake.png", "snowFlake");
 
     ResourceLoader::LoadTexture("gfx/fir.png", "fir");
     ResourceLoader::LoadTexture("gfx/moon.png", "moon");

@@ -55,7 +55,7 @@ void SnowMan::Update(IP& ip, float eTime, Level& level, Character& character, En
         if(IsInWater(level)) {
             Jump(level);
         } else {
-            if(!level.GetMap().IsOnTileType(*this, Map::WALL) && !level.GetSpawner().IsOnGround(*this)) {
+            if(!level.GetMap().IsOnTileType(*this, Map::WALL) && !level.GetSpawner().IsOnGround(*this) && !level.GetMap().IsOnTileType(*this, Map::PLATFORM)) {
                 if(getPosition().x > character.getPosition().x) {
                     GoLeft(eTime);
                 } else {

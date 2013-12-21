@@ -56,6 +56,8 @@ class Level {
 
     private:
     sf::Clock _timer;
+    sf::Clock _snowFlakesTimer;
+    float _snowFlakesTime;
     sf::Vector2i GetRectSizeInImageAt(sf::Image& img, sf::Vector2i pos, sf::Color c);
 
     Map *_map;

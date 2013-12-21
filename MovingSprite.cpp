@@ -172,6 +172,20 @@ bool MovingSprite::IsInWater(Level& level) {
     return false;
 }
 
+bool MovingSprite::IsInLava(Level& level) {
+    for(int i=0 ; i<level.GetNbWaterFields() ; i++) {
+        WaterField& w(level.GetWaterField(i));
+        sf::FloatRect r(w.GetRect());
+        if(!w.IsLava()) {
+            continue;
+        }
+        if(/*r.intersects(GetGlobalHitbox())*/r.contains(getPosition())) {
+            return true;
+        }
+    }
+    return false;
+}
+
 bool MovingSprite::GetCollidesWithWater() {
     return _collidesWithWater;
 }

@@ -14,6 +14,7 @@
 #include "WaterField.h"
 #include "WaterFall.h"
 #include "ParticleManager.h"
+#include "Particle.h"
 #include "Duck.h"
 #include "Mouse.h"
 #include "Skull.h"
@@ -33,10 +34,11 @@ Level::Level(IP& ip, Character& character) {
     _grass = 0;
     _background = 0;
     _difficulty = 2;
-    Load(ip, "iceCave", character);
+    Load(ip, "lavaCave", character);
     character.setPosition(character.getPosition() + sf::Vector2f(0, 50));
     _lavaTexture.create(/*_map->GetSize().x*/64*16, /*_map->GetSize().y*/38*16);
     _lavaShader.loadFromFile("shaders/lava.frag", sf::Shader::Fragment);
+    _snowFlakesTime = 0;
 }
 
 Level::~Level() {
@@ -90,6 +92,24 @@ void Level::Update(IP& ip, EntityManager& eManager, Character& character, float 
     if((_curLevel == "miniBoss1" || _curLevel == "miniBoss2") && _spawner->IsFinished()) {
         NextLevel(ip, eManager, bManager, character);
         character.LeavePipe();
+    }
+
+    if(_curLevel == "iceCave") {
+        _snowFlakesTime += _snowFlakesTimer.restart().asMilliseconds();
+        while(_snowFlakesTime >= 42) {
+            _snowFlakesTime -= 42;
+            bool z = rand()%2;
+            Particle *p = new Particle(ip,
+                                       "snowFlake",
+                                       sf::Vector2f(MathHelper::RandFloat(0, _map->GetSize().x*16), 0),
+                                        sf::Vector2f(MathHelper::RandFloat(-.015, 0.015), .04),
+                                       MathHelper::RandFloat(-.3, .3),
+                                       10000,
+                                       sf::Vector2f(1, 1), sf::Vector2f(1, 1),
+                                       255, 255,
+                                       false, false, false, sf::IntRect(0, 0, 7, 7), z);
+            pManager.AddParticle(p);
+        }
     }
 }
 

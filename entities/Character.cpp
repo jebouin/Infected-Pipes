@@ -98,6 +98,10 @@ void Character::Update(IP& ip, float eTime, Level& level, EntityManager& eManage
         _arm.setRotation(r);
     }
 
+    if(IsInLava(level) && GetHP() > 0) {
+        Damage(GetHP(), ip, pManager, sf::Color(255, 0, 0), sf::Vector2f(0, 0), sf::Vector2f(0, -.1), eManager, level);
+    }
+
     sf::Vector2f framed(0, 0);
     if(t.GetAnimationName() == "idle") {
         framed = sf::Vector2f(0, 0);
