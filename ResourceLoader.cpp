@@ -4,6 +4,7 @@ void ResourceLoader::LoadTexture(string path, string name) {
     sf::Texture t;
     t.loadFromFile(path);
     t.setSmooth(false);
+    t.setRepeated(true);
     _textures[name] = t;
     sf::Image i;
     i.loadFromFile(path);

@@ -12,6 +12,7 @@ using namespace std;
 
 class IP;
 class ParticleManager;
+class MovingSprite;
 
 struct Spring {
     float _nLength;
@@ -21,11 +22,13 @@ struct Spring {
 
 class WaterField {
     public:
-    WaterField(sf::FloatRect rect, float resolution, bool surface, bool lava);
+    WaterField(sf::FloatRect rect, float resolution, bool surface, bool lava, bool limited);
     ~WaterField();
     void Update(IP& ip, float elapsedTime, ParticleManager& pManager);
     void Draw(IP& ip, sf::RenderTexture& rt);
     void Splash(sf::Vector2f pos, float force, ParticleManager& pManager, IP& ip);
+    bool IsInWater(MovingSprite& sprite);
+    void SetLimited(bool l);
     sf::FloatRect GetRect();
     bool IsSurface();
     bool IsLava();
@@ -39,6 +42,7 @@ class WaterField {
     float _resolution;
     bool _surface;
     bool _lava;
+    bool _limited;
 
     sf::Color _topc;
     sf::Color _c;

@@ -36,7 +36,7 @@ Level::Level(IP& ip, Character& character) {
     _grass = 0;
     _background = 0;
     _difficulty = 2;
-    Load(ip, "iceCave", character);
+    Load(ip, "miniBoss3", character);
     character.setPosition(character.getPosition() + sf::Vector2f(0, 50));
     _lavaTexture.create(/*_map->GetSize().x*/64*16, /*_map->GetSize().y*/38*16);
     _lavaShader.loadFromFile("shaders/lava.frag", sf::Shader::Fragment);
@@ -276,6 +276,7 @@ void Level::Load(IP& ip, string name, Character& character) {
             //fluids
             if(_levelImages[1].getPixel(i, j) == waterSufaceC || _levelImages[1].getPixel(i, j) == lavaSufaceC) {
                 bool isLava = _levelImages[1].getPixel(i, j)==lavaSufaceC;
+                bool isLimited = true;
                 sf::Vector2i s(GetRectSizeInImageAt(_levelImages[1], sf::Vector2i(i, j), _levelImages[1].getPixel(i, j)));
                 float offsets[2]{0};
                 if(_map->GetTileType(sf::Vector2i(i-1, j), Map::FRONT) != Map::VOID) {
@@ -284,7 +285,12 @@ void Level::Load(IP& ip, string name, Character& character) {
                 if(_map->GetTileType(sf::Vector2i(i+s.x, j), Map::FRONT) != Map::VOID) {
                     offsets[1] = 2;
                 }
-                _waterFields.push_back(new WaterField(sf::FloatRect(i*16-offsets[0], j*16+8, s.x*16+offsets[0]+offsets[1], s.y*16-8), isLava?4:2, true, isLava));
+                sf::FloatRect fluidRect(i*16-offsets[0], j*16+8, s.x*16+offsets[0]+offsets[1], s.y*16-8);
+                if(isLava && name == "miniBoss3") {
+                    isLimited = false;
+                    fluidRect.height = 12*16;
+                }
+                _waterFields.push_back(new WaterField(fluidRect, isLava?4:2, true, isLava, isLimited));
                 if(_levelInfos[name]._addDucks) {
                     sf::FloatRect rect(_waterFields[GetNbWaterFields()-1]->GetRect());
                     int nbDucks = (int)(MathHelper::RandFloat(0, 1)*MathHelper::RandFloat(0, 1)*((float)s.x/3.f));
@@ -303,7 +309,7 @@ void Level::Load(IP& ip, string name, Character& character) {
                         offsets[i] = 2;
                     }
                 }
-                _waterFields.push_back(new WaterField(sf::FloatRect(i*16-offsets[0], j*16-offsets[2], s.x*16+offsets[0]+offsets[1], s.y*16+offsets[2]+offsets[3]), 2, false, _levelImages[1].getPixel(i, j)==lavaC));
+                _waterFields.push_back(new WaterField(sf::FloatRect(i*16-offsets[0], j*16-offsets[2], s.x*16+offsets[0]+offsets[1], s.y*16+offsets[2]+offsets[3]), 2, false, _levelImages[1].getPixel(i, j)==lavaC, true));
             }
             //falls
             if(_levelImages[0].getPixel(i, j) == waterFallC) {

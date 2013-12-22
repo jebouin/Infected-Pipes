@@ -5,13 +5,14 @@
 #include "Particle.h"
 #include "MathHelper.h"
 
-WaterField::WaterField(sf::FloatRect rect, float resolution, bool surface, bool lava) {
+WaterField::WaterField(sf::FloatRect rect, float resolution, bool surface, bool lava, bool limited) {
     _rect = rect;
     _surface = surface;
     _nbPoints = rect.width/resolution;
     _resolution = rect.width/_nbPoints;
     _vertexes.setPrimitiveType(sf::Quads);
     _lava = lava;
+    _limited = limited;
 
     sf::Color waterTopC(177, 181, 191, 200);
     sf::Color waterC(106, 129, 193, 80);
@@ -55,13 +56,15 @@ void WaterField::Update(IP& ip, float elapsedTime, ParticleManager& pManager) {
         s._velocity += acc*elapsedTime/50.f;
         s._length += s._velocity*elapsedTime/50.f;
 
-        if(s._length < -4) {
-            s._length = -4;
-            s._velocity = 0;
-        }
-        if(s._length > _rect.height+4) {
-            s._length = _rect.height+4;
-            s._velocity = 0;
+        if(_limited) {
+            if(s._length < -4) {
+                s._length = -4;
+                s._velocity = 0;
+            }
+            if(s._length > _rect.height+4) {
+                s._length = _rect.height+4;
+                s._velocity = 0;
+            }
         }
     }
 
@@ -181,6 +184,14 @@ void WaterField::Splash(sf::Vector2f pos, float force, ParticleManager& pManager
             pManager.AddParticle(p);
         }
     }
+}
+
+bool WaterField::IsInWater(MovingSprite& sprite) {
+
+}
+
+void WaterField::SetLimited(bool l) {
+    _limited = l;
 }
 
 sf::FloatRect WaterField::GetRect() {

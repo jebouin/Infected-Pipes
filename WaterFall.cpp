@@ -54,18 +54,20 @@ void WaterFall::Update(IP& ip, float elapsedTime, Level& level, ParticleManager&
     }
 
     _down = false;
-    for(int i=0 ; i<level.GetNbWaterFields() ; i++) {
-        WaterField& wf(level.GetWaterField(i));
-        if(!wf.IsSurface()) {
-            continue;
-        }
-        if(GetGlobalHitbox().intersects(wf.GetRect())) {
-            _down = true;
-            //set the points corresponding to the field
-            for(int i=2 ; i<_shape.getPointCount() ; i++) {
-                float x = i-2 + _shape.getPoint(1).x;
-                float l = wf.GetHeight(x);
-                _shape.setPoint(i, sf::Vector2f(x, (wf.GetRect().top+wf.GetRect().height)-l+1));
+    if(!_lava) {
+        for(int i=0 ; i<level.GetNbWaterFields() ; i++) {
+            WaterField& wf(level.GetWaterField(i));
+            if(!wf.IsSurface()) {
+                continue;
+            }
+            if(GetGlobalHitbox().intersects(wf.GetRect())) {
+                _down = true;
+                //set the points corresponding to the field
+                for(int i=2 ; i<_shape.getPointCount() ; i++) {
+                    float x = i-2 + _shape.getPoint(1).x;
+                    float l = wf.GetHeight(x);
+                    _shape.setPoint(i, sf::Vector2f(x, (wf.GetRect().top+wf.GetRect().height)-l+1));
+                }
             }
         }
     }
@@ -88,6 +90,9 @@ void WaterFall::Fall(IP& ip, Level& level) {
         sf::Vector2i curTilePos(_tilePos.x, i);
         sf::FloatRect curRect(sf::Vector2f(curTilePos)*16.f, sf::Vector2f(16, 16));
         level.AddWaterFall(ip, curTilePos, _big, _lava);
+        if(_lava) {
+            continue;
+        }
         for(int j=0 ; j<level.GetNbWaterFields() ; j++) {
             WaterField& wf(level.GetWaterField(j));
             if(!wf.IsSurface()) {
