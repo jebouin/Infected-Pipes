@@ -22,6 +22,7 @@
 #include "WaveIndicator.h"
 #include "SnowMan.h"
 #include "FireWormBoss.h"
+#include "Fist.h"
 
 Spawner::Spawner(IP& ip, int nbWaves, Level& l) {
     _curWave = 0;
@@ -167,9 +168,16 @@ void Spawner::Spawn(IP& ip, EntityManager& eManager, Level& level, Character& ch
                 break;
             }
         }*/
-        _difToSpawn = 0;
+        /*_difToSpawn = 0;
         int pipeId = rand()%_pipes.size();
-        _pipes[pipeId]->Spawn(ip, eManager, new SnowMan(ip, level));
+        _pipes[pipeId]->Spawn(ip, eManager, new SnowMan(ip, level));*/
+        Fist *f = new Fist(ip, level);
+        if(!f->AutoSpawn(ip, level, eManager, character)) {
+            delete f;
+            return;
+        }
+        eManager.Add(f);
+        _difToSpawn = 0;
     }
 
     /*if(rand()%10==0) {

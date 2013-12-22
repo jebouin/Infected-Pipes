@@ -1,6 +1,11 @@
 #ifndef MATHHELPER_H_INCLUDED
 #define MATHHELPER_H_INCLUDED
 
+#define RIGHT sf::Vector2i(1, 0)
+#define LEFT sf::Vector2i(-1, 0)
+#define UP sf::Vector2i(0, -1)
+#define DOWN sf::Vector2i(0, 1)
+
 #include <iostream>
 #include <cmath>
 #include <sstream>
