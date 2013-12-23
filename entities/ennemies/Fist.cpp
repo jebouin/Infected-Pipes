@@ -16,7 +16,7 @@
 
 Fist::Fist(IP& ip, Level& level)
     : Ennemy(ip, "fist", sf::IntRect(4, 2, 17, 36), 200, 30, 40, level) {
-    _stateTime = 1000;
+    _stateTime = 300;
     _curState = SDOWN;
     SetPushable(false);
     SetFlying(true);
@@ -61,6 +61,9 @@ bool Fist::AutoSpawn(IP& ip, Level& level, EntityManager& eManager, Character& c
                 i--;
             }
         }
+    }
+    if(correctPos.size() == 0) {
+        return false; //no correct pos yet...
     }
     //now we keep the closest pos to player
     float bestDist = 42000000;

@@ -20,7 +20,7 @@
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1387720726 source:c:\users\xaychru04\desktop\infected pipes\ip.cpp
+1387731369 source:c:\users\xaychru04\desktop\infected pipes\ip.cpp
 	"IP.h"
 	"Renderer.h"
 	"ResourceLoader.h"
@@ -610,7 +610,7 @@
 	"SFML/System.hpp"
 	"Bullet.h"
 
-1383319861 source:c:\users\xaychru04\desktop\infected pipes\bullets\arrow.cpp
+1387731369 source:c:\users\xaychru04\desktop\infected pipes\bullets\arrow.cpp
 	"Arrow.h"
 	"IP.h"
 	"Character.h"
@@ -800,7 +800,7 @@
 	<SFML/Window.hpp>
 	"MovingSprite.h"
 
-1387720610 source:c:\users\xaychru04\desktop\infected pipes\waterfall.cpp
+1387721552 source:c:\users\xaychru04\desktop\infected pipes\waterfall.cpp
 	"WaterFall.h"
 	"IP.h"
 	"Renderer.h"
@@ -1827,7 +1827,7 @@
 	"SFML/System.hpp"
 	"Ennemy.h"
 
-1387719346 source:c:\users\xaychru04\desktop\infected pipes\entities\ennemies\fist.cpp
+1387733331 source:c:\users\xaychru04\desktop\infected pipes\entities\ennemies\fist.cpp
 	"Fist.h"
 	"IP.h"
 	"Map.h"
@@ -1849,12 +1849,12 @@
 	"SFML/System.hpp"
 	"Ennemy.h"
 
-1387642253 c:\users\xaychru04\desktop\infected pipes\entities\ennemies\firewormboss.h
+1387731369 c:\users\xaychru04\desktop\infected pipes\entities\ennemies\firewormboss.h
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 	"Ennemy.h"
 
-1387650525 source:c:\users\xaychru04\desktop\infected pipes\entities\ennemies\firewormboss.cpp
+1387733535 source:c:\users\xaychru04\desktop\infected pipes\entities\ennemies\firewormboss.cpp
 	"FireWormBoss.h"
 	"Level.h"
 	"Character.h"
@@ -1869,4 +1869,21 @@
 	"Particle.h"
 	"AnimationTable.h"
 	"Animation.h"
+	"ResourceLoader.h"
+	"DualFireBullet.h"
+
+1387731520 source:c:\users\xaychru04\desktop\infected pipes\bullets\dualfirebullet.cpp
+	"DualFireBullet.h"
+	"IP.h"
+	"Character.h"
+	"Level.h"
+	"EntityManager.h"
+	"ParticleManager.h"
+	"MathHelper.h"
+
+1387731369 c:\users\xaychru04\desktop\infected pipes\bullets\dualfirebullet.h
+	<iostream>
+	"SFML/Graphics.hpp"
+	"SFML/System.hpp"
+	"Bullet.h"
 
