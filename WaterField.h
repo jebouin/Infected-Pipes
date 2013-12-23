@@ -32,7 +32,9 @@ class WaterField {
     sf::FloatRect GetRect();
     bool IsSurface();
     bool IsLava();
+    int GetId(float x);
     float GetHeight(float x); //inverted!
+    float GetY(float x); //not inverted! REAL POS YEAH! \o/ ...!
 
     private:
     sf::VertexArray _vertexes;

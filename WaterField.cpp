@@ -206,13 +206,28 @@ bool WaterField::IsLava() {
     return _lava;
 }
 
+int WaterField::GetId(float x) {
+    if(x < _rect.left || x > _rect.left+_rect.width) {
+        return -1;
+    }
+    return int((x-_rect.left)/_rect.width*_nbPoints);
+}
+
 float WaterField::GetHeight(float x) {
     if(!_surface) {
-        return 0;
+        return -1;
     }
-    if(x < _rect.left || x > _rect.left+_rect.width) {
-        return 0;
+    int id = GetId(x);
+    if(id == -1) {
+        return -1;
     }
-    int id = int((x-_rect.left)/_rect.width*_nbPoints);
     return _springs[id]._length;
+}
+
+float WaterField::GetY(float x) {
+    float height = GetHeight(x);
+    if(height == -1) {
+        return -1;
+    }
+    return _rect.top+_rect.height-height;
 }

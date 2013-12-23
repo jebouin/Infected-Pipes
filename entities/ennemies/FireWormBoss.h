@@ -28,6 +28,7 @@ public:
 private:
     float _upY;
     float _downY;
+    float _relY;
     State _curState;
     sf::Clock _stateTimer;
     float _stateTime;

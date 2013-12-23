@@ -14,6 +14,7 @@
 #include "Animation.h"
 #include "ResourceLoader.h"
 #include "DualFireBullet.h"
+#include "WaterField.h"
 
 FireWormBoss::FireWormBoss(IP& ip, Level& level)
     : Ennemy(ip, "fireWormBoss", sf::IntRect(0, 6, 43, 60), 4200, 1000, 500, level) {
@@ -24,9 +25,10 @@ FireWormBoss::FireWormBoss(IP& ip, Level& level)
     SetFlying(true);
     SetPhysics(false);
     SetPushable(false);
-    _upY = 284;
-    _downY = 284+70;
-    setPosition(sf::Vector2f(200, _downY));
+    _upY = -40;
+    _downY = 38;
+    _relY = _downY;
+    setPosition(sf::Vector2f(200, 0));
     _stateTime = 1000;
     _curState = SDOWN;
 
@@ -52,14 +54,16 @@ void FireWormBoss::Update(IP& ip, float eTime, Level& level, Character& characte
 
     switch(_curState) {
     case SGOINGUP:
-        if(getPosition().y <= _upY) {
-            setPosition(getPosition().x, _upY);
+        _relY -= .4f*eTime;
+        if(_relY <= _upY) {
+            _relY = _upY;
             ChangeState(SUP);
         }
         break;
     case SGOINGDOWN:
-        if(getPosition().y >= _downY) {
-            setPosition(getPosition().x, _downY);
+        _relY += .3f*eTime;
+        if(_relY >= _downY) {
+            _relY = _downY;
             ChangeState(SDOWN);
             float xPos=0;
             bool correctPos = false;
@@ -116,6 +120,21 @@ void FireWormBoss::Update(IP& ip, float eTime, Level& level, Character& characte
         _turretBase.setPosition(getPosition() + sf::Vector2f(-4, _relTurretY));
         _turretCannon.setPosition(_turretBase.getPosition() + sf::Vector2f(0, -_turretBase.getTextureRect().height/2.f));
     }
+
+    //get the minumum lava height to set the position relatively to the HUUUUGE lava field :D
+    float minLavaY = 0;
+    if(level.GetNbWaterFields() == 1) {
+        WaterField& wf(level.GetWaterField(0));
+        float minX = GetGlobalHitbox().left;
+        float maxX = GetGlobalHitbox().left+GetGlobalHitbox().width;
+        for(float i=minX ; i<maxX ; i++) {
+            float curLavaY = wf.GetY(i);
+            if(curLavaY > minLavaY) {
+                minLavaY = curLavaY;
+            }
+        }
+    }
+    setPosition(sf::Vector2f(getPosition().x, minLavaY+_relY));
 }
 
 void FireWormBoss::Draw(IP& ip) {
@@ -135,24 +154,20 @@ void FireWormBoss::ChangeState(State state) {
     _stateTimer.restart();
     switch(state) {
     case SUP:
-        SetVel(sf::Vector2f(0, 0));
         _curState = SUP;
         t.SetAnimation("idle");
         _stateTime = 1000;
         break;
     case SDOWN:
-        SetVel(sf::Vector2f(0, 0));
         _curState = SDOWN;
         _stateTime = 1000;
         break;
     case SGOINGUP:
         _curState = SGOINGUP;
-        SetVel(sf::Vector2f(0, -.4));
         t.SetAnimation("goingup");
         break;
     case SGOINGDOWN:
         _curState = SGOINGDOWN;
-        SetVel(sf::Vector2f(0, .3));
         t.SetAnimation("goingup");
         break;
     case STURRETGOINGUP:
