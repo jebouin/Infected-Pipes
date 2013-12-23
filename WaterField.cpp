@@ -35,6 +35,9 @@ WaterField::WaterField(sf::FloatRect rect, float resolution, bool surface, bool 
             _vertexes.append(sf::Vertex(corners[i], _c));
         }
     }
+
+    _shape.setFillColor(sf::Color(0, 0, 0));
+    _shape.setPointCount(4);
 }
 
 WaterField::~WaterField() {
@@ -121,6 +124,11 @@ void WaterField::Update(IP& ip, float elapsedTime, ParticleManager& pManager) {
             }
         }
     }
+
+    vector<sf::Vector2f> c(MathHelper::Rect2Corners(_rect));
+    for(int i=0 ; i<4 ; i++) {
+        _shape.setPoint(i, c[i]);
+    }
 }
 
 void WaterField::Draw(IP& ip, sf::RenderTexture& rt){
@@ -150,6 +158,8 @@ void WaterField::Draw(IP& ip, sf::RenderTexture& rt){
     } else {
         ip._renderer->Draw(_vertexes);
     }
+
+    //ip._renderer->Draw(_shape);
 }
 
 void WaterField::Splash(sf::Vector2f pos, float force, ParticleManager& pManager, IP& ip) {
@@ -194,6 +204,15 @@ void WaterField::SetLimited(bool l) {
     _limited = l;
 }
 
+void WaterField::SetNormalHeight(float normalheight) {
+    float delta = _springs[0]._nLength-normalheight;
+    _rect.top += delta;
+    _rect.height -= delta;
+    for(int i=0 ; i<_springs.size() ; i++) {
+        _springs[i]._nLength = normalheight;
+    }
+}
+
 sf::FloatRect WaterField::GetRect() {
     return _rect;
 }
@@ -204,6 +223,14 @@ bool WaterField::IsSurface() {
 
 bool WaterField::IsLava() {
     return _lava;
+}
+
+bool WaterField::IsLimited() {
+    return _limited;
+}
+
+float WaterField::GetNormalHeight() {
+    return _springs[0]._nLength;
 }
 
 int WaterField::GetId(float x) {

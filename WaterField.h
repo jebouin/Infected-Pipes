@@ -29,9 +29,12 @@ class WaterField {
     void Splash(sf::Vector2f pos, float force, ParticleManager& pManager, IP& ip);
     bool IsInWater(MovingSprite& sprite);
     void SetLimited(bool l);
+    void SetNormalHeight(float normalheight);
     sf::FloatRect GetRect();
     bool IsSurface();
     bool IsLava();
+    bool IsLimited();
+    float GetNormalHeight();
     int GetId(float x);
     float GetHeight(float x); //inverted!
     float GetY(float x); //not inverted! REAL POS YEAH! \o/ ...!
@@ -51,6 +54,8 @@ class WaterField {
     sf::Color _downc;
 
     sf::Clock _particleTimer;
+
+    sf::ConvexShape _shape;
 };
 
 #endif // WATERFIELD_H_INCLUDED

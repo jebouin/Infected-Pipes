@@ -48,7 +48,11 @@ void WaterFall::Update(IP& ip, float elapsedTime, Level& level, ParticleManager&
                 continue;
             }
             if(GetGlobalHitbox().intersects(wf.GetRect())) {
-                wf.Splash(getPosition() + sf::Vector2f(MathHelper::RandFloat(-GetGlobalHitbox().width/2.f+1, GetGlobalHitbox().width/2.f-1), GetGlobalHitbox().height/2.f), (_lava ? -MathHelper::RandFloat(1.7, 2.4) : -MathHelper::RandFloat(3., 5.)), pManager, ip);
+                if(wf.IsLimited()) {
+                    wf.Splash(getPosition() + sf::Vector2f(MathHelper::RandFloat(-GetGlobalHitbox().width/2.f+1, GetGlobalHitbox().width/2.f-1), GetGlobalHitbox().height/2.f), (_lava ? -MathHelper::RandFloat(1.7, 2.4) : -MathHelper::RandFloat(3., 5.)), pManager, ip);
+                } else {
+                    wf.Splash(getPosition() + sf::Vector2f(MathHelper::RandFloat(-GetGlobalHitbox().width/2.f+1, GetGlobalHitbox().width/2.f-1), GetGlobalHitbox().height/2.f), (_lava ? -MathHelper::RandFloat(3.7, 5.4) : -MathHelper::RandFloat(3., 5.)), pManager, ip);
+                }
             }
         }
     }

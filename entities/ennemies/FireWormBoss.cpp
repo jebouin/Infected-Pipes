@@ -121,6 +121,12 @@ void FireWormBoss::Update(IP& ip, float eTime, Level& level, Character& characte
         _turretCannon.setPosition(_turretBase.getPosition() + sf::Vector2f(0, -_turretBase.getTextureRect().height/2.f));
     }
 
+    //LAVA IS FLOWING OMG!
+    if(level.GetNbWaterFields() == 1) {
+        WaterField& wf(level.GetWaterField(0));
+        wf.SetNormalHeight(wf.GetNormalHeight() + .01f*eTime);
+    }
+
     //get the minumum lava height to set the position relatively to the HUUUUGE lava field :D
     float minLavaY = 0;
     if(level.GetNbWaterFields() == 1) {
