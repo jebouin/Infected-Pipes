@@ -132,6 +132,7 @@ void IP::LoadResources() {
     ResourceLoader::LoadTexture("gfx/fireWormBossTurret.png", "fireWormBossTurret");
     ResourceLoader::LoadTexture("gfx/fireWormBossCannon.png", "fireWormBossCannon");
     ResourceLoader::LoadTexture("gfx/fist.png", "fist");
+    ResourceLoader::LoadTexture("gfx/flyingSkull.png", "flyingSkull");
 
     ResourceLoader::LoadTexture("gfx/duck.png", "duck");
     ResourceLoader::LoadTexture("gfx/mouse.png", "mouse");
@@ -164,6 +165,7 @@ void IP::LoadResources() {
     ResourceLoader::LoadTexture("gfx/snowBallBullet.png", "snowBallBullet");
     ResourceLoader::LoadTexture("gfx/grenade.png", "grenade");
     ResourceLoader::LoadTexture("gfx/dualFireBullet.png", "dualFireBullet");
+    ResourceLoader::LoadTexture("gfx/boneBullet.png", "boneBullet");
 
     ResourceLoader::LoadTexture("gfx/blood0.png", "blood0");
     ResourceLoader::LoadTexture("gfx/blood1.png", "blood1");
@@ -197,6 +199,12 @@ void IP::LoadResources() {
     ResourceLoader::LoadTexture("gfx/snowRockParticle2.png", "snowRockParticle2");
     ResourceLoader::LoadTexture("gfx/fingerParticle.png", "fingerParticle");
     ResourceLoader::LoadTexture("gfx/fingerParticle2.png", "fingerParticle2");
+    ResourceLoader::LoadTexture("gfx/skullParticle.png", "skullParticle");
+    ResourceLoader::LoadTexture("gfx/skullParticle2.png", "skullParticle2");
+    ResourceLoader::LoadTexture("gfx/skullParticle3.png", "skullParticle3");
+    ResourceLoader::LoadTexture("gfx/skullParticle4.png", "skullParticle4");
+    ResourceLoader::LoadTexture("gfx/skullFeather.png", "skullFeather");
+    ResourceLoader::LoadTexture("gfx/skullFeather2.png", "skullFeather2");
 
     ResourceLoader::LoadTexture("gfx/fir.png", "fir");
     ResourceLoader::LoadTexture("gfx/moon.png", "moon");

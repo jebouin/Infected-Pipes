@@ -20,7 +20,7 @@
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1387731369 source:c:\users\xaychru04\desktop\infected pipes\ip.cpp
+1387807851 source:c:\users\xaychru04\desktop\infected pipes\ip.cpp
 	"IP.h"
 	"Renderer.h"
 	"ResourceLoader.h"
@@ -171,7 +171,7 @@
 	"IP.h"
 	"Renderer.h"
 
-1387720299 source:c:\users\xaychru04\desktop\infected pipes\level.cpp
+1387801218 source:c:\users\xaychru04\desktop\infected pipes\level.cpp
 	"Level.h"
 	"IP.h"
 	"Map.h"
@@ -278,7 +278,7 @@
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1387711386 source:c:\users\xaychru04\desktop\infected pipes\spawner.cpp
+1387801559 source:c:\users\xaychru04\desktop\infected pipes\spawner.cpp
 	"Spawner.h"
 	"IP.h"
 	"EntityManager.h"
@@ -304,6 +304,7 @@
 	"SnowMan.h"
 	"FireWormBoss.h"
 	"Fist.h"
+	"FlyingSkull.h"
 
 1383036518 c:\users\xaychru04\desktop\infected pipes\particlemanager.h
 	<iostream>
@@ -1827,7 +1828,7 @@
 	"SFML/System.hpp"
 	"Ennemy.h"
 
-1387733331 source:c:\users\xaychru04\desktop\infected pipes\entities\ennemies\fist.cpp
+1387805784 source:c:\users\xaychru04\desktop\infected pipes\entities\ennemies\fist.cpp
 	"Fist.h"
 	"IP.h"
 	"Map.h"
@@ -1882,6 +1883,42 @@
 	"MathHelper.h"
 
 1387731369 c:\users\xaychru04\desktop\infected pipes\bullets\dualfirebullet.h
+	<iostream>
+	"SFML/Graphics.hpp"
+	"SFML/System.hpp"
+	"Bullet.h"
+
+1387808554 source:c:\users\xaychru04\desktop\infected pipes\entities\ennemies\flyingskull.cpp
+	"FlyingSkull.h"
+	"IP.h"
+	"Map.h"
+	"Level.h"
+	"Character.h"
+	"MathHelper.h"
+	"EntityManager.h"
+	"Spawner.h"
+	"Particle.h"
+	"ParticleManager.h"
+	"AnimationTable.h"
+	"Animation.h"
+	"BulletManager.h"
+	"BoneBullet.h"
+
+1387806800 c:\users\xaychru04\desktop\infected pipes\entities\ennemies\flyingskull.h
+	"SFML/Graphics.hpp"
+	"SFML/System.hpp"
+	"Ennemy.h"
+
+1387806236 source:c:\users\xaychru04\desktop\infected pipes\bullets\bonebullet.cpp
+	"BoneBullet.h"
+	"IP.h"
+	"Character.h"
+	"Level.h"
+	"EntityManager.h"
+	"ParticleManager.h"
+	"MathHelper.h"
+
+1387806184 c:\users\xaychru04\desktop\infected pipes\bullets\bonebullet.h
 	<iostream>
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"

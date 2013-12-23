@@ -59,6 +59,7 @@ bool Fist::AutoSpawn(IP& ip, Level& level, EntityManager& eManager, Character& c
             if(eRect.intersects(curRect)) {
                 correctPos.erase(correctPos.begin() + i);
                 i--;
+                break;
             }
         }
     }

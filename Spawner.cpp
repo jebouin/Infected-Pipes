@@ -23,6 +23,7 @@
 #include "SnowMan.h"
 #include "FireWormBoss.h"
 #include "Fist.h"
+#include "FlyingSkull.h"
 
 Spawner::Spawner(IP& ip, int nbWaves, Level& l) {
     _curWave = 0;
@@ -119,7 +120,7 @@ void Spawner::Spawn(IP& ip, EntityManager& eManager, Level& level, Character& ch
         _difToSpawn -= d[et];
     } else if(levelName == "lavaCave") {
         int pipeId = rand()%_pipes.size();
-        int et(0);
+        /*int et(0);
         static int d[2] = {200, 500};
         for(int i=1 ; i>=0 ; i--) {
             if(d[i] <= _difToSpawn) {
@@ -142,7 +143,9 @@ void Spawner::Spawn(IP& ip, EntityManager& eManager, Level& level, Character& ch
                 break;
             }
         }
-        _difToSpawn -= d[et];
+        _difToSpawn -= d[et];*/
+        _difToSpawn -= 10;
+        _pipes[pipeId]->Spawn(ip, eManager, new FlyingSkull(ip, level));
     } else if(levelName == "iceCave") {
         /*int pipeId = rand()%_pipes.size();
         int et(0);
