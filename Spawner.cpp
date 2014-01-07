@@ -144,7 +144,7 @@ void Spawner::Spawn(IP& ip, EntityManager& eManager, Level& level, Character& ch
             }
         }
         _difToSpawn -= d[et];*/
-        _difToSpawn -= 10;
+        _difToSpawn -= 32;
         _pipes[pipeId]->Spawn(ip, eManager, new FlyingSkull(ip, level));
     } else if(levelName == "iceCave") {
         /*int pipeId = rand()%_pipes.size();
