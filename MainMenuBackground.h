@@ -1,12 +1,10 @@
 #ifndef MAINMENUBACKGROUND_H_INCLUDED
 #define MAINMENUBACKGROUND_H_INCLUDED
 
-#include <iostream>
-
 #include "SFML/Graphics.hpp"
 #include "SFML/System.hpp"
 
-using namespace std;
+
 
 class IP;
 class Map;
@@ -26,7 +24,7 @@ private:
     Background *_background;
     sf::View *_view;
     sf::RenderTexture *_rt;
-    vector<sf::Sprite> _trees;
+    std::vector<sf::Sprite> _trees;
 };
 
 #endif // MAINMENUBACKGROUND_H_INCLUDED

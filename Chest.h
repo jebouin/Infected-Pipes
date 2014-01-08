@@ -1,14 +1,12 @@
 #ifndef CHEST_H_INCLUDED
 #define CHEST_H_INCLUDED
 
-#include <iostream>
-
 #include "SFML/Graphics.hpp"
 #include "SFML/System.hpp"
 
 #include "MovingSprite.h"
 
-using namespace std;
+
 
 class IP;
 class Level;

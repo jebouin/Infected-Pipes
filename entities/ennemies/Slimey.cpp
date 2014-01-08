@@ -50,7 +50,7 @@ void Slimey::Update(IP& ip, float eTime, Level& level, Character& character, Ent
     }
 
     int curState = (GetHPMax()-GetHP())*4/GetHPMax();
-    curState = min(curState, 3);
+    curState = std::min(curState, 3);
     if(curState > _prevState && curState < 4) {
         for(int i=0 ; i<20*(curState-_prevState) ; i++) {
             int type = rand()%2;

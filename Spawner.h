@@ -1,13 +1,12 @@
 #ifndef SPAWNER_H_INCLUDED
 #define SPAWNER_H_INCLUDED
 
-#include <iostream>
 #include <cmath>
 
 #include "SFML/Graphics.hpp"
 #include "SFML/System.hpp"
 
-using namespace std;
+
 
 class Pipe;
 class IP;
@@ -36,7 +35,7 @@ class Spawner {
     private:
     void NextWave(IP& ip, Level& level, GUI& gui);
 
-    vector<Pipe*> _pipes;
+    std::vector<Pipe*> _pipes;
     int _curWave;
     int _nbWaves;
     float _difficulty;

@@ -1,27 +1,25 @@
 #ifndef BACKGROUND_H_INCLUDED
 #define BACKGROUND_H_INCLUDED
 
-#include <iostream>
-
 #include "SFML/Graphics.hpp"
 #include "SFML/System.hpp"
 
-using namespace std;
+
 
 class IP;
 class Map;
 
 class Background {
     public:
-    Background(IP& ip, string name, float zoom, Map& map);
+    Background(IP& ip, std::string name, float zoom, Map& map);
     ~Background();
     void Update(IP& ip, float elapsedTime);
     void Draw(sf::RenderTexture& rt, const sf::View& prevView);
 
     private:
-    string _name;
-    vector<sf::Sprite> _backSprites;
-    vector<sf::Sprite> _backSprites2;
+    std::string _name;
+    std::vector<sf::Sprite> _backSprites;
+    std::vector<sf::Sprite> _backSprites2;
     sf::Sprite _back;
     sf::Sprite _back2;
     sf::View _view;

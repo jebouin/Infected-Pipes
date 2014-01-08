@@ -29,7 +29,7 @@ WaterField::WaterField(sf::FloatRect rect, float resolution, bool surface, bool 
             _springs.push_back(Spring{rect.height, rect.height, 0});
         }
     } else {
-        vector<sf::Vector2f> corners = MathHelper::Rect2Corners(_rect);
+        std::vector<sf::Vector2f> corners = MathHelper::Rect2Corners(_rect);
         //sf::Color c(rand()%256, rand()%256, rand()%256, 80);
         for(int i=0 ; i<corners.size() ; i++) {
             _vertexes.append(sf::Vertex(corners[i], _c));
@@ -125,7 +125,7 @@ void WaterField::Update(IP& ip, float elapsedTime, ParticleManager& pManager) {
         }
     }
 
-    vector<sf::Vector2f> c(MathHelper::Rect2Corners(_rect));
+    std::vector<sf::Vector2f> c(MathHelper::Rect2Corners(_rect));
     for(int i=0 ; i<4 ; i++) {
         _shape.setPoint(i, c[i]);
     }
@@ -172,7 +172,7 @@ void WaterField::Splash(sf::Vector2f pos, float force, ParticleManager& pManager
 
     int id = int((pos.x-_rect.left)/_rect.width*_nbPoints);
     _springs[id]._velocity = force;
-    _springs[min(id+1, _nbPoints-1)]._velocity = force;
+    _springs[std::min(id+1, _nbPoints-1)]._velocity = force;
 
     float y = _rect.top+_rect.height - _springs[id]._length;
     if(!_lava) {

@@ -4,7 +4,7 @@
 #include "Renderer.h"
 #include "MathHelper.h"
 
-SpeechBubble::SpeechBubble(IP& ip, string text, const GameEntity& speaker, float stayTime, float fadeTime)
+SpeechBubble::SpeechBubble(IP& ip, std::string text, const GameEntity& speaker, float stayTime, float fadeTime)
     : sf::ConvexShape(), _speaker(speaker){
     _stayTime = stayTime;
     _fadeTime = fadeTime;
@@ -25,7 +25,7 @@ SpeechBubble::SpeechBubble(IP& ip, string text, const GameEntity& speaker, float
     setPointCount(7);
     sf::FloatRect rect = sf::FloatRect(_text.getGlobalBounds().left, _text.getGlobalBounds().top, _text.getGlobalBounds().width+1, _text.getGlobalBounds().height+1);
     sf::Vector2f arrowSize(4, 4);
-    vector<sf::Vector2f> corners = MathHelper::Rect2Corners(rect);
+    std::vector<sf::Vector2f> corners = MathHelper::Rect2Corners(rect);
     float midWidthPos = (corners[0].x+corners[1].x)/2.f;
     setPoint(0, corners[0]);
     setPoint(1, corners[1]);

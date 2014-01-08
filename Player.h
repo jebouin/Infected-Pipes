@@ -1,12 +1,10 @@
 #ifndef PLAYER_H_INCLUDED
 #define PLAYER_H_INCLUDED
 
-#include <iostream>
-
 #include "SFML/Graphics.hpp"
 #include "SFML/System.hpp"
 
-using namespace std;
+
 
 class IP;
 class Character;

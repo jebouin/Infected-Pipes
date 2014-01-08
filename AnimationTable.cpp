@@ -6,7 +6,7 @@ AnimationTable::AnimationTable() {
 }
 
 AnimationTable::~AnimationTable() {
-    for(map<string, Animation*>::iterator i=_animations.begin() ; i!=_animations.end() ; i++) {
+    for(std::map<std::string, Animation*>::iterator i=_animations.begin() ; i!=_animations.end() ; i++) {
         delete i->second;
         i->second = 0;
     }
@@ -16,16 +16,16 @@ void AnimationTable::Update() {
     _animations[_curAnim]->Update();
 }
 
-void AnimationTable::SetAnimation(string name) {
+void AnimationTable::SetAnimation(std::string name) {
     _curAnim = name;
     _animations[_curAnim]->Restart();
 }
 
-void AnimationTable::AddAnimation(string name, Animation *anim) {
+void AnimationTable::AddAnimation(std::string name, Animation *anim) {
     _animations[name] = anim;
 }
 
-Animation& AnimationTable::GetAnimation(string name) {
+Animation& AnimationTable::GetAnimation(std::string name) {
     return *_animations[name];
 }
 
@@ -33,7 +33,7 @@ Animation& AnimationTable::GetAnimation() {
     return *_animations[_curAnim];
 }
 
-string AnimationTable::GetAnimationName() {
+std::string AnimationTable::GetAnimationName() {
     return _curAnim;
 }
 

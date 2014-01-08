@@ -238,12 +238,12 @@ void Character::Damage(int dmg, IP& ip, ParticleManager& pManager, sf::Color col
 }
 
 void Character::EarnXP(int amount) {
-    cout << "Earned " << amount << " XP!" << endl;
+    std::cout << "Earned " << amount << " XP!" << std::endl;
     _xp += amount;
     while(_xp >= _nextXP) {
         LevelUp();
     }
-    cout << _xp << "/" << _nextXP << "XP" << endl;
+    std::cout << _xp << "/" << _nextXP << "XP" << std::endl;
 }
 
 void Character::LevelUp() {
@@ -254,7 +254,7 @@ void Character::LevelUp() {
     SetHPMax(GetHPMax() * 1.2f);
     SetHP(GetHPMax());
 
-    cout << "Level up! Level " << _level << endl;
+    std::cout << "Level up! Level " << _level << std::endl;
 }
 
 int Character::GetXP() const {

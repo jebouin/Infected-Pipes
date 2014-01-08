@@ -1,13 +1,12 @@
 #ifndef SCENEMANAGER_H_INCLUDED
 #define SCENEMANAGER_H_INCLUDED
 
-#include <iostream>
 #include <vector>
 
 class IP;
 class Scene;
 
-using namespace std;
+
 
 class SceneManager {
 public:
@@ -19,7 +18,7 @@ public:
     int GetNbScenes();
 
 private:
-    vector<Scene*> _scenes;
+    std::vector<Scene*> _scenes;
 };
 
 #endif

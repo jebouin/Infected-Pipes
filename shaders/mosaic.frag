@@ -2,21 +2,27 @@ uniform sampler2D texture;
 uniform vec2 r;
 uniform float amp;
 
-void main()
-{
-   vec4 pixel = texture2D(texture, gl_TexCoord[0].xy);
-	vec2 p = gl_TexCoord[0].xy*r;
+void main() {
+	vec4 col = texture2D(texture, gl_TexCoord[0].xy);
+	vec2 p = gl_TexCoord[0].xy;
+	p.y = 1-p.y;
+	p *= r;
+	float x = float(int(p.x));
+	float y = float(int(p.y));
 	
-	int x = int(mod(p.x, 4.0));
-	int y = int(mod(-p.y, 4.0));
-	
-	float c = 1.0;
-	if(y == 3 || x == 3) {
-		c = 1.1;
+	if(mod(y, 4) == 0) {
+		int i;
+		if(mod(x, 4) == 0) {
+			col *= 1.4;
+		} else if(mod(x, 4) == 1) {
+			col *= 1.27;
+		} else if(mod(x, 4) == 2) {
+			col *= 1.16;
+		}
 	}
-	if(y == 3 && x == 3) {
-		c = 1.3;
+	if(mod(x, 4) == 0 && mod(y, 4) == 1) {
+		col *= 1.29;
 	}
 	
-   gl_FragColor = pixel * c * (1.+amp);
+	gl_FragColor = col*(1+amp);
 }

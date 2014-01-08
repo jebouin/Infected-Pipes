@@ -36,8 +36,8 @@ Level::Level(IP& ip, Character& character) {
     _grass = 0;
     _background = 0;
     _difficulty = 2;
-    Load(ip, "intro", character);
-    //character.setPosition(character.getPosition() + sf::Vector2f(0, 50));
+    Load(ip, "iceCave", character);
+    character.setPosition(character.getPosition() + sf::Vector2f(0, 50));
     _lavaTexture.create(/*_map->GetSize().x*/64*16, /*_map->GetSize().y*/38*16);
     _lavaShader.loadFromFile("shaders/lava.frag", sf::Shader::Fragment);
     _snowFlakesTime = 0;
@@ -167,10 +167,10 @@ Spawner& Level::GetSpawner() {
     return *_spawner;
 }
 
-void Level::Load(IP& ip, string name, Character& character) {
+void Level::Load(IP& ip, std::string name, Character& character) {
     _curLevel = name;
     LevelInfo& info(_levelInfos[name]);
-    _levelImages = vector<sf::Image>(2);
+    _levelImages = std::vector<sf::Image>(2);
     _levelImages[0] = sf::Image(ResourceLoader::GetImage(info._imageName + "back"));
     _levelImages[1] = sf::Image(ResourceLoader::GetImage(info._imageName + "front"));
     delete _map;
@@ -437,7 +437,7 @@ void Level::NextLevel(IP& ip, EntityManager& eManager, BulletManager& bManager, 
         Load(ip, "rockyCave", character);
     }*/
     //Load(ip, /*"rockyCave"*/"miniBoss1", character);
-    string toLoad;
+    std::string toLoad;
     if(_curLevel == "intro") {
         toLoad = "rockyCave";
     } else if(_curLevel == "rockyCave") {
@@ -502,6 +502,6 @@ GameEntity* Level::GetPassiveEntity(int id) {
     return _passiveEntities[id];
 }
 
-string Level::GetName() {
+std::string Level::GetName() {
     return _curLevel;
 }

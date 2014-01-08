@@ -2,7 +2,7 @@
 #include "IP.h"
 #include "Renderer.h"
 
-float MathHelper::ABS(float n) {
+template <typename T> T MathHelper::ABS(T n) {
     return (n<0 ? -n : n);
 }
 
@@ -10,7 +10,7 @@ sf::Vector2f MathHelper::ABS(sf::Vector2f v) {
     return sf::Vector2f(ABS(v.x), ABS(v.y));
 }
 
-float MathHelper::SGN(float n) {
+template <typename T> T MathHelper::SGN(T n) {
     return (n==0 ? 0 : n/ABS(n));
 }
 
@@ -34,15 +34,15 @@ float MathHelper::RandFloat(float min, float max) {
     return float(rand())/float(RAND_MAX)*(max-min) + min;
 }
 
-string MathHelper::NbToStringWithUnit(int nb) {
-    static string symb = "kMGT";
-    string s;
+std::string MathHelper::NbToStringWithUnit(int nb) {
+    static std::string symb = "kMGT";
+    std::string s;
     int e=-1;
     while(pow(1000, e+2) <= nb) {
         e++;
     }
     nb = nb/pow(1000, e+1);
-    ostringstream os;
+    std::ostringstream os;
     os << nb;
     s = os.str();
     if(e >= 0) {
@@ -51,15 +51,15 @@ string MathHelper::NbToStringWithUnit(int nb) {
     return s;
 }
 
-string MathHelper::IntToString(int nb) {
-    ostringstream os;
+std::string MathHelper::IntToString(int nb) {
+    std::ostringstream os;
     os << nb;
     return os.str();
 }
 
-vector<sf::Vector2f> MathHelper::Rect2Corners(sf::FloatRect rect) {
+std::vector<sf::Vector2f> MathHelper::Rect2Corners(sf::FloatRect rect) {
     static sf::Vector2i CPOS[4] = {sf::Vector2i(0, 0), sf::Vector2i(1, 0), sf::Vector2i(1, 1), sf::Vector2i(0, 1)};
-    vector<sf::Vector2f> corners;
+    std::vector<sf::Vector2f> corners;
     for(int i=0 ; i<4 ; i++) {
         corners.push_back(sf::Vector2f(rect.left, rect.top) + sf::Vector2f(rect.width*CPOS[i].x, rect.height*CPOS[i].y));
     }
@@ -110,31 +110,31 @@ float MathHelper::Vec2Ang(sf::Vector2f vec) {
     return atan2(vec.y, vec.x);
 }
 
-vector<float> MathHelper::GetNoise(float width) {
-    vector<float> noise(width, 0);
+std::vector<float> MathHelper::GetNoise(float width) {
+    std::vector<float> noise(width, 0);
     for(int i=0 ; i<width ; i++) {
         noise[i] = MathHelper::RandFloat(0, 1);
     }
     return noise;
 }
 
-vector<float> MathHelper::GetInterplatedNoise(float width, int waveLength) {
-    vector<float> baseNoise = GetNoise(width/waveLength);
-    vector<float> noise(width, 0);
+std::vector<float> MathHelper::GetInterplatedNoise(float width, int waveLength) {
+    std::vector<float> baseNoise = GetNoise(width/waveLength);
+    std::vector<float> noise(width, 0);
     for(int i=0 ; i<width ; i++) {
         noise[i] = MathHelper::Interpolate(float(i%waveLength)/(float(waveLength)), baseNoise[i/waveLength], baseNoise[(i/waveLength+1)%int(width/waveLength)]);
     }
     return noise;
 }
 
-vector<float> MathHelper::GetPerlin(float width) {
+std::vector<float> MathHelper::GetPerlin(float width) {
     int nbOctaves = 7;
     float p = 1.f;
     float m = 0.5f;
     float totalP = 0.f;
-    vector<float> perlin(width, 0);
+    std::vector<float> perlin(width, 0);
     for(int o=0 ; o<nbOctaves ; o++) {
-        vector<float> curNoise = GetInterplatedNoise(width, pow(2, nbOctaves-1-o));
+        std::vector<float> curNoise = GetInterplatedNoise(width, pow(2, nbOctaves-1-o));
         for(int i=0 ; i<width ; i++) {
             perlin[i] += curNoise[i]*p;
         }
@@ -152,8 +152,8 @@ HSV MathHelper::RGBToHSV(sf::Color rgb) {
     HSV c;
     float r=rgb.r, g=rgb.g, b=rgb.b;
     r/=255; g/=255, b/=255;
-    float maxi = max(max(r, g), b);
-    float mini = min(min(r, g), b);
+    float maxi = std::max(std::max(r, g), b);
+    float mini = std::min(std::min(r, g), b);
     c.v = maxi;
     float d = maxi-mini;
     c.s = ((maxi == 0) ? 0 : d / maxi);

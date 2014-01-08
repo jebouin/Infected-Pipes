@@ -1,12 +1,10 @@
 #ifndef XPBAR_H_INCLUDED
 #define XPBAR_H_INCLUDED
 
-#include <iostream>
-
 #include "SFML/Graphics.hpp"
 #include "SFML/System.hpp"
 
-using namespace std;
+
 
 class IP;
 class Character;

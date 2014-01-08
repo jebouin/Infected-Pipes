@@ -29,7 +29,7 @@ Fist::~Fist() {
 
 bool Fist::AutoSpawn(IP& ip, Level& level, EntityManager& eManager, Character& character) {
     Map& map(level.GetMap());
-    vector<sf::Vector2i> correctPos;
+    std::vector<sf::Vector2i> correctPos;
     //list all correct positions   ..
     //                             P.
     //                             ##

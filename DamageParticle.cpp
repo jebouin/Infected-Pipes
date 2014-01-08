@@ -7,7 +7,7 @@
 
 DamageParticle::DamageParticle(IP& ip, int damage, sf::Vector2f pos, sf::Vector2f velocity, sf::Vector2f startScale, sf::Vector2f endScale, sf::Color color, bool gravity, bool collision)
     : Particle(ip, "blood0", pos, velocity, 0, (damage >= 1000 ? MathHelper::RandFloat(1500, 1800) : MathHelper::RandFloat(600, 800)), startScale, endScale, 255, 0, gravity, collision, false, sf::IntRect(0, 0, 1, 1), false) {
-    string damageText = MathHelper::NbToStringWithUnit(damage);
+    std::string damageText = MathHelper::NbToStringWithUnit(damage);
     int fontSize = (damage >= 1000 ? 20 : 16);
     /*sf::Sprite sprites[damageText.size()];
     sf::Vector2i totalSize(0, 0);

@@ -1,14 +1,12 @@
 #ifndef SHOTGUN_H_INCLUDED
 #define SHOTGUN_H_INCLUDED
 
-#include <iostream>
-
 #include "SFML/Graphics.hpp"
 #include "SFML/System.hpp"
 
 #include "Weapon.h"
 
-using namespace std;
+
 
 class IP;
 class TextureLoader;

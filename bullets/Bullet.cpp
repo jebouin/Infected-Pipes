@@ -12,7 +12,7 @@
 #include "Ennemy.h"
 #include "MathHelper.h"
 
-Bullet::Bullet(IP& ip, string name, sf::IntRect hitbox, sf::Vector2f position, sf::Vector2f vel, int damage, float knockBack, bool animated, bool ennemy, bool gravity, bool instantDie, bool sticky, bool dieOnWall, bool bounce)
+Bullet::Bullet(IP& ip, std::string name, sf::IntRect hitbox, sf::Vector2f position, sf::Vector2f vel, int damage, float knockBack, bool animated, bool ennemy, bool gravity, bool instantDie, bool sticky, bool dieOnWall, bool bounce)
     : MovingSprite(ip, name, hitbox, animated) {
     setPosition(position);
     SetVel(vel);
@@ -73,7 +73,6 @@ void Bullet::Update(IP& ip, float eTime, Level& level, Character& character, Par
             } else {
                 sf::Vector2f dir = MathHelper::Normalize(getPosition() - _prevPos);
                 float l = MathHelper::GetVecLength(getPosition() - _prevPos);
-                cout << l << endl;
                 for(int i=0 ; i<eManager.GetNbEnnemies() ; i++) {
                     Ennemy *e = eManager.GetEnnemy(i);
                     for(float j=0 ; j<l ; j+=4) {

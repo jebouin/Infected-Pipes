@@ -16,7 +16,7 @@ Renderer::Renderer(sf::Vector2i size) {
     _bigSprite.setTexture(_bigTexture->getTexture());
 
     if(!_mosaicShader.loadFromFile("shaders/mosaic.frag", sf::Shader::Fragment)) {
-        cout << "Cannot load mosaic shader..." << endl;
+        std::cout << "Cannot load mosaic shader..." << std::endl;
     }
 }
 

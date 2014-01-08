@@ -1,13 +1,12 @@
 #ifndef SHADERMANAGER_H_INCLUDED
 #define SHADERMANAGER_H_INCLUDED
 
-#include <iostream>
 #include <vector>
 
 #include "SFML/Graphics.hpp"
 #include "SFML/System.hpp"
 
-using namespace std;
+
 
 class ShaderManager {
 public:
@@ -23,7 +22,7 @@ private:
     sf::RenderTexture *_back;
     sf::RenderTexture *_front;
     sf::RenderTexture *_temp;
-    vector<sf::Shader*> _shaders;
+    std::vector<sf::Shader*> _shaders;
 };
 
 #endif // SHADERMANAGER_H_INCLUDED

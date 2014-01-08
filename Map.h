@@ -6,7 +6,7 @@
 #include "SFML/Graphics.hpp"
 #include "SFML/System.hpp"
 
-using namespace std;
+
 
 class IP;
 class MovingSprite;
@@ -39,8 +39,8 @@ class Map {
 
     sf::Vector2i _size;
     sf::Sprite _tileset;
-    vector<vector<vector<int> > > _tiles;
-    vector<TileType> _tileTypes;
+    std::vector<std::vector<std::vector<int> > > _tiles;
+    std::vector<TileType> _tileTypes;
 };
 
 #endif // MAP_H_INCLUDED

@@ -1,14 +1,12 @@
 #ifndef DUALFIREBULLET_H_INCLUDED
 #define DUALFIREBULLET_H_INCLUDED
 
-#include <iostream>
-
 #include "SFML/Graphics.hpp"
 #include "SFML/System.hpp"
 
 #include "Bullet.h"
 
-using namespace std;
+
 
 class IP;
 class Character;

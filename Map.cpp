@@ -8,7 +8,7 @@
 Map::Map(IP& ip, sf::Vector2i size) {
     _tileset.setTexture(ResourceLoader::GetTexture("tileset"));
     _size = size;
-    _tiles = vector<vector<vector<int> > >(2, vector<vector<int> >(_size.x, vector<int>(_size.y, 0)));
+    _tiles = std::vector<std::vector<std::vector<int> > >(2, std::vector<std::vector<int> >(_size.x, std::vector<int>(_size.y, 0)));
     _tileTypes.push_back(VOID);
     _tileTypes.push_back(WALL);
     _tileTypes.push_back(WALL);
@@ -136,7 +136,7 @@ bool Map::IsLocalCollided(sf::Vector2f pos, TileType type) {
 }
 
 bool Map::IsCollided(sf::FloatRect rect, TileType type) {
-    vector<sf::Vector2f> corners = MathHelper::Rect2Corners(rect);
+    std::vector<sf::Vector2f> corners = MathHelper::Rect2Corners(rect);
     for(float i=corners[0].x ; i<corners[1].x ; i+=2) {
         if(_tileTypes[GetTile(sf::Vector2i(sf::Vector2f(i, corners[0].y)/16.f), FRONT)] == type) {
             return true;

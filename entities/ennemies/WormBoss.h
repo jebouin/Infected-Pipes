@@ -1,14 +1,13 @@
 #ifndef WORMBOSS_H_INCLUDED
 #define WORMBOSS_H_INCLUDED
 
-#include <iostream>
 #include <vector>
 
 #include "SFML/Graphics.hpp"
 #include "SFML/System.hpp"
 #include "Ennemy.h"
 
-using namespace std;
+
 
 class IP;
 class Level;
@@ -39,7 +38,7 @@ private:
     float _nextStateTime;
     int _nbPartsExploded;
 
-    vector<MovingSprite*> _parts;
+    std::vector<MovingSprite*> _parts;
 };
 
 #endif // WORMBOSS_H_INCLUDED

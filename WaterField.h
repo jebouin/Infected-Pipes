@@ -1,14 +1,13 @@
 #ifndef WATERFIELD_H_INCLUDED
 #define WATERFIELD_H_INCLUDED
 
-#include <iostream>
 #include <vector>
 
 #include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 
-using namespace std;
+
 
 class IP;
 class ParticleManager;
@@ -42,7 +41,7 @@ class WaterField {
     private:
     sf::VertexArray _vertexes;
     sf::FloatRect _rect;
-    vector<Spring> _springs;
+    std::vector<Spring> _springs;
     int _nbPoints;
     float _resolution;
     bool _surface;

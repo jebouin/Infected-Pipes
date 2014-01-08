@@ -11,7 +11,7 @@
 #include "DamageParticle.h"
 #include "WaterField.h"
 
-GameEntity::GameEntity(IP& ip, string name, sf::IntRect hitbox, int hp) : MovingSprite(ip, name, hitbox, true) {
+GameEntity::GameEntity(IP& ip, std::string name, sf::IntRect hitbox, int hp) : MovingSprite(ip, name, hitbox, true) {
     _jumpPower = 0.69;
     _speed = 0.003;
     _weight = 0.3;
@@ -108,7 +108,7 @@ void GameEntity::Collide(GameEntity* other, float elapsedTime) {
         sf::Vector2f dist = MathHelper::ABS(sf::Vector2f(c-c2));
         float rx = (r.width/2.f + r2.width/2.f - dist.x) / (r.width/2.f + r2.width/2.f);
         float dx = rx*MathHelper::SGN(sf::Vector2f(c-c2).x);
-        dx = max(-0.5f, min(dx, 0.5f));
+        dx = std::max(-0.5f, std::min(dx, 0.5f));
 
         if(IsPushable() && HasPhysics()) SetVel(GetVel() + sf::Vector2f(dx, 0)*other->GetWeight());
         if(other->IsPushable() && other->HasPhysics()) other->SetVel(other->GetVel() - sf::Vector2f(dx, 0)*GetWeight());
@@ -229,11 +229,11 @@ void GameEntity::SetFlying(bool f) {
 }
 
 void GameEntity::SetHP(int hp) {
-    _hp = max(min(hp, _hpMax), 0);
+    _hp = std::max(std::min(hp, _hpMax), 0);
 }
 
 void GameEntity::SetHPMax(int hpMax) {
-    _hpMax = max(hpMax, 0);
+    _hpMax = std::max(hpMax, 0);
 }
 
 void GameEntity::SetAlive(bool a) {

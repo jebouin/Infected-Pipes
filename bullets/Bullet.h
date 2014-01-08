@@ -1,14 +1,12 @@
 #ifndef BULLET_H_INCLUDED
 #define BULLET_H_INCLUDED
 
-#include <iostream>
-
 #include "SFML/Graphics.hpp"
 #include "SFML/System.hpp"
 
 #include "MovingSprite.h"
 
-using namespace std;
+
 
 class IP;
 class TextureLoader;
@@ -20,8 +18,8 @@ class EntityManager;
 
 class Bullet : public MovingSprite {
     public:
-    Bullet(IP& ip, string name, sf::IntRect hitbox, sf::Vector2f position, sf::Vector2f vel, int damage, float knockBack, bool animated, bool ennemy, bool gravity, bool instantDie, bool sticky, bool dieOnWall, bool bounce);
-    ~Bullet();
+    Bullet(IP& ip, std::string name, sf::IntRect hitbox, sf::Vector2f position, sf::Vector2f vel, int damage, float knockBack, bool animated, bool ennemy, bool gravity, bool instantDie, bool sticky, bool dieOnWall, bool bounce);
+    virtual ~Bullet();
     virtual void Update(IP& ip, float eTime, Level& level, Character& character, ParticleManager& pManager, EntityManager& eManager);
     void Draw(IP& ip);
     void TestCollisions(IP& ip, float eTime, Level& level, sf::Vector2f delta);

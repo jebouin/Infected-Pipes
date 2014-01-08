@@ -5,7 +5,7 @@
 #include "SFML/System.hpp"
 #include "GameEntity.h"
 
-using namespace std;
+
 
 class IP;
 class Level;
@@ -18,7 +18,7 @@ class Ennemy : public GameEntity {
     public:
     enum EnnemyType {SPIDEROCK, ROCKWORM, BAT, SNAIL, SLIME, SLIMEY, SNOWBALL};
 
-    Ennemy(IP& ip, string name, sf::IntRect hitbox, int hpn, int xp, int incDifficulty, Level& level);
+    Ennemy(IP& ip, std::string name, sf::IntRect hitbox, int hpn, int xp, int incDifficulty, Level& level);
     virtual ~Ennemy();
     virtual void Update(IP& ip, float eTime, Level& level, Character& character, EntityManager& eManager, ParticleManager& pManager, BulletManager& bManager);
     virtual void Draw(IP& ip);

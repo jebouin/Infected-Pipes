@@ -10,7 +10,7 @@ ChestOpened::ChestOpened(IP& ip) {
     _texture.setSmooth(false);
 
     if(!_shader.loadFromFile("shaders/chestOpened.frag", sf::Shader::Fragment)) {
-        cout << "Cannot load chest opened shader..." << endl;
+        std::cout << "Cannot load chest opened shader..." << std::endl;
     }
 
     _sprite.setTexture(_texture);

@@ -1,7 +1,6 @@
 #ifndef GAMEENTITY_H_INCLUDED
 #define GAMEENTITY_H_INCLUDED
 
-#include <iostream>
 #include <vector>
 #include <cmath>
 
@@ -9,7 +8,7 @@
 #include "SFML/System.hpp"
 #include "MovingSprite.h"
 
-using namespace std;
+
 
 class IP;
 class Level;
@@ -19,8 +18,8 @@ class ParticleManager;
 
 class GameEntity : public MovingSprite {
     public:
-    GameEntity(IP& ip, string name, sf::IntRect hitbox, int hp);
-    ~GameEntity();
+    GameEntity(IP& ip, std::string name, sf::IntRect hitbox, int hp);
+    virtual ~GameEntity();
     virtual void Update(IP& ip, float elapsedTime, Level& level, EntityManager& eManager, ParticleManager& pManager);
     virtual void Update(IP& ip, float elapsedTime);
     void Draw(IP& ip);

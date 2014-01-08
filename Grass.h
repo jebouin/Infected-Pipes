@@ -6,7 +6,7 @@
 #include "SFML/Graphics.hpp"
 #include "SFML/System.hpp"
 
-using namespace std;
+
 
 class IP;
 class Map;
@@ -27,8 +27,8 @@ class Grass {
     private:
     sf::Clock _timer;
     sf::VertexArray _grass;
-    vector<GrassBlade> _blades;
-    vector<float> _windNoise;
+    std::vector<GrassBlade> _blades;
+    std::vector<float> _windNoise;
 };
 
 #endif // GRASS_H_INCLUDED

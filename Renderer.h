@@ -6,7 +6,7 @@
 #include "SFML/Graphics.hpp"
 #include "SFML/System.hpp"
 
-using namespace std;
+
 
 class IP;
 
@@ -34,7 +34,7 @@ class Renderer {
     sf::Sprite _bigSprite;
     sf::Shader _mosaicShader;
     sf::Vector2i _size;
-    vector<Flash> _flashes;
+    std::vector<Flash> _flashes;
 };
 
 #endif // RENDERER_H_INCLUDED

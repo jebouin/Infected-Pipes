@@ -9,7 +9,7 @@
 #include "ParticleManager.h"
 #include "BulletManager.h"
 
-Ennemy::Ennemy(IP& ip, string name, sf::IntRect hitbox, int hp, int xp, int incDifficulty, Level& level) : GameEntity(ip, name, hitbox, hp), _level(level) {
+Ennemy::Ennemy(IP& ip, std::string name, sf::IntRect hitbox, int hp, int xp, int incDifficulty, Level& level) : GameEntity(ip, name, hitbox, hp), _level(level) {
     SetSpeed(MathHelper::RandFloat(0.0005, 0.001));
     SetJumpPower(0.6);
     _inPipe = true;

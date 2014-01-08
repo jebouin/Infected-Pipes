@@ -20,9 +20,6 @@ Grass::Grass(IP& ip, Map& map) {
         }
     }
     _windNoise = MathHelper::GetPerlin(1024);
-    for(int i=0 ; i<1024 ; i++) {
-        cout << _windNoise[i] << endl;
-    }
 }
 
 Grass::~Grass() {

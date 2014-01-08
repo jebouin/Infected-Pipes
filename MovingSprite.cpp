@@ -11,7 +11,7 @@
 #include "WaterField.h"
 #include "ParticleManager.h"
 
-MovingSprite::MovingSprite(IP& ip, string name, bool animated) : sf::Sprite() {
+MovingSprite::MovingSprite(IP& ip, std::string name, bool animated) : sf::Sprite() {
     _vel = sf::Vector2f(0, 0);
     _rotVel = 0;
     setTexture(ResourceLoader::GetTexture(name));
@@ -29,7 +29,7 @@ MovingSprite::MovingSprite(IP& ip, string name, bool animated) : sf::Sprite() {
     _bounce = false;
 }
 
-MovingSprite::MovingSprite(IP& ip, string name, sf::IntRect hitbox, bool animated) {
+MovingSprite::MovingSprite(IP& ip, std::string name, sf::IntRect hitbox, bool animated) {
     _vel = sf::Vector2f(0, 0);
     _rotVel = 0;
     setTexture(ResourceLoader::GetTexture(name));
@@ -78,7 +78,7 @@ void MovingSprite::Update(IP& ip, float eTime, Level& level, ParticleManager& pM
         _onPlatform = false;
     }
 
-    vector<sf::Vector2f> boxCorners = MathHelper::Rect2Corners(GetGlobalHitbox());
+    std::vector<sf::Vector2f> boxCorners = MathHelper::Rect2Corners(GetGlobalHitbox());
     for(int i=0 ; i<4 ; i++) {
         _box.setPoint(i, boxCorners[i]);
     }

@@ -1,19 +1,17 @@
 #ifndef SPEECHBUBBLE_H_INCLUDED
 #define SPEECHBUBBLE_H_INCLUDED
 
-#include <iostream>
-
 #include "SFML/Graphics.hpp"
 #include "SFML/System.hpp"
 
-using namespace std;
+
 
 class IP;
 class GameEntity;
 
 class SpeechBubble : public sf::ConvexShape {
 public:
-    SpeechBubble(IP& ip, string text, const GameEntity& speaker, float stayTime, float fadeTime);
+    SpeechBubble(IP& ip, std::string text, const GameEntity& speaker, float stayTime, float fadeTime);
     ~SpeechBubble();
     void Update(IP& ip, float eTime);
     void Draw(IP& ip);

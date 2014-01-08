@@ -3,7 +3,7 @@
 
 #include <cmath>
 
-using namespace std;
+
 
 #include "SFML/Graphics.hpp"
 #include "SFML/System.hpp"

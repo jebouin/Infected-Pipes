@@ -6,7 +6,7 @@
 #include "SFML/Graphics.hpp"
 #include "SFML/System.hpp"
 
-using namespace std;
+
 
 class IP;
 class Level;
@@ -15,9 +15,9 @@ class ParticleManager;
 
 class MovingSprite : public sf::Sprite {
     public:
-    MovingSprite(IP& ip, string name, bool animated=true);
-    MovingSprite(IP& ip, string name, sf::IntRect hitbox, bool animated=true);
-    ~MovingSprite();
+    MovingSprite(IP& ip, std::string name, bool animated=true);
+    MovingSprite(IP& ip, std::string name, sf::IntRect hitbox, bool animated=true);
+    virtual ~MovingSprite();
     void Update(IP& ip, float eTime);
     void Update(IP& ip, float eTime, Level& level, ParticleManager& pManager);
     void Draw(IP& ip);

@@ -4,7 +4,7 @@
 #include "SFML/Graphics.hpp"
 #include "SFML/System.hpp"
 
-using namespace std;
+
 
 class Animation;
 
@@ -13,16 +13,16 @@ class AnimationTable {
     AnimationTable();
     ~AnimationTable();
     void Update();
-    void SetAnimation(string name);
-    void AddAnimation(string name, Animation *anim);
-    Animation& GetAnimation(string name);
+    void SetAnimation(std::string name);
+    void AddAnimation(std::string name, Animation *anim);
+    Animation& GetAnimation(std::string name);
     Animation& GetAnimation();
-    string GetAnimationName();
+    std::string GetAnimationName();
     sf::IntRect GetRect();
 
     private:
-    string _curAnim;
-    map<string, Animation*> _animations;
+    std::string _curAnim;
+    std::map<std::string, Animation*> _animations;
 };
 
 #endif // ANIMATIONTABLE_H_INCLUDED

@@ -7,7 +7,7 @@
 #include "SFML/System.hpp"
 #include "GameEntity.h"
 
-using namespace std;
+
 
 class IP;
 class Map;
@@ -32,7 +32,7 @@ class Character : public GameEntity {
     enum ArmType {EMPTY, RAINBOW, BOW, SHOTGUN, MACHINEGUN, RIFLE};
 
     Character(IP& ip);
-    ~Character();
+    virtual ~Character();
     void Update(IP& ip, float eTime, Level& level, EntityManager& eManager, ParticleManager& pManager, BulletManager& bManager);
     void Draw(IP& ip);
     void LoadArm(ArmType t);
@@ -63,7 +63,7 @@ class Character : public GameEntity {
     Weapon *_sWeapon;
     sf::Sprite _arm;
 
-    map<ArmType, Arm> _arms;
+    std::map<ArmType, Arm> _arms;
 };
 
 #endif // CHARACTER_H_INCLUDED

@@ -6,7 +6,7 @@
 #include "SFML/Graphics.hpp"
 #include "SFML/System.hpp"
 
-using namespace std;
+
 
 class IP;
 class Map;
@@ -26,8 +26,8 @@ class GUI;
 class Stalactite;
 
 struct LevelInfo {
-    string _imageName;
-    string _backgroundName;
+    std::string _imageName;
+    std::string _backgroundName;
     float _backgroundZoom;
     bool _addDucks;
     bool _addMice;
@@ -43,7 +43,7 @@ class Level {
     void DrawFront(IP& ip);
     Map& GetMap() const;
     Spawner& GetSpawner();
-    void Load(IP& ip, string name, Character& character);
+    void Load(IP& ip, std::string name, Character& character);
     void NextLevel(IP& ip, EntityManager& eManager, BulletManager& bManager, Character& character);
     int GetDifficulty() const;
     void SetDifficulty(int v);
@@ -53,7 +53,7 @@ class Level {
     void AddWaterFall(IP& ip, sf::Vector2i tilePos, bool big, bool lava);
     int GetNbPassiveEntities();
     GameEntity* GetPassiveEntity(int id);
-    string GetName();
+    std::string GetName();
 
     private:
     sf::Clock _timer;
@@ -62,20 +62,20 @@ class Level {
     sf::Vector2i GetRectSizeInImageAt(sf::Image& img, sf::Vector2i pos, sf::Color c);
 
     Map *_map;
-    vector<sf::Image> _levelImages;
+    std::vector<sf::Image> _levelImages;
     Spawner *_spawner;
     Grass *_grass;
     Background *_background;
-    string _curLevel;
-    map<string, LevelInfo> _levelInfos;
+    std::string _curLevel;
+    std::map<std::string, LevelInfo> _levelInfos;
 
     int _difficulty;
-    vector<Chest*> _chests;
-    vector<WaterField*> _waterFields;
-    vector<WaterFall*> _waterFalls;
-    vector<GameEntity*> _passiveEntities;
-    vector<sf::Sprite> _backSprites;
-    vector<Stalactite*> _stalactites;
+    std::vector<Chest*> _chests;
+    std::vector<WaterField*> _waterFields;
+    std::vector<WaterFall*> _waterFalls;
+    std::vector<GameEntity*> _passiveEntities;
+    std::vector<sf::Sprite> _backSprites;
+    std::vector<Stalactite*> _stalactites;
 
     sf::RenderTexture _lavaTexture;
     sf::Shader _lavaShader;

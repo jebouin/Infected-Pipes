@@ -1,13 +1,11 @@
 #ifndef DAMAGEPARTICLE_H_INCLUDED
 #define DAMAGEPARTICLE_H_INCLUDED
 
-#include <iostream>
-
 #include "SFML/Graphics.hpp"
 #include "SFML/System.hpp"
 #include "Particle.h"
 
-using namespace std;
+
 
 class IP;
 

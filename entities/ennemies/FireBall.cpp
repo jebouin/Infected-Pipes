@@ -29,7 +29,7 @@ FireBall::~FireBall() {
 
 bool FireBall::AutoSpawn(IP& ip, Level& level, EntityManager& eManager, Character& character) {
     Map& m(level.GetMap());
-    vector<WaterField*> lf;
+    std::vector<WaterField*> lf;
     for(int i=0 ; i<level.GetNbWaterFields() ; i++) {
         WaterField& wf(level.GetWaterField(i));
         if(wf.IsSurface()) {

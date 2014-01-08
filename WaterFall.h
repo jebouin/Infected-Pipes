@@ -1,7 +1,6 @@
 #ifndef WATERFALL_H_INCLUDED
 #define WATERFALL_H_INCLUDED
 
-#include <iostream>
 #include <vector>
 
 #include <SFML/System.hpp>
@@ -10,7 +9,7 @@
 
 #include "MovingSprite.h"
 
-using namespace std;
+
 
 class IP;
 class ParticleManager;

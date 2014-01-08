@@ -1,12 +1,10 @@
 #ifndef ENTITYMANAGER_H_INCLUDED
 #define ENTITYMANAGER_H_INCLUDED
 
-#include <iostream>
-
 #include "SFML/Graphics.hpp"
 #include "SFML/System.hpp"
 
-using namespace std;
+
 
 class IP;
 class Level;
@@ -27,7 +25,7 @@ class EntityManager {
     Ennemy* GetEnnemy(int id);
 
     private:
-    vector<Ennemy*> _ennemies;
+    std::vector<Ennemy*> _ennemies;
 };
 
 #endif // ENTITYMANAGER_H_INCLUDED

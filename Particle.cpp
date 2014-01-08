@@ -6,7 +6,7 @@
 #include "Spawner.h"
 #include "Renderer.h"
 
-Particle::Particle(IP& ip, string name, sf::Vector2f pos, sf::Vector2f velocity, float rotVel, float lifeTime, sf::Vector2f startScale, sf::Vector2f endScale, float startAlpha, float endAlpha, bool gravity, bool collision, bool animated, sf::IntRect hitbox, bool zFront)
+Particle::Particle(IP& ip, std::string name, sf::Vector2f pos, sf::Vector2f velocity, float rotVel, float lifeTime, sf::Vector2f startScale, sf::Vector2f endScale, float startAlpha, float endAlpha, bool gravity, bool collision, bool animated, sf::IntRect hitbox, bool zFront)
     : MovingSprite(ip, name, hitbox, animated) {
     _alive = true;
     _gravity = gravity;

@@ -1,13 +1,12 @@
 #ifndef PARTICLEMANAGER_H_INCLUDED
 #define PARTICLEMANAGER_H_INCLUDED
 
-#include <iostream>
 #include <vector>
 
 #include "SFML/Graphics.hpp"
 #include "SFML/System.hpp"
 
-using namespace std;
+
 
 class IP;
 class Particle;
@@ -25,7 +24,7 @@ class ParticleManager {
     Particle* GetParticle(int id);
 
     private:
-    vector<Particle*> _particles;
+    std::vector<Particle*> _particles;
 };
 
 #endif // PARTICLEMANAGER_H_INCLUDED

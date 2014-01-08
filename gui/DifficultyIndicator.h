@@ -1,18 +1,16 @@
 #ifndef DIFFICULTYINDICATOR_H_INCLUDED
 #define DIFFICULTYINDICATOR_H_INCLUDED
 
-#include <iostream>
-
 #include "SFML/Graphics.hpp"
 #include "SFML/System.hpp"
 
-using namespace std;
+
 
 class IP;
 class Level;
 
 struct Comment {
-    string _text;
+    std::string _text;
     int _dif;
 };
 

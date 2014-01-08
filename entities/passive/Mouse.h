@@ -5,7 +5,7 @@
 #include "SFML/System.hpp"
 #include "GameEntity.h"
 
-using namespace std;
+
 
 class IP;
 class Level;

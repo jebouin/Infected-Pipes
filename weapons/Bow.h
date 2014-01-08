@@ -1,14 +1,12 @@
 #ifndef BOW_H_INCLUDED
 #define BOW_H_INCLUDED
 
-#include <iostream>
-
 #include "SFML/Graphics.hpp"
 #include "SFML/System.hpp"
 
 #include "Weapon.h"
 
-using namespace std;
+
 
 class IP;
 class TextureLoader;

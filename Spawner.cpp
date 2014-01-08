@@ -71,7 +71,7 @@ void Spawner::Update(IP& ip, float eTime, EntityManager& eManager, Level& level,
 }
 
 void Spawner::Spawn(IP& ip, EntityManager& eManager, Level& level, Character& character) {
-    string levelName = level.GetName();
+    std::string levelName = level.GetName();
     if(levelName == "miniBoss1") {
         Slimey *slimey = new Slimey(ip, level);
         eManager.Add(slimey);
@@ -197,14 +197,14 @@ void Spawner::NextWave(IP& ip, Level& level, GUI& gui) {
     if(_curWave >= _nbWaves) {
         _finished = true;
         _spawning = false;
-        cout << "Finished!" << endl;
+        std::cout << "Finished!" << std::endl;
         return;
     }
     _difToSpawn = level.GetDifficulty();
     _curWave++;
     _spawning = true;
     _clock.restart();
-    cout << "Wave: " << _curWave << endl;
+    std::cout << "Wave: " << _curWave << std::endl;
     if(level.GetName() == "miniBoss1" || level.GetName() == "miniBoss2" || level.GetName() == "miniBoss3") {
         gui.GetWaveIndicator().AnnounceWave(ip, -42);
     } else {
@@ -219,7 +219,7 @@ void Spawner::Draw(IP& ip) {
 }
 
 bool Spawner::SpawnCharacter(Character& character) {
-    vector<int> cp;
+    std::vector<int> cp;
     for(int i=0 ; i<_pipes.size() ; i++) {
         if(_pipes[i]->getRotation() == 90) {
             cp.push_back(i);

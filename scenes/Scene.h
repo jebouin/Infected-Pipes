@@ -6,7 +6,7 @@ class IP;
 class Scene {
 public:
     Scene(IP& ip);
-    ~Scene();
+    virtual ~Scene();
     virtual void Update(float eTime, IP& ip);
     virtual void Draw(IP& ip);
     bool IsActive();
