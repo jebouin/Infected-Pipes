@@ -137,6 +137,22 @@ void Fist::Update(IP& ip, float eTime, Level& level, Character& character, Entit
             _stateTimer.restart();
             _curState = SGOINGUP;
             SetHitbox(sf::IntRect(4, 2, 17, 36));
+            for(int i=0 ; i<10 ; i++) {
+                Particle *p = new Particle(ip, "fistUpParticle",
+                                           sf::Vector2f(GetGlobalHitbox().left+MathHelper::RandFloat(0, GetGlobalHitbox().width), GetGlobalHitbox().top+MathHelper::RandFloat(0, GetGlobalHitbox().height/2.f)),
+                                           sf::Vector2f(0, -MathHelper::RandFloat(.19, .39)),
+                                           0,
+                                           MathHelper::RandFloat(300, 420),
+                                           sf::Vector2f(1, 1),
+                                           sf::Vector2f(1, 1),
+                                           255,
+                                           0,
+                                           false,
+                                           false,
+                                           false,
+                                           sf::IntRect(1, 1, 1, 6), false);
+                pManager.AddParticle(p);
+            }
         }
         break;
     case SUP:
