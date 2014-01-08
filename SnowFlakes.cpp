@@ -10,11 +10,19 @@ SnowFlakes::SnowFlakes(IP& ip) {
     _ssize = ip._renderer->GetSize();
     _view.setSize(sf::Vector2f(_ssize));
     _view.setCenter(sf::Vector2f(_ssize)/2.f);
-
     _points.setPrimitiveType(sf::Points);
+    Reset();
+}
+
+SnowFlakes::~SnowFlakes() {
+
+}
+
+void SnowFlakes::Reset() {
     float nb = _ssize.x*_ssize.y/400;
     std::cout << nb << std::endl;
     for(int i=0 ; i<nb ; i++) {
+        float z = float(i%10)/5.f + 1.3f;
         sf::Vector2f pos(MathHelper::RandFloat(0, _ssize.x), MathHelper::RandFloat(0, _ssize.y));
         float b = MathHelper::RandFloat(0, 1);
         float b0 = MathHelper::Interpolate(b, 200, 255);
@@ -25,10 +33,6 @@ SnowFlakes::SnowFlakes(IP& ip) {
         _basePos.push_back(pos);
         _points.append(sf::Vertex(pos, c));
     }
-}
-
-SnowFlakes::~SnowFlakes() {
-
 }
 
 void SnowFlakes::Update(IP& ip, float eTime, Level& level, ParticleManager& pManager, sf::View& prevView) {

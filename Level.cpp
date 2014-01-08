@@ -22,8 +22,10 @@
 #include "GUI.h"
 #include "Stalactite.h"
 #include "Snowflakes.h"
+#include "Player.h"
 
-Level::Level(IP& ip, Character& character) {
+Level::Level(IP& ip, Player& player) {
+    Character& character(player.GetCharacter());
     _levelInfos["intro"] = LevelInfo{"level0", "nightBackground", 0.0001f, true, false, false};
     _levelInfos["rockyCave"] = LevelInfo{"level1", "rockyBackground", 0.2f, true, true, false};
     _levelInfos["miniBoss1"] = LevelInfo{"miniBoss1", "rockyBackground", 0.2f, false, false, false};
@@ -37,7 +39,7 @@ Level::Level(IP& ip, Character& character) {
     _grass = 0;
     _background = 0;
     _difficulty = 2;
-    Load(ip, "iceCave", character);
+    Load(ip, "iceCave", player);
     character.setPosition(character.getPosition() + sf::Vector2f(0, 50));
     _lavaTexture.create(/*_map->GetSize().x*/64*16, /*_map->GetSize().y*/38*16);
     _lavaShader.loadFromFile("shaders/lava.frag", sf::Shader::Fragment);
@@ -82,7 +84,8 @@ Level::~Level() {
     _flakes = 0;
 }
 
-void Level::Update(IP& ip, EntityManager& eManager, Character& character, float eTime, ParticleManager& pManager, BulletManager& bManager, GUI& gui, sf::View& prevView) {
+void Level::Update(IP& ip, EntityManager& eManager, Player& player, float eTime, ParticleManager& pManager, BulletManager& bManager, GUI& gui, sf::View& prevView) {
+    Character& character(player.GetCharacter());
     _spawner->Update(ip, eTime, eManager, *this, character, gui);
     _grass->Update(ip);
     _background->Update(ip, eTime);
@@ -102,7 +105,7 @@ void Level::Update(IP& ip, EntityManager& eManager, Character& character, float 
         _stalactites[i]->Update(ip, eTime, *this, character, pManager, eManager);
     }
     if((_curLevel == "miniBoss1" || _curLevel == "miniBoss2" || _curLevel == "miniBoss3") && _spawner->IsFinished()) {
-        NextLevel(ip, eManager, bManager, character);
+        NextLevel(ip, eManager, bManager, player);
         character.LeavePipe();
     }
 
@@ -161,7 +164,8 @@ Spawner& Level::GetSpawner() {
     return *_spawner;
 }
 
-void Level::Load(IP& ip, std::string name, Character& character) {
+void Level::Load(IP& ip, std::string name, Player& player) {
+    Character& character(player.GetCharacter());
     _curLevel = name;
     LevelInfo& info(_levelInfos[name]);
     _levelImages = std::vector<sf::Image>(2);
@@ -367,7 +371,6 @@ void Level::Load(IP& ip, std::string name, Character& character) {
         character.setPosition(charPos);
     }
 
-
     delete _background;
     _background = new Background(ip, _levelInfos[name]._backgroundName, _levelInfos[name]._backgroundZoom, *_map);
     delete _grass;
@@ -400,7 +403,8 @@ sf::Vector2i Level::GetRectSizeInImageAt(sf::Image& img, sf::Vector2i pos, sf::C
     return sf::Vector2i(w, 1);
 }
 
-void Level::NextLevel(IP& ip, EntityManager& eManager, BulletManager& bManager, Character& character) {
+void Level::NextLevel(IP& ip, EntityManager& eManager, BulletManager& bManager, Player& player) {
+    Character& character(player.GetCharacter());
     /*if(_curLevel == "rockyCave") {
         Load(ip, "rockyCave2", character);
     } else {
@@ -425,7 +429,7 @@ void Level::NextLevel(IP& ip, EntityManager& eManager, BulletManager& bManager, 
     } else {
         toLoad = "iceCave";
     }
-    Load(ip, toLoad, character);
+    Load(ip, toLoad, player);
     eManager.Clear();
     bManager.Clear();
 }

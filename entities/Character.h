@@ -19,6 +19,7 @@ class Ennemy;
 class Weapon;
 class Bow;
 class GUI;
+class Player;
 
 struct Arm {
     sf::IntRect _textureRect;
@@ -33,7 +34,7 @@ class Character : public GameEntity {
 
     Character(IP& ip);
     virtual ~Character();
-    void Update(IP& ip, float eTime, Level& level, EntityManager& eManager, ParticleManager& pManager, BulletManager& bManager);
+    void Update(IP& ip, float eTime, Level& level, EntityManager& eManager, ParticleManager& pManager, BulletManager& bManager, Player& player);
     void Draw(IP& ip);
     void LoadArm(ArmType t);
     void GoLeft(float eTime);

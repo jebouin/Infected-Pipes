@@ -23,6 +23,7 @@ class GameEntity;
 class GUI;
 class Stalactite;
 class SnowFlakes;
+class Player;
 
 struct LevelInfo {
     std::string _imageName;
@@ -35,15 +36,15 @@ struct LevelInfo {
 
 class Level {
     public:
-    Level(IP& ip, Character& character);
+    Level(IP& ip, Player& player);
     ~Level();
-    void Update(IP& ip, EntityManager& eManager, Character& character, float eTime, ParticleManager& pManager, BulletManager& bManager, GUI& gui, sf::View& preView);
+    void Update(IP& ip, EntityManager& eManager, Player& player, float eTime, ParticleManager& pManager, BulletManager& bManager, GUI& gui, sf::View& preView);
     void DrawBack(IP& ip, sf::View& prevView);
     void DrawFront(IP& ip);
     Map& GetMap() const;
     Spawner& GetSpawner();
-    void Load(IP& ip, std::string name, Character& character);
-    void NextLevel(IP& ip, EntityManager& eManager, BulletManager& bManager, Character& character);
+    void Load(IP& ip, std::string name, Player& player);
+    void NextLevel(IP& ip, EntityManager& eManager, BulletManager& bManager, Player& player);
     int GetDifficulty() const;
     void SetDifficulty(int v);
     void OpenChest(Character& character, IP& ip);

@@ -14,6 +14,7 @@ class SnowFlakes {
 public:
     SnowFlakes(IP& ip);
     ~SnowFlakes();
+    void Reset();
     void Update(IP& ip, float eTime, Level& level, ParticleManager& pManager, sf::View& prevView);
     void Draw(IP& ip, sf::View& prevView);
 

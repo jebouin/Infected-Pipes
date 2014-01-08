@@ -51,7 +51,7 @@ void Player::Update(IP& ip, float eTime, Level& level, EntityManager& eManager, 
         }
     }
 
-    _character->Update(ip, eTime, level, eManager, pManager, bManager);
+    _character->Update(ip, eTime, level, eManager, pManager, bManager, *this);
     _camera->Update(ip, eTime, level, *_character);
 
     ip._renderer->GetTexture().setView(*_camera);

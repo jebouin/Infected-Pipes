@@ -21,6 +21,7 @@
 #include "ResourceLoader.h"
 #include "GUI.h"
 
+
 Character::Character(IP& ip) : GameEntity(ip, "character", sf::IntRect(4, 3, 7, 26), 100) {
     _arms[EMPTY] = Arm {sf::IntRect(0, 0, 6, 9), sf::Vector2f(2, 1), sf::Vector2f(5, 6), 0};
     _arms[RAINBOW] = Arm {sf::IntRect(0, 9, 15, 9), sf::Vector2f(4, 1), sf::Vector2f(2, 2), 0};
@@ -58,7 +59,7 @@ Character::~Character() {
     _sWeapon = 0;
 }
 
-void Character::Update(IP& ip, float eTime, Level& level, EntityManager& eManager, ParticleManager& pManager, BulletManager& bManager) {
+void Character::Update(IP& ip, float eTime, Level& level, EntityManager& eManager, ParticleManager& pManager, BulletManager& bManager, Player& player) {
     sf::Vector2f mpos = MathHelper::GetMousePos(ip);
     AnimationTable& t(GetAnims());
 
@@ -68,7 +69,7 @@ void Character::Update(IP& ip, float eTime, Level& level, EntityManager& eManage
         MovingSprite::Update(ip, eTime);
         if(_enterTimer.getElapsedTime().asMilliseconds() > 500) {
             _enteringPipe = false;
-            level.NextLevel(ip, eManager, bManager, *this);
+            level.NextLevel(ip, eManager, bManager, player);
             _leavingPipe = true;
             _enterTimer.restart();
         }

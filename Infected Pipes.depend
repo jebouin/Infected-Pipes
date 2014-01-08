@@ -140,7 +140,7 @@
 	"DamageParticle.h"
 	"WaterField.h"
 
-1389192199 source:c:\users\xaychru04\desktop\infected pipes\player.cpp
+1389202384 source:c:\users\xaychru04\desktop\infected pipes\player.cpp
 	"Player.h"
 	"IP.h"
 	"Character.h"
@@ -169,7 +169,7 @@
 	"IP.h"
 	"Renderer.h"
 
-1389200063 source:c:\users\xaychru04\desktop\infected pipes\level.cpp
+1389203038 source:c:\users\xaychru04\desktop\infected pipes\level.cpp
 	"Level.h"
 	"IP.h"
 	"Map.h"
@@ -194,8 +194,9 @@
 	"GUI.h"
 	"Stalactite.h"
 	"Snowflakes.h"
+	"Player.h"
 
-1389200051 c:\users\xaychru04\desktop\infected pipes\level.h
+1389202428 c:\users\xaychru04\desktop\infected pipes\level.h
 	<map>
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
@@ -659,7 +660,7 @@
 1389129079 c:\users\xaychru04\desktop\infected pipes\scenes\scenemanager.h
 	<vector>
 
-1389199534 source:c:\users\xaychru04\desktop\infected pipes\scenes\game.cpp
+1389202908 source:c:\users\xaychru04\desktop\infected pipes\scenes\game.cpp
 	"Game.h"
 	"IP.h"
 	"Level.h"
@@ -813,7 +814,7 @@
 	"BulletManager.h"
 	"Renderer.h"
 
-1389128874 c:\users\xaychru04\desktop\infected pipes\entities\character.h
+1389202367 c:\users\xaychru04\desktop\infected pipes\entities\character.h
 	<vector>
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
@@ -835,7 +836,7 @@
 	"SFML/System.hpp"
 	"GameEntity.h"
 
-1389192200 source:c:\users\xaychru04\desktop\infected pipes\entities\character.cpp
+1389202367 source:c:\users\xaychru04\desktop\infected pipes\entities\character.cpp
 	"Character.h"
 	"IP.h"
 	"Animation.h"
@@ -1882,7 +1883,7 @@
 	"SFML/System.hpp"
 	"Bullet.h"
 
-1389201234 source:c:\users\xaychru04\desktop\infected pipes\snowflakes.cpp
+1389202172 source:c:\users\xaychru04\desktop\infected pipes\snowflakes.cpp
 	"SnowFlakes.h"
 	"IP.h"
 	"Level.h"
@@ -1891,7 +1892,7 @@
 	"MathHelper.h"
 	"Renderer.h"
 
-1389199698 c:\users\xaychru04\desktop\infected pipes\snowflakes.h
+1389203038 c:\users\xaychru04\desktop\infected pipes\snowflakes.h
 	<iostream>
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
