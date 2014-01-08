@@ -6,8 +6,6 @@
 #include "SFML/Graphics.hpp"
 #include "SFML/System.hpp"
 
-
-
 class IP;
 class Map;
 class Spawner;
@@ -24,6 +22,7 @@ class Duck;
 class GameEntity;
 class GUI;
 class Stalactite;
+class SnowFlakes;
 
 struct LevelInfo {
     std::string _imageName;
@@ -38,7 +37,7 @@ class Level {
     public:
     Level(IP& ip, Character& character);
     ~Level();
-    void Update(IP& ip, EntityManager& eManager, Character& character, float eTime, ParticleManager& pManager, BulletManager& bManager, GUI& gui);
+    void Update(IP& ip, EntityManager& eManager, Character& character, float eTime, ParticleManager& pManager, BulletManager& bManager, GUI& gui, sf::View& preView);
     void DrawBack(IP& ip, sf::View& prevView);
     void DrawFront(IP& ip);
     Map& GetMap() const;
@@ -57,8 +56,6 @@ class Level {
 
     private:
     sf::Clock _timer;
-    sf::Clock _snowFlakesTimer;
-    float _snowFlakesTime;
     sf::Vector2i GetRectSizeInImageAt(sf::Image& img, sf::Vector2i pos, sf::Color c);
 
     Map *_map;
@@ -76,6 +73,7 @@ class Level {
     std::vector<GameEntity*> _passiveEntities;
     std::vector<sf::Sprite> _backSprites;
     std::vector<Stalactite*> _stalactites;
+    SnowFlakes *_flakes;
 
     sf::RenderTexture _lavaTexture;
     sf::Shader _lavaShader;

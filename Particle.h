@@ -5,8 +5,6 @@
 #include "SFML/System.hpp"
 #include "MovingSprite.h"
 
-
-
 class IP;
 class Level;
 class ParticleManager;

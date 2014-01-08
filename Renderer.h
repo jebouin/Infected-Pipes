@@ -6,8 +6,6 @@
 #include "SFML/Graphics.hpp"
 #include "SFML/System.hpp"
 
-
-
 class IP;
 
 struct Flash {
@@ -26,6 +24,7 @@ class Renderer {
     void DrawToWindow(sf::RenderWindow& window, IP& ip);
     sf::RenderTexture& GetTexture();
     void AddFlash(float time, float power);
+    sf::Vector2u GetSize();
 
     public:
     sf::RenderTexture *_littleTexture;

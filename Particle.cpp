@@ -38,6 +38,7 @@ void Particle::Update(IP& ip, float eTime, Level& level, ParticleManager& pManag
     }
     setScale(MathHelper::Interpolate(lifePos, _startScale, _endScale));
     setColor(sf::Color(getColor().r, getColor().g, getColor().b, MathHelper::Interpolate(lifePos, _startAlpha, _endAlpha)));
+
     if(_collision) {
         MovingSprite::Update(ip, eTime, level, pManager);
     } else {

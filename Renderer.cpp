@@ -69,3 +69,7 @@ sf::RenderTexture& Renderer::GetTexture() {
 void Renderer::AddFlash(float time, float power) {
     _flashes.push_back(Flash{sf::Clock(), time, power});
 }
+
+sf::Vector2u Renderer::GetSize() {
+    return _littleTexture->getSize();
+}

@@ -21,6 +21,7 @@
 #include "MathHelper.h"
 #include "GUI.h"
 #include "Stalactite.h"
+#include "Snowflakes.h"
 
 Level::Level(IP& ip, Character& character) {
     _levelInfos["intro"] = LevelInfo{"level0", "nightBackground", 0.0001f, true, false, false};
@@ -40,7 +41,7 @@ Level::Level(IP& ip, Character& character) {
     character.setPosition(character.getPosition() + sf::Vector2f(0, 50));
     _lavaTexture.create(/*_map->GetSize().x*/64*16, /*_map->GetSize().y*/38*16);
     _lavaShader.loadFromFile("shaders/lava.frag", sf::Shader::Fragment);
-    _snowFlakesTime = 0;
+    _flakes = new SnowFlakes(ip);
 }
 
 Level::~Level() {
@@ -77,9 +78,11 @@ Level::~Level() {
         _stalactites[i] = 0;
     }
     _stalactites.clear();
+    delete _flakes;
+    _flakes = 0;
 }
 
-void Level::Update(IP& ip, EntityManager& eManager, Character& character, float eTime, ParticleManager& pManager, BulletManager& bManager, GUI& gui) {
+void Level::Update(IP& ip, EntityManager& eManager, Character& character, float eTime, ParticleManager& pManager, BulletManager& bManager, GUI& gui, sf::View& prevView) {
     _spawner->Update(ip, eTime, eManager, *this, character, gui);
     _grass->Update(ip);
     _background->Update(ip, eTime);
@@ -103,27 +106,18 @@ void Level::Update(IP& ip, EntityManager& eManager, Character& character, float 
         character.LeavePipe();
     }
 
+    //snow!
     if(_curLevel == "iceCave") {
-        _snowFlakesTime += _snowFlakesTimer.restart().asMilliseconds();
-        while(_snowFlakesTime >= 42) {
-            _snowFlakesTime -= 42;
-            bool z = rand()%2;
-            Particle *p = new Particle(ip,
-                                       "snowFlake",
-                                       sf::Vector2f(MathHelper::RandFloat(0, _map->GetSize().x*16), 0),
-                                        sf::Vector2f(MathHelper::RandFloat(-.015, 0.015), .04),
-                                       MathHelper::RandFloat(-.3, .3),
-                                       10000,
-                                       sf::Vector2f(1, 1), sf::Vector2f(1, 1),
-                                       255, 255,
-                                       false, false, false, sf::IntRect(0, 0, 7, 7), z);
-            pManager.AddParticle(p);
-        }
+        _flakes->Update(ip, eTime, *this, pManager, prevView);
     }
 }
 
 void Level::DrawBack(IP& ip, sf::View& prevView) {
     _background->Draw(ip._renderer->GetTexture(), prevView);
+    //snow!
+    if(_curLevel == "iceCave") {
+        _flakes->Draw(ip, prevView);
+    }
     _map->DrawLayer(ip._renderer->GetTexture(), Map::BACK);
     for(int i=0 ; i<_waterFalls.size() ; i++) {
         _waterFalls[i]->Draw(ip);
@@ -388,30 +382,6 @@ void Level::Load(IP& ip, std::string name, Character& character) {
 
 
 sf::Vector2i Level::GetRectSizeInImageAt(sf::Image& img, sf::Vector2i pos, sf::Color c) {
-    /*int w = 100000;
-    int h = 0;
-
-    while(42) {
-        bool end = false;
-        for(int i=0 ; i<w ; i++) {
-            if(img.getPixel(i+pos.x, h+pos.y) != c) {
-                if(i == 0) {
-                    end = true;
-                } else {
-                    w = i;
-                }
-                break;
-            } else {
-                img.setPixel(i+pos.x, h+pos.y, sf::Color(255, 255, 255, 0));
-            }
-        }
-        if(end) {
-            break;
-        }
-        h++;
-    }
-
-    return sf::Vector2i(w, h);*/
     int w = 100000;
 
     for(int i=0 ; i<w ; i++) {
@@ -458,9 +428,6 @@ void Level::NextLevel(IP& ip, EntityManager& eManager, BulletManager& bManager, 
     Load(ip, toLoad, character);
     eManager.Clear();
     bManager.Clear();
-    if(toLoad == "iceCave") {
-        _snowFlakesTimer.restart();
-    }
 }
 
 int Level::GetDifficulty() const {
