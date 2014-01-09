@@ -40,7 +40,7 @@ class Level {
     ~Level();
     void Update(IP& ip, EntityManager& eManager, Player& player, float eTime, ParticleManager& pManager, BulletManager& bManager, GUI& gui, sf::View& preView);
     void DrawBack(IP& ip, sf::View& prevView);
-    void DrawFront(IP& ip);
+    void DrawFront(IP& ip, sf::View& prevView);
     Map& GetMap() const;
     Spawner& GetSpawner();
     void Load(IP& ip, std::string name, Player& player);

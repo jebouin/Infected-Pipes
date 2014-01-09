@@ -139,7 +139,7 @@ void Level::DrawBack(IP& ip, sf::View& prevView) {
     }
 }
 
-void Level::DrawFront(IP& ip) {
+void Level::DrawFront(IP& ip, sf::View& prevView) {
     _lavaTexture.clear(sf::Color(0, 0, 0, 0));
     for(int i=0 ; i<_waterFields.size() ; i++) {
         _waterFields[i]->Draw(ip, _lavaTexture);
