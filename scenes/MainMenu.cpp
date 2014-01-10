@@ -3,6 +3,8 @@
 #include "MainMenuBackground.h"
 #include "Renderer.h"
 #include "ResourceLoader.h"
+#include "Game.h"
+#include "SceneManager.h"
 
 MainMenu::MainMenu(IP& ip) : Scene(ip) {
     _title.setTexture(ResourceLoader::GetTexture("title"));
@@ -20,6 +22,11 @@ MainMenu::~MainMenu() {
 void MainMenu::Update(float eTime, IP& ip) {
     Scene::Update(eTime, ip);
     _background->Update(ip, eTime);
+
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+        ip._sceneManager->RemoveScene();
+        ip._sceneManager->AddScene(new Game(ip));
+    }
 }
 
 void MainMenu::Draw(IP& ip) {

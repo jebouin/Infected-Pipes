@@ -29,3 +29,9 @@ void SceneManager::AddScene(Scene* scene){
 int SceneManager::GetNbScenes() {
     return _scenes.size();
 }
+
+void SceneManager::RemoveScene() {
+    delete _scenes[_scenes.size()-1];
+    _scenes[_scenes.size()-1] = 0;
+    _scenes.pop_back();
+}

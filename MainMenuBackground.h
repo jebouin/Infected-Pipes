@@ -4,7 +4,7 @@
 #include "SFML/Graphics.hpp"
 #include "SFML/System.hpp"
 
-
+using namespace std;
 
 class IP;
 class Map;
@@ -25,6 +25,10 @@ private:
     sf::View *_view;
     sf::RenderTexture *_rt;
     std::vector<sf::Sprite> _trees;
+    std::vector<sf::Vector2f> _treePos;
+    sf::Vector2u _ssize;
+    float _viewVelX;
+    float _simViewX;
 };
 
 #endif // MAINMENUBACKGROUND_H_INCLUDED

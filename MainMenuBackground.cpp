@@ -5,8 +5,10 @@
 #include "Background.h"
 #include "Renderer.h"
 #include "ResourceLoader.h"
+#include "MathHelper.h"
 
 MainMenuBackground::MainMenuBackground(IP& ip) {
+    _ssize = ip._renderer->GetSize();
     _map = new Map(ip, sf::Vector2i(64, 2));
     for(int i=0 ; i<_map->GetSize().x ; i++) {
         _map->SetTile(sf::Vector2i(i, _map->GetSize().y-1), 1, Map::FRONT);
@@ -19,7 +21,17 @@ MainMenuBackground::MainMenuBackground(IP& ip) {
     _rt = new sf::RenderTexture();
     _rt->create(ip._renderer->GetTexture().getSize().x, ip._renderer->GetTexture().getSize().y);
 
+    _simViewX = 0;
+    _viewVelX = .15f;
 
+    //add some trees
+    for(int i=0 ; i<_ssize.x/42 ; i++) {
+        sf::Sprite tree(ResourceLoader::GetTexture("fir"));
+        tree.setOrigin(sf::Vector2f(tree.getTextureRect().width/2, tree.getTextureRect().height));
+        tree.setPosition(sf::Vector2f(0, _ssize.y-15));
+        _treePos.push_back(sf::Vector2f(MathHelper::RandFloat(0, _ssize.x), 0));
+        _trees.push_back(tree);
+    }
 }
 
 MainMenuBackground::~MainMenuBackground() {
@@ -36,9 +48,23 @@ MainMenuBackground::~MainMenuBackground() {
 }
 
 void MainMenuBackground::Update(IP& ip, float eTime) {
-    _view->move(eTime*0.15f, 0);
+    _view->move(eTime*_viewVelX, 0);
+    _simViewX += _viewVelX*eTime;
     _grass->Update(ip);
     _background->Update(ip, eTime);
+    for(int i=0 ; i<_trees.size() ; i++) {
+        sf::Sprite& t(_trees[i]);
+        sf::Vector2f& basePos(_treePos[i]);
+        t.setPosition(sf::Vector2f(basePos.x - (_simViewX/2.f), t.getPosition().y));
+        if(t.getPosition().x < -32) {
+            t.setPosition(sf::Vector2f(_ssize.x+32, t.getPosition().y));
+        }
+        if(t.getPosition().x > _ssize.x+32) {
+            t.setPosition(sf::Vector2f(-32, t.getPosition().y));
+        }
+        basePos.x = (_simViewX/2.f)+t.getPosition().x;
+        t.setPosition(sf::Vector2f(sf::Vector2i(t.getPosition())));
+    }
 }
 
 void MainMenuBackground::Draw(IP& ip) {
@@ -50,6 +76,12 @@ void MainMenuBackground::Draw(IP& ip) {
     _rt->display();
 
     _background->Draw(ip._renderer->GetTexture(), *_view);
+    //trees
+    ip._renderer->GetTexture().setView(ip._renderer->GetTexture().getDefaultView());
+    for(int i=0 ; i<_trees.size() ; i++) {
+        ip._renderer->Draw(_trees[i]);
+    }
+    ip._renderer->GetTexture().setView(*_view);
 
     if(_view->getCenter().x+_view->getSize().x/2.f >= 1024) {
         sf::Sprite loopSprite;

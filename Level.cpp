@@ -39,8 +39,8 @@ Level::Level(IP& ip, Player& player) {
     _grass = 0;
     _background = 0;
     _difficulty = 2;
-    Load(ip, "iceCave", player);
-    character.setPosition(character.getPosition() + sf::Vector2f(0, 50));
+    Load(ip, "intro", player);
+    //character.setPosition(character.getPosition() + sf::Vector2f(0, 50));
     _lavaTexture.create(/*_map->GetSize().x*/64*16, /*_map->GetSize().y*/38*16);
     _lavaShader.loadFromFile("shaders/lava.frag", sf::Shader::Fragment);
     _flakes = new SnowFlakes(ip);

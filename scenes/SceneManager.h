@@ -16,6 +16,7 @@ public:
     void Draw(IP& ip);
     void AddScene(Scene* scene);
     int GetNbScenes();
+    void RemoveScene();
 
 private:
     std::vector<Scene*> _scenes;
