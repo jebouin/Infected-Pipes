@@ -23,6 +23,7 @@ class Background {
     sf::Sprite _back;
     sf::Sprite _back2;
     sf::Sprite _clouds;
+    float _cloudsX;
     sf::View _view;
     float _zoom;
 

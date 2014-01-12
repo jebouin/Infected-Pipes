@@ -22,6 +22,7 @@ Background::Background(IP& ip, std::string name, float zoom, Map& map) {
         }
 
         _clouds.setTexture(ResourceLoader::GetTexture("clouds"));
+        _cloudsX = 0;
 
         for(int i=0 ; i<(ip._renderer->GetTexture().getSize().x*ip._renderer->GetTexture().getSize().y/900) ; i++) {
             int starType = rand()%4;
@@ -75,6 +76,11 @@ void Background::Update(IP& ip, float elapsedTime) {
             }
         }
     }
+
+    _cloudsX += elapsedTime*.01f;
+    if(_cloudsX > _clouds.getTextureRect().width) {
+        _cloudsX = 0;
+    }
 }
 
 void Background::Draw(sf::RenderTexture& rt, const sf::View& prevView) {
@@ -94,10 +100,6 @@ void Background::Draw(sf::RenderTexture& rt, const sf::View& prevView) {
         }
     }
 
-    if(_name == "nightBackground") {
-        rt.draw(_clouds);
-    }
-
     _view.setCenter(prevView.getCenter()*_zoom + sf::Vector2f(rt.getSize().x, rt.getSize().y)/2.f);
     rt.setView(_view);
     sf::FloatRect r = MathHelper::View2Rect(_view);
@@ -111,6 +113,13 @@ void Background::Draw(sf::RenderTexture& rt, const sf::View& prevView) {
 
     for(int i=0 ; i<_backSprites2.size() ; i++) {
         rt.draw(_backSprites2[i]);
+    }
+
+    if(_name == "nightBackground") {
+        _clouds.setPosition(sf::Vector2f(_cloudsX, 100));
+        rt.draw(_clouds);
+        _clouds.setPosition(_clouds.getPosition() + sf::Vector2f(-_clouds.getTextureRect().width, 0));
+        rt.draw(_clouds);
     }
 
     _view.setCenter(sf::Vector2f(prevView.getCenter().x / 2., prevView.getCenter().y));
