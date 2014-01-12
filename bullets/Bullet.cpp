@@ -27,6 +27,10 @@ Bullet::Bullet(IP& ip, std::string name, sf::IntRect hitbox, sf::Vector2f positi
     _knockBack = knockBack;
     _dieOnWall = dieOnWall;
     _bounce = bounce;
+    _collisionWithEnnemies = true;
+    _trail.setPrimitiveType(sf::Lines);
+    _trail.append(sf::Vertex(sf::Vector2f(0, 0), sf::Color(255, 255, 0)));
+    _trail.append(sf::Vertex(sf::Vector2f(0, 0), sf::Color(255, 255, 0)));
 }
 
 Bullet::~Bullet() {
@@ -73,10 +77,14 @@ void Bullet::Update(IP& ip, float eTime, Level& level, Character& character, Par
             } else {
                 sf::Vector2f dir = MathHelper::Normalize(getPosition() - _prevPos);
                 float l = MathHelper::GetVecLength(getPosition() - _prevPos);
-                for(int i=0 ; i<eManager.GetNbEnnemies() ; i++) {
-                    Ennemy *e = eManager.GetEnnemy(i);
-                    for(float j=0 ; j<l ; j+=4) {
-                        if(sf::FloatRect(sf::Vector2f(_prevPos + j*dir), sf::Vector2f(e->GetGlobalHitbox().width, e->GetGlobalHitbox().height)).intersects(e->GetGlobalHitbox())) {
+                //cout << l << endl;
+                _trail.clear();
+                for(float j=0 ; j<l ; j+=4) {
+                    sf::Vector2f curPos(_prevPos + j*dir);
+                    _trail.append(sf::Vertex(curPos, sf::Color(255, 255, 0)));
+                    for(int i=0 ; i<eManager.GetNbEnnemies() ; i++) {
+                        Ennemy *e = eManager.GetEnnemy(i);
+                        if(sf::FloatRect(sf::Vector2f(curPos), sf::Vector2f(GetGlobalHitbox().width, GetGlobalHitbox().height)).intersects(e->GetGlobalHitbox())) {
                             Impact((GameEntity&)(*e), ip, pManager, sf::Color(255, 255, 0), eManager, level);
                             break;
                         }
@@ -96,7 +104,9 @@ void Bullet::Update(IP& ip, float eTime, Level& level, Character& character, Par
 }
 
 void Bullet::Draw(IP& ip) {
-    ip._renderer->Draw(*this);
+    //ip._renderer->Draw(*this);
+    MovingSprite::Draw(ip);
+    ip._renderer->Draw(_trail);
 }
 
 void Bullet::TestCollisions(IP& ip, float eTime, Level& level, sf::Vector2f delta) {

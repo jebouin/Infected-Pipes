@@ -9,11 +9,7 @@ ParticleManager::ParticleManager() {
 }
 
 ParticleManager::~ParticleManager() {
-    for(int i=0 ; i<_particles.size() ; i++) {
-        delete _particles[i];
-        _particles[i] = 0;
-    }
-    _particles.clear();
+    Clear();
 }
 
 void ParticleManager::Update(IP& ip, float elapsedTime, Level& level) {
@@ -60,4 +56,12 @@ Particle* ParticleManager::GetParticle(int id) {
         return NULL;
     }
     return _particles[id];
+}
+
+void ParticleManager::Clear() {
+    for(int i=0 ; i<_particles.size() ; i++) {
+        delete _particles[i];
+        _particles[i] = 0;
+    }
+    _particles.clear();
 }

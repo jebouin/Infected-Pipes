@@ -22,6 +22,7 @@ class Background {
     std::vector<sf::Sprite> _backSprites2;
     sf::Sprite _back;
     sf::Sprite _back2;
+    sf::Sprite _clouds;
     sf::View _view;
     float _zoom;
 

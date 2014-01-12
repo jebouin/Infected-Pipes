@@ -1,11 +1,13 @@
 #ifndef ENNEMY_H_INCLUDED
 #define ENNEMY_H_INCLUDED
 
+#include <iostream>
+
 #include "SFML/Graphics.hpp"
 #include "SFML/System.hpp"
 #include "GameEntity.h"
 
-
+using namespace std;
 
 class IP;
 class Level;
@@ -24,6 +26,7 @@ class Ennemy : public GameEntity {
     virtual void Draw(IP& ip);
     int GetXP();
     int GetIncDifficulty();
+    void Damage(int dmg, IP& ip, ParticleManager& pManager, sf::Color color, sf::Vector2f pos, sf::Vector2f dir, EntityManager& eManager, Level& level);
     virtual void Die(IP& ip, ParticleManager& pManager, EntityManager& eManager, Level& level);
 
     private:

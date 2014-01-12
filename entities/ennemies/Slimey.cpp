@@ -43,11 +43,11 @@ void Slimey::Update(IP& ip, float eTime, Level& level, Character& character, Ent
         _attackTimer.restart();
     }
 
-    if(_jumpTimer.getElapsedTime().asMilliseconds() >= _nextJump) {
+    /*if(_jumpTimer.getElapsedTime().asMilliseconds() >= _nextJump) {
         if(Jump(level)) {
             _jumpTimer.restart();
         }
-    }
+    }*/
 
     int curState = (GetHPMax()-GetHP())*4/GetHPMax();
     curState = std::min(curState, 3);

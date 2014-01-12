@@ -6,7 +6,7 @@
 #include "SFML/Graphics.hpp"
 #include "SFML/System.hpp"
 
-
+using namespace std;
 
 class IP;
 class Level;

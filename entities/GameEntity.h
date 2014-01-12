@@ -8,7 +8,7 @@
 #include "SFML/System.hpp"
 #include "MovingSprite.h"
 
-
+using namespace std;
 
 class IP;
 class Level;
@@ -31,7 +31,7 @@ class GameEntity : public MovingSprite {
     bool Jump(Level& level);
     virtual void Damage(int dmg, IP& ip, ParticleManager& pManager, sf::Color color, sf::Vector2f pos, sf::Vector2f dir, EntityManager& eManager, Level& level);
     virtual void Die(IP& ip, ParticleManager& pManager, EntityManager& eManager, Level& level);
-    void Hit(GameEntity *other, IP& ip, ParticleManager& pManager, sf::Color color, int damage, EntityManager& eManager, Level& level);
+    virtual void Hit(GameEntity *other, IP& ip, ParticleManager& pManager, sf::Color color, int damage, EntityManager& eManager, Level& level);
     void SetJumpPower(float p);
     void SetSpeed(float s);
     void SetWeight(float w);

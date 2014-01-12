@@ -9,7 +9,7 @@
 #include "Animation.h"
 #include "Particle.h"
 
-GunBullet::GunBullet(IP& ip, sf::Vector2f position, sf::Vector2f vel, bool ennemy) : Bullet(ip, "bullet", sf::IntRect(0, 0, 2, 2), position, vel, 90, .1, true, ennemy, false, true, false, true, false) {
+GunBullet::GunBullet(IP& ip, sf::Vector2f position, sf::Vector2f vel, bool ennemy) : Bullet(ip, "bullet", sf::IntRect(0, 0, 2, 2), position, vel, 100, .1, true, ennemy, false, true, false, true, false) {
 
 }
 

@@ -21,6 +21,8 @@ Background::Background(IP& ip, std::string name, float zoom, Map& map) {
             }
         }
 
+        _clouds.setTexture(ResourceLoader::GetTexture("clouds"));
+
         for(int i=0 ; i<(ip._renderer->GetTexture().getSize().x*ip._renderer->GetTexture().getSize().y/900) ; i++) {
             int starType = rand()%4;
             sf::Sprite star;
@@ -90,6 +92,10 @@ void Background::Draw(sf::RenderTexture& rt, const sf::View& prevView) {
                 rt.draw(_back2);
             }
         }
+    }
+
+    if(_name == "nightBackground") {
+        rt.draw(_clouds);
     }
 
     _view.setCenter(prevView.getCenter()*_zoom + sf::Vector2f(rt.getSize().x, rt.getSize().y)/2.f);

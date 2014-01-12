@@ -10,6 +10,8 @@
 #include "Particle.h"
 #include "DamageParticle.h"
 #include "WaterField.h"
+#include "IP.h"
+#include "Renderer.h"
 
 GameEntity::GameEntity(IP& ip, std::string name, sf::IntRect hitbox, int hp) : MovingSprite(ip, name, hitbox, true) {
     _jumpPower = 0.69;

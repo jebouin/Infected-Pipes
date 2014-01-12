@@ -17,7 +17,7 @@ Game::Game(IP& ip) : Scene(ip) {
     _particleManager = new ParticleManager();
     _speechManager = new SpeechManager();
     _player = new Player(ip, *_entityManager);
-    _level = new Level(ip, *_player);
+    _level = new Level(ip, *_player, *_particleManager);
     _gui = new GUI(ip, _player->GetCharacter(), *_level);
     _speechManager->AddBubble(new SpeechBubble(ip, "Particles! :D", (const GameEntity&)_player->GetCharacter(), 1000, 200));
 }

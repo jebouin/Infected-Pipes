@@ -24,7 +24,7 @@
 #include "Snowflakes.h"
 #include "Player.h"
 
-Level::Level(IP& ip, Player& player) {
+Level::Level(IP& ip, Player& player, ParticleManager& pManager) {
     Character& character(player.GetCharacter());
     _levelInfos["intro"] = LevelInfo{"level0", "nightBackground", 0.0001f, true, false, false};
     _levelInfos["rockyCave"] = LevelInfo{"level1", "rockyBackground", 0.2f, true, true, false};
@@ -39,8 +39,8 @@ Level::Level(IP& ip, Player& player) {
     _grass = 0;
     _background = 0;
     _difficulty = 2;
-    Load(ip, "intro", player);
-    //character.setPosition(character.getPosition() + sf::Vector2f(0, 50));
+    Load(ip, "miniBoss1", player, pManager);
+    character.setPosition(character.getPosition() + sf::Vector2f(0, 50));
     _lavaTexture.create(/*_map->GetSize().x*/64*16, /*_map->GetSize().y*/38*16);
     _lavaShader.loadFromFile("shaders/lava.frag", sf::Shader::Fragment);
     _flakes = new SnowFlakes(ip);
@@ -105,7 +105,7 @@ void Level::Update(IP& ip, EntityManager& eManager, Player& player, float eTime,
         _stalactites[i]->Update(ip, eTime, *this, character, pManager, eManager);
     }
     if((_curLevel == "miniBoss1" || _curLevel == "miniBoss2" || _curLevel == "miniBoss3") && _spawner->IsFinished()) {
-        NextLevel(ip, eManager, bManager, player);
+        NextLevel(ip, eManager, bManager, player, pManager);
         character.LeavePipe();
     }
 
@@ -164,7 +164,7 @@ Spawner& Level::GetSpawner() {
     return *_spawner;
 }
 
-void Level::Load(IP& ip, std::string name, Player& player) {
+void Level::Load(IP& ip, std::string name, Player& player, ParticleManager& pManager) {
     Character& character(player.GetCharacter());
     _curLevel = name;
     LevelInfo& info(_levelInfos[name]);
@@ -173,7 +173,7 @@ void Level::Load(IP& ip, std::string name, Player& player) {
     _levelImages[1] = sf::Image(ResourceLoader::GetImage(info._imageName + "front"));
     delete _map;
     _map = new Map(ip, sf::Vector2i(_levelImages[0].getSize()));
-
+    pManager.Clear();
     delete _spawner;
     if(name == "miniBoss1" || name == "miniBoss2" || name == "miniBoss3") {
         _spawner = new Spawner(ip, 1, *this);
@@ -403,7 +403,7 @@ sf::Vector2i Level::GetRectSizeInImageAt(sf::Image& img, sf::Vector2i pos, sf::C
     return sf::Vector2i(w, 1);
 }
 
-void Level::NextLevel(IP& ip, EntityManager& eManager, BulletManager& bManager, Player& player) {
+void Level::NextLevel(IP& ip, EntityManager& eManager, BulletManager& bManager, Player& player, ParticleManager& pManager) {
     Character& character(player.GetCharacter());
     /*if(_curLevel == "rockyCave") {
         Load(ip, "rockyCave2", character);
@@ -429,7 +429,7 @@ void Level::NextLevel(IP& ip, EntityManager& eManager, BulletManager& bManager, 
     } else {
         toLoad = "iceCave";
     }
-    Load(ip, toLoad, player);
+    Load(ip, toLoad, player, pManager);
     eManager.Clear();
     bManager.Clear();
 }

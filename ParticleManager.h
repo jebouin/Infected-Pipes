@@ -22,6 +22,7 @@ class ParticleManager {
     void AddParticle(Particle *p);
     int GetCount();
     Particle* GetParticle(int id);
+    void Clear();
 
     private:
     std::vector<Particle*> _particles;

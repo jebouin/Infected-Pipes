@@ -27,6 +27,11 @@ MovingSprite::MovingSprite(IP& ip, std::string name, bool animated) : sf::Sprite
     _collidesWithWater = true;
     _collisionPrecision = .2;
     _bounce = false;
+
+    _box.setPointCount(4);
+    _box.setOutlineColor(sf::Color(255, 255, 255));
+    _box.setOutlineThickness(1);
+    _box.setFillColor(sf::Color(255, 255, 255, 0));
 }
 
 MovingSprite::MovingSprite(IP& ip, std::string name, sf::IntRect hitbox, bool animated) {
@@ -45,6 +50,11 @@ MovingSprite::MovingSprite(IP& ip, std::string name, sf::IntRect hitbox, bool an
     _collidesWithWater = true;
     _collisionPrecision = .2;
     _bounce = false;
+
+    _box.setPointCount(4);
+    _box.setOutlineColor(sf::Color(255, 255, 255));
+    _box.setOutlineThickness(1);
+    _box.setFillColor(sf::Color(255, 255, 255, 0));
 }
 
 MovingSprite::~MovingSprite() {
@@ -58,6 +68,11 @@ void MovingSprite::Update(IP& ip, float eTime) {
     if(_animated) {
         _animTable->Update();
         setTextureRect(_animTable->GetRect());
+    }
+
+    vector<sf::Vector2f> cs(MathHelper::Rect2Corners(GetGlobalHitbox()));
+    for(int i=0 ; i<4 ; i++) {
+        _box.setPoint(i, cs[i]);
     }
 }
 
@@ -78,17 +93,17 @@ void MovingSprite::Update(IP& ip, float eTime, Level& level, ParticleManager& pM
         _onPlatform = false;
     }
 
-    std::vector<sf::Vector2f> boxCorners = MathHelper::Rect2Corners(GetGlobalHitbox());
-    for(int i=0 ; i<4 ; i++) {
-        _box.setPoint(i, boxCorners[i]);
-    }
-
     WaterCollision(level, delta, pManager, ip);
+
+    vector<sf::Vector2f> cs(MathHelper::Rect2Corners(GetGlobalHitbox()));
+    for(int i=0 ; i<4 ; i++) {
+        _box.setPoint(i, cs[i]);
+    }
 }
 
 void MovingSprite::Draw(IP& ip) {
     ip._renderer->Draw(*this);
-    //ip._renderer->Draw(_box);
+    ip._renderer->Draw(_box);
 }
 
 void MovingSprite::MoveCollidingMap(sf::Vector2f delta, Level& level) {

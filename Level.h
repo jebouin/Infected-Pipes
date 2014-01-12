@@ -36,15 +36,15 @@ struct LevelInfo {
 
 class Level {
     public:
-    Level(IP& ip, Player& player);
+    Level(IP& ip, Player& player, ParticleManager& pManager);
     ~Level();
     void Update(IP& ip, EntityManager& eManager, Player& player, float eTime, ParticleManager& pManager, BulletManager& bManager, GUI& gui, sf::View& preView);
     void DrawBack(IP& ip, sf::View& prevView);
     void DrawFront(IP& ip, sf::View& prevView);
     Map& GetMap() const;
     Spawner& GetSpawner();
-    void Load(IP& ip, std::string name, Player& player);
-    void NextLevel(IP& ip, EntityManager& eManager, BulletManager& bManager, Player& player);
+    void Load(IP& ip, std::string name, Player& player, ParticleManager& pManager);
+    void NextLevel(IP& ip, EntityManager& eManager, BulletManager& bManager, Player& player, ParticleManager& pManager);
     int GetDifficulty() const;
     void SetDifficulty(int v);
     void OpenChest(Character& character, IP& ip);

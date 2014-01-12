@@ -36,8 +36,8 @@ IP::IP() {
     const_cast<sf::Texture&>(_font.getTexture(64)).setSmooth(false);
 
     _window->setActive(true);
-    _sceneManager->AddScene(new MainMenu(*this));
-    //_sceneManager->AddScene(new Game(*this));
+    //_sceneManager->AddScene(new MainMenu(*this));
+    _sceneManager->AddScene(new Game(*this));
     _focused = true;
 
     while(_window->isOpen()) {
@@ -206,6 +206,7 @@ void IP::LoadResources() {
     ResourceLoader::LoadTexture("gfx/skullFeather.png", "skullFeather");
     ResourceLoader::LoadTexture("gfx/skullFeather2.png", "skullFeather2");
     ResourceLoader::LoadTexture("gfx/fistUpParticle.png", "fistUpParticle");
+    ResourceLoader::LoadTexture("gfx/littleImpact.png", "littleImpact");
 
     ResourceLoader::LoadTexture("gfx/fir.png", "fir");
     ResourceLoader::LoadTexture("gfx/moon.png", "moon");
@@ -214,6 +215,7 @@ void IP::LoadResources() {
     ResourceLoader::LoadTexture("gfx/falls.png", "falls");
     ResourceLoader::LoadTexture("gfx/bigFalls.png", "bigFalls");
     ResourceLoader::LoadTexture("gfx/title.png", "title");
+    ResourceLoader::LoadTexture("gfx/clouds.png", "clouds");
 
     ResourceLoader::LoadTexture("gfx/arms.png", "arms");
 }

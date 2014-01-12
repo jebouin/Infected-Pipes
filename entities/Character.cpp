@@ -42,11 +42,11 @@ Character::Character(IP& ip) : GameEntity(ip, "character", sf::IntRect(4, 3, 7, 
     _xp = 0;
     _nextXP = 10;
 
-    _weapon = new Shotgun(ip, (const GameEntity&)*this, sf::Vector2f(0, 0));
+    _weapon = new MachineGun(ip, (const GameEntity&)*this, sf::Vector2f(0, 0));
     _sWeapon = new GrenadeLauncher(ip, (const GameEntity&)*this, sf::Vector2f(0, 0));
 
     _arm.setTexture(ResourceLoader::GetTexture("arms"));
-    LoadArm(SHOTGUN);
+    LoadArm(MACHINEGUN);
 
     SetAutoDir(false);
     SetCollisionPrecision(.05);
@@ -69,7 +69,7 @@ void Character::Update(IP& ip, float eTime, Level& level, EntityManager& eManage
         MovingSprite::Update(ip, eTime);
         if(_enterTimer.getElapsedTime().asMilliseconds() > 500) {
             _enteringPipe = false;
-            level.NextLevel(ip, eManager, bManager, player);
+            level.NextLevel(ip, eManager, bManager, player, pManager);
             _leavingPipe = true;
             _enterTimer.restart();
         }
