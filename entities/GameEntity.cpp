@@ -28,6 +28,11 @@ GameEntity::GameEntity(IP& ip, std::string name, sf::IntRect hitbox, int hp) : M
     _inWater = false;
     _friction = .008;
     _havePhysics = true;
+    _lastTimeHit = -10000;
+
+    if(!_hitShader.loadFromFile("shaders/hit.frag", sf::Shader::Fragment)) {
+        cout << "Could not load hit shader..." << endl;
+    }
 }
 
 GameEntity::~GameEntity() {
@@ -37,6 +42,10 @@ GameEntity::~GameEntity() {
 void GameEntity::Update(IP& ip, float elapsedTime, Level& level, EntityManager& eManager, ParticleManager& pManager) {
     _inWater = IsInWater(level);
     bool onGround = (level.GetSpawner().IsOnGround(*this) || level.GetMap().IsOnTileType(*this, Map::WALL) || level.GetMap().IsOnTileType(*this, Map::PLATFORM));
+
+    _hitShader.setParameter("texture", sf::Shader::CurrentTexture);
+    _hitShader.setParameter("time", _hitTimer.getElapsedTime().asMilliseconds());
+    _hitShader.setParameter("lastTimeHit", _lastTimeHit);
 
     if(!_havePhysics) {
         MovingSprite::Update(ip, elapsedTime);
@@ -85,7 +94,7 @@ void GameEntity::Update(IP& ip, float elapsedTime) {
 }
 
 void GameEntity::Draw(IP& ip) {
-    MovingSprite::Draw(ip);
+    MovingSprite::Draw(ip, &_hitShader);
 }
 
 void GameEntity::Collide(GameEntity* other, float elapsedTime) {
@@ -196,6 +205,7 @@ void GameEntity::Damage(int dmg, IP& ip, ParticleManager& pManager, sf::Color co
                                             color,
                                             true,
                                             true));
+    _lastTimeHit = _hitTimer.getElapsedTime().asMilliseconds();
 }
 
 void GameEntity::Die(IP& ip, ParticleManager& pManager, EntityManager& eManager, Level& level) {

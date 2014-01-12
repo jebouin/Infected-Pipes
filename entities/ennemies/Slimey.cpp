@@ -43,11 +43,11 @@ void Slimey::Update(IP& ip, float eTime, Level& level, Character& character, Ent
         _attackTimer.restart();
     }
 
-    /*if(_jumpTimer.getElapsedTime().asMilliseconds() >= _nextJump) {
+    if(_jumpTimer.getElapsedTime().asMilliseconds() >= _nextJump) {
         if(Jump(level)) {
             _jumpTimer.restart();
         }
-    }*/
+    }
 
     int curState = (GetHPMax()-GetHP())*4/GetHPMax();
     curState = std::min(curState, 3);
@@ -127,5 +127,31 @@ void Slimey::Die(IP& ip, ParticleManager& pManager, EntityManager& eManager, Lev
         slime->setPosition(getPosition() + MathHelper::Ang2Vec(MathHelper::Deg2Rad(MathHelper::RandFloat(0, 360))) * MathHelper::RandFloat(0., 2.));
         slime->SetVel(MathHelper::Ang2Vec(MathHelper::Deg2Rad(MathHelper::RandFloat(-90, -90)))*MathHelper::RandFloat(1.0, 1.2));
         eManager.Add(slime);
+    }
+}
+
+void Slimey::Damage(int dmg, IP& ip, ParticleManager& pManager, sf::Color color, sf::Vector2f pos, sf::Vector2f dir, EntityManager& eManager, Level& level) {
+    Ennemy::Damage(dmg, ip, pManager, color, pos, dir, eManager, level);
+    if(_prevState == 1) {
+        if(rand()%10==0) {
+            Slime *slime = new Slime(ip, level);
+            slime->setPosition(getPosition() + MathHelper::Ang2Vec(MathHelper::Deg2Rad(MathHelper::RandFloat(0, 360))) * MathHelper::RandFloat(0., 2.));
+            slime->SetVel(MathHelper::Ang2Vec(MathHelper::Deg2Rad(MathHelper::RandFloat(-90, -90)))*MathHelper::RandFloat(0.4, .6));
+            eManager.Add(slime);
+        }
+    } else if(_prevState == 2) {
+        if(rand()%7==0) {
+            Slime *slime = new Slime(ip, level);
+            slime->setPosition(getPosition() + MathHelper::Ang2Vec(MathHelper::Deg2Rad(MathHelper::RandFloat(0, 360))) * MathHelper::RandFloat(0., 2.));
+            slime->SetVel(MathHelper::Ang2Vec(MathHelper::Deg2Rad(MathHelper::RandFloat(-90, -90)))*MathHelper::RandFloat(0.4, .6));
+            eManager.Add(slime);
+        }
+    } else if(_prevState == 3) {
+        if(rand()%4==0) {
+            Slime *slime = new Slime(ip, level);
+            slime->setPosition(getPosition() + MathHelper::Ang2Vec(MathHelper::Deg2Rad(MathHelper::RandFloat(0, 360))) * MathHelper::RandFloat(0., 2.));
+            slime->SetVel(MathHelper::Ang2Vec(MathHelper::Deg2Rad(MathHelper::RandFloat(-90, -90)))*MathHelper::RandFloat(0.4, .6));
+            eManager.Add(slime);
+        }
     }
 }

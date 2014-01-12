@@ -20,6 +20,7 @@ class Slimey : public Ennemy {
     ~Slimey();
     void Update(IP& ip, float eTime, Level& level, Character& character, EntityManager& eManager, ParticleManager& pManager, BulletManager& bManager);
     void Die(IP& ip, ParticleManager& pManager, EntityManager& eManager, Level& level);
+    void Damage(int dmg, IP& ip, ParticleManager& pManager, sf::Color color, sf::Vector2f pos, sf::Vector2f dir, EntityManager& eManager, Level& level);
 
     private:
     sf::Clock _attackTimer;

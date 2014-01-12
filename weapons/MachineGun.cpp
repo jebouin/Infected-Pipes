@@ -6,7 +6,7 @@
 #include "MathHelper.h"
 #include "Renderer.h"
 
-MachineGun::MachineGun(IP& ip, const GameEntity& holder, sf::Vector2f relativePos) : Weapon(ip, holder, relativePos, 100) {
+MachineGun::MachineGun(IP& ip, const GameEntity& holder, sf::Vector2f relativePos) : Weapon(ip, holder, relativePos, 20) {
 
 }
 

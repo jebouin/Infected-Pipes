@@ -21,6 +21,7 @@ class MovingSprite : public sf::Sprite {
     void Update(IP& ip, float eTime);
     void Update(IP& ip, float eTime, Level& level, ParticleManager& pManager);
     void Draw(IP& ip);
+    void Draw(IP& ip, sf::Shader* shader);
     void MoveCollidingMap(sf::Vector2f delta, Level& level);
     bool TryMove(sf::Vector2f delta, Level& level);
     sf::Vector2f GetVel();

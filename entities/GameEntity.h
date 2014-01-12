@@ -56,6 +56,7 @@ class GameEntity : public MovingSprite {
 
     protected:
     bool _inWater;
+    sf::Shader _hitShader;
 
     private:
     bool _dir;
@@ -71,6 +72,8 @@ class GameEntity : public MovingSprite {
     bool _havePhysics;
     int _hpMax;
     int _hp;
+    float _lastTimeHit;
+    sf::Clock _hitTimer;
 };
 
 #endif // GAMEENTITY_H_INCLUDED

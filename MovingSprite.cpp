@@ -103,7 +103,11 @@ void MovingSprite::Update(IP& ip, float eTime, Level& level, ParticleManager& pM
 
 void MovingSprite::Draw(IP& ip) {
     ip._renderer->Draw(*this);
-    ip._renderer->Draw(_box);
+    //ip._renderer->Draw(_box);
+}
+
+void MovingSprite::Draw(IP& ip, sf::Shader* shader) {
+    ip._renderer->Draw(*this, shader);
 }
 
 void MovingSprite::MoveCollidingMap(sf::Vector2f delta, Level& level) {
