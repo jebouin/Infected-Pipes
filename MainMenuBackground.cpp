@@ -22,6 +22,8 @@ MainMenuBackground::MainMenuBackground(IP& ip) {
     _rt->create(ip._renderer->GetTexture().getSize().x, ip._renderer->GetTexture().getSize().y);
 
     _simViewX = 0;
+    _forestPosX = 0;
+    //_viewVelX = .05f;
     _viewVelX = .15f;
 
     //add some trees
@@ -32,6 +34,8 @@ MainMenuBackground::MainMenuBackground(IP& ip) {
         _treePos.push_back(sf::Vector2f(MathHelper::RandFloat(0, _ssize.x), 0));
         _trees.push_back(tree);
     }
+    _forest.setTexture(ResourceLoader::GetTexture("forestBackground"));
+    _forest.setPosition(sf::Vector2f(0, _ssize.y-_forest.getTextureRect().height));
 }
 
 MainMenuBackground::~MainMenuBackground() {
@@ -65,6 +69,7 @@ void MainMenuBackground::Update(IP& ip, float eTime) {
         basePos.x = (_simViewX/2.f)+t.getPosition().x;
         t.setPosition(sf::Vector2f(sf::Vector2i(t.getPosition())));
     }
+    _forestPosX += eTime*_viewVelX/-4.f;
 }
 
 void MainMenuBackground::Draw(IP& ip) {
@@ -76,8 +81,17 @@ void MainMenuBackground::Draw(IP& ip) {
     _rt->display();
 
     _background->Draw(ip._renderer->GetTexture(), *_view);
-    //trees
+
     ip._renderer->GetTexture().setView(ip._renderer->GetTexture().getDefaultView());
+    //forest/mountain
+    if(_forestPosX+_forest.getTextureRect().width < _ssize.x) {
+        _forestPosX += _forest.getTextureRect().width;
+    }
+    _forest.setPosition(sf::Vector2f(_forestPosX, _forest.getPosition().y));
+    ip._renderer->Draw(_forest);
+    _forest.setPosition(_forest.getPosition() + sf::Vector2f(-_forest.getTextureRect().width, 0));
+    ip._renderer->Draw(_forest);
+    //trees
     for(int i=0 ; i<_trees.size() ; i++) {
         ip._renderer->Draw(_trees[i]);
     }

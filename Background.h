@@ -4,7 +4,7 @@
 #include "SFML/Graphics.hpp"
 #include "SFML/System.hpp"
 
-
+using namespace std;
 
 class IP;
 class Map;
@@ -22,6 +22,7 @@ class Background {
     std::vector<sf::Sprite> _backSprites2;
     sf::Sprite _back;
     sf::Sprite _back2;
+    sf::Sprite _forest;
     sf::Sprite _clouds;
     float _cloudsX;
     sf::View _view;

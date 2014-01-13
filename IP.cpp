@@ -15,7 +15,8 @@
 #include "ShaderManager.h"
 
 IP::IP() {
-    _window = new sf::RenderWindow(sf::VideoMode(1600, 900, 32), "Infected Pipes");
+    _window = new sf::RenderWindow(sf::VideoMode(1600, 768, 32), "Infected Pipes");
+    //_window = new sf::RenderWindow(sf::VideoMode(1024, 768, 32), "Infected Pipes");
     //_window = new sf::RenderWindow(sf::VideoMode::getFullscreenModes()[0], "Infected Pipes", sf::Style::None);
     _window->setVerticalSyncEnabled(true);
     _window->setFramerateLimit(60);
@@ -36,8 +37,8 @@ IP::IP() {
     const_cast<sf::Texture&>(_font.getTexture(64)).setSmooth(false);
 
     _window->setActive(true);
-    //_sceneManager->AddScene(new MainMenu(*this));
-    _sceneManager->AddScene(new Game(*this));
+    _sceneManager->AddScene(new MainMenu(*this));
+    //_sceneManager->AddScene(new Game(*this));
     _focused = true;
 
     while(_window->isOpen()) {
@@ -148,6 +149,8 @@ void IP::LoadResources() {
     ResourceLoader::LoadTexture("gfx/lavaBackground2.png", "lavaBackground2");
     ResourceLoader::LoadTexture("gfx/iceBackground.png", "iceBackground");
     ResourceLoader::LoadTexture("gfx/iceBackground2.png", "iceBackground2");
+    ResourceLoader::LoadTexture("gfx/forestBackground.png", "forestBackground");
+
     ResourceLoader::LoadTexture("gfx/lifeBar.png", "lifeBar");
     ResourceLoader::LoadTexture("gfx/lifeBarBorder.png", "lifeBarBorder");
     ResourceLoader::LoadTexture("gfx/xpBar.png", "xpBar");

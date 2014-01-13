@@ -27,6 +27,8 @@ private:
     std::vector<sf::Sprite> _trees;
     std::vector<sf::Vector2f> _treePos;
     sf::Vector2u _ssize;
+    sf::Sprite _forest;
+    float _forestPosX;
     float _viewVelX;
     float _simViewX;
 };
