@@ -120,7 +120,7 @@ void Background::Draw(sf::RenderTexture& rt, const sf::View& prevView) {
 
     if(_name == "nightBackground") {
         //clouds
-        _clouds.setPosition(sf::Vector2f(_cloudsX, 100));
+        _clouds.setPosition(sf::Vector2f(_cloudsX, rt.getSize().y-128));
         rt.draw(_clouds);
         _clouds.setPosition(_clouds.getPosition() + sf::Vector2f(-_clouds.getTextureRect().width, 0));
         rt.draw(_clouds);

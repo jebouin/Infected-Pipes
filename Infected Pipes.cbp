@@ -80,6 +80,7 @@
 		<Unit filename="ResourceLoader.h" />
 		<Unit filename="ShaderManager.cpp" />
 		<Unit filename="ShaderManager.h" />
+		<Unit filename="SnowFlakes.cpp" />
 		<Unit filename="SnowFlakes.h" />
 		<Unit filename="Spawner.cpp" />
 		<Unit filename="Spawner.h" />
