@@ -22,13 +22,13 @@ class Bullet : public MovingSprite {
     virtual ~Bullet();
     virtual void Update(IP& ip, float eTime, Level& level, Character& character, ParticleManager& pManager, EntityManager& eManager);
     void Draw(IP& ip);
-    void TestCollisions(IP& ip, float eTime, Level& level, sf::Vector2f delta);
+    void TestCollisions(IP& ip, float eTime, Level& level, ParticleManager& pManager, EntityManager& eManager, sf::Vector2f delta);
     void Impact(GameEntity& entity, IP& ip, ParticleManager& pManager, sf::Color color, EntityManager& eManager, Level& level);
     bool IsAlive() const;
     bool IsDying() const;
     bool CollisionWithEnnemies() const;
     void SetCollisionWithEnnemies(bool c);
-    virtual bool Die();
+    virtual bool Die(IP& ip, ParticleManager& pManager, EntityManager& eManager, Level& level);
 
     private:
     bool _gravity;

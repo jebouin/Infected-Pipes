@@ -23,7 +23,7 @@ void Grenade::Update(IP& ip, float eTime, Level& level, Character& character, Pa
     Bullet::Update(ip, eTime, level, character, pManager, eManager);
 
     if(_explosionTimer.getElapsedTime().asMilliseconds() >= 2000) {
-        Die();
+        Die(ip, pManager, eManager, level);
         ip._renderer->AddFlash(80, .8);
         Particle *p = new Particle(ip,
                                    "bigExplosion",

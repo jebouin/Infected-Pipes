@@ -15,9 +15,9 @@
 #include "ShaderManager.h"
 
 IP::IP() {
-    _window = new sf::RenderWindow(sf::VideoMode(1600, 900, 32), "Infected Pipes");
+    //_window = new sf::RenderWindow(sf::VideoMode(1600, 900, 32), "Infected Pipes");
     //_window = new sf::RenderWindow(sf::VideoMode(1024, 768, 32), "Infected Pipes");
-    //_window = new sf::RenderWindow(sf::VideoMode::getFullscreenModes()[0], "Infected Pipes", sf::Style::None);
+    _window = new sf::RenderWindow(sf::VideoMode::getFullscreenModes()[0], "Infected Pipes", sf::Style::None);
     _window->setVerticalSyncEnabled(true);
     _window->setFramerateLimit(60);
     _window->setMouseCursorVisible(false);
@@ -37,8 +37,8 @@ IP::IP() {
     const_cast<sf::Texture&>(_font.getTexture(64)).setSmooth(false);
 
     _window->setActive(true);
-    _sceneManager->AddScene(new MainMenu(*this));
-    //_sceneManager->AddScene(new Game(*this));
+    //_sceneManager->AddScene(new MainMenu(*this));
+    _sceneManager->AddScene(new Game(*this));
     _focused = true;
 
     while(_window->isOpen()) {
@@ -134,6 +134,7 @@ void IP::LoadResources() {
     ResourceLoader::LoadTexture("gfx/fireWormBossCannon.png", "fireWormBossCannon");
     ResourceLoader::LoadTexture("gfx/fist.png", "fist");
     ResourceLoader::LoadTexture("gfx/flyingSkull.png", "flyingSkull");
+    ResourceLoader::LoadTexture("gfx/missileBall.png", "missileBall");
 
     ResourceLoader::LoadTexture("gfx/duck.png", "duck");
     ResourceLoader::LoadTexture("gfx/mouse.png", "mouse");
@@ -169,6 +170,7 @@ void IP::LoadResources() {
     ResourceLoader::LoadTexture("gfx/grenade.png", "grenade");
     ResourceLoader::LoadTexture("gfx/dualFireBullet.png", "dualFireBullet");
     ResourceLoader::LoadTexture("gfx/boneBullet.png", "boneBullet");
+    ResourceLoader::LoadTexture("gfx/missile.png", "missile");
 
     ResourceLoader::LoadTexture("gfx/blood0.png", "blood0");
     ResourceLoader::LoadTexture("gfx/blood1.png", "blood1");
@@ -210,6 +212,7 @@ void IP::LoadResources() {
     ResourceLoader::LoadTexture("gfx/skullFeather2.png", "skullFeather2");
     ResourceLoader::LoadTexture("gfx/fistUpParticle.png", "fistUpParticle");
     ResourceLoader::LoadTexture("gfx/littleImpact.png", "littleImpact");
+    ResourceLoader::LoadTexture("gfx/missileSmoke.png", "missileSmoke");
 
     ResourceLoader::LoadTexture("gfx/fir.png", "fir");
     ResourceLoader::LoadTexture("gfx/moon.png", "moon");

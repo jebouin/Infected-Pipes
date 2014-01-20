@@ -17,7 +17,7 @@ RockBullet::~RockBullet() {
 void RockBullet::Update(IP& ip, float eTime, Level& level, Character& character, ParticleManager& pManager, EntityManager& eManager) {
     Bullet::Update(ip, eTime, level, character, pManager, eManager);
     if(MathHelper::GetVecLength(GetVel()) < 0.1) {
-        Die();
+        Die(ip, pManager, eManager, level);
     }
 }
 

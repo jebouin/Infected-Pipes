@@ -67,7 +67,7 @@ void Bullet::Update(IP& ip, float eTime, Level& level, Character& character, Par
         if(!_bounce) {
             MovingSprite::Update(ip, eTime);
         }
-        TestCollisions(ip, eTime, level, GetVel()*eTime);
+        TestCollisions(ip, eTime, level, pManager, eManager, GetVel()*eTime);
         WaterCollision(level, GetVel()*eTime, pManager, ip);
         if(_collisionWithEnnemies) {
             if(_ennemy) {
@@ -97,8 +97,7 @@ void Bullet::Update(IP& ip, float eTime, Level& level, Character& character, Par
         }
 
         if(_timer.getElapsedTime().asSeconds() > 4) {
-            _dying = true;
-            _deadTimer.restart();
+            Die(ip, pManager, eManager, level);
         }
     }
 }
@@ -109,14 +108,14 @@ void Bullet::Draw(IP& ip) {
     //ip._renderer->Draw(_trail);
 }
 
-void Bullet::TestCollisions(IP& ip, float eTime, Level& level, sf::Vector2f delta) {
+void Bullet::TestCollisions(IP& ip, float eTime, Level& level, ParticleManager& pManager, EntityManager& eManager, sf::Vector2f delta) {
     if(_dying) {
         return;
     }
 
     if(abs(delta.x > 2.f) || abs(delta.y) > 2.f) {
         for(int i=0 ; i<2 ; i++) {
-            TestCollisions(ip, eTime, level, delta/2.f);
+            TestCollisions(ip, eTime, level, pManager, eManager, delta/2.f);
         }
         return;
     }
@@ -149,8 +148,7 @@ void Bullet::TestCollisions(IP& ip, float eTime, Level& level, sf::Vector2f delt
     } else {
         if(level.GetMap().IsCollided(*this, GetGlobalUpperLeftPos()+delta, Map::WALL) || level.GetSpawner().IsCollided(*this, GetGlobalUpperLeftPos()+delta)) {
             if(_dieOnWall) {
-                _dying = true;
-                _deadTimer.restart();
+                Die(ip, pManager, eManager, level);
                 //setPosition(getPosition() + delta);
             }
         }
@@ -161,9 +159,8 @@ void Bullet::Impact(GameEntity& entity, IP& ip, ParticleManager& pManager, sf::C
     /*if(!entity.IsAlive()) {
         return;
     }*/
-    _dying = true;
     _instantDie = true;
-    _deadTimer.restart();
+    Die(ip, pManager, eManager, level);
     entity.Damage(_damage, ip, pManager, color, getPosition(), GetVel(), eManager, level);
     if(entity.HasPhysics()) {
         entity.SetVel(entity.GetVel() + GetVel()/MathHelper::GetVecLength(GetVel())*_knockBack);
@@ -186,7 +183,7 @@ void Bullet::SetCollisionWithEnnemies(bool c) {
     _collisionWithEnnemies = c;
 }
 
-bool Bullet::Die() {
+bool Bullet::Die(IP& ip, ParticleManager& pManager, EntityManager& eManager, Level& level) {
     if(!_dying) {
         _dying = true;
         _deadTimer.restart();

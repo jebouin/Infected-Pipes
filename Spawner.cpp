@@ -24,6 +24,7 @@
 #include "FireWormBoss.h"
 #include "Fist.h"
 #include "FlyingSkull.h"
+#include "MissileBall.h"
 
 Spawner::Spawner(IP& ip, int nbWaves, Level& l) {
     _curWave = 0;
@@ -174,12 +175,14 @@ void Spawner::Spawn(IP& ip, EntityManager& eManager, Level& level, Character& ch
         /*_difToSpawn = 0;
         int pipeId = rand()%_pipes.size();
         _pipes[pipeId]->Spawn(ip, eManager, new SnowMan(ip, level));*/
-        Fist *f = new Fist(ip, level);
+        /*Fist *f = new Fist(ip, level);
         if(!f->AutoSpawn(ip, level, eManager, character)) {
             delete f;
             return;
         }
-        eManager.Add(f);
+        eManager.Add(f);*/
+        int pipeId = rand()%_pipes.size();
+        _pipes[pipeId]->Spawn(ip, eManager, new MissileBall(ip, level));
         _difToSpawn = 0;
     }
 

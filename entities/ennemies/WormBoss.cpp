@@ -74,7 +74,7 @@ void WormBoss::Update(IP& ip, float eTime, Level& level, Character& character, E
         for(int i=0 ; i<bManager.GetCount() ; i++) {
             Bullet* b(bManager.GetBullet(i));
             if(b->GetGlobalHitbox().intersects(p->GetGlobalHitbox())) {
-                b->Die();
+                b->Die(ip, pManager, eManager, level);
             }
         }
     }
