@@ -28,6 +28,8 @@ private:
     ParticleManager *_particleManager;
     GUI *_gui;
     SpeechManager *_speechManager;
+
+    bool _prevEscapePressed;
 };
 
 #endif

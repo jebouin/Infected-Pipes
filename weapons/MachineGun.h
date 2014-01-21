@@ -6,8 +6,6 @@
 
 #include "Weapon.h"
 
-
-
 class IP;
 class TextureLoader;
 class GameEntity;
@@ -22,7 +20,7 @@ class MachineGun : public Weapon {
     bool Use(IP& ip, BulletManager& bManager, float angle);
 
     private:
-
+    float _spreadAngle;
 };
 
 #endif // MACHINEGUN_H_INCLUDED

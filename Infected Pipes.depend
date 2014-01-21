@@ -20,7 +20,7 @@
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1390150919 source:c:\users\xaychru04\desktop\infected pipes\ip.cpp
+1390333387 source:c:\users\xaychru04\desktop\infected pipes\ip.cpp
 	"IP.h"
 	"Renderer.h"
 	"ResourceLoader.h"
@@ -661,7 +661,7 @@
 1389365635 c:\users\xaychru04\desktop\infected pipes\scenes\scenemanager.h
 	<vector>
 
-1389377564 source:c:\users\xaychru04\desktop\infected pipes\scenes\game.cpp
+1390334265 source:c:\users\xaychru04\desktop\infected pipes\scenes\game.cpp
 	"Game.h"
 	"IP.h"
 	"Level.h"
@@ -674,17 +674,19 @@
 	"Renderer.h"
 	"SpeechManager.h"
 	"SpeechBubble.h"
+	"PauseMenu.h"
+	"SceneManager.h"
 
-1382282304 c:\users\xaychru04\desktop\infected pipes\scenes\game.h
+1390334265 c:\users\xaychru04\desktop\infected pipes\scenes\game.h
 	"Scene.h"
 
-1389127014 c:\users\xaychru04\desktop\infected pipes\scenes\scene.h
+1390333738 c:\users\xaychru04\desktop\infected pipes\scenes\scene.h
 
-1381677543 source:c:\users\xaychru04\desktop\infected pipes\scenes\scene.cpp
+1390333738 source:c:\users\xaychru04\desktop\infected pipes\scenes\scene.cpp
 	"Scene.h"
 	"IP.h"
 
-1389365644 source:c:\users\xaychru04\desktop\infected pipes\scenes\scenemanager.cpp
+1390335163 source:c:\users\xaychru04\desktop\infected pipes\scenes\scenemanager.cpp
 	"SceneManager.h"
 	"Scene.h"
 	"IP.h"
@@ -1279,7 +1281,7 @@
 	"SFML/System.hpp"
 	"Scene.h"
 
-1389365635 source:c:\users\xaychru04\desktop\infected pipes\scenes\mainmenu.cpp
+1390333745 source:c:\users\xaychru04\desktop\infected pipes\scenes\mainmenu.cpp
 	"MainMenu.h"
 	"IP.h"
 	"MainMenuBackground.h"
@@ -1701,12 +1703,12 @@
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1389128677 c:\users\xaychru04\desktop\infected pipes\weapons\machinegun.h
+1390330794 c:\users\xaychru04\desktop\infected pipes\weapons\machinegun.h
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 	"Weapon.h"
 
-1389997010 source:c:\users\xaychru04\desktop\infected pipes\weapons\machinegun.cpp
+1390332348 source:c:\users\xaychru04\desktop\infected pipes\weapons\machinegun.cpp
 	"MachineGun.h"
 	"IP.h"
 	"GameEntity.h"
@@ -1944,4 +1946,16 @@
 	"Particle.h"
 	"AnimationTable.h"
 	"Animation.h"
+
+1390335053 source:c:\users\xaychru04\desktop\infected pipes\scenes\pausemenu.cpp
+	"PauseMenu.h"
+	"IP.h"
+	"SceneManager.h"
+	"MathHelper.h"
+	"Renderer.h"
+
+1390334950 c:\users\xaychru04\desktop\infected pipes\scenes\pausemenu.h
+	"SFML/Graphics.hpp"
+	"SFML/System.hpp"
+	"Scene.h"
 

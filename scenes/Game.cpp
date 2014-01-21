@@ -10,8 +10,11 @@
 #include "Renderer.h"
 #include "SpeechManager.h"
 #include "SpeechBubble.h"
+#include "PauseMenu.h"
+#include "SceneManager.h"
 
-Game::Game(IP& ip) : Scene(ip) {
+Game::Game(IP& ip) : Scene(ip, false) {
+    _prevEscapePressed = true;
     _entityManager = new EntityManager();
     _bulletManager = new BulletManager();
     _particleManager = new ParticleManager();
@@ -41,6 +44,15 @@ Game::~Game() {
 
 void Game::Update(float eTime, IP& ip) {
     Scene::Update(eTime, ip);
+
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
+        if(!_prevEscapePressed) {
+            ip._sceneManager->AddScene(new PauseMenu(ip));
+        }
+        _prevEscapePressed = true;
+    } else {
+        _prevEscapePressed = false;
+    }
 
     _level->Update(ip, *_entityManager, *_player, eTime, *_particleManager, *_bulletManager, *_gui, _player->GetView());
     _entityManager->Update(ip, eTime, *_level, _player->GetCharacter(), *_particleManager, *_bulletManager);

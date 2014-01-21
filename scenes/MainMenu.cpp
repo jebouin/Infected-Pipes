@@ -6,7 +6,7 @@
 #include "Game.h"
 #include "SceneManager.h"
 
-MainMenu::MainMenu(IP& ip) : Scene(ip) {
+MainMenu::MainMenu(IP& ip) : Scene(ip, false) {
     _title.setTexture(ResourceLoader::GetTexture("title"));
     _title.setOrigin(sf::Vector2f(sf::Vector2i(_title.getTextureRect().width, _title.getTextureRect().height)/2));
     _title.setPosition(sf::Vector2f(ip._renderer->GetTexture().getSize().x/2.f, ip._renderer->GetTexture().getSize().y/5.f));
