@@ -78,16 +78,16 @@ bool Missile::Die(IP& ip, ParticleManager& pManager, EntityManager& eManager, Le
     Bullet::Die(ip, pManager, eManager, level);
 
     Particle *p = new Particle(ip,
-                               "explosion",
+                               "bigExplosion",
                                getPosition(),
                                sf::Vector2f(0, 0),
                                0,
-                               140,
+                               160,
                                sf::Vector2f(1, 1),
                                sf::Vector2f(1, 1),
                                255, 255,
-                               false, false, true, sf::IntRect(2, 2, 9, 9), false);
-    p->GetAnims().AddAnimation("explosion", new Animation(7, 20, sf::Vector2i(0, 0), sf::Vector2i(13, 13), false));
+                               false, false, true, sf::IntRect(2, 2, 21, 21), false);
+    p->GetAnims().AddAnimation("explosion", new Animation(8, 20, sf::Vector2i(0, 0), sf::Vector2i(25, 25), false));
     p->GetAnims().SetAnimation("explosion");
     pManager.AddParticle(p);
 }

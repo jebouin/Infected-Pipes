@@ -16,7 +16,6 @@
 #include "ShotGun.h"
 #include "MachineGun.h"
 #include "Rifle.h"
-#include "GrenadeLauncher.h"
 #include "Particle.h"
 #include "ResourceLoader.h"
 #include "GUI.h"
@@ -43,7 +42,6 @@ Character::Character(IP& ip) : GameEntity(ip, "character", sf::IntRect(4, 3, 7, 
     _nextXP = 10;
 
     _weapon = new MachineGun(ip, (const GameEntity&)*this, sf::Vector2f(0, 0));
-    _sWeapon = new GrenadeLauncher(ip, (const GameEntity&)*this, sf::Vector2f(0, 0));
 
     _arm.setTexture(ResourceLoader::GetTexture("arms"));
     LoadArm(MACHINEGUN);
@@ -55,8 +53,6 @@ Character::Character(IP& ip) : GameEntity(ip, "character", sf::IntRect(4, 3, 7, 
 Character::~Character() {
     delete _weapon;
     _weapon = 0;
-    delete _sWeapon;
-    _sWeapon = 0;
 }
 
 void Character::Update(IP& ip, float eTime, Level& level, EntityManager& eManager, ParticleManager& pManager, BulletManager& bManager, Player& player) {
@@ -86,9 +82,6 @@ void Character::Update(IP& ip, float eTime, Level& level, EntityManager& eManage
         float r = MathHelper::Rad2Deg(MathHelper::Vec2Ang(mpos-_arm.getPosition()));
         if(sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
             _weapon->Use(ip, bManager, r);
-        }
-        if(sf::Mouse::isButtonPressed(sf::Mouse::Right)) {
-            _sWeapon->Use(ip, bManager, r);
         }
         if(!GetDir()) {
             _arm.setScale(-1, 1);
@@ -131,8 +124,6 @@ void Character::Update(IP& ip, float eTime, Level& level, EntityManager& eManage
     sf::Vector2f newRelPos = MathHelper::Ang2Vec(MathHelper::Deg2Rad(a+_arm.getRotation()))*l;
     _weapon->SetRelPosition(_arm.getPosition() - GetGlobalUpperLeftPos() + newRelPos/*+ _arms[_curArmType]._bulletPos*/);
     _weapon->Update(ip, eTime, bManager);
-    _sWeapon->SetRelPosition(_arm.getPosition() - GetGlobalUpperLeftPos() + newRelPos/*+ _arms[_curArmType]._bulletPos*/);
-    _sWeapon->Update(ip, eTime, bManager);
 
     if(_regenTimer.getElapsedTime().asMilliseconds() >= 100) {
         _regenTimer.restart();
