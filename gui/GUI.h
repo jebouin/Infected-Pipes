@@ -13,6 +13,7 @@ class LevelIndicator;
 class DifficultyIndicator;
 class Level;
 class WaveIndicator;
+class Sight;
 
 class GUI {
     public:
@@ -28,6 +29,7 @@ class GUI {
     LevelIndicator *_levelIndicator;
     DifficultyIndicator *_difficultyIndicator;
     WaveIndicator *_waveIndicator;
+    Sight *_sight;
 };
 
 #endif // GUI_H_INCLUDED

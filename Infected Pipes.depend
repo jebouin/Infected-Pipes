@@ -386,7 +386,7 @@
 	"BulletManager.h"
 	"RockBullet.h"
 
-1390398704 c:\users\xaychru04\desktop\infected pipes\gui\gui.h
+1390409873 c:\users\xaychru04\desktop\infected pipes\gui\gui.h
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
@@ -1962,4 +1962,15 @@
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 	"Scene.h"
+
+1390409775 source:c:\users\xaychru04\desktop\infected pipes\gui\sight.cpp
+	"Sight.h"
+	"IP.h"
+	"ResourceLoader.h"
+	"MathHelper.h"
+	"Renderer.h"
+
+1390409574 c:\users\xaychru04\desktop\infected pipes\gui\sight.h
+	"SFML/Graphics.hpp"
+	"SFML/System.hpp"
 

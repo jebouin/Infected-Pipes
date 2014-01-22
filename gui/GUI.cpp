@@ -9,6 +9,7 @@
 #include "DifficultyIndicator.h"
 #include "Level.h"
 #include "WaveIndicator.h"
+#include "Sight.h"
 
 GUI::GUI(IP& ip, Character& character, Level& level) {
     _lifeBar = new LifeBar(ip, character);
@@ -17,6 +18,7 @@ GUI::GUI(IP& ip, Character& character, Level& level) {
     _difficultyIndicator = new DifficultyIndicator(ip, level);
     _waveIndicator = new WaveIndicator(ip);
     //_waveIndicator->AnnounceWave(ip, -42);
+    _sight = new Sight(ip);
 }
 
 GUI::~GUI() {
@@ -30,6 +32,8 @@ GUI::~GUI() {
     _difficultyIndicator = 0;
     delete _waveIndicator;
     _waveIndicator = 0;
+    delete _sight;
+    _sight = 0;
 }
 
 void GUI::Update(IP& ip, float eTime) {
@@ -38,6 +42,7 @@ void GUI::Update(IP& ip, float eTime) {
     _levelIndicator->Update(ip);
     _difficultyIndicator->Update(ip);
     _waveIndicator->Update(ip, eTime);
+    _sight->Update(ip);
 }
 
 void GUI::Draw(IP& ip) {
@@ -46,6 +51,7 @@ void GUI::Draw(IP& ip) {
     _levelIndicator->Draw(ip);
     _difficultyIndicator->Draw(ip);
     _waveIndicator->Draw(ip);
+    _sight->Draw(ip);
 }
 
 WaveIndicator& GUI::GetWaveIndicator() {
