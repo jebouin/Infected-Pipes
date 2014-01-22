@@ -12,6 +12,7 @@
 #include "SpeechBubble.h"
 #include "PauseMenu.h"
 #include "SceneManager.h"
+#include "Cursor.h"
 
 Game::Game(IP& ip) : Scene(ip, false) {
     _prevEscapePressed = true;
@@ -23,6 +24,8 @@ Game::Game(IP& ip) : Scene(ip, false) {
     _level = new Level(ip, *_player, *_particleManager);
     _gui = new GUI(ip, _player->GetCharacter(), *_level);
     _speechManager->AddBubble(new SpeechBubble(ip, "Particles! :D", (const GameEntity&)_player->GetCharacter(), 1000, 200));
+
+    ip._cursor->Hide();
 }
 
 Game::~Game() {
@@ -30,16 +33,16 @@ Game::~Game() {
     _level = 0;
     delete _entityManager;
     _entityManager = 0;
-    delete _player;
-    _player = 0;
-    delete _particleManager;
-    _particleManager = 0;
     delete _gui;
     _gui = 0;
     delete _bulletManager;
     _bulletManager = 0;
     delete _speechManager;
     _speechManager = 0;
+    delete _particleManager;
+    _particleManager = 0;
+    delete _player;
+    _player = 0;
 }
 
 void Game::Update(float eTime, IP& ip) {
@@ -48,12 +51,14 @@ void Game::Update(float eTime, IP& ip) {
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
         if(!_prevEscapePressed) {
             ip._sceneManager->AddScene(new PauseMenu(ip));
+            ip._cursor->Show();
         }
         _prevEscapePressed = true;
     } else {
         _prevEscapePressed = false;
     }
 
+    ip._renderer->GetTexture().setView(_player->GetView());
     _level->Update(ip, *_entityManager, *_player, eTime, *_particleManager, *_bulletManager, *_gui, _player->GetView());
     _entityManager->Update(ip, eTime, *_level, _player->GetCharacter(), *_particleManager, *_bulletManager);
     _player->Update(ip, eTime, *_level, *_entityManager, *_particleManager, *_bulletManager);
@@ -77,5 +82,6 @@ void Game::Draw(IP& ip) {
 
     ip._renderer->GetTexture().setView(ip._renderer->GetTexture().getDefaultView());
     _gui->Draw(ip);
-    ip._renderer->GetTexture().setView(_player->GetView());
+
+    //always leave this method with the basic view
 }

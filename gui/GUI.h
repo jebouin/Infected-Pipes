@@ -4,8 +4,6 @@
 #include "SFML/Graphics.hpp"
 #include "SFML/System.hpp"
 
-
-
 class IP;
 class LifeBar;
 class TextureLoader;
@@ -13,7 +11,6 @@ class Character;
 class XPBar;
 class LevelIndicator;
 class DifficultyIndicator;
-class Cursor;
 class Level;
 class WaveIndicator;
 
@@ -30,7 +27,6 @@ class GUI {
     XPBar *_xpBar;
     LevelIndicator *_levelIndicator;
     DifficultyIndicator *_difficultyIndicator;
-    Cursor *_cursor;
     WaveIndicator *_waveIndicator;
 };
 

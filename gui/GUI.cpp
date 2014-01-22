@@ -6,7 +6,6 @@
 #include "LifeBar.h"
 #include "XPBar.h"
 #include "LevelIndicator.h"
-#include "Cursor.h"
 #include "DifficultyIndicator.h"
 #include "Level.h"
 #include "WaveIndicator.h"
@@ -16,7 +15,6 @@ GUI::GUI(IP& ip, Character& character, Level& level) {
     _xpBar = new XPBar(ip, character);
     _levelIndicator = new LevelIndicator(ip, character);
     _difficultyIndicator = new DifficultyIndicator(ip, level);
-    _cursor = new Cursor(ip);
     _waveIndicator = new WaveIndicator(ip);
     //_waveIndicator->AnnounceWave(ip, -42);
 }
@@ -30,8 +28,6 @@ GUI::~GUI() {
     _levelIndicator = 0;
     delete _difficultyIndicator;
     _difficultyIndicator = 0;
-    delete _cursor;
-    _cursor = 0;
     delete _waveIndicator;
     _waveIndicator = 0;
 }
@@ -41,7 +37,6 @@ void GUI::Update(IP& ip, float eTime) {
     _xpBar->Update(ip);
     _levelIndicator->Update(ip);
     _difficultyIndicator->Update(ip);
-    _cursor->Update(ip);
     _waveIndicator->Update(ip, eTime);
 }
 
@@ -50,7 +45,6 @@ void GUI::Draw(IP& ip) {
     _xpBar->Draw(ip);
     _levelIndicator->Draw(ip);
     _difficultyIndicator->Draw(ip);
-    _cursor->Draw(ip);
     _waveIndicator->Draw(ip);
 }
 

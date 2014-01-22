@@ -7,6 +7,7 @@
 Cursor::Cursor(IP& ip) : sf::Sprite() {
     setTexture(ResourceLoader::GetTexture("cursor"));
     _prevPos = getPosition();
+    _show = true;
 }
 
 Cursor::~Cursor() {
@@ -30,5 +31,19 @@ void Cursor::Update(IP& ip) {
 }
 
 void Cursor::Draw(IP& ip) {
-    ip._renderer->Draw(*this);
+    if(_show) {
+        ip._renderer->Draw(*this);
+    }
+}
+
+void Cursor::Show() {
+    _show = true;
+}
+
+void Cursor::Hide() {
+    _show = false;
+}
+
+bool Cursor::IsShown() {
+    return _show;
 }

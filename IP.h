@@ -7,6 +7,7 @@
 class Renderer;
 class SceneManager;
 class ShaderManager;
+class Cursor;
 
 class IP {
     public:
@@ -18,6 +19,7 @@ class IP {
     Renderer *_renderer;
     sf::RenderWindow *_window;
     SceneManager *_sceneManager;
+    Cursor *_cursor;
     sf::Font _font;
 
     private:

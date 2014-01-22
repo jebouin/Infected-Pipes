@@ -13,6 +13,7 @@
 #include "MainMenu.h"
 #include "MathHelper.h"
 #include "ShaderManager.h"
+#include "Cursor.h"
 
 IP::IP() {
     //_window = new sf::RenderWindow(sf::VideoMode(1600, 900, 32), "Infected Pipes");
@@ -32,11 +33,13 @@ IP::IP() {
     }
     const_cast<sf::Texture&>(_font.getTexture(8)).setSmooth(false);
     const_cast<sf::Texture&>(_font.getTexture(16)).setSmooth(false);
+    const_cast<sf::Texture&>(_font.getTexture(24)).setSmooth(false);
     const_cast<sf::Texture&>(_font.getTexture(32)).setSmooth(false);
     const_cast<sf::Texture&>(_font.getTexture(48)).setSmooth(false);
     const_cast<sf::Texture&>(_font.getTexture(64)).setSmooth(false);
 
     _window->setActive(true);
+    _cursor = new Cursor(*this);
     //_sceneManager->AddScene(new MainMenu(*this));
     _sceneManager->AddScene(new Game(*this));
     _focused = true;
@@ -71,6 +74,8 @@ IP::~IP() {
     _renderer = 0;
     delete _sceneManager;
     _sceneManager = 0;
+    delete _cursor;
+    _cursor = 0;
 }
 
 void IP::Update() {
@@ -84,6 +89,7 @@ void IP::Update() {
     }
 
     _renderer->Update(*this, eTime);
+    _cursor->Update(*this);
 }
 
 void IP::Draw() {
@@ -91,6 +97,7 @@ void IP::Draw() {
     _renderer->Clear();
 
     _sceneManager->Draw(*this);
+    _cursor->Draw(*this);
 
     _renderer->DrawToWindow(*_window, *this);
     _window->display();

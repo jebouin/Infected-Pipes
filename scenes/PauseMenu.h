@@ -18,9 +18,18 @@ public:
     void Draw(IP& ip);
 
 private:
+    sf::Clock _timer;
     sf::ConvexShape _back;
     sf::View _view;
     bool _prevEscapePressed;
+    sf::Vector2f _ssize;
+    const sf::Color _baseColor;
+    const sf::Color _selecColor;
+
+    sf::Text _pause;
+    sf::Text _resume;
+    sf::Text _options;
+    sf::Text _quit;
 };
 
 #endif //PAUSEMENU_H_INCLUDED
