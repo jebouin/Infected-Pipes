@@ -23,8 +23,8 @@ MainMenuBackground::MainMenuBackground(IP& ip) {
 
     _simViewX = 0;
     _forestPosX = 0;
-    //_viewVelX = .05f;
-    _viewVelX = .15f;
+    _viewVelX = .05f;
+    //_viewVelX = .15f;
 
     //add some trees
     for(int i=0 ; i<_ssize.x/42 ; i++) {

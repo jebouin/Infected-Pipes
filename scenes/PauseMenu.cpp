@@ -48,7 +48,7 @@ void PauseMenu::Update(float eTime, IP& ip) {
 
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
         if(!_prevEscapePressed) {
-            ip._sceneManager->RemoveScene();
+            ip._sceneManager->AddSceneToRemoveStack();
             ip._cursor->Hide();
         }
         _prevEscapePressed = true;
@@ -75,7 +75,7 @@ void PauseMenu::Update(float eTime, IP& ip) {
     if(onResume) {
         _resume.setColor(_selecColor);
         if(sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-            ip._sceneManager->RemoveScene();
+            ip._sceneManager->AddSceneToRemoveStack();
             ip._cursor->Hide();
         }
     } else {
@@ -92,9 +92,9 @@ void PauseMenu::Update(float eTime, IP& ip) {
     if(onQuit) {
         _quit.setColor(_selecColor);
         if(sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-            ip._sceneManager->RemoveScene();
-            ip._sceneManager->RemoveScene();
-            ip._sceneManager->AddScene(new MainMenu(ip));
+            ip._sceneManager->AddSceneToRemoveStack();
+            ip._sceneManager->AddSceneToRemoveStack();
+            ip._sceneManager->AddSceneToAddStack(new MainMenu(ip));
         }
     } else {
         _quit.setColor(_baseColor);

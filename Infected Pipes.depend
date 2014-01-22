@@ -20,7 +20,7 @@
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1390402092 source:c:\users\xaychru04\desktop\infected pipes\ip.cpp
+1390414002 source:c:\users\xaychru04\desktop\infected pipes\ip.cpp
 	"IP.h"
 	"Renderer.h"
 	"ResourceLoader.h"
@@ -390,7 +390,7 @@
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1390398704 source:c:\users\xaychru04\desktop\infected pipes\gui\gui.cpp
+1390409895 source:c:\users\xaychru04\desktop\infected pipes\gui\gui.cpp
 	"GUI.h"
 	"IP.h"
 	"Character.h"
@@ -402,6 +402,7 @@
 	"DifficultyIndicator.h"
 	"Level.h"
 	"WaveIndicator.h"
+	"Sight.h"
 
 1389128677 c:\users\xaychru04\desktop\infected pipes\gui\lifebar.h
 	"SFML/Graphics.hpp"
@@ -658,8 +659,9 @@
 	"Particle.h"
 	"MathHelper.h"
 
-1389365635 c:\users\xaychru04\desktop\infected pipes\scenes\scenemanager.h
+1390414392 c:\users\xaychru04\desktop\infected pipes\scenes\scenemanager.h
 	<vector>
+	<iostream>
 
 1390405823 source:c:\users\xaychru04\desktop\infected pipes\scenes\game.cpp
 	"Game.h"
@@ -687,7 +689,7 @@
 	"Scene.h"
 	"IP.h"
 
-1390407372 source:c:\users\xaychru04\desktop\infected pipes\scenes\scenemanager.cpp
+1390414315 source:c:\users\xaychru04\desktop\infected pipes\scenes\scenemanager.cpp
 	"SceneManager.h"
 	"Scene.h"
 	"IP.h"
@@ -1282,7 +1284,7 @@
 	"SFML/System.hpp"
 	"Scene.h"
 
-1390333745 source:c:\users\xaychru04\desktop\infected pipes\scenes\mainmenu.cpp
+1390414353 source:c:\users\xaychru04\desktop\infected pipes\scenes\mainmenu.cpp
 	"MainMenu.h"
 	"IP.h"
 	"MainMenuBackground.h"
@@ -1291,7 +1293,7 @@
 	"Game.h"
 	"SceneManager.h"
 
-1389646131 source:c:\users\xaychru04\desktop\infected pipes\mainmenubackground.cpp
+1390413372 source:c:\users\xaychru04\desktop\infected pipes\mainmenubackground.cpp
 	"MainMenuBackground.h"
 	"IP.h"
 	"Map.h"
@@ -1949,7 +1951,7 @@
 	"AnimationTable.h"
 	"Animation.h"
 
-1390404808 source:c:\users\xaychru04\desktop\infected pipes\scenes\pausemenu.cpp
+1390414315 source:c:\users\xaychru04\desktop\infected pipes\scenes\pausemenu.cpp
 	"PauseMenu.h"
 	"IP.h"
 	"SceneManager.h"

@@ -2,11 +2,12 @@
 #define SCENEMANAGER_H_INCLUDED
 
 #include <vector>
+#include <iostream>
 
 class IP;
 class Scene;
 
-
+using namespace std;
 
 class SceneManager {
 public:
@@ -16,10 +17,15 @@ public:
     void Draw(IP& ip);
     void AddScene(Scene* scene);
     int GetNbScenes();
-    void RemoveScene();
+    void AddSceneToRemoveStack();
+    void AddSceneToAddStack(Scene* scene);
 
 private:
+    void RemoveScene(); //private, cause using it outside of the class can result in big mem leaks
+
+    std::vector<Scene*> _addStack;
     std::vector<Scene*> _scenes;
+    int _scenesToRemove;
 };
 
 #endif
