@@ -30,7 +30,6 @@ Spawner::Spawner(IP& ip, int nbWaves, Level& l) {
     _curWave = 0;
     _nbWaves = nbWaves;
     _spawning = true;
-    _difToSpawn = _difficulty;
     _finished = false;
 }
 

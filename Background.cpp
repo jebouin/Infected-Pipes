@@ -78,11 +78,11 @@ void Background::Update(IP& ip, float elapsedTime) {
                 s.setOrigin(sf::Vector2f(sf::Vector2i(sf::Vector2f(s.getTextureRect().width, s.getTextureRect().height)/2.f)));
             }
         }
-    }
 
-    _cloudsX += elapsedTime*.01f;
-    if(_cloudsX > _clouds.getTextureRect().width) {
-        _cloudsX = 0;
+        _cloudsX += elapsedTime*.01f;
+        if(_cloudsX > _clouds.getTextureRect().width) {
+            _cloudsX = 0;
+        }
     }
 }
 

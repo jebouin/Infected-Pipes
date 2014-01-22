@@ -6,8 +6,6 @@
 
 #include "IP.h"
 
-
-
 int main()
 {
     if(!sf::Shader::isAvailable()) {
@@ -16,6 +14,5 @@ int main()
     srand((unsigned)time(NULL));
     IP *ip = new IP();
     delete ip;
-    ip = 0;
     return 0;
 }
