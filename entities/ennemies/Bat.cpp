@@ -14,7 +14,7 @@
 
 Bat::Bat(IP& ip, Level& level) : Ennemy(ip, "bat", sf::IntRect(11, 1, 14, 11), 20, 3, 3, level) {
     AnimationTable& t(GetAnims());
-    t.AddAnimation("flying", new Animation(4, 100, sf::Vector2i(0, 0), sf::Vector2i(36, 13), true));
+    t.AddAnimation("flying", Animation(4, 100, sf::Vector2i(0, 0), sf::Vector2i(36, 13), true));
     t.SetAnimation("flying");
 
     SetSpeed(MathHelper::RandFloat(0.0005, 0.001));

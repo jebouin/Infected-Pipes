@@ -14,7 +14,7 @@
 
 Slime::Slime(IP& ip, Level& level) : Ennemy(ip, "slime", sf::IntRect(1, 1, 18, 10), 7, 1, 1, level) {
     AnimationTable& t(GetAnims());
-    t.AddAnimation("idle", new Animation(4, 100, sf::Vector2i(0, 0), sf::Vector2i(24, 12), true));
+    t.AddAnimation("idle", Animation(4, 100, sf::Vector2i(0, 0), sf::Vector2i(24, 12), true));
     t.SetAnimation("idle");
     SetSpeed(0.002);
     SetJumpPower(.3);

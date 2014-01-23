@@ -1,10 +1,12 @@
 #ifndef ANIMATIONTABLE_H_INCLUDED
 #define ANIMATIONTABLE_H_INCLUDED
 
+#include <iostream>
+
 #include "SFML/Graphics.hpp"
 #include "SFML/System.hpp"
 
-
+using namespace std;
 
 class Animation;
 
@@ -14,7 +16,7 @@ class AnimationTable {
     ~AnimationTable();
     void Update();
     void SetAnimation(std::string name);
-    void AddAnimation(std::string name, Animation *anim);
+    void AddAnimation(std::string name, Animation anim);
     Animation& GetAnimation(std::string name);
     Animation& GetAnimation();
     std::string GetAnimationName();
@@ -22,7 +24,7 @@ class AnimationTable {
 
     private:
     std::string _curAnim;
-    std::map<std::string, Animation*> _animations;
+    std::map<std::string, Animation> _animations;
 };
 
 #endif // ANIMATIONTABLE_H_INCLUDED

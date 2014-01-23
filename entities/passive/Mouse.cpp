@@ -14,8 +14,8 @@
 Mouse::Mouse(IP& ip)
     : GameEntity(ip, "mouse", sf::IntRect(0, 2, 6, 2), 42) {
     AnimationTable& t(GetAnims());
-    t.AddAnimation("idle", new Animation(1, 100, sf::Vector2i(0, 0), sf::Vector2i(6, 5), true));
-    t.AddAnimation("walking", new Animation(4, 100, sf::Vector2i(0, 5), sf::Vector2i(6, 5), true));
+    t.AddAnimation("idle", Animation(1, 100, sf::Vector2i(0, 0), sf::Vector2i(6, 5), true));
+    t.AddAnimation("walking", Animation(4, 100, sf::Vector2i(0, 5), sf::Vector2i(6, 5), true));
     t.SetAnimation("walking");
 
     SetInvincible(true);

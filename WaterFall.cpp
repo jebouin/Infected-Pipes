@@ -16,11 +16,11 @@ WaterFall::WaterFall(IP& ip, sf::Vector2i tilePos, bool big, bool lava)
     _lava = lava;
     AnimationTable& t(GetAnims());
     if(big) {
-        t.AddAnimation("waterFall", new Animation(8, 30, sf::Vector2i(0, 0), sf::Vector2i(16, 16), true));
-        t.AddAnimation("lavaFall", new Animation(8, 50, sf::Vector2i(0, 16), sf::Vector2i(16, 16), true));
+        t.AddAnimation("waterFall", Animation(8, 30, sf::Vector2i(0, 0), sf::Vector2i(16, 16), true));
+        t.AddAnimation("lavaFall", Animation(8, 50, sf::Vector2i(0, 16), sf::Vector2i(16, 16), true));
     } else {
-        t.AddAnimation("waterFall", new Animation(8, 30, sf::Vector2i(0, 0), sf::Vector2i(6, 16), true));
-        t.AddAnimation("lavaFall", new Animation(8, 50, sf::Vector2i(0, 16), sf::Vector2i(6, 16), true));
+        t.AddAnimation("waterFall", Animation(8, 30, sf::Vector2i(0, 0), sf::Vector2i(6, 16), true));
+        t.AddAnimation("lavaFall", Animation(8, 50, sf::Vector2i(0, 16), sf::Vector2i(6, 16), true));
     }
     t.SetAnimation((lava ? "lavaFall" : "waterFall"));
     setPosition(sf::Vector2f(tilePos*16) + sf::Vector2f(8, 4));

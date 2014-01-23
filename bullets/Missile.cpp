@@ -66,6 +66,7 @@ void Missile::Update(IP& ip, float eTime, Level& level, Character& character, Pa
                                    255, 0,
                                    false, false, false, sf::IntRect(0, 0, 4, 4), false);
         pManager.AddParticle(p);
+        p = 0;
     }
     _prevPos = getPosition();
 }
@@ -87,7 +88,8 @@ bool Missile::Die(IP& ip, ParticleManager& pManager, EntityManager& eManager, Le
                                sf::Vector2f(1, 1),
                                255, 255,
                                false, false, true, sf::IntRect(2, 2, 21, 21), false);
-    p->GetAnims().AddAnimation("explosion", new Animation(8, 20, sf::Vector2i(0, 0), sf::Vector2i(25, 25), false));
+    p->GetAnims().AddAnimation("explosion", Animation(8, 20, sf::Vector2i(0, 0), sf::Vector2i(25, 25), false));
     p->GetAnims().SetAnimation("explosion");
     pManager.AddParticle(p);
+    p = 0;
 }

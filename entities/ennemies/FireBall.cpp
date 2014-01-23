@@ -15,7 +15,7 @@
 
 FireBall::FireBall(IP& ip, Level& level) : Ennemy(ip, "fireBall", sf::IntRect(1, 1, 14, 14), 20, 10, 20, level) {
     AnimationTable& t(GetAnims());
-    t.AddAnimation("idle", new Animation(6, 50, sf::Vector2i(0, 0), sf::Vector2i(20, 16), true));
+    t.AddAnimation("idle", Animation(6, 50, sf::Vector2i(0, 0), sf::Vector2i(20, 16), true));
     t.SetAnimation("idle");
     SetCollideOnPlatform(false);
     SetFriction(.0);
@@ -160,7 +160,7 @@ void FireBall::SpreadParticles(IP& ip, ParticleManager& pManager) {
                                   true,
                                   true,
                                   sf::IntRect(1, 1, 5, 5), false);
-        p->GetAnims().AddAnimation("base", new Animation(4, 60, sf::Vector2i(0, 0), sf::Vector2i(7, 7), false));
+        p->GetAnims().AddAnimation("base", Animation(4, 60, sf::Vector2i(0, 0), sf::Vector2i(7, 7), false));
         p->GetAnims().SetAnimation("base");
         pManager.AddParticle(p);
     }
@@ -178,7 +178,7 @@ void FireBall::SpreadParticles(IP& ip, ParticleManager& pManager) {
                                   false,
                                   true,
                                   sf::IntRect(42, 42, 42, 42), false);
-        p->GetAnims().AddAnimation("base", new Animation(7, 40, sf::Vector2i(0, 0), sf::Vector2i(13, 13), false));
+        p->GetAnims().AddAnimation("base", Animation(7, 40, sf::Vector2i(0, 0), sf::Vector2i(13, 13), false));
         p->GetAnims().SetAnimation("base");
         pManager.AddParticle(p);
     }

@@ -20,10 +20,12 @@ WaveIndicator::WaveIndicator(IP& ip) {
 }
 
 WaveIndicator::~WaveIndicator() {
-    delete _top;
-    _top = 0;
-    delete _bottom;
-    _bottom = 0;
+    if(_announcing) {
+        delete _top;
+        _top = 0;
+        delete _bottom;
+        _bottom = 0;
+    }
 }
 
 void WaveIndicator::Update(IP& ip, float eTime) {

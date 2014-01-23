@@ -19,8 +19,8 @@
 FireWormBoss::FireWormBoss(IP& ip, Level& level)
     : Ennemy(ip, "fireWormBoss", sf::IntRect(0, 6, 43, 60), 4200, 1000, 500, level) {
     AnimationTable& t(GetAnims());
-    t.AddAnimation("goingup", new Animation(1, 300, sf::Vector2i(34, 0), sf::Vector2i(34, 78), false));
-    t.AddAnimation("idle", new Animation(4, 300, sf::Vector2i(0, 0), sf::Vector2i(34, 78), true));
+    t.AddAnimation("goingup", Animation(1, 300, sf::Vector2i(34, 0), sf::Vector2i(34, 78), false));
+    t.AddAnimation("idle", Animation(4, 300, sf::Vector2i(0, 0), sf::Vector2i(34, 78), true));
     t.SetAnimation("goingup");
     SetFlying(true);
     SetPhysics(false);

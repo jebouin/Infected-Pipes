@@ -121,6 +121,7 @@ void WaterField::Update(IP& ip, float elapsedTime, ParticleManager& pManager) {
                                        sf::IntRect(1, 1, 3, 1), rand()%2==0);
                 p->SetCollideWithWater(false);
                 pManager.AddParticle(p);
+                p = 0;
             }
         }
     }
@@ -192,6 +193,7 @@ void WaterField::Splash(sf::Vector2f pos, float force, ParticleManager& pManager
                                        sf::IntRect(1, 1, 3, 3), false);
             p->SetCollideWithWater(false);
             pManager.AddParticle(p);
+            p = 0;
         }
     }
 }

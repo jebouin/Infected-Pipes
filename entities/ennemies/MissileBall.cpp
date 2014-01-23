@@ -17,9 +17,9 @@
 MissileBall::MissileBall(IP& ip, Level& level)
     : Ennemy(ip, "missileBall", sf::IntRect(2, 2, 17, 17), 200, 30, 40, level) {
     AnimationTable& anims(GetAnims());
-    anims.AddAnimation("idle", new Animation(4, 100, sf::Vector2i(0, 0), sf::Vector2i(21, 21), true));
-    anims.AddAnimation("prepare", new Animation(2, 200, sf::Vector2i(0, 21), sf::Vector2i(21, 21), true));
-    anims.AddAnimation("attacked", new Animation(1, 1000, sf::Vector2i(0, 42), sf::Vector2i(21, 21), false));
+    anims.AddAnimation("idle", Animation(4, 100, sf::Vector2i(0, 0), sf::Vector2i(21, 21), true));
+    anims.AddAnimation("prepare", Animation(2, 200, sf::Vector2i(0, 21), sf::Vector2i(21, 21), true));
+    anims.AddAnimation("attacked", Animation(1, 1000, sf::Vector2i(0, 42), sf::Vector2i(21, 21), false));
     anims.SetAnimation("idle");
     SetFlying(true);
     SetPhysics(true);

@@ -17,7 +17,7 @@ FlyingSkull::FlyingSkull(IP& ip, Level& level)
     : Ennemy(ip, "flyingSkull", sf::IntRect(19, 8, 26, 17), 100, 40, 50, level) {
     AnimationTable& t(GetAnims());
     SetFlying(true);
-    t.AddAnimation("idle", new Animation(4, 80, sf::Vector2i(0, 0), sf::Vector2i(64, 28), true));
+    t.AddAnimation("idle", Animation(4, 80, sf::Vector2i(0, 0), sf::Vector2i(64, 28), true));
     t.SetAnimation("idle");
     _boneTime = MathHelper::RandFloat(2600, 3500);
 }

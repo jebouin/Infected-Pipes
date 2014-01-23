@@ -21,7 +21,7 @@ public:
     void AddSceneToAddStack(Scene* scene);
 
 private:
-    void RemoveScene(); //private, cause using it outside of the class can result in big mem leaks
+    void RemoveScene(); //private, cause using it outside of the class can result in mem leaks
 
     std::vector<Scene*> _addStack;
     std::vector<Scene*> _scenes;

@@ -67,9 +67,10 @@ void Ennemy::Damage(int dmg, IP& ip, ParticleManager& pManager, sf::Color color,
                                   false,
                                   true,
                                   sf::IntRect(2, 2, 4, 4), false);
-    p->GetAnims().AddAnimation("boom", new Animation(3, 50, sf::Vector2i(0, 0), sf::Vector2i(8, 8), false));
+    p->GetAnims().AddAnimation("boom", Animation(3, 50, sf::Vector2i(0, 0), sf::Vector2i(8, 8), false));
     p->GetAnims().SetAnimation("boom");
     pManager.AddParticle(p);
+    p = 0;
 }
 
 void Ennemy::Die(IP& ip, ParticleManager& pManager, EntityManager& eManager, Level& level) {

@@ -17,7 +17,7 @@ SnowBallEnemy::SnowBallEnemy(IP& ip, Level& level) : Ennemy(ip, "snowBallEnemy",
     SetJumpPower(.0);
     SetFriction(0.f);
     AnimationTable& t(GetAnims());
-    t.AddAnimation("walk", new Animation(8, 80, sf::Vector2i(0, 0), sf::Vector2i(16, 16), true));
+    t.AddAnimation("walk", Animation(8, 80, sf::Vector2i(0, 0), sf::Vector2i(16, 16), true));
     t.SetAnimation("walk");
 }
 

@@ -15,10 +15,10 @@
 
 Slimey::Slimey(IP& ip, Level& level) : Ennemy(ip, "slimey", sf::IntRect(4, 0, 34, 25), 1500, 100, 50, level) {
     AnimationTable& t(GetAnims());
-    t.AddAnimation("0", new Animation(1, 100, sf::Vector2i(0, 0), sf::Vector2i(42, 26), false));
-    t.AddAnimation("1", new Animation(1, 100, sf::Vector2i(0, 26), sf::Vector2i(42, 26), false));
-    t.AddAnimation("2", new Animation(1, 100, sf::Vector2i(0, 52), sf::Vector2i(42, 26), false));
-    t.AddAnimation("3", new Animation(1, 100, sf::Vector2i(0, 78), sf::Vector2i(42, 26), false));
+    t.AddAnimation("0", Animation(1, 100, sf::Vector2i(0, 0), sf::Vector2i(42, 26), false));
+    t.AddAnimation("1", Animation(1, 100, sf::Vector2i(0, 26), sf::Vector2i(42, 26), false));
+    t.AddAnimation("2", Animation(1, 100, sf::Vector2i(0, 52), sf::Vector2i(42, 26), false));
+    t.AddAnimation("3", Animation(1, 100, sf::Vector2i(0, 78), sf::Vector2i(42, 26), false));
     t.SetAnimation("0");
     SetSpeed(0.002);
     SetJumpPower(.4);

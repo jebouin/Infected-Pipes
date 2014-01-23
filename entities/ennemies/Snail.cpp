@@ -16,9 +16,9 @@
 
 Snail::Snail(IP& ip, Level& level) : Ennemy(ip, "snail", sf::IntRect(3, 1, 26, 19), 42, 8, 6, level) {
     AnimationTable& t(GetAnims());
-    t.AddAnimation("walk", new Animation(2, 200, sf::Vector2i(0, 0), sf::Vector2i(31, 21), true));
-    t.AddAnimation("prepare", new Animation(4, 250, sf::Vector2i(0, 21), sf::Vector2i(31, 21), false));
-    t.AddAnimation("explode", new Animation(2, 150, sf::Vector2i(0, 42), sf::Vector2i(20, 16), true));
+    t.AddAnimation("walk", Animation(2, 200, sf::Vector2i(0, 0), sf::Vector2i(31, 21), true));
+    t.AddAnimation("prepare", Animation(4, 250, sf::Vector2i(0, 21), sf::Vector2i(31, 21), false));
+    t.AddAnimation("explode", Animation(2, 150, sf::Vector2i(0, 42), sf::Vector2i(20, 16), true));
     t.SetAnimation("walk");
     SetSpeed(MathHelper::RandFloat(0.0003, 0.0004));
     _preparing = false;

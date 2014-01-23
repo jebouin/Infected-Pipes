@@ -19,10 +19,10 @@ RockWorm::RockWorm(IP& ip, Level& level) : Ennemy(ip, "rockWorm", sf::IntRect(1,
     _bigHitBox = sf::IntRect(3, 0, 9, 20);
 
     AnimationTable& t(GetAnims());
-    t.AddAnimation("spawn", new Animation(4, 60, sf::Vector2i(0, 0), sf::Vector2i(9, 20), false));
-    t.AddAnimation("idle", new Animation(4, 200, sf::Vector2i(0, 20), sf::Vector2i(9, 20), true));
-    t.AddAnimation("attack", new Animation(4, 80, sf::Vector2i(0, 40), sf::Vector2i(15, 20), false));
-    t.AddAnimation("despawn", new Animation(4, 60, sf::Vector2i(0, 60), sf::Vector2i(9, 20), false));
+    t.AddAnimation("spawn", Animation(4, 60, sf::Vector2i(0, 0), sf::Vector2i(9, 20), false));
+    t.AddAnimation("idle", Animation(4, 200, sf::Vector2i(0, 20), sf::Vector2i(9, 20), true));
+    t.AddAnimation("attack", Animation(4, 80, sf::Vector2i(0, 40), sf::Vector2i(15, 20), false));
+    t.AddAnimation("despawn", Animation(4, 60, sf::Vector2i(0, 60), sf::Vector2i(9, 20), false));
     t.SetAnimation("spawn");
     SetSpeed(0);
     SetPushable(false);
@@ -160,7 +160,7 @@ void RockWorm::Die(IP& ip, ParticleManager& pManager, EntityManager& eManager, L
                                    true,
                                    true,
                                    sf::IntRect(2, 2, 2, 1), false);
-        p->GetAnims().AddAnimation("base", new Animation(6, 80, sf::Vector2i(0, 0), sf::Vector2i(6, 5), false));
+        p->GetAnims().AddAnimation("base", Animation(6, 80, sf::Vector2i(0, 0), sf::Vector2i(6, 5), false));
         p->GetAnims().SetAnimation("base");
         pManager.AddParticle(p);
     }

@@ -20,9 +20,6 @@ SceneManager::~SceneManager(){
 }
 
 void SceneManager::Update(float eTime, IP& ip){
-    if(GetNbScenes() > 0) {
-        _scenes[_scenes.size()-1]->Update(eTime, ip);
-    }
     for(int i=0 ; i<_scenesToRemove ; i++) {
         RemoveScene();
     }
@@ -31,6 +28,11 @@ void SceneManager::Update(float eTime, IP& ip){
         AddScene(_addStack[i]);
     }
     _addStack.clear();
+
+
+    if(GetNbScenes() > 0) {
+        _scenes[_scenes.size()-1]->Update(eTime, ip);
+    }
 }
 
 void SceneManager::Draw(IP& ip){

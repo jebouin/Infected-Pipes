@@ -10,6 +10,7 @@
 
 class Animation {
     public:
+    Animation();
     Animation(int nbFrames, float frameTime, sf::Vector2i pos, sf::Vector2i size, bool loop);
     ~Animation();
     void Update();

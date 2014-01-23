@@ -31,8 +31,8 @@ Character::Character(IP& ip) : GameEntity(ip, "character", sf::IntRect(4, 3, 7, 
 
     SetWeight(0.5f);
     AnimationTable& t(GetAnims());
-    t.AddAnimation("walk", new Animation(8, 100, sf::Vector2i(0, 0), sf::Vector2i(15, 31), true));
-    t.AddAnimation("idle", new Animation(1, 50, sf::Vector2i(0, 31), sf::Vector2i(15, 31), false));
+    t.AddAnimation("walk", Animation(8, 100, sf::Vector2i(0, 0), sf::Vector2i(15, 31), true));
+    t.AddAnimation("idle", Animation(1, 50, sf::Vector2i(0, 31), sf::Vector2i(15, 31), false));
     t.SetAnimation("walk");
     _enteringPipe = false;
     _leavingPipe = false;
@@ -204,9 +204,10 @@ void Character::Damage(int dmg, IP& ip, ParticleManager& pManager, sf::Color col
                                    true,
                                    true,
                                    sf::IntRect(2, 1, 2, 2), false);
-        p->GetAnims().AddAnimation("base", new Animation(7, 50, sf::Vector2i(0, 0), sf::Vector2i(6, 6), false));
+        p->GetAnims().AddAnimation("base", Animation(7, 50, sf::Vector2i(0, 0), sf::Vector2i(6, 6), false));
         p->GetAnims().SetAnimation("base");
         pManager.AddParticle(p);
+        p = 0;
     }
 
     for(int i=0 ; i<10 ; i++) {
@@ -223,9 +224,10 @@ void Character::Damage(int dmg, IP& ip, ParticleManager& pManager, sf::Color col
                                    true,
                                    true,
                                    sf::IntRect(1, 0, 2, 1), false);
-        p->GetAnims().AddAnimation("base", new Animation(6, 50, sf::Vector2i(0, 0), sf::Vector2i(4, 4), false));
+        p->GetAnims().AddAnimation("base", Animation(6, 50, sf::Vector2i(0, 0), sf::Vector2i(4, 4), false));
         p->GetAnims().SetAnimation("base");
         pManager.AddParticle(p);
+        p = 0;
     }
 }
 

@@ -1,5 +1,15 @@
 #include "Animation.h"
 
+Animation::Animation() {
+    _frameTime = 0;
+    _nbFrames = 0;
+    _curFrame = 0;
+    _pos = sf::Vector2i(0, 0);
+    _size = sf::Vector2i(0, 0);
+    _loop = false;
+    _finished = false;
+}
+
 Animation::Animation(int nbFrames, float frameTime, sf::Vector2i pos, sf::Vector2i size, bool loop) {
     _frameTime = frameTime;
     _nbFrames = nbFrames;

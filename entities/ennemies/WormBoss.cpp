@@ -16,7 +16,7 @@
 WormBoss::WormBoss(IP& ip, Level& level)
         : Ennemy(ip, "wormBossHead", sf::IntRect(0, 0, 21, 21), 800, 100, 50, level) {
     AnimationTable& t(GetAnims());
-    t.AddAnimation("nomnomnom", new Animation(4, 80, sf::Vector2i(0, 0), sf::Vector2i(22, 22), true));
+    t.AddAnimation("nomnomnom", Animation(4, 80, sf::Vector2i(0, 0), sf::Vector2i(22, 22), true));
     t.SetAnimation("nomnomnom");
     _nbPartsExploded = 0;
     setPosition(sf::Vector2f(sf::Vector2i(sf::Vector2f(level.GetMap().GetSize().x*8, level.GetMap().GetSize().y*16))));

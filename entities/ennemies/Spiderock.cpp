@@ -14,8 +14,8 @@
 
 Spiderock::Spiderock(IP& ip, Level& level) : Ennemy(ip, "spiderock", sf::IntRect(3, 0, 13, 17), 10, 1, 1, level) {
     AnimationTable& t(GetAnims());
-    t.AddAnimation("idle", new Animation(1, 100, sf::Vector2i(0, 0), sf::Vector2i(17, 18), true));
-    t.AddAnimation("walk", new Animation(4, 100, sf::Vector2i(0, 18), sf::Vector2i(17, 18), true));
+    t.AddAnimation("idle", Animation(1, 100, sf::Vector2i(0, 0), sf::Vector2i(17, 18), true));
+    t.AddAnimation("walk", Animation(4, 100, sf::Vector2i(0, 18), sf::Vector2i(17, 18), true));
     t.SetAnimation("walk");
     SetSpeed(MathHelper::RandFloat(0.001, 0.002));
     SetJumpPower(.63);

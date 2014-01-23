@@ -17,9 +17,6 @@ MovingSprite::MovingSprite(IP& ip, std::string name, bool animated) : sf::Sprite
     setTexture(ResourceLoader::GetTexture(name));
     _hitbox = getTextureRect();
     setOrigin(sf::Vector2f(sf::Vector2i(MathHelper::GetCenter(sf::FloatRect(_hitbox)))));
-    _animTable = new AnimationTable();
-    _animTable->AddAnimation("base", new Animation(1, 1000, sf::Vector2i(0, 0), sf::Vector2i(getTextureRect().width, getTextureRect().height), false));
-    _animTable->SetAnimation("base");
     _animated = animated;
     _onPlatform = false;
     _box.setPointCount(4);
@@ -32,6 +29,10 @@ MovingSprite::MovingSprite(IP& ip, std::string name, bool animated) : sf::Sprite
     _box.setOutlineColor(sf::Color(255, 255, 255));
     _box.setOutlineThickness(1);
     _box.setFillColor(sf::Color(255, 255, 255, 0));
+
+    _animTable = new AnimationTable();
+    _animTable->AddAnimation("base", Animation(1, 1000, sf::Vector2i(0, 0), sf::Vector2i(getTextureRect().width, getTextureRect().height), false));
+    _animTable->SetAnimation("base");
 }
 
 MovingSprite::MovingSprite(IP& ip, std::string name, sf::IntRect hitbox, bool animated) {
@@ -40,9 +41,6 @@ MovingSprite::MovingSprite(IP& ip, std::string name, sf::IntRect hitbox, bool an
     setTexture(ResourceLoader::GetTexture(name));
     setOrigin(sf::Vector2f(sf::Vector2i(MathHelper::GetCenter(sf::FloatRect(hitbox)))));
     _hitbox = hitbox;
-    _animTable = new AnimationTable();
-    _animTable->AddAnimation("base", new Animation(1, 1000, sf::Vector2i(0, 0), sf::Vector2i(getTextureRect().width, getTextureRect().height), false));
-    _animTable->SetAnimation("base");
     _animated = animated;
     _onPlatform = false;
     _box.setPointCount(4);
@@ -55,6 +53,10 @@ MovingSprite::MovingSprite(IP& ip, std::string name, sf::IntRect hitbox, bool an
     _box.setOutlineColor(sf::Color(255, 255, 255));
     _box.setOutlineThickness(1);
     _box.setFillColor(sf::Color(255, 255, 255, 0));
+
+    _animTable = new AnimationTable();
+    _animTable->AddAnimation("base", Animation(1, 1000, sf::Vector2i(0, 0), sf::Vector2i(getTextureRect().width, getTextureRect().height), false));
+    _animTable->SetAnimation("base");
 }
 
 MovingSprite::~MovingSprite() {

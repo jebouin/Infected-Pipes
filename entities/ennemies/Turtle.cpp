@@ -16,8 +16,8 @@
 
 Turtle::Turtle(IP& ip, Level& level) : Ennemy(ip, "turtle", sf::IntRect(12, 2, 21, 18), 100, 25, 30, level) {
     AnimationTable& t(GetAnims());
-    t.AddAnimation("walk", new Animation(4, 200, sf::Vector2i(0, 0), sf::Vector2i(36, 21), true));
-    t.AddAnimation("attack", new Animation(4, 200, sf::Vector2i(0, 21), sf::Vector2i(36, 21), false));
+    t.AddAnimation("walk", Animation(4, 200, sf::Vector2i(0, 0), sf::Vector2i(36, 21), true));
+    t.AddAnimation("attack", Animation(4, 200, sf::Vector2i(0, 21), sf::Vector2i(36, 21), false));
     t.SetAnimation("walk");
     SetSpeed(.0009);
     SetJumpPower(.46);
@@ -130,7 +130,7 @@ void Turtle::Die(IP& ip, ParticleManager& pManager, EntityManager& eManager, Lev
                                   false,
                                   true,
                                   sf::IntRect(42, 42, 42, 42), false);
-        p->GetAnims().AddAnimation("base", new Animation(7, 40, sf::Vector2i(0, 0), sf::Vector2i(13, 13), false));
+        p->GetAnims().AddAnimation("base", Animation(7, 40, sf::Vector2i(0, 0), sf::Vector2i(13, 13), false));
         p->GetAnims().SetAnimation("base");
         pManager.AddParticle(p);
     }
