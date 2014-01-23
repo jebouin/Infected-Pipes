@@ -13,6 +13,7 @@
 #include "PauseMenu.h"
 #include "SceneManager.h"
 #include "Cursor.h"
+#include "SkillsMenu.h"
 
 Game::Game(IP& ip) : Scene(ip, false) {
     _prevEscapePressed = true;
@@ -50,13 +51,24 @@ void Game::Update(float eTime, IP& ip) {
 
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
         if(!_prevEscapePressed) {
-            ip._sceneManager->AddScene(new PauseMenu(ip));
+            ip._sceneManager->AddSceneToAddStack(new PauseMenu(ip));
             ip._cursor->Show();
         }
         _prevEscapePressed = true;
     } else {
         _prevEscapePressed = false;
     }
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Tab)) {
+        if(!_prevTabPressed) {
+            ip._sceneManager->AddSceneToAddStack(new SkillsMenu(ip));
+            ip._cursor->Show();
+        }
+        _prevTabPressed = true;
+        _prevEscapePressed = true;
+    } else {
+        _prevTabPressed = false;
+    }
+
 
     ip._renderer->GetTexture().setView(_player->GetView());
     _level->Update(ip, *_entityManager, *_player, eTime, *_particleManager, *_bulletManager, *_gui, _player->GetView());

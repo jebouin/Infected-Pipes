@@ -30,6 +30,7 @@ private:
     SpeechManager *_speechManager;
 
     bool _prevEscapePressed;
+    bool _prevTabPressed;
 };
 
 #endif
