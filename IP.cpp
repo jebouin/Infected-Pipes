@@ -170,6 +170,7 @@ void IP::LoadResources() {
     ResourceLoader::LoadTexture("gfx/cursor.png", "cursor");
     ResourceLoader::LoadTexture("gfx/difficultyIndicator.png", "difficultyIndicator");
     ResourceLoader::LoadTexture("gfx/chest.png", "chest");
+    ResourceLoader::LoadTexture("gfx/skillIcons.png", "skillIcons");
 
     ResourceLoader::LoadTexture("gfx/littleRockBullet.png", "littleRockBullet");
     ResourceLoader::LoadTexture("gfx/arrow.png", "arrow");

@@ -9,6 +9,7 @@
 using namespace std;
 
 class IP;
+class SkillIcon;
 
 class SkillsMenu : public Scene {
 public:
@@ -25,6 +26,7 @@ private:
     sf::Vector2f _ssize;
 
     sf::Text _title;
+    vector<SkillIcon*> _icons;
 };
 
 #endif //SKILLSMENU_H_INCLUDED

@@ -5,6 +5,7 @@
 #include "Renderer.h"
 #include "Cursor.h"
 #include "MainMenu.h"
+#include "SkillIcon.h"
 
 SkillsMenu::SkillsMenu(IP& ip)
     : Scene(ip, true) {
@@ -23,10 +24,20 @@ SkillsMenu::SkillsMenu(IP& ip)
     _title.setString("PLAYER SKILLS");
     _title.setColor(sf::Color(175, 167, 72));
     _title.setPosition(sf::Vector2f(_ssize.x / 2.f - _title.getGlobalBounds().width/2.f, 0));
+
+    for(int i=0 ; i<3 ; i++) {
+        SkillIcon* icon = new SkillIcon(ip, sf::Vector2i(17, 0), "Health");
+        icon->setPosition(sf::Vector2f(_ssize/2.f) + sf::Vector2f(float(i-1)*_ssize.x/4.f, _ssize.y/4.f));
+        _icons.push_back(icon);
+    }
 }
 
 SkillsMenu::~SkillsMenu() {
-
+    for(int i=0 ; i<_icons.size() ; i++) {
+        delete _icons[i];
+        _icons[i] = 0;
+    }
+    _icons.clear();
 }
 
 void SkillsMenu::Update(float eTime, IP& ip) {
@@ -41,12 +52,18 @@ void SkillsMenu::Update(float eTime, IP& ip) {
     } else {
         _prevEscapePressed = false;
     }
+    for(int i=0 ; i<_icons.size() ; i++) {
+        _icons[i]->Update(ip, eTime);
+    }
 }
 
 void SkillsMenu::Draw(IP& ip) {
     Scene::Draw(ip);
-    ip._renderer->GetTexture().setView(_view);
+    ip._renderer->GetTexture().setView(ip._renderer->GetTexture().getDefaultView());
     ip._renderer->Draw(_back);
 
     ip._renderer->Draw(_title);
+    for(int i=0 ; i<_icons.size() ; i++) {
+        _icons[i]->Draw(ip);
+    }
 }

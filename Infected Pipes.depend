@@ -20,7 +20,7 @@
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1390589680 source:c:\users\xaychru04\desktop\infected pipes\ip.cpp
+1390596524 source:c:\users\xaychru04\desktop\infected pipes\ip.cpp
 	"IP.h"
 	"Renderer.h"
 	"ResourceLoader.h"
@@ -1979,7 +1979,7 @@
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1390589602 source:c:\users\xaychru04\desktop\infected pipes\scenes\skillsmenu.cpp
+1390599468 source:c:\users\xaychru04\desktop\infected pipes\scenes\skillsmenu.cpp
 	"SkillsMenu.h"
 	"IP.h"
 	"SceneManager.h"
@@ -1987,9 +1987,21 @@
 	"Renderer.h"
 	"Cursor.h"
 	"MainMenu.h"
+	"SkillIcon.h"
 
-1390508088 c:\users\xaychru04\desktop\infected pipes\scenes\skillsmenu.h
+1390597369 c:\users\xaychru04\desktop\infected pipes\scenes\skillsmenu.h
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 	"Scene.h"
+
+1390599969 source:c:\users\xaychru04\desktop\infected pipes\gui\skillicon.cpp
+	"SkillIcon.h"
+	"IP.h"
+	"Renderer.h"
+	"ResourceLoader.h"
+	"MathHelper.h"
+
+1390599085 c:\users\xaychru04\desktop\infected pipes\gui\skillicon.h
+	"SFML/Graphics.hpp"
+	"SFML/System.hpp"
 
