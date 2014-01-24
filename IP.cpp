@@ -14,6 +14,7 @@
 #include "MathHelper.h"
 #include "ShaderManager.h"
 #include "Cursor.h"
+#include "SkillsMenu.h"
 
 IP::IP() {
     //_window = new sf::RenderWindow(sf::VideoMode(1600, 900, 32), "Infected Pipes");
@@ -42,6 +43,7 @@ IP::IP() {
     _cursor = new Cursor(*this);
     //_sceneManager->AddScene(new MainMenu(*this));
     _sceneManager->AddScene(new Game(*this));
+    //_sceneManager->AddScene(new SkillsMenu(*this));
     _focused = true;
 
     while(_window->isOpen()) {
@@ -158,6 +160,7 @@ void IP::LoadResources() {
     ResourceLoader::LoadTexture("gfx/iceBackground.png", "iceBackground");
     ResourceLoader::LoadTexture("gfx/iceBackground2.png", "iceBackground2");
     ResourceLoader::LoadTexture("gfx/forestBackground.png", "forestBackground");
+    ResourceLoader::LoadTexture("gfx/mountainBackground.png", "mountainBackground");
 
     ResourceLoader::LoadTexture("gfx/lifeBar.png", "lifeBar");
     ResourceLoader::LoadTexture("gfx/lifeBarBorder.png", "lifeBarBorder");

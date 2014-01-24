@@ -19,10 +19,10 @@ SkillsMenu::SkillsMenu(IP& ip)
     _prevEscapePressed = true;
 
     _title.setFont(ip._font);
-    _title.setCharacterSize(32);
-    _title.setString("SKILLS");
+    _title.setCharacterSize(24);
+    _title.setString("PLAYER SKILLS");
     _title.setColor(sf::Color(175, 167, 72));
-    _title.setPosition(sf::Vector2f(_ssize.x / 2.f - _title.getGlobalBounds().width/2.f, _ssize.y / 8.f - _title.getGlobalBounds().height/2.f));
+    _title.setPosition(sf::Vector2f(_ssize.x / 2.f - _title.getGlobalBounds().width/2.f, 0));
 }
 
 SkillsMenu::~SkillsMenu() {

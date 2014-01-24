@@ -61,6 +61,7 @@ Background::Background(IP& ip, std::string name, float zoom, Map& map) {
     }
     if(_name == "nightBackground") {
         _forest.setTexture(ResourceLoader::GetTexture("forestBackground"));
+        _mountains.setTexture(ResourceLoader::GetTexture("mountainBackground"));
     }
 }
 
@@ -124,9 +125,25 @@ void Background::Draw(sf::RenderTexture& rt, const sf::View& prevView) {
         rt.draw(_clouds);
         _clouds.setPosition(_clouds.getPosition() + sf::Vector2f(-_clouds.getTextureRect().width, 0));
         rt.draw(_clouds);
+
+        //mountains
+        _view = sf::View(prevView);
+        _view.setCenter(sf::Vector2f(_view.getCenter().x/8.f, _view.getCenter().y));
+        if(_mountains.getPosition().x > _view.getCenter().x+_view.getSize().x/2.f) {
+            _mountains.setPosition(sf::Vector2f(_mountains.getPosition().x-_mountains.getTextureRect().width, _mountains.getPosition().y));
+        }
+        if(_mountains.getPosition().x < _view.getCenter().x-_view.getSize().x/2.f) {
+            _mountains.setPosition(sf::Vector2f(_mountains.getPosition().x+_mountains.getTextureRect().width, _mountains.getPosition().y));
+        }
+        rt.setView(_view);
+        rt.draw(_mountains);
+        _mountains.setPosition(sf::Vector2f(_mountains.getPosition().x-_mountains.getTextureRect().width, _mountains.getPosition().y));
+        rt.draw(_mountains);
+        _mountains.setPosition(sf::Vector2f(_mountains.getPosition().x+_mountains.getTextureRect().width, _mountains.getPosition().y));
+
         //then forest/mountains
         _view = sf::View(prevView);
-        _view.setCenter(sf::Vector2f(_view.getCenter().x/.3f, _view.getCenter().y));
+        _view.setCenter(sf::Vector2f(_view.getCenter().x/4.f, _view.getCenter().y));
         if(_forest.getPosition().x > _view.getCenter().x+_view.getSize().x/2.f) {
             _forest.setPosition(sf::Vector2f(_forest.getPosition().x-_forest.getTextureRect().width, _forest.getPosition().y));
         }
@@ -138,6 +155,7 @@ void Background::Draw(sf::RenderTexture& rt, const sf::View& prevView) {
         _forest.setPosition(sf::Vector2f(_forest.getPosition().x-_forest.getTextureRect().width, _forest.getPosition().y));
         rt.draw(_forest);
         _forest.setPosition(sf::Vector2f(_forest.getPosition().x+_forest.getTextureRect().width, _forest.getPosition().y));
+        //and mountains
     }
 
     _view.setCenter(sf::Vector2f(prevView.getCenter().x / 2., prevView.getCenter().y));

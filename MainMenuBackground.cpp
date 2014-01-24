@@ -23,8 +23,9 @@ MainMenuBackground::MainMenuBackground(IP& ip) {
 
     _simViewX = 0;
     _forestPosX = 0;
-    _viewVelX = .05f;
-    //_viewVelX = .15f;
+    _mountainsPosX = 0;
+    //_viewVelX = .05f;
+    _viewVelX = .15f;
 
     //add some trees
     for(int i=0 ; i<_ssize.x/42 ; i++) {
@@ -36,6 +37,9 @@ MainMenuBackground::MainMenuBackground(IP& ip) {
     }
     _forest.setTexture(ResourceLoader::GetTexture("forestBackground"));
     _forest.setPosition(sf::Vector2f(0, _ssize.y-_forest.getTextureRect().height));
+
+    _mountains.setTexture(ResourceLoader::GetTexture("mountainBackground"));
+    _mountains.setPosition(sf::Vector2f(0, _ssize.y-_mountains.getTextureRect().height));
 }
 
 MainMenuBackground::~MainMenuBackground() {
@@ -70,6 +74,7 @@ void MainMenuBackground::Update(IP& ip, float eTime) {
         t.setPosition(sf::Vector2f(sf::Vector2i(t.getPosition())));
     }
     _forestPosX += eTime*_viewVelX/-4.f;
+    _mountainsPosX += eTime*_viewVelX/-16.f;
 }
 
 void MainMenuBackground::Draw(IP& ip) {
@@ -83,6 +88,17 @@ void MainMenuBackground::Draw(IP& ip) {
     _background->Draw(ip._renderer->GetTexture(), *_view);
 
     ip._renderer->GetTexture().setView(ip._renderer->GetTexture().getDefaultView());
+
+    //mountains
+    //forest/mountain
+    if(_mountainsPosX+_mountains.getTextureRect().width < _ssize.x) {
+        _mountainsPosX += _mountains.getTextureRect().width;
+    }
+    _mountains.setPosition(sf::Vector2f(_mountainsPosX, _mountains.getPosition().y));
+    ip._renderer->Draw(_mountains);
+    _mountains.setPosition(_mountains.getPosition() + sf::Vector2f(-_mountains.getTextureRect().width, 0));
+    ip._renderer->Draw(_mountains);
+
     //forest/mountain
     if(_forestPosX+_forest.getTextureRect().width < _ssize.x) {
         _forestPosX += _forest.getTextureRect().width;
@@ -91,6 +107,7 @@ void MainMenuBackground::Draw(IP& ip) {
     ip._renderer->Draw(_forest);
     _forest.setPosition(_forest.getPosition() + sf::Vector2f(-_forest.getTextureRect().width, 0));
     ip._renderer->Draw(_forest);
+
     //trees
     for(int i=0 ; i<_trees.size() ; i++) {
         ip._renderer->Draw(_trees[i]);

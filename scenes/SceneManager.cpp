@@ -37,7 +37,7 @@ void SceneManager::Update(float eTime, IP& ip){
 
 void SceneManager::Draw(IP& ip){
     int i;
-    for(i=_scenes.size()-1 ; i>=0 ; i--) {
+    for(i=_scenes.size()-1 ; i>0 ; i--) {
         if(!_scenes[i]->IsTransparent()) {
             break;
         }
