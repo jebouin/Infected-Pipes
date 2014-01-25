@@ -4,7 +4,7 @@
 #include "ResourceLoader.h"
 #include "MathHelper.h"
 
-SkillIcon::SkillIcon(IP& ip, sf::Vector2i skillPos, string name)
+SkillIcon::SkillIcon(IP& ip, sf::Vector2i skillPos, string name, string description)
     : sf::Sprite(ResourceLoader::GetTexture("skillIcons")) {
     setTextureRect(sf::IntRect(0, 0, 16, 16));
     setOrigin(sf::Vector2f(getGlobalBounds().width, getGlobalBounds().height)/2.f);
@@ -13,6 +13,7 @@ SkillIcon::SkillIcon(IP& ip, sf::Vector2i skillPos, string name)
     _content.setOrigin(sf::Vector2f(_content.getGlobalBounds().width, _content.getGlobalBounds().height)/2.f);
 
     _name = name;
+    _description = description;
 
     _nameText.setFont(ip._font);
     _nameText.setColor(sf::Color(200, 200, 200));
@@ -20,7 +21,15 @@ SkillIcon::SkillIcon(IP& ip, sf::Vector2i skillPos, string name)
     _nameText.setCharacterSize(8);
     _nameText.setOrigin(sf::Vector2f(_nameText.getGlobalBounds().width/2.f, _nameText.getGlobalBounds().height));
 
-    vector<sf::Vector2f> c(MathHelper::Rect2Corners(sf::FloatRect(0, 0, _nameText.getGlobalBounds().width+1, _nameText.getGlobalBounds().height+2)));
+    _descriptionText.setFont(ip._font);
+    _descriptionText.setColor(sf::Color(160, 160, 160));
+    _descriptionText.setString(_description);
+    _descriptionText.setCharacterSize(8);
+    _descriptionText.setOrigin(sf::Vector2f(_descriptionText.getGlobalBounds().width/2.f, _descriptionText.getGlobalBounds().height));
+
+    vector<sf::Vector2f> c(MathHelper::Rect2Corners(sf::FloatRect(0, 0,
+                                                                  max(_nameText.getGlobalBounds().width+1, _descriptionText.getGlobalBounds().width+1),
+                                                                  _nameText.getGlobalBounds().height+_descriptionText.getGlobalBounds().height+2)));
     const sf::Vector2f arrowSize(8, 8);
     sf::Vector2f centerDown((c[2]+c[3])/2.f);
     _textBox.setPointCount(7);
@@ -65,7 +74,7 @@ void SkillIcon::Update(IP& ip, float eTime) {
         _textBox.setPosition(sf::Vector2f(sf::Vector2i(getPosition() + sf::Vector2f(0, -16.f + 6.f))));
     }
     _nameText.setPosition(_textBox.getPosition() + sf::Vector2f(-1, -_textBox.getGlobalBounds().height+4));
-
+    _descriptionText.setPosition(_textBox.getPosition() + sf::Vector2f(-1, -14));
 
     if(_hover) {
         setTextureRect(sf::IntRect(0, 17, 16, 16));
@@ -81,5 +90,6 @@ void SkillIcon::Draw(IP& ip) {
     if(_hover) {
         ip._renderer->Draw(_textBox);
         ip._renderer->Draw(_nameText);
+        ip._renderer->Draw(_descriptionText);
     }
 }

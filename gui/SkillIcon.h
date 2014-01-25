@@ -10,7 +10,7 @@ class IP;
 
 class SkillIcon : public sf::Sprite {
     public:
-    SkillIcon(IP& ip, sf::Vector2i skillPos, string name);
+    SkillIcon(IP& ip, sf::Vector2i skillPos, string name, string description);
     ~SkillIcon();
     void Update(IP& ip, float eTime);
     void Draw(IP& ip);
@@ -20,9 +20,11 @@ class SkillIcon : public sf::Sprite {
     sf::Clock _textBoxTimer;
     sf::Sprite _content;
     string _name;
+    string _description;
     bool _hover;
     sf::ConvexShape _textBox;
     sf::Text _nameText;
+    sf::Text _descriptionText;
 };
 
 #endif // SKILLICON_H_INCLUDED
