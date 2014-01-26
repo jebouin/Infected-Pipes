@@ -62,7 +62,7 @@ void Spawner::Update(IP& ip, float eTime, EntityManager& eManager, Level& level,
             Slime *slime = new Slime(ip, level);
             slime->setPosition(sf::Vector2f(26*16, -15));
             eManager.Add(slime);
-        }
+        }_targets[i]->Damage(dmg, ip, pManager, sf::Color(255, 255, 0), _targets[i]->getPosition(), sf::Vector2f(0, MathHelper::RandFloat(-.4, -.3)), eManager, level);
     }*/
 
     for(int i=0 ; i<_pipes.size() ; i++) {
@@ -180,8 +180,10 @@ void Spawner::Spawn(IP& ip, EntityManager& eManager, Level& level, Character& ch
             return;
         }
         eManager.Add(f);*/
-        int pipeId = rand()%_pipes.size();
-        _pipes[pipeId]->Spawn(ip, eManager, new MissileBall(ip, level));
+        for(int i=0 ; i<3 ; i++) {
+            int pipeId = rand()%_pipes.size();
+            _pipes[pipeId]->Spawn(ip, eManager, new MissileBall(ip, level));
+        }
         _difToSpawn = 0;
     }
 

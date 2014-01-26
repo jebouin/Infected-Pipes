@@ -14,16 +14,16 @@ Shotgun::~Shotgun() {
 
 }
 
-void Shotgun::Update(IP& ip, float eTime, BulletManager& bManager) {
-    Weapon::Update(ip, eTime, bManager);
+void Shotgun::Update(IP& ip, float eTime, BulletManager& bManager, EntityManager& eManager, Level& level, ParticleManager& pManager) {
+    Weapon::Update(ip, eTime, bManager, eManager, level, pManager);
 }
 
 void Shotgun::Draw(IP& ip) {
     Weapon::Draw(ip);
 }
 
-bool Shotgun::Use(IP& ip, BulletManager& bManager, float angle) {
-    if(!Weapon::Use(ip, bManager, angle)) {
+bool Shotgun::Use(IP& ip, BulletManager& bManager, float angle, EntityManager& eManager, Level& level, ParticleManager& pManager) {
+    if(!Weapon::Use(ip, bManager, angle, eManager, level, pManager)) {
         return false;
     }
     for(int i=0 ; i<8 ; i++) {

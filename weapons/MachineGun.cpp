@@ -5,6 +5,7 @@
 #include "GunBullet.h"
 #include "MathHelper.h"
 #include "Renderer.h"
+#include "Level.h"
 
 MachineGun::MachineGun(IP& ip, const GameEntity& holder, sf::Vector2f relativePos) : Weapon(ip, holder, relativePos, 20) {
     _spreadAngle = 18;
@@ -14,16 +15,16 @@ MachineGun::~MachineGun() {
 
 }
 
-void MachineGun::Update(IP& ip, float eTime, BulletManager& bManager) {
-    Weapon::Update(ip, eTime, bManager);
+void MachineGun::Update(IP& ip, float eTime, BulletManager& bManager, EntityManager& eManager, Level& level, ParticleManager& pManager) {
+    Weapon::Update(ip, eTime, bManager, eManager, level, pManager);
 }
 
 void MachineGun::Draw(IP& ip) {
     Weapon::Draw(ip);
 }
 
-bool MachineGun::Use(IP& ip, BulletManager& bManager, float angle) {
-    if(!Weapon::Use(ip, bManager, angle)) {
+bool MachineGun::Use(IP& ip, BulletManager& bManager, float angle, EntityManager& eManager, Level& level, ParticleManager& pManager) {
+    if(!Weapon::Use(ip, bManager, angle, eManager, level, pManager)) {
         return false;
     }
     sf::Vector2f d = MathHelper::Ang2Vec(MathHelper::Deg2Rad(angle + MathHelper::RandFloat(-_spreadAngle, _spreadAngle)));

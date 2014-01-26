@@ -4,6 +4,8 @@
 #include "Renderer.h"
 #include "BulletManager.h"
 #include "Bullet.h"
+#include "EntityManager.h"
+#include "Level.h"
 
 Weapon::Weapon(IP& ip, const GameEntity& holder, sf::Vector2f relativePos, float reloadTime)
     : _holder(holder) {
@@ -15,7 +17,7 @@ Weapon::~Weapon() {
 
 }
 
-void Weapon::Update(IP& ip, float eTime, BulletManager& bManager) {
+void Weapon::Update(IP& ip, float eTime, BulletManager& bManager, EntityManager& eManager, Level& level, ParticleManager& pManager) {
     _position = _holder.GetGlobalUpperLeftPos()+_relativePos;
 }
 
@@ -23,7 +25,7 @@ void Weapon::Draw(IP& ip) {
 
 }
 
-bool Weapon::Use(IP& ip, BulletManager& bManager, float angle) {
+bool Weapon::Use(IP& ip, BulletManager& bManager, float angle, EntityManager& eManager, Level& level, ParticleManager& pManager) {
     if(_useTimer.getElapsedTime().asMilliseconds() >= _reloadTime) {
         _useTimer.restart();
         return true;

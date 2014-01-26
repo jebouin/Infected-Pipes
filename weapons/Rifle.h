@@ -6,8 +6,6 @@
 
 #include "Weapon.h"
 
-
-
 class IP;
 class TextureLoader;
 class GameEntity;
@@ -17,9 +15,9 @@ class Rifle : public Weapon {
     public:
     Rifle(IP& ip, const GameEntity& holder, sf::Vector2f relativePos);
     ~Rifle();
-    void Update(IP& ip, float eTime, BulletManager& bManager);
+    void Update(IP& ip, float eTime, BulletManager& bManager, EntityManager& eManager, Level& level, ParticleManager& pManager);
     void Draw(IP& ip);
-    bool Use(IP& ip, BulletManager& bManager, float angle);
+    bool Use(IP& ip, BulletManager& bManager, float angle, EntityManager& eManager, Level& level, ParticleManager& pManager);
 
     private:
 

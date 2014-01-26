@@ -14,16 +14,16 @@ Rifle::~Rifle() {
 
 }
 
-void Rifle::Update(IP& ip, float eTime, BulletManager& bManager) {
-    Weapon::Update(ip, eTime, bManager);
+void Rifle::Update(IP& ip, float eTime, BulletManager& bManager, EntityManager& eManager, Level& level, ParticleManager& pManager) {
+    Weapon::Update(ip, eTime, bManager, eManager, level, pManager);
 }
 
 void Rifle::Draw(IP& ip) {
     Weapon::Draw(ip);
 }
 
-bool Rifle::Use(IP& ip, BulletManager& bManager, float angle) {
-    if(!Weapon::Use(ip, bManager, angle)) {
+bool Rifle::Use(IP& ip, BulletManager& bManager, float angle, EntityManager& eManager, Level& level, ParticleManager& pManager) {
+    if(!Weapon::Use(ip, bManager, angle, eManager, level, pManager)) {
         return false;
     }
     sf::Vector2f d = MathHelper::Ang2Vec(MathHelper::Deg2Rad(angle + MathHelper::RandFloat(-3, 3)));
