@@ -10,10 +10,11 @@ using namespace std;
 
 class IP;
 class SkillIcon;
+class SkillTree;
 
 class SkillsMenu : public Scene {
 public:
-    SkillsMenu(IP& ip);
+    SkillsMenu(IP& ip, SkillTree& skillTree);
     ~SkillsMenu();
     void Update(float eTime, IP& ip);
     void Draw(IP& ip);
@@ -21,12 +22,11 @@ public:
 private:
     sf::Clock _timer;
     sf::ConvexShape _back;
-    sf::View _view;
     bool _prevEscapePressed;
     sf::Vector2f _ssize;
-
     sf::Text _title;
-    vector<SkillIcon*> _icons;
+
+    SkillTree& _skillTree;
 };
 
 #endif //SKILLSMENU_H_INCLUDED

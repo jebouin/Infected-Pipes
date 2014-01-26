@@ -57,11 +57,9 @@ void ElectricGun::Update(IP& ip, float eTime, BulletManager& bManager, EntityMan
         _electricity[0].position = _position;
         _electricity[_electricity.getVertexCount()-1].position = mpos;
         int id = 0;
-        //cout << "---------------" << endl;
         for(int i=0 ; i<_midPoints.size() ; i++) {
             sf::Vector2f pos0(_electricity[id].position);
             sf::Vector2f pos1(_electricity[id+_midPoints[i].size()].position);
-            //cout << pos0.x << " " << pos1.x << endl;
             float l(MathHelper::GetVecLength(pos0-pos1));
             sf::Vector2f dir = (pos1-pos0)/l;
             for(int j=0 ; j<_midPoints[i].size() ; j++) {
@@ -197,7 +195,6 @@ bool ElectricGun::Use(IP& ip, BulletManager& bManager, float angle, EntityManage
         _midPoints.push_back(vector<float>(GetNbPoints(_position, mpos, 24)));
     } else {
         _midPoints.push_back(vector<float>(GetNbPoints(_position, _targets[0]->getPosition(), 24)));
-        cout << _targets.size() << endl;
         for(int i=0 ; i<int(_targets.size())-1 ; i++) {
             _midPoints.push_back(vector<float>(GetNbPoints(_targets[i]->getPosition(), _targets[i+1]->getPosition(), 24)));
         }

@@ -4,8 +4,6 @@
 #include "SFML/Graphics.hpp"
 #include "SFML/System.hpp"
 
-
-
 class IP;
 class Character;
 class EntityManager;
@@ -14,6 +12,7 @@ class ParticleManager;
 class BulletManager;
 class GUI;
 class Camera;
+class SkillTree;
 
 class Player {
     public:
@@ -23,11 +22,12 @@ class Player {
     void Draw(IP& ip);
     sf::View& GetView();
     Character& GetCharacter();
-    //void SetView(sf::View v);
+    SkillTree& GetSkillTree();
 
     private:
     Camera *_camera;
     Character *_character;
+    SkillTree *_skillTree;
 };
 
 #endif // PLAYER_H_INCLUDED

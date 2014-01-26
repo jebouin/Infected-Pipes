@@ -5,12 +5,11 @@
 #include "Renderer.h"
 #include "Cursor.h"
 #include "MainMenu.h"
-#include "SkillIcon.h"
+#include "SkillTree.h"
 
-SkillsMenu::SkillsMenu(IP& ip)
-    : Scene(ip, true) {
+SkillsMenu::SkillsMenu(IP& ip, SkillTree& skillTree)
+    : Scene(ip, true), _skillTree(skillTree) {
     _ssize = sf::Vector2f(ip._renderer->GetSize());
-    _view = sf::View(sf::FloatRect(sf::Vector2f(0, 0), _ssize));
     _back.setFillColor(sf::Color(0, 0, 0, 200));
     _back.setPointCount(4);
     vector<sf::Vector2f> c(MathHelper::Rect2Corners(sf::FloatRect(sf::Vector2f(0, 0), _ssize)));
@@ -25,20 +24,20 @@ SkillsMenu::SkillsMenu(IP& ip)
     _title.setColor(sf::Color(175, 167, 72));
     _title.setPosition(sf::Vector2f(_ssize.x / 2.f - _title.getGlobalBounds().width/2.f, 0));
 
-    string test[3] = {"each level +10% hp", "each level +10% hp\nTest", "HA\nHA\nHA\nHA"};
+    /*string test[3] = {"each level +10% hp", "each level +10% hp\nTest", "HA\nHA\nHA\nHA"};
     for(int i=0 ; i<3 ; i++) {
         SkillIcon* icon = new SkillIcon(ip, sf::Vector2i(17, 0), "Health", test[i]);
         icon->setPosition(sf::Vector2f(_ssize/2.f) + sf::Vector2f(float(i-1)*_ssize.x/4.f, _ssize.y/4.f));
         _icons.push_back(icon);
-    }
+    }*/
 }
 
 SkillsMenu::~SkillsMenu() {
-    for(int i=0 ; i<_icons.size() ; i++) {
+    /*for(int i=0 ; i<_icons.size() ; i++) {
         delete _icons[i];
         _icons[i] = 0;
     }
-    _icons.clear();
+    _icons.clear();*/
 }
 
 void SkillsMenu::Update(float eTime, IP& ip) {
@@ -53,9 +52,10 @@ void SkillsMenu::Update(float eTime, IP& ip) {
     } else {
         _prevEscapePressed = false;
     }
-    for(int i=0 ; i<_icons.size() ; i++) {
+    /*for(int i=0 ; i<_icons.size() ; i++) {
         _icons[i]->Update(ip, eTime);
-    }
+    }*/
+    _skillTree.Update(ip, eTime);
 }
 
 void SkillsMenu::Draw(IP& ip) {
@@ -64,7 +64,8 @@ void SkillsMenu::Draw(IP& ip) {
     ip._renderer->Draw(_back);
 
     ip._renderer->Draw(_title);
-    for(int i=0 ; i<_icons.size() ; i++) {
+    /*for(int i=0 ; i<_icons.size() ; i++) {
         _icons[i]->Draw(ip);
-    }
+    }*/
+    _skillTree.Draw(ip);
 }

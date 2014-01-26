@@ -60,7 +60,7 @@ void Game::Update(float eTime, IP& ip) {
     }
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Tab)) {
         if(!_prevTabPressed) {
-            ip._sceneManager->AddSceneToAddStack(new SkillsMenu(ip));
+            ip._sceneManager->AddSceneToAddStack(new SkillsMenu(ip, _player->GetSkillTree()));
             ip._cursor->Show();
         }
         _prevTabPressed = true;

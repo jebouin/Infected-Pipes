@@ -14,14 +14,19 @@ class SkillIcon : public sf::Sprite {
     ~SkillIcon();
     void Update(IP& ip, float eTime);
     void Draw(IP& ip);
+    void Unhide();
+    bool IsClicked();
 
     private:
     sf::Clock _timer;
     sf::Clock _textBoxTimer;
     sf::Sprite _content;
+    sf::Vector2i _skillPos;
     string _name;
     string _description;
     bool _hover;
+    bool _hidden;
+    bool _clicked;
     sf::ConvexShape _textBox;
     sf::Text _nameText;
     sf::Text _descriptionText;

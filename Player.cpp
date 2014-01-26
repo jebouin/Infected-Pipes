@@ -10,11 +10,13 @@
 #include "BulletManager.h"
 #include "GUI.h"
 #include "Camera.h"
+#include "SkillTree.h"
 
 Player::Player(IP& ip, EntityManager& eManager) {
     _character = new Character(ip);
     _character->setPosition(sf::Vector2f(48, 32));
     _camera = new Camera(sf::FloatRect(0, 0, ip._renderer->GetTexture().getSize().x, ip._renderer->GetTexture().getSize().y));
+    _skillTree = new SkillTree(ip);
 }
 
 Player::~Player() {
@@ -22,6 +24,8 @@ Player::~Player() {
     _camera = 0;
     delete _character;
     _character = 0;
+    delete _skillTree;
+    _skillTree = 0;
 }
 
 void Player::Update(IP& ip, float eTime, Level& level, EntityManager& eManager, ParticleManager& pManager, BulletManager& bManager) {
@@ -69,6 +73,6 @@ Character& Player::GetCharacter() {
     return *_character;
 }
 
-/*void Player::SetView(sf::View v) {
-    _view = new sf::View(v);
-}*/
+SkillTree& Player::GetSkillTree() {
+    return *_skillTree;
+}
