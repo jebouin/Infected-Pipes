@@ -8,13 +8,16 @@ using namespace std;
 
 class IP;
 class Skill;
+class Player;
 
 class SkillTree {
     public:
+
     SkillTree(IP& ip);
     ~SkillTree();
-    void Update(IP& ip, float eTime);
+    void Update(IP& ip, float eTime, Player& player);
     void Draw(IP& ip);
+    void LearnSkill(Player& player, int id);
 
     private:
     vector<Skill*> _skills;

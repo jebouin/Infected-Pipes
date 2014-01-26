@@ -2,9 +2,11 @@
 #include "IP.h"
 #include "SkillIcon.h"
 
-Skill::Skill(IP& ip, sf::Vector2i skillPos, sf::Vector2f iconPos, string name, string description) {
-    _icon = new SkillIcon(ip, skillPos, name, description);
+Skill::Skill(IP& ip, sf::Vector2i skillPos, sf::Vector2f iconPos, string name, string description, int maxLevel) {
+    _icon = new SkillIcon(ip, skillPos, name, description, *this);
     _icon->setPosition(iconPos);
+    _maxLevel = maxLevel;
+    _level = 0;
 }
 
 Skill::~Skill() {
@@ -22,6 +24,10 @@ void Skill::Draw(IP& ip) {
 
 int Skill::GetLevel() {
     return _level;
+}
+
+int Skill::GetLevelMax() {
+    return _maxLevel;
 }
 
 void Skill::LevelUp() {

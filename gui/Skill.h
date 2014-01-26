@@ -11,11 +11,12 @@ class SkillIcon;
 
 class Skill {
     public:
-    Skill(IP& ip, sf::Vector2i skillPos, sf::Vector2f iconPos, string name, string description);
+    Skill(IP& ip, sf::Vector2i skillPos, sf::Vector2f iconPos, string name, string description, int maxLevel);
     ~Skill();
     void Update(IP& ip, float eTime);
     void Draw(IP& ip);
     int GetLevel();
+    int GetLevelMax();
     void LevelUp();
     SkillIcon& GetIcon();
     void Unhide();
