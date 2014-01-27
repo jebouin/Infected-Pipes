@@ -57,7 +57,10 @@ void SkillTree::Update(IP& ip, float eTime, Player& player) {
 
 void SkillTree::Draw(IP& ip) {
     for(int i=_skills.size()-1 ; i>=0; i--) {
-        _skills[i]->Draw(ip);
+        _skills[i]->DrawBack(ip);
+    }
+    for(int i=_skills.size()-1 ; i>=0; i--) {
+        _skills[i]->DrawTop(ip);
     }
 }
 

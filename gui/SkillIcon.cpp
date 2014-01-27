@@ -185,12 +185,15 @@ void SkillIcon::Update(IP& ip, float eTime) {
     _content.setPosition(getPosition());
 }
 
-void SkillIcon::Draw(IP& ip) {
+void SkillIcon::DrawBack(IP& ip) {
     ip._renderer->Draw(*this);
     ip._renderer->Draw(_content);
     if(!_hidden) {
         ip._renderer->Draw(_levelText);
     }
+}
+
+void SkillIcon::DrawTop(IP& ip) {
     if(_hover && !_hidden) {
         ip._renderer->Draw(_textBox);
         ip._renderer->Draw(_nameText);

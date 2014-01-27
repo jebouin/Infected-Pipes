@@ -14,7 +14,8 @@ class SkillIcon : public sf::Sprite {
     SkillIcon(IP& ip, sf::Vector2i skillPos, string name, string description, Skill& skill);
     ~SkillIcon();
     void Update(IP& ip, float eTime);
-    void Draw(IP& ip);
+    void DrawBack(IP& ip);
+    void DrawTop(IP& ip);
     void Unhide();
     bool IsClicked();
     bool IsDoubleClicked();

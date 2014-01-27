@@ -18,8 +18,12 @@ void Skill::Update(IP& ip, float eTime) {
     _icon->Update(ip, eTime);
 }
 
-void Skill::Draw(IP& ip) {
-    _icon->Draw(ip);
+void Skill::DrawBack(IP& ip) {
+    _icon->DrawBack(ip);
+}
+
+void Skill::DrawTop(IP& ip) {
+    _icon->DrawTop(ip);
 }
 
 int Skill::GetLevel() {

@@ -14,7 +14,8 @@ class Skill {
     Skill(IP& ip, sf::Vector2i skillPos, sf::Vector2f iconPos, string name, string description, int maxLevel);
     ~Skill();
     void Update(IP& ip, float eTime);
-    void Draw(IP& ip);
+    void DrawBack(IP& ip);
+    void DrawTop(IP& ip);
     int GetLevel();
     int GetLevelMax();
     void LevelUp();
