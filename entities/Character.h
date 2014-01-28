@@ -39,6 +39,8 @@ class Character : public GameEntity {
     void LoadArm(ArmType t);
     void GoLeft(float eTime);
     void GoRight(float eTime);
+    void Jump(Level& level, float eTime);
+    void StopJumping();
     void EnterPipe(Level& level);
     void LeavePipe();
     bool EnteringPipe();
@@ -56,6 +58,7 @@ class Character : public GameEntity {
     int _nextXP;
     bool _enteringPipe;
     bool _leavingPipe;
+    bool _canContinueJump;
     sf::Clock _enterTimer;
     sf::Clock _regenTimer;
     ArmType _curArmType;

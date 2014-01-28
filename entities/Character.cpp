@@ -20,7 +20,6 @@
 #include "GUI.h"
 #include "ElectricGun.h"
 
-
 Character::Character(IP& ip) : GameEntity(ip, "character", sf::IntRect(4, 3, 7, 26), 100) {
     _arms[EMPTY] = Arm {sf::IntRect(0, 0, 6, 9), sf::Vector2f(2, 1), sf::Vector2f(5, 6), 0};
     _arms[SHOTGUN] = Arm{sf::IntRect(0, 35, 21, 10), sf::Vector2f(5, 1), sf::Vector2f(6, 4), -90};
@@ -29,12 +28,14 @@ Character::Character(IP& ip) : GameEntity(ip, "character", sf::IntRect(4, 3, 7, 
     _arms[ELECTRICGUN] = Arm{sf::IntRect(0, 63, 20, 9), sf::Vector2f(7, 1), sf::Vector2f(12, 4), -90};
 
     SetWeight(0.5f);
+    SetJumpPower(.69);
     AnimationTable& t(GetAnims());
     t.AddAnimation("walk", Animation(8, 100, sf::Vector2i(0, 0), sf::Vector2i(15, 31), true));
     t.AddAnimation("idle", Animation(1, 50, sf::Vector2i(0, 31), sf::Vector2i(15, 31), false));
     t.SetAnimation("walk");
     _enteringPipe = false;
     _leavingPipe = false;
+    _canContinueJump = false;
 
     _level = 0;
     _xp = 0;
@@ -154,6 +155,22 @@ void Character::GoRight(float eTime) {
     if(GetAnims().GetAnimationName() == "idle") {
         GetAnims().SetAnimation("walk");
     }
+}
+
+void Character::Jump(Level& level, float eTime) {
+    if(GameEntity::Jump(level)) {
+        _canContinueJump = true;
+    }
+    /*if(_canContinueJump) {
+        Accelerate(sf::Vector2f(0, -.001f), eTime);
+    }*/
+}
+
+void Character::StopJumping() {
+    if(_canContinueJump) {
+        SetVel(sf::Vector2f(GetVel().x, GetVel().y/10.f));
+    }
+    _canContinueJump = false;
 }
 
 void Character::EnterPipe(Level& level) {
