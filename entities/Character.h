@@ -51,6 +51,10 @@ class Character : public GameEntity {
     int GetXP() const;
     int GetNextXP() const;
     int GetLevel() const;
+    void SetHPMultiplier(float mult);
+    void SetSpeedMultiplier(float mult);
+    void SetRegen(float regen);
+    void SetJumpMultiplier(float mult);
 
     private:
     int _level;
@@ -62,6 +66,13 @@ class Character : public GameEntity {
     sf::Clock _enterTimer;
     sf::Clock _regenTimer;
     ArmType _curArmType;
+
+    //skills
+    float _baseHP;
+    float _hpMult;
+    float _baseSpeed;
+    float _regen;
+    float _baseJump;
 
     Weapon *_weapon;
     sf::Sprite _arm;

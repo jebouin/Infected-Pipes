@@ -4,14 +4,15 @@
 #include "Renderer.h"
 #include "SkillIcon.h"
 #include "Player.h"
+#include "Character.h"
 
 SkillTree::SkillTree(IP& ip) {
     _ssize = sf::Vector2f(ip._renderer->GetSize());
     string titles[9] = {"Health", "Strength", "Agility", "Healing", "Attack Speed", "Jump height", "Healing fly", "Ground attack", "Dash"};
-    string descriptions[9] = {"Increases max health\n+10% hp per level",
+    string descriptions[9] = {"Increases max health\n+20% hp per level",
                                 "Increases attack strength\n+10% damage per level",
-                                "Increases running speed\n+5% moving speed\nper level",
-                                "Increases healing speed\nLevel 1: +1hp/s\nLevel 2: +8hp/s\nLevel 3: +25hp/s",
+                                "Increases running speed\n+20% moving speed\nper level",
+                                "Increases healing speed\nLevel 1: +3hp/s\nLevel 2: +8hp/s\nLevel 3: +25hp/s",
                                 "Increases attack speed\nLevel 1: +10%\nLevel 2: +25%\nLevel 3: +60%",
                                 "Increases jump height\nLevel 1: +15%\nLevel 2: +30%\nLevel 3: +50%",
                                 "Summons magical flies\nthat will heal you\nduring your adventure\nLevel 1: 1 fly\nLevel 2: 3 flies\nLevel 3: 8 flies",
@@ -65,7 +66,39 @@ void SkillTree::Draw(IP& ip) {
 }
 
 void SkillTree::LearnSkill(Player& player, int id) {
+    Character& character(player.GetCharacter());
     Skill* skill(_skills[id]);
     int level(skill->GetLevel());
     int levelMax(skill->GetLevelMax());
+    if(id == 0) {
+        character.SetHPMultiplier(1. + .2*level);
+    } else if(id == 1) {
+
+    } else if(id == 2) {
+        character.SetSpeedMultiplier(1. + .2*level);
+    } else if(id == 3) {
+        if(level == 1) {
+            character.SetRegen(3);
+        } else if(level == 2) {
+            character.SetRegen(8);
+        } else if(level == 3) {
+            character.SetRegen(25);
+        }
+    } else if(id == 4) {
+
+    } else if(id == 5) {
+        if(level == 1) {
+            character.SetJumpMultiplier(1.15);
+        } else if(level == 2) {
+            character.SetJumpMultiplier(1.3);
+        } else if(level == 3) {
+            character.SetJumpMultiplier(1.5);
+        }
+    } else if(id == 6) {
+
+    } else if(id == 7) {
+
+    } else if(id == 8) {
+
+    }
 }

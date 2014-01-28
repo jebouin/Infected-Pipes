@@ -20,7 +20,7 @@
 #include "GUI.h"
 #include "ElectricGun.h"
 
-Character::Character(IP& ip) : GameEntity(ip, "character", sf::IntRect(4, 3, 7, 26), 100) {
+Character::Character(IP& ip) : GameEntity(ip, "character", sf::IntRect(4, 3, 7, 26), 20) {
     _arms[EMPTY] = Arm {sf::IntRect(0, 0, 6, 9), sf::Vector2f(2, 1), sf::Vector2f(5, 6), 0};
     _arms[SHOTGUN] = Arm{sf::IntRect(0, 35, 21, 10), sf::Vector2f(5, 1), sf::Vector2f(6, 4), -90};
     _arms[MACHINEGUN] = Arm{sf::IntRect(0, 44, 23, 10), sf::Vector2f(8, 1), sf::Vector2f(8, 2), -90};
@@ -28,7 +28,6 @@ Character::Character(IP& ip) : GameEntity(ip, "character", sf::IntRect(4, 3, 7, 
     _arms[ELECTRICGUN] = Arm{sf::IntRect(0, 63, 20, 9), sf::Vector2f(7, 1), sf::Vector2f(12, 4), -90};
 
     SetWeight(0.5f);
-    SetJumpPower(.69);
     AnimationTable& t(GetAnims());
     t.AddAnimation("walk", Animation(8, 100, sf::Vector2i(0, 0), sf::Vector2i(15, 31), true));
     t.AddAnimation("idle", Animation(1, 50, sf::Vector2i(0, 31), sf::Vector2i(15, 31), false));
@@ -40,6 +39,13 @@ Character::Character(IP& ip) : GameEntity(ip, "character", sf::IntRect(4, 3, 7, 
     _level = 0;
     _xp = 0;
     _nextXP = 10;
+    _baseHP = 20;
+    _hpMult = 1.;
+    _regen = 0;
+    _baseSpeed = 0.0026;
+    SetSpeed(_baseSpeed);
+    _baseJump = .69;
+    SetJumpPower(_baseJump);
 
     _weapon = new ElectricGun(ip, (const GameEntity&)*this, sf::Vector2f(0, 0));
 
@@ -125,9 +131,11 @@ void Character::Update(IP& ip, float eTime, Level& level, EntityManager& eManage
     _weapon->SetRelPosition(_arm.getPosition() - GetGlobalUpperLeftPos() + newRelPos/*+ _arms[_curArmType]._bulletPos*/);
     _weapon->Update(ip, eTime, bManager, eManager, level, pManager);
 
-    if(_regenTimer.getElapsedTime().asMilliseconds() >= 100) {
-        _regenTimer.restart();
-        SetHP(GetHP()+1);
+    if(_regen > 0) {
+        if(_regenTimer.getElapsedTime().asMilliseconds() >= 1000/_regen) {
+            _regenTimer.restart();
+            SetHP(GetHP()+1);
+        }
     }
 }
 
@@ -161,13 +169,10 @@ void Character::Jump(Level& level, float eTime) {
     if(GameEntity::Jump(level)) {
         _canContinueJump = true;
     }
-    /*if(_canContinueJump) {
-        Accelerate(sf::Vector2f(0, -.001f), eTime);
-    }*/
 }
 
 void Character::StopJumping() {
-    if(_canContinueJump) {
+    if(_canContinueJump && GetVel().y < 0) {
         SetVel(sf::Vector2f(GetVel().x, GetVel().y/10.f));
     }
     _canContinueJump = false;
@@ -261,8 +266,10 @@ void Character::LevelUp() {
     _xp -= _nextXP;
     _nextXP *= 1.3f;
 
-    SetHPMax(GetHPMax() * 1.2f);
-    SetHP(GetHPMax());
+    float hpRatio(float(GetHP())/float(GetHPMax()));
+    _baseHP = 20*pow(1.2, _level);
+    SetHPMax(_baseHP*_hpMult);
+    SetHP(GetHPMax()*hpRatio);
 
     std::cout << "Level up! Level " << _level << std::endl;
 }
@@ -277,4 +284,23 @@ int Character::GetNextXP() const {
 
 int Character::GetLevel() const {
     return _level;
+}
+
+void Character::SetHPMultiplier(float mult) {
+    _hpMult = mult;
+    float hpRatio(float(GetHP())/float(GetHPMax()));
+    SetHPMax(_baseHP*_hpMult);
+    SetHP(GetHPMax()*hpRatio);
+}
+
+void Character::SetSpeedMultiplier(float mult) {
+    SetSpeed(_baseSpeed*mult);
+}
+
+void Character::SetRegen(float regen) {
+    _regen = regen;
+}
+
+void Character::SetJumpMultiplier(float mult) {
+    SetJumpPower(_baseJump * sqrt(mult));
 }
