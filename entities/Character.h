@@ -56,6 +56,7 @@ class Character : public GameEntity {
     void SetRegen(float regen);
     void SetJumpMultiplier(float mult);
     void SetReloadSpeedMultiplier(float mult);
+    void SetDamageMultiplier(float mult);
 
     private:
     int _level;

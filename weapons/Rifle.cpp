@@ -6,7 +6,7 @@
 #include "MathHelper.h"
 #include "Renderer.h"
 
-Rifle::Rifle(IP& ip, const GameEntity& holder, sf::Vector2f relativePos) : Weapon(ip, holder, relativePos, 600) {
+Rifle::Rifle(IP& ip, const GameEntity& holder, sf::Vector2f relativePos) : Weapon(ip, holder, relativePos, 600, 10, 14) {
 
 }
 
@@ -30,7 +30,8 @@ bool Rifle::Use(IP& ip, BulletManager& bManager, float angle, EntityManager& eMa
     bManager.AddBullet(new GunBullet(ip,
                                      GetPosition(),
                                      d*MathHelper::RandFloat(0.7, 1.0),
-                                     false));
+                                     false,
+                                     GetDamage()));
     ip._renderer->AddFlash(80, .2);
     return true;
 }

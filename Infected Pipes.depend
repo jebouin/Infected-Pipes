@@ -558,7 +558,7 @@
 	"MathHelper.h"
 	"Renderer.h"
 
-1391006354 source:c:\users\xaychru04\desktop\infected pipes\weapons\weapon.cpp
+1391007056 source:c:\users\xaychru04\desktop\infected pipes\weapons\weapon.cpp
 	"Weapon.h"
 	"GameEntity.h"
 	"IP.h"
@@ -567,8 +567,9 @@
 	"Bullet.h"
 	"EntityManager.h"
 	"Level.h"
+	"MathHelper.h"
 
-1391006354 c:\users\xaychru04\desktop\infected pipes\weapons\weapon.h
+1391006841 c:\users\xaychru04\desktop\infected pipes\weapons\weapon.h
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
@@ -826,7 +827,7 @@
 	"BulletManager.h"
 	"Renderer.h"
 
-1391006354 c:\users\xaychru04\desktop\infected pipes\entities\character.h
+1391007331 c:\users\xaychru04\desktop\infected pipes\entities\character.h
 	<vector>
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
@@ -849,7 +850,7 @@
 	"SFML/System.hpp"
 	"GameEntity.h"
 
-1391006354 source:c:\users\xaychru04\desktop\infected pipes\entities\character.cpp
+1391006569 source:c:\users\xaychru04\desktop\infected pipes\entities\character.cpp
 	"Character.h"
 	"IP.h"
 	"Animation.h"
@@ -1028,7 +1029,7 @@
 	"SFML/System.hpp"
 	"Ennemy.h"
 
-1390501869 source:c:\users\xaychru04\desktop\infected pipes\entities\ennemies\spiderock.cpp
+1391007165 source:c:\users\xaychru04\desktop\infected pipes\entities\ennemies\spiderock.cpp
 	"Spiderock.h"
 	"IP.h"
 	"Map.h"
@@ -1254,7 +1255,7 @@
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1389550842 source:c:\users\xaychru04\desktop\infected pipes\bullets\gunbullet.cpp
+1391006906 source:c:\users\xaychru04\desktop\infected pipes\bullets\gunbullet.cpp
 	"GunBullet.h"
 	"IP.h"
 	"Character.h"
@@ -1266,7 +1267,7 @@
 	"Animation.h"
 	"Particle.h"
 
-1389128677 c:\users\xaychru04\desktop\infected pipes\bullets\gunbullet.h
+1391006906 c:\users\xaychru04\desktop\infected pipes\bullets\gunbullet.h
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 	"Bullet.h"
@@ -1276,7 +1277,7 @@
 	"SFML/System.hpp"
 	"Weapon.h"
 
-1390667704 source:c:\users\xaychru04\desktop\infected pipes\weapons\shotgun.cpp
+1391007016 source:c:\users\xaychru04\desktop\infected pipes\weapons\shotgun.cpp
 	"Shotgun.h"
 	"IP.h"
 	"GameEntity.h"
@@ -1718,7 +1719,7 @@
 	"SFML/System.hpp"
 	"Weapon.h"
 
-1390667659 source:c:\users\xaychru04\desktop\infected pipes\weapons\machinegun.cpp
+1391007132 source:c:\users\xaychru04\desktop\infected pipes\weapons\machinegun.cpp
 	"MachineGun.h"
 	"IP.h"
 	"GameEntity.h"
@@ -1733,7 +1734,7 @@
 	"SFML/System.hpp"
 	"Weapon.h"
 
-1390667645 source:c:\users\xaychru04\desktop\infected pipes\weapons\rifle.cpp
+1391007000 source:c:\users\xaychru04\desktop\infected pipes\weapons\rifle.cpp
 	"Rifle.h"
 	"IP.h"
 	"GameEntity.h"
@@ -2011,7 +2012,7 @@
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1390732964 source:c:\users\xaychru04\desktop\infected pipes\weapons\electricgun.cpp
+1391006981 source:c:\users\xaychru04\desktop\infected pipes\weapons\electricgun.cpp
 	"ElectricGun.h"
 	"IP.h"
 	"GameEntity.h"
@@ -2037,7 +2038,7 @@
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1390934762 source:c:\users\xaychru04\desktop\infected pipes\gui\skilltree.cpp
+1391006473 source:c:\users\xaychru04\desktop\infected pipes\gui\skilltree.cpp
 	"SkillTree.h"
 	"IP.h"
 	"Skill.h"

@@ -47,10 +47,10 @@ Character::Character(IP& ip) : GameEntity(ip, "character", sf::IntRect(4, 3, 7, 
     _baseJump = .69;
     SetJumpPower(_baseJump);
 
-    _weapon = new ElectricGun(ip, (const GameEntity&)*this, sf::Vector2f(0, 0));
+    _weapon = new MachineGun(ip, (const GameEntity&)*this, sf::Vector2f(0, 0));
 
     _arm.setTexture(ResourceLoader::GetTexture("arms"));
-    LoadArm(ELECTRICGUN);
+    LoadArm(MACHINEGUN);
 
     SetAutoDir(false);
     SetCollisionPrecision(.05);
@@ -307,4 +307,8 @@ void Character::SetJumpMultiplier(float mult) {
 
 void Character::SetReloadSpeedMultiplier(float mult) {
     _weapon->SetReloadSpeedMultiplier(mult);
+}
+
+void Character::SetDamageMultiplier(float mult) {
+    _weapon->SetDamageMultiplier(mult);
 }

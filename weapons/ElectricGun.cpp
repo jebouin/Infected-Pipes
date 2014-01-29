@@ -8,7 +8,7 @@
 #include "EntityManager.h"
 #include "Ennemy.h"
 
-ElectricGun::ElectricGun(IP& ip, const GameEntity& holder, sf::Vector2f relativePos) : Weapon(ip, holder, relativePos, 500) {
+ElectricGun::ElectricGun(IP& ip, const GameEntity& holder, sf::Vector2f relativePos) : Weapon(ip, holder, relativePos, 500, 42, 60) {
     _timeSinceShot = 0;
     _radius = 200;
     _shooting = false;
@@ -27,7 +27,7 @@ void ElectricGun::Update(IP& ip, float eTime, BulletManager& bManager, EntityMan
         if(_hitTimer.getElapsedTime().asMilliseconds() > 70) {
             _hitTimer.restart();
             for(int i=0 ; i<_targets.size() ; i++) {
-                float dmg = MathHelper::RandFloat(20, 25);
+                float dmg = GetDamage();
                 float hp = _targets[i]->GetHP();
                 _targets[i]->Damage(dmg, ip, pManager, sf::Color(255, 255, 0), _targets[i]->getPosition(), sf::Vector2f(0, MathHelper::RandFloat(-.25, -.2)), eManager, level);
                 if(dmg >= hp) {

@@ -14,7 +14,7 @@ class ParticleManager;
 
 class Weapon {
     public:
-    Weapon(IP& ip, const GameEntity& holder, sf::Vector2f relativePos, float reloadTime);
+    Weapon(IP& ip, const GameEntity& holder, sf::Vector2f relativePos, float reloadTime, float minBaseDmg, float maxBaseDmg);
     virtual ~Weapon();
     virtual void Update(IP& ip, float eTime, BulletManager& bManager, EntityManager& eManager, Level& level, ParticleManager& pManager);
     virtual void Draw(IP& ip);
@@ -22,8 +22,10 @@ class Weapon {
     sf::Vector2f GetPosition();
     void SetRelPosition(sf::Vector2f p);
     void SetReloadSpeedMultiplier(float mult);
+    void SetDamageMultiplier(float mult);
 
     protected:
+    int GetDamage();
     sf::Vector2f _position;
 
     private:
@@ -32,6 +34,9 @@ class Weapon {
     float _baseReloadTime;
     float _reloadTime;
     sf::Vector2f _relativePos;
+    float _minBaseDmg;
+    float _maxBaseDmg;
+    float _damageMult;
 };
 
 #endif // WEAPON_H_INCLUDED

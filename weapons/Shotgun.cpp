@@ -6,7 +6,7 @@
 #include "MathHelper.h"
 #include "Renderer.h"
 
-Shotgun::Shotgun(IP& ip, const GameEntity& holder, sf::Vector2f relativePos) : Weapon(ip, holder, relativePos, 700) {
+Shotgun::Shotgun(IP& ip, const GameEntity& holder, sf::Vector2f relativePos) : Weapon(ip, holder, relativePos, 700, 10, 14) {
 
 }
 
@@ -31,7 +31,8 @@ bool Shotgun::Use(IP& ip, BulletManager& bManager, float angle, EntityManager& e
         bManager.AddBullet(new GunBullet(ip,
                                      GetPosition(),
                                      d*MathHelper::RandFloat(0.4, 0.6),
-                                     false));
+                                     false,
+                                     GetDamage()));
     }
     ip._renderer->AddFlash(80, .2);
     return true;

@@ -7,7 +7,7 @@
 #include "Renderer.h"
 #include "Level.h"
 
-MachineGun::MachineGun(IP& ip, const GameEntity& holder, sf::Vector2f relativePos) : Weapon(ip, holder, relativePos, 20) {
+MachineGun::MachineGun(IP& ip, const GameEntity& holder, sf::Vector2f relativePos) : Weapon(ip, holder, relativePos, 100, 5, 7) {
     _spreadAngle = 18;
 }
 
@@ -31,7 +31,8 @@ bool MachineGun::Use(IP& ip, BulletManager& bManager, float angle, EntityManager
     bManager.AddBullet(new GunBullet(ip,
                                      GetPosition(),
                                      d*MathHelper::RandFloat(0.6, 0.9),
-                                     false));
+                                     false,
+                                     GetDamage()));
     ip._renderer->AddFlash(80, .1);
     return true;
 }

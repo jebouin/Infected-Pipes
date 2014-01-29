@@ -6,12 +6,16 @@
 #include "Bullet.h"
 #include "EntityManager.h"
 #include "Level.h"
+#include "MathHelper.h"
 
-Weapon::Weapon(IP& ip, const GameEntity& holder, sf::Vector2f relativePos, float reloadTime)
+Weapon::Weapon(IP& ip, const GameEntity& holder, sf::Vector2f relativePos, float reloadTime, float minBaseDmg, float maxBaseDmg)
     : _holder(holder) {
     _baseReloadTime = reloadTime;
     _reloadTime = reloadTime;
     _relativePos = relativePos;
+    _damageMult = 1.f;
+    _minBaseDmg = minBaseDmg;
+    _maxBaseDmg = maxBaseDmg;
 }
 
 Weapon::~Weapon() {
@@ -46,4 +50,12 @@ void Weapon::SetReloadSpeedMultiplier(float mult) {
     float curSpeed = 1000.f/_baseReloadTime;
     curSpeed *= mult;
     _reloadTime = 1000.f/curSpeed;
+}
+
+void Weapon::SetDamageMultiplier(float mult) {
+    _damageMult = mult;
+}
+
+int Weapon::GetDamage() {
+    return MathHelper::RandFloat(_minBaseDmg, _maxBaseDmg) * _damageMult;
 }

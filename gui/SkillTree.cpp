@@ -10,7 +10,7 @@ SkillTree::SkillTree(IP& ip) {
     _ssize = sf::Vector2f(ip._renderer->GetSize());
     string titles[9] = {"Health", "Strength", "Agility", "Healing", "Attack Speed", "Jump height", "Healing fly", "Ground attack", "Dash"};
     string descriptions[9] = {"Increases max health\n+20% hp per level",
-                                "Increases attack strength\n+10% damage per level",
+                                "Increases attack strength\n+35% damage per level",
                                 "Increases running speed\n+20% moving speed\nper level",
                                 "Increases healing speed\nLevel 1: +3hp/s\nLevel 2: +8hp/s\nLevel 3: +25hp/s",
                                 "Increases attack speed\nLevel 1: +10%\nLevel 2: +25%\nLevel 3: +60%",
@@ -73,7 +73,7 @@ void SkillTree::LearnSkill(Player& player, int id) {
     if(id == 0) {
         character.SetHPMultiplier(1. + .2*level);
     } else if(id == 1) {
-
+        character.SetDamageMultiplier(1. + .35*level);
     } else if(id == 2) {
         character.SetSpeedMultiplier(1. + .2*level);
     } else if(id == 3) {
