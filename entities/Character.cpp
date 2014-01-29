@@ -304,3 +304,7 @@ void Character::SetRegen(float regen) {
 void Character::SetJumpMultiplier(float mult) {
     SetJumpPower(_baseJump * sqrt(mult));
 }
+
+void Character::SetReloadSpeedMultiplier(float mult) {
+    _weapon->SetReloadSpeedMultiplier(mult);
+}

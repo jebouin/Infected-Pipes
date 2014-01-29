@@ -9,6 +9,7 @@
 
 Weapon::Weapon(IP& ip, const GameEntity& holder, sf::Vector2f relativePos, float reloadTime)
     : _holder(holder) {
+    _baseReloadTime = reloadTime;
     _reloadTime = reloadTime;
     _relativePos = relativePos;
 }
@@ -39,4 +40,10 @@ sf::Vector2f Weapon::GetPosition() {
 
 void Weapon::SetRelPosition(sf::Vector2f p) {
     _relativePos = p;
+}
+
+void Weapon::SetReloadSpeedMultiplier(float mult) {
+    float curSpeed = 1000.f/_baseReloadTime;
+    curSpeed *= mult;
+    _reloadTime = 1000.f/curSpeed;
 }

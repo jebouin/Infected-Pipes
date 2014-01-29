@@ -21,6 +21,7 @@ class Weapon {
     virtual bool Use(IP& ip, BulletManager& bManager, float angle, EntityManager& eManager, Level& level, ParticleManager& pManager);
     sf::Vector2f GetPosition();
     void SetRelPosition(sf::Vector2f p);
+    void SetReloadSpeedMultiplier(float mult);
 
     protected:
     sf::Vector2f _position;
@@ -28,6 +29,7 @@ class Weapon {
     private:
     const GameEntity& _holder;
     sf::Clock _useTimer;
+    float _baseReloadTime;
     float _reloadTime;
     sf::Vector2f _relativePos;
 };

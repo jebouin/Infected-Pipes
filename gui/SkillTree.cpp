@@ -85,7 +85,13 @@ void SkillTree::LearnSkill(Player& player, int id) {
             character.SetRegen(25);
         }
     } else if(id == 4) {
-
+        if(level == 1) {
+            character.SetReloadSpeedMultiplier(1.1);
+        } else if(level == 2) {
+            character.SetReloadSpeedMultiplier(1.25);
+        } else if(level == 3) {
+            character.SetReloadSpeedMultiplier(1.6);
+        }
     } else if(id == 5) {
         if(level == 1) {
             character.SetJumpMultiplier(1.15);
