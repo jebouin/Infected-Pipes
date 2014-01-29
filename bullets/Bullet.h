@@ -18,7 +18,7 @@ class EntityManager;
 
 class Bullet : public MovingSprite {
     public:
-    Bullet(IP& ip, std::string name, sf::IntRect hitbox, sf::Vector2f position, sf::Vector2f vel, int damage, float knockBack, bool animated, bool ennemy, bool gravity, bool instantDie, bool sticky, bool dieOnWall, bool bounce);
+    Bullet(IP& ip, std::string name, sf::IntRect hitbox, sf::Vector2f position, sf::Vector2f vel, int damage, float knockBack, bool animated, bool ennemy, bool gravity, bool instantDie, bool sticky, bool dieOnWall, bool bounce, float penetrationChance);
     virtual ~Bullet();
     virtual void Update(IP& ip, float eTime, Level& level, Character& character, ParticleManager& pManager, EntityManager& eManager);
     void Draw(IP& ip);
@@ -29,6 +29,7 @@ class Bullet : public MovingSprite {
     bool CollisionWithEnnemies() const;
     void SetCollisionWithEnnemies(bool c);
     virtual bool Die(IP& ip, ParticleManager& pManager, EntityManager& eManager, Level& level);
+    void SetPenetration(float p);
 
     private:
     bool _gravity;
@@ -46,6 +47,7 @@ class Bullet : public MovingSprite {
     sf::Clock _deadTimer;
     sf::Clock _timer;
     sf::Vector2f _prevPos;
+    float _penetrationChance;
 
     sf::VertexArray _trail;
 };

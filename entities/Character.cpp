@@ -19,6 +19,8 @@
 #include "ResourceLoader.h"
 #include "GUI.h"
 #include "ElectricGun.h"
+#include "GroundAttackBullet.h"
+#include "Map.h"
 
 Character::Character(IP& ip) : GameEntity(ip, "character", sf::IntRect(4, 3, 7, 26), 20) {
     _arms[EMPTY] = Arm {sf::IntRect(0, 0, 6, 9), sf::Vector2f(2, 1), sf::Vector2f(5, 6), 0};
@@ -35,6 +37,7 @@ Character::Character(IP& ip) : GameEntity(ip, "character", sf::IntRect(4, 3, 7, 
     _enteringPipe = false;
     _leavingPipe = false;
     _canContinueJump = false;
+    _prevVelY = 0;
 
     _level = 0;
     _xp = 0;
@@ -46,6 +49,7 @@ Character::Character(IP& ip) : GameEntity(ip, "character", sf::IntRect(4, 3, 7, 
     SetSpeed(_baseSpeed);
     _baseJump = .69;
     SetJumpPower(_baseJump);
+    _groundAttackLevel = 0;
 
     _weapon = new MachineGun(ip, (const GameEntity&)*this, sf::Vector2f(0, 0));
 
@@ -137,6 +141,63 @@ void Character::Update(IP& ip, float eTime, Level& level, EntityManager& eManage
             SetHP(GetHP()+1);
         }
     }
+
+    if(_groundAttackLevel > 0) {
+        float minSpd = (_groundAttackLevel == 1 ? .8 : (_groundAttackLevel == 2 ? .5 : .4));
+        if(GetVel().y > minSpd) {
+            float time(_groundAttackTimer.getElapsedTime().asMilliseconds());
+            if(time > 5) {
+                int nbParts(time / 5.f);
+                _groundAttackTimer.restart();
+                for(int i=0 ; i<nbParts ; i++) {
+                    float intx(float(i) / float(nbParts));
+                    sf::Vector2f pos(GetGlobalUpperLeftPos() + intx*GetVel()*eTime + sf::Vector2f(MathHelper::RandFloat(0, GetGlobalHitbox().width), MathHelper::RandFloat(0, GetGlobalHitbox().height)));
+                    Particle *p = new Particle(ip, "groundAttackParticle",
+                                   pos,
+                                   /*MathHelper::Ang2Vec(MathHelper::Deg2Rad(ang + MathHelper::RandFloat(-20, 20))) * spd * MathHelper::RandFloat(0.7, 1.2)*/sf::Vector2f(0, 0),
+                                   0,
+                                   MathHelper::RandFloat(100, 300),
+                                   sf::Vector2f(1, 1),
+                                   sf::Vector2f(1, 1),
+                                   128,
+                                   0,
+                                   false,
+                                   false,
+                                   false,
+                                   sf::IntRect(0, 0, 3, 10), false);
+                    pManager.AddParticle(p);
+                }
+            }
+        } else {
+            _groundAttackTimer.restart();
+        }
+
+        if(/*MathHelper::ABS(GetVel().y) < .01 && */GetVel().y <= 0.01 && _prevVelY > minSpd) {
+            if(level.GetMap().IsOnTileType(*this, Map::WALL) || level.GetMap().IsOnTileType(*this, Map::PLATFORM) || level.GetSpawner().IsOnGround(*this)) {
+                if(_groundAttackLevel == 1) {
+                    GroundAttackBullet *b = new GroundAttackBullet(ip, getPosition()+sf::Vector2f(0, 5), sf::Vector2f(.4, 0), false, 10, .1, false);
+                    bManager.AddBullet(b);
+                    b = new GroundAttackBullet(ip, getPosition()+sf::Vector2f(0, 5), sf::Vector2f(-.4, 0), false, 10, .1, false);
+                    b->setScale(-1, 1);
+                    bManager.AddBullet(b);
+                } else if(_groundAttackLevel == 2) {
+                    GroundAttackBullet *b = new GroundAttackBullet(ip, getPosition()+sf::Vector2f(0, 5), sf::Vector2f(.4, 0), false, 20, .3, false);
+                    bManager.AddBullet(b);
+                    b = new GroundAttackBullet(ip, getPosition()+sf::Vector2f(0, 5), sf::Vector2f(-.4, 0), false, 20, .3, false);
+                    b->setScale(-1, 1);
+                    bManager.AddBullet(b);
+                } else if(_groundAttackLevel == 3) {
+                    GroundAttackBullet *b = new GroundAttackBullet(ip, getPosition()+sf::Vector2f(0, 1), sf::Vector2f(.4, 0), false, 50, .6, true);
+                    bManager.AddBullet(b);
+                    b = new GroundAttackBullet(ip, getPosition()+sf::Vector2f(0, 1), sf::Vector2f(-.4, 0), false, 50, .6, true);
+                    b->setScale(-1, 1);
+                    bManager.AddBullet(b);
+                }
+            }
+        }
+    }
+
+    _prevVelY = GetVel().y;
 }
 
 void Character::Draw(IP& ip) {
@@ -311,4 +372,8 @@ void Character::SetReloadSpeedMultiplier(float mult) {
 
 void Character::SetDamageMultiplier(float mult) {
     _weapon->SetDamageMultiplier(mult);
+}
+
+void Character::SetGroundAttackLevel(int lvl) {
+    _groundAttackLevel = lvl;
 }

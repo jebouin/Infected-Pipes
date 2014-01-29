@@ -12,7 +12,7 @@
 #include "Ennemy.h"
 #include "MathHelper.h"
 
-Bullet::Bullet(IP& ip, std::string name, sf::IntRect hitbox, sf::Vector2f position, sf::Vector2f vel, int damage, float knockBack, bool animated, bool ennemy, bool gravity, bool instantDie, bool sticky, bool dieOnWall, bool bounce)
+Bullet::Bullet(IP& ip, std::string name, sf::IntRect hitbox, sf::Vector2f position, sf::Vector2f vel, int damage, float knockBack, bool animated, bool ennemy, bool gravity, bool instantDie, bool sticky, bool dieOnWall, bool bounce, float penetrationChance)
     : MovingSprite(ip, name, hitbox, animated) {
     setPosition(position);
     SetVel(vel);
@@ -31,6 +31,7 @@ Bullet::Bullet(IP& ip, std::string name, sf::IntRect hitbox, sf::Vector2f positi
     _trail.setPrimitiveType(sf::Lines);
     _trail.append(sf::Vertex(sf::Vector2f(0, 0), sf::Color(255, 255, 0)));
     _trail.append(sf::Vertex(sf::Vector2f(0, 0), sf::Color(255, 255, 0)));
+    _penetrationChance = penetrationChance;
 }
 
 Bullet::~Bullet() {
@@ -159,11 +160,13 @@ void Bullet::Impact(GameEntity& entity, IP& ip, ParticleManager& pManager, sf::C
     /*if(!entity.IsAlive()) {
         return;
     }*/
-    _instantDie = true;
-    Die(ip, pManager, eManager, level);
     entity.Damage(_damage, ip, pManager, color, getPosition(), GetVel(), eManager, level);
     if(entity.HasPhysics()) {
         entity.SetVel(entity.GetVel() + GetVel()/MathHelper::GetVecLength(GetVel())*_knockBack);
+    }
+    if(MathHelper::RandFloat(0, 1) > _penetrationChance) {
+        _instantDie = true;
+        Die(ip, pManager, eManager, level);
     }
 }
 
@@ -188,4 +191,8 @@ bool Bullet::Die(IP& ip, ParticleManager& pManager, EntityManager& eManager, Lev
         _dying = true;
         _deadTimer.restart();
     }
+}
+
+void Bullet::SetPenetration(float p) {
+    _penetrationChance = p;
 }

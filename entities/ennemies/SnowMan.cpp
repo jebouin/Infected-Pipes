@@ -86,7 +86,7 @@ void SnowMan::Update(IP& ip, float eTime, Level& level, Character& character, En
             _ballTimer.restart();
             sf::Vector2f rp = (attdir ? sf::Vector2f(-2, -5) : sf::Vector2f(-8, 0));
             sf::Vector2f vel = MathHelper::Ang2Vec(MathHelper::Deg2Rad(attdir ? MathHelper::RandFloat(-40, -10) : MathHelper::RandFloat(190, 220))) * MathHelper::RandFloat(.2, .4);
-            Bullet *b = new Bullet(ip, "snowBallBullet", sf::IntRect(1, 1, 6, 6), getPosition()+rp, vel, 24, .1, false, true, true, true, false, true, false);
+            Bullet *b = new Bullet(ip, "snowBallBullet", sf::IntRect(1, 1, 6, 6), getPosition()+rp, vel, 24, .1, false, true, true, true, false, true, false, 0);
             bManager.AddBullet(b);
         }
         break;

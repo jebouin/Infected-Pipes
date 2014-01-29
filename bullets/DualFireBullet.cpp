@@ -7,7 +7,7 @@
 #include "MathHelper.h"
 
 DualFireBullet::DualFireBullet(IP& ip, sf::Vector2f position, sf::Vector2f vel, bool ennemy)
-    : Bullet(ip, "dualFireBullet", sf::IntRect(1, 1, 8, 5), position, vel, 42, .6, true, ennemy, false, true, false, true, false) {
+    : Bullet(ip, "dualFireBullet", sf::IntRect(1, 1, 8, 5), position, vel, 42, .6, true, ennemy, false, true, false, true, false, 0) {
 
 }
 

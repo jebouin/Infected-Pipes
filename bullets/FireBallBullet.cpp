@@ -9,7 +9,7 @@
 #include "Animation.h"
 #include "Particle.h"
 
-FireBallBullet::FireBallBullet(IP& ip, sf::Vector2f position, sf::Vector2f vel, bool ennemy) : Bullet(ip, "fireBallBullet", sf::IntRect(0, 0, 6, 8), position, vel, 30, .6, true, ennemy, false, true, false, true, false) {
+FireBallBullet::FireBallBullet(IP& ip, sf::Vector2f position, sf::Vector2f vel, bool ennemy) : Bullet(ip, "fireBallBullet", sf::IntRect(0, 0, 6, 8), position, vel, 30, .6, true, ennemy, false, true, false, true, false, 0) {
     AnimationTable& t(GetAnims());
     t.AddAnimation("anim", Animation(4, 100, sf::Vector2i(0, 0), sf::Vector2i(6, 8), true));
     t.SetAnimation("anim");

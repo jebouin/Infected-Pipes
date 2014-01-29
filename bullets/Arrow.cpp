@@ -7,7 +7,7 @@
 #include "MathHelper.h"
 
 Arrow::Arrow(IP& ip, sf::Vector2f position, sf::Vector2f vel, bool ennemy)
-    : Bullet(ip, "arrow", sf::IntRect(0, 1, 13, 3), position, vel, 160, .2, true, ennemy, true, false, true, true, false) {
+    : Bullet(ip, "arrow", sf::IntRect(0, 1, 13, 3), position, vel, 160, .2, true, ennemy, true, false, true, true, false, 0) {
 
 }
 

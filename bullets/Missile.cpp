@@ -10,7 +10,7 @@
 #include "Animation.h"
 
 Missile::Missile(IP& ip, sf::Vector2f position, sf::Vector2f vel, bool ennemy)
-    : Bullet(ip, "missile", sf::IntRect(1, 1, 6, 6), position, vel, 160, .5, true, ennemy, false, true, true, true, false) {
+    : Bullet(ip, "missile", sf::IntRect(1, 1, 6, 6), position, vel, 160, .5, true, ennemy, false, true, true, true, false, 0) {
     _prevPos = getPosition();
 }
 

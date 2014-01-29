@@ -7,8 +7,6 @@
 #include "SFML/System.hpp"
 #include "GameEntity.h"
 
-
-
 class IP;
 class Map;
 class Level;
@@ -57,6 +55,7 @@ class Character : public GameEntity {
     void SetJumpMultiplier(float mult);
     void SetReloadSpeedMultiplier(float mult);
     void SetDamageMultiplier(float mult);
+    void SetGroundAttackLevel(int lvl);
 
     private:
     int _level;
@@ -67,7 +66,9 @@ class Character : public GameEntity {
     bool _canContinueJump;
     sf::Clock _enterTimer;
     sf::Clock _regenTimer;
+    sf::Clock _groundAttackTimer;
     ArmType _curArmType;
+    float _prevVelY;
 
     //skills
     float _baseHP;
@@ -75,6 +76,7 @@ class Character : public GameEntity {
     float _baseSpeed;
     float _regen;
     float _baseJump;
+    int _groundAttackLevel;
 
     Weapon *_weapon;
     sf::Sprite _arm;

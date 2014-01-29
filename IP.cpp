@@ -182,6 +182,8 @@ void IP::LoadResources() {
     ResourceLoader::LoadTexture("gfx/dualFireBullet.png", "dualFireBullet");
     ResourceLoader::LoadTexture("gfx/boneBullet.png", "boneBullet");
     ResourceLoader::LoadTexture("gfx/missile.png", "missile");
+    ResourceLoader::LoadTexture("gfx/groundAttackBullet.png", "groundAttackBullet");
+    ResourceLoader::LoadTexture("gfx/bigGroundAttackBullet.png", "bigGroundAttackBullet");
 
     ResourceLoader::LoadTexture("gfx/blood0.png", "blood0");
     ResourceLoader::LoadTexture("gfx/blood1.png", "blood1");
@@ -224,6 +226,7 @@ void IP::LoadResources() {
     ResourceLoader::LoadTexture("gfx/fistUpParticle.png", "fistUpParticle");
     ResourceLoader::LoadTexture("gfx/littleImpact.png", "littleImpact");
     ResourceLoader::LoadTexture("gfx/missileSmoke.png", "missileSmoke");
+    ResourceLoader::LoadTexture("gfx/groundAttackParticle.png", "groundAttackParticle");
 
     ResourceLoader::LoadTexture("gfx/fir.png", "fir");
     ResourceLoader::LoadTexture("gfx/moon.png", "moon");

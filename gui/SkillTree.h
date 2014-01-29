@@ -12,7 +12,6 @@ class Player;
 
 class SkillTree {
     public:
-
     SkillTree(IP& ip);
     ~SkillTree();
     void Update(IP& ip, float eTime, Player& player);

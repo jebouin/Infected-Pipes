@@ -6,7 +6,7 @@
 #include "ParticleManager.h"
 #include "MathHelper.h"
 
-RockBullet::RockBullet(IP& ip, sf::Vector2f position, sf::Vector2f vel, bool ennemy) : Bullet(ip, "littleRockBullet", sf::IntRect(1, 0, 3, 4), position, vel, 2, .2, true, ennemy, true, false, false, true, true) {
+RockBullet::RockBullet(IP& ip, sf::Vector2f position, sf::Vector2f vel, bool ennemy) : Bullet(ip, "littleRockBullet", sf::IntRect(1, 0, 3, 4), position, vel, 2, .2, true, ennemy, true, false, false, true, true, 0) {
 
 }
 

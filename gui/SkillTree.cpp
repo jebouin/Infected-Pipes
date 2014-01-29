@@ -17,7 +17,7 @@ SkillTree::SkillTree(IP& ip) {
                                 "Increases jump height\nLevel 1: +15%\nLevel 2: +30%\nLevel 3: +50%",
                                 "Summons magical flies\nthat will heal you\nduring your adventure\nLevel 1: 1 fly\nLevel 2: 3 flies\nLevel 3: 8 flies",
                                 "Learn a powerful attack\nthat will damage enemies\nwhen falling on the ground",
-                                "Learn how to dash\n1 dash per level"};
+                                "Learn how to dash\n1 dash per level\nDouble press a key\nto dash"};
     for(int j=0 ; j<3 ; j++) {
         for(int i=0 ; i<3 ; i++) {
             Skill *skill = new Skill(ip,
@@ -103,7 +103,7 @@ void SkillTree::LearnSkill(Player& player, int id) {
     } else if(id == 6) {
 
     } else if(id == 7) {
-
+        character.SetGroundAttackLevel(level);
     } else if(id == 8) {
 
     }
