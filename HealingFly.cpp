@@ -66,7 +66,7 @@ void HealingFly::Update(IP& ip, float eTime, Level& level, ParticleManager& pMan
         if(_healingProgress >= 1) {
             _healing = false;
             _healingTimer.restart();
-            character.SetHP(character.GetHP() + 5);
+            character.Heal(ip, pManager, MathHelper::RandFloat(5, 7));
         } else {
             sf::Vector2f hpos = getPosition() + (character.getPosition() - getPosition())*_healingProgress;
             _heart.setPosition(hpos);
@@ -74,8 +74,6 @@ void HealingFly::Update(IP& ip, float eTime, Level& level, ParticleManager& pMan
     }
 
     setPosition(getPosition() + _vel*eTime);
-    cout << dist << endl;
-    cout << getPosition().x << " " << getPosition().y << endl;
 }
 
 void HealingFly::Draw(IP& ip) {

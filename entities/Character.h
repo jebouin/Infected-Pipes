@@ -60,6 +60,7 @@ class Character : public GameEntity {
     void SetGroundAttackLevel(int lvl);
     void AddFlies(IP& ip, int nb);
     int GetNbFlies();
+    void Heal(IP& ip, ParticleManager& pManager, float amount);
 
     private:
     int _level;

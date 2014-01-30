@@ -20,7 +20,7 @@
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1391113869 source:c:\users\xaychru04\desktop\infected pipes\ip.cpp
+1391114954 source:c:\users\xaychru04\desktop\infected pipes\ip.cpp
 	"IP.h"
 	"Renderer.h"
 	"ResourceLoader.h"
@@ -334,7 +334,7 @@
 	"Particle.h"
 	"Renderer.h"
 
-1389192199 source:c:\users\xaychru04\desktop\infected pipes\damageparticle.cpp
+1391114863 source:c:\users\xaychru04\desktop\infected pipes\damageparticle.cpp
 	"DamageParticle.h"
 	"IP.h"
 	"Animation.h"
@@ -827,7 +827,7 @@
 	"BulletManager.h"
 	"Renderer.h"
 
-1391113649 c:\users\xaychru04\desktop\infected pipes\entities\character.h
+1391114726 c:\users\xaychru04\desktop\infected pipes\entities\character.h
 	<vector>
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
@@ -850,7 +850,7 @@
 	"SFML/System.hpp"
 	"GameEntity.h"
 
-1391114023 source:c:\users\xaychru04\desktop\infected pipes\entities\character.cpp
+1391114743 source:c:\users\xaychru04\desktop\infected pipes\entities\character.cpp
 	"Character.h"
 	"IP.h"
 	"Animation.h"
@@ -875,6 +875,7 @@
 	"GroundAttackBullet.h"
 	"Map.h"
 	"HealingFly.h"
+	"HealingParticle.h"
 
 1390501827 source:c:\users\xaychru04\desktop\infected pipes\entities\ennemies\bat.cpp
 	"Bat.h"
@@ -2076,7 +2077,7 @@
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1391114085 source:c:\users\xaychru04\desktop\infected pipes\healingfly.cpp
+1391115211 source:c:\users\xaychru04\desktop\infected pipes\healingfly.cpp
 	"HealingFly.h"
 	"IP.h"
 	"Renderer.h"
@@ -2085,4 +2086,16 @@
 	"Animation.h"
 	"Character.h"
 	"MathHelper.h"
+
+1391114726 c:\users\xaychru04\desktop\infected pipes\healingparticle.h
+	"SFML/Graphics.hpp"
+	"SFML/System.hpp"
+	"Particle.h"
+
+1391114863 source:c:\users\xaychru04\desktop\infected pipes\healingparticle.cpp
+	"HealingParticle.h"
+	"ParticleManager.h"
+	"MathHelper.h"
+	"IP.h"
+	"Renderer.h"
 

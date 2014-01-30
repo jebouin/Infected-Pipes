@@ -22,6 +22,7 @@
 #include "GroundAttackBullet.h"
 #include "Map.h"
 #include "HealingFly.h"
+#include "HealingParticle.h"
 
 Character::Character(IP& ip) : GameEntity(ip, "character", sf::IntRect(4, 3, 7, 26), 20) {
     _arms[EMPTY] = Arm {sf::IntRect(0, 0, 6, 9), sf::Vector2f(2, 1), sf::Vector2f(5, 6), 0};
@@ -405,4 +406,9 @@ void Character::AddFlies(IP& ip, int nb) {
 
 int Character::GetNbFlies() {
     return _flies.size();
+}
+
+void Character::Heal(IP& ip, ParticleManager& pManager, float amount) {
+    SetHP(GetHP() + amount);
+    pManager.AddParticle(new HealingParticle(ip, amount, getPosition()));
 }
