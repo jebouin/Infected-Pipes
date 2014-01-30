@@ -18,6 +18,7 @@ class Weapon;
 class Bow;
 class GUI;
 class Player;
+class HealingFly;
 
 struct Arm {
     sf::IntRect _textureRect;
@@ -34,6 +35,7 @@ class Character : public GameEntity {
     virtual ~Character();
     void Update(IP& ip, float eTime, Level& level, EntityManager& eManager, ParticleManager& pManager, BulletManager& bManager, Player& player);
     void Draw(IP& ip);
+    void DrawFront(IP& ip);
     void LoadArm(ArmType t);
     void GoLeft(float eTime);
     void GoRight(float eTime);
@@ -56,6 +58,8 @@ class Character : public GameEntity {
     void SetReloadSpeedMultiplier(float mult);
     void SetDamageMultiplier(float mult);
     void SetGroundAttackLevel(int lvl);
+    void AddFlies(IP& ip, int nb);
+    int GetNbFlies();
 
     private:
     int _level;
@@ -77,6 +81,7 @@ class Character : public GameEntity {
     float _regen;
     float _baseJump;
     int _groundAttackLevel;
+    vector<HealingFly*> _flies;
 
     Weapon *_weapon;
     sf::Sprite _arm;

@@ -40,7 +40,8 @@ Level::Level(IP& ip, Player& player, ParticleManager& pManager) {
     _background = 0;
     _difficulty = 2;
     Load(ip, "rockyCave", player, pManager);
-    character.setPosition(character.getPosition() + sf::Vector2f(0, 50));
+    //character.setPosition(character.getPosition() + sf::Vector2f(0, 50));
+    character.LeavePipe();
     _lavaTexture.create(/*_map->GetSize().x*/64*16, /*_map->GetSize().y*/38*16);
     _lavaShader.loadFromFile("shaders/lava.frag", sf::Shader::Fragment);
     _flakes = new SnowFlakes(ip);

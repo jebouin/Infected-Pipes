@@ -48,7 +48,7 @@ void SkillTree::Update(IP& ip, float eTime, Player& player) {
         skill->Update(ip, eTime);
         if(skill->GetIcon().IsDoubleClicked()) {
             skill->LevelUp();
-            LearnSkill(player, i);
+            LearnSkill(ip, player, i);
             if(i/3 < 2) {
                 _skills[i+3]->Unhide();
             }
@@ -65,7 +65,7 @@ void SkillTree::Draw(IP& ip) {
     }
 }
 
-void SkillTree::LearnSkill(Player& player, int id) {
+void SkillTree::LearnSkill(IP& ip, Player& player, int id) {
     Character& character(player.GetCharacter());
     Skill* skill(_skills[id]);
     int level(skill->GetLevel());
@@ -101,7 +101,13 @@ void SkillTree::LearnSkill(Player& player, int id) {
             character.SetJumpMultiplier(1.5);
         }
     } else if(id == 6) {
-
+        if(level == 1) {
+            character.AddFlies(ip, 1-character.GetNbFlies());
+        } else if(level == 2) {
+            character.AddFlies(ip, 3-character.GetNbFlies());
+        } else if(level == 3) {
+            character.AddFlies(ip, 8-character.GetNbFlies());
+        }
     } else if(id == 7) {
         character.SetGroundAttackLevel(level);
     } else if(id == 8) {

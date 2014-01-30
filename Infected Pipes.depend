@@ -7,7 +7,7 @@
 	"SFML/System.hpp"
 	"IP.h"
 
-1389525755 source:c:\users\xaychru04\desktop\infected pipes\renderer.cpp
+1391113411 source:c:\users\xaychru04\desktop\infected pipes\renderer.cpp
 	"Renderer.h"
 	"IP.h"
 
@@ -20,7 +20,7 @@
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1391026220 source:c:\users\xaychru04\desktop\infected pipes\ip.cpp
+1391113869 source:c:\users\xaychru04\desktop\infected pipes\ip.cpp
 	"IP.h"
 	"Renderer.h"
 	"ResourceLoader.h"
@@ -142,7 +142,7 @@
 	"DamageParticle.h"
 	"WaterField.h"
 
-1390929561 source:c:\users\xaychru04\desktop\infected pipes\player.cpp
+1391106680 source:c:\users\xaychru04\desktop\infected pipes\player.cpp
 	"Player.h"
 	"IP.h"
 	"Character.h"
@@ -157,7 +157,7 @@
 	"Camera.h"
 	"SkillTree.h"
 
-1390732159 c:\users\xaychru04\desktop\infected pipes\player.h
+1391106680 c:\users\xaychru04\desktop\infected pipes\player.h
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
@@ -172,7 +172,7 @@
 	"IP.h"
 	"Renderer.h"
 
-1390729635 source:c:\users\xaychru04\desktop\infected pipes\level.cpp
+1391104635 source:c:\users\xaychru04\desktop\infected pipes\level.cpp
 	"Level.h"
 	"IP.h"
 	"Map.h"
@@ -669,7 +669,7 @@
 	<vector>
 	<iostream>
 
-1390769142 source:c:\users\xaychru04\desktop\infected pipes\scenes\game.cpp
+1391106680 source:c:\users\xaychru04\desktop\infected pipes\scenes\game.cpp
 	"Game.h"
 	"IP.h"
 	"Level.h"
@@ -827,7 +827,7 @@
 	"BulletManager.h"
 	"Renderer.h"
 
-1391018958 c:\users\xaychru04\desktop\infected pipes\entities\character.h
+1391113649 c:\users\xaychru04\desktop\infected pipes\entities\character.h
 	<vector>
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
@@ -850,7 +850,7 @@
 	"SFML/System.hpp"
 	"GameEntity.h"
 
-1391027042 source:c:\users\xaychru04\desktop\infected pipes\entities\character.cpp
+1391114023 source:c:\users\xaychru04\desktop\infected pipes\entities\character.cpp
 	"Character.h"
 	"IP.h"
 	"Animation.h"
@@ -874,6 +874,7 @@
 	"ElectricGun.h"
 	"GroundAttackBullet.h"
 	"Map.h"
+	"HealingFly.h"
 
 1390501827 source:c:\users\xaychru04\desktop\infected pipes\entities\ennemies\bat.cpp
 	"Bat.h"
@@ -1257,7 +1258,7 @@
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1391025327 source:c:\users\xaychru04\desktop\infected pipes\bullets\gunbullet.cpp
+1391112161 source:c:\users\xaychru04\desktop\infected pipes\bullets\gunbullet.cpp
 	"GunBullet.h"
 	"IP.h"
 	"Character.h"
@@ -1721,7 +1722,7 @@
 	"SFML/System.hpp"
 	"Weapon.h"
 
-1391007132 source:c:\users\xaychru04\desktop\infected pipes\weapons\machinegun.cpp
+1391112303 source:c:\users\xaychru04\desktop\infected pipes\weapons\machinegun.cpp
 	"MachineGun.h"
 	"IP.h"
 	"GameEntity.h"
@@ -2040,7 +2041,7 @@
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1391017507 source:c:\users\xaychru04\desktop\infected pipes\gui\skilltree.cpp
+1391113793 source:c:\users\xaychru04\desktop\infected pipes\gui\skilltree.cpp
 	"SkillTree.h"
 	"IP.h"
 	"Skill.h"
@@ -2049,7 +2050,7 @@
 	"Player.h"
 	"Character.h"
 
-1391015511 c:\users\xaychru04\desktop\infected pipes\gui\skilltree.h
+1391113788 c:\users\xaychru04\desktop\infected pipes\gui\skilltree.h
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
@@ -2069,4 +2070,19 @@
 	"AnimationTable.h"
 	"Animation.h"
 	"Particle.h"
+
+1391111584 c:\users\xaychru04\desktop\infected pipes\healingfly.h
+	<iostream>
+	"SFML/Graphics.hpp"
+	"SFML/System.hpp"
+
+1391114085 source:c:\users\xaychru04\desktop\infected pipes\healingfly.cpp
+	"HealingFly.h"
+	"IP.h"
+	"Renderer.h"
+	"ResourceLoader.h"
+	"AnimationTable.h"
+	"Animation.h"
+	"Character.h"
+	"MathHelper.h"
 

@@ -89,6 +89,7 @@ void Game::Draw(IP& ip) {
     _particleManager->DrawBack(ip);
     _bulletManager->Draw(ip);
     _level->DrawFront(ip, _player->GetView());
+    _player->DrawFront(ip);
     _speechManager->Draw(ip);
     _particleManager->DrawFront(ip);
 

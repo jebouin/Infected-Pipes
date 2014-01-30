@@ -67,6 +67,10 @@ void Player::Draw(IP& ip) {
     _character->Draw(ip);
 }
 
+void Player::DrawFront(IP& ip) {
+    _character->DrawFront(ip);
+}
+
 sf::View& Player::GetView() {
     return *_camera;
 }

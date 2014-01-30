@@ -21,6 +21,7 @@
 #include "ElectricGun.h"
 #include "GroundAttackBullet.h"
 #include "Map.h"
+#include "HealingFly.h"
 
 Character::Character(IP& ip) : GameEntity(ip, "character", sf::IntRect(4, 3, 7, 26), 20) {
     _arms[EMPTY] = Arm {sf::IntRect(0, 0, 6, 9), sf::Vector2f(2, 1), sf::Vector2f(5, 6), 0};
@@ -63,6 +64,10 @@ Character::Character(IP& ip) : GameEntity(ip, "character", sf::IntRect(4, 3, 7, 
 Character::~Character() {
     delete _weapon;
     _weapon = 0;
+    for(int i=0 ; i<_flies.size() ; i++) {
+        delete _flies[i];
+        _flies[i] = 0;
+    }
 }
 
 void Character::Update(IP& ip, float eTime, Level& level, EntityManager& eManager, ParticleManager& pManager, BulletManager& bManager, Player& player) {
@@ -197,6 +202,13 @@ void Character::Update(IP& ip, float eTime, Level& level, EntityManager& eManage
         }
     }
 
+    for(int i=0 ; i<_flies.size() ; i++) {
+        _flies[i]->Update(ip, eTime, level, pManager, *this);
+        if(_leavingPipe) {
+            _flies[i]->setPosition(getPosition());
+        }
+    }
+
     _prevVelY = GetVel().y;
 }
 
@@ -204,6 +216,12 @@ void Character::Draw(IP& ip) {
     GameEntity::Draw(ip);
     _weapon->Draw(ip);
     ip._renderer->Draw(_arm);
+}
+
+void Character::DrawFront(IP& ip) {
+    for(int i=0 ; i<_flies.size() ; i++) {
+        _flies[i]->Draw(ip);
+    }
 }
 
 void Character::LoadArm(ArmType t) {
@@ -376,4 +394,15 @@ void Character::SetDamageMultiplier(float mult) {
 
 void Character::SetGroundAttackLevel(int lvl) {
     _groundAttackLevel = lvl;
+}
+
+void Character::AddFlies(IP& ip, int nb) {
+    for(int i=0 ; i<nb ; i++) {
+        _flies.push_back(new HealingFly(ip));
+        _flies[_flies.size()-1]->setPosition(getPosition() + sf::Vector2f(.1, .1));
+    }
+}
+
+int Character::GetNbFlies() {
+    return _flies.size();
 }

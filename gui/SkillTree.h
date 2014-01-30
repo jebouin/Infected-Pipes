@@ -16,7 +16,7 @@ class SkillTree {
     ~SkillTree();
     void Update(IP& ip, float eTime, Player& player);
     void Draw(IP& ip);
-    void LearnSkill(Player& player, int id);
+    void LearnSkill(IP& ip, Player& player, int id);
 
     private:
     vector<Skill*> _skills;
