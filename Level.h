@@ -24,6 +24,7 @@ class GUI;
 class Stalactite;
 class SnowFlakes;
 class Player;
+class WaterGrass;
 
 struct LevelInfo {
     std::string _imageName;
@@ -63,6 +64,7 @@ class Level {
     std::vector<sf::Image> _levelImages;
     Spawner *_spawner;
     Grass *_grass;
+    WaterGrass *_waterGrass;
     Background *_background;
     std::string _curLevel;
     std::map<std::string, LevelInfo> _levelInfos;

@@ -23,6 +23,7 @@
 #include "Stalactite.h"
 #include "Snowflakes.h"
 #include "Player.h"
+#include "WaterGrass.h"
 
 Level::Level(IP& ip, Player& player, ParticleManager& pManager) {
     Character& character(player.GetCharacter());
@@ -38,6 +39,7 @@ Level::Level(IP& ip, Player& player, ParticleManager& pManager) {
     _map = 0;
     _spawner = 0;
     _grass = 0;
+    _waterGrass = 0;
     _background = 0;
     _difficulty = 2;
     Load(ip, "waterCave", player, pManager);
@@ -55,6 +57,8 @@ Level::~Level() {
     _spawner = 0;
     delete _grass;
     _grass = 0;
+    delete _waterGrass;
+    _waterGrass = 0;
     delete _background;
     _background = 0;
     for(int i=0 ; i<_chests.size() ; i++) {
@@ -90,6 +94,7 @@ void Level::Update(IP& ip, EntityManager& eManager, Player& player, float eTime,
     Character& character(player.GetCharacter());
     _spawner->Update(ip, eTime, eManager, *this, character, gui);
     _grass->Update(ip);
+    _waterGrass->Update(ip);
     _background->Update(ip, eTime);
     for(int i=0 ; i<_chests.size() ; i++) {
         _chests[i]->Update(ip, eTime, *this, pManager);
@@ -154,6 +159,7 @@ void Level::DrawFront(IP& ip, sf::View& prevView) {
     ip._renderer->Draw(spt, &_lavaShader);
 
     _spawner->Draw(ip);
+    _waterGrass->Draw(ip._renderer->GetTexture());
     _map->DrawLayer(ip._renderer->GetTexture(), Map::FRONT);
     _grass->Draw(ip._renderer->GetTexture());
 }
@@ -380,6 +386,8 @@ void Level::Load(IP& ip, std::string name, Player& player, ParticleManager& pMan
     _background = new Background(ip, _levelInfos[name]._backgroundName, _levelInfos[name]._backgroundZoom, *_map);
     delete _grass;
     _grass = new Grass(ip, *_map);
+    delete _waterGrass;
+    _waterGrass = new WaterGrass(ip, *_map);
     for(int i=0 ; i<_chests.size() ; i++) {
         delete _chests[i];
         _chests[i] = 0;
