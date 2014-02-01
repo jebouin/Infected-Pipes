@@ -21,7 +21,7 @@ struct Spring {
 
 class WaterField {
     public:
-    WaterField(sf::FloatRect rect, float resolution, bool surface, bool lava, bool limited);
+    WaterField(sf::FloatRect rect, float resolution, bool surface, bool lava, bool limited, bool dark);
     ~WaterField();
     void Update(IP& ip, float elapsedTime, ParticleManager& pManager);
     void Draw(IP& ip, sf::RenderTexture& rt);

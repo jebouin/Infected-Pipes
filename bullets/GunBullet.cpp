@@ -21,6 +21,10 @@ GunBullet::~GunBullet() {
 
 void GunBullet::Update(IP& ip, float eTime, Level& level, Character& character, ParticleManager& pManager, EntityManager& eManager) {
     Bullet::Update(ip, eTime, level, character, pManager, eManager);
+    sf::Vector2f v(GetVel());
+    if(v.x*v.x+v.y*v.y < .001) {
+        Die(ip, pManager, eManager, level);
+    }
 }
 
 void GunBullet::Draw(IP& ip) {

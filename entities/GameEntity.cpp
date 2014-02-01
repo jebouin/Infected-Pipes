@@ -56,7 +56,7 @@ void GameEntity::Update(IP& ip, float elapsedTime, Level& level, EntityManager& 
         if(!_inWater) {
             Accelerate(sf::Vector2f(0, 0.003), elapsedTime);
         } else {
-            Accelerate(sf::Vector2f(0, 0.001), elapsedTime);
+            Accelerate(sf::Vector2f(0, 0.002), elapsedTime);
         }
     } else {
         Accelerate(sf::Vector2f(0, -0.008*GetVel().y), elapsedTime);

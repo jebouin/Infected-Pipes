@@ -153,6 +153,7 @@ void IP::LoadResources() {
     ResourceLoader::LoadTexture("gfx/igloo.png", "igloo");
     ResourceLoader::LoadTexture("gfx/stalactite.png", "stalactite");
     ResourceLoader::LoadTexture("gfx/healingFly.png", "healingFly");
+    ResourceLoader::LoadTexture("gfx/waterPlants.png", "waterPlants");
 
     ResourceLoader::LoadTexture("gfx/pipe.png", "pipe");
     ResourceLoader::LoadTexture("gfx/zombie.png", "zombie");
@@ -164,6 +165,8 @@ void IP::LoadResources() {
     ResourceLoader::LoadTexture("gfx/iceBackground2.png", "iceBackground2");
     ResourceLoader::LoadTexture("gfx/forestBackground.png", "forestBackground");
     ResourceLoader::LoadTexture("gfx/mountainBackground.png", "mountainBackground");
+    ResourceLoader::LoadTexture("gfx/waterBackground.png", "waterBackground");
+    ResourceLoader::LoadTexture("gfx/waterBackground2.png", "waterBackground2");
 
     ResourceLoader::LoadTexture("gfx/lifeBar.png", "lifeBar");
     ResourceLoader::LoadTexture("gfx/lifeBarBorder.png", "lifeBarBorder");

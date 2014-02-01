@@ -5,7 +5,7 @@
 #include "Particle.h"
 #include "MathHelper.h"
 
-WaterField::WaterField(sf::FloatRect rect, float resolution, bool surface, bool lava, bool limited) {
+WaterField::WaterField(sf::FloatRect rect, float resolution, bool surface, bool lava, bool limited, bool dark) {
     _rect = rect;
     _surface = surface;
     _nbPoints = rect.width/resolution;
@@ -20,6 +20,10 @@ WaterField::WaterField(sf::FloatRect rect, float resolution, bool surface, bool 
     sf::Color lavaTopC(183, 153, 78, 255);
     sf::Color lavaC(142, 90, 27, 255);
     sf::Color lavaDownC(142, 90, 27, 255);
+    if(dark) {
+        waterC = sf::Color(67, 82, 101, 80);
+        waterDownC = sf::Color(67, 82, 101, 80);
+    }
     _topc = (_lava ? lavaTopC : waterTopC);
     _c = (_lava ? lavaC : waterC);
     _downc = (_lava ? lavaDownC : waterDownC);

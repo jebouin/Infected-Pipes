@@ -20,7 +20,7 @@
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1391270120 source:c:\users\xaychru04\desktop\infected pipes\ip.cpp
+1391277430 source:c:\users\xaychru04\desktop\infected pipes\ip.cpp
 	"IP.h"
 	"Renderer.h"
 	"ResourceLoader.h"
@@ -172,7 +172,7 @@
 	"IP.h"
 	"Renderer.h"
 
-1391273136 source:c:\users\xaychru04\desktop\infected pipes\level.cpp
+1391288667 source:c:\users\xaychru04\desktop\infected pipes\level.cpp
 	"Level.h"
 	"IP.h"
 	"Map.h"
@@ -235,7 +235,7 @@
 	"ResourceLoader.h"
 	"MathHelper.h"
 
-1390582845 source:c:\users\xaychru04\desktop\infected pipes\background.cpp
+1391274733 source:c:\users\xaychru04\desktop\infected pipes\background.cpp
 	"Background.h"
 	"IP.h"
 	"ResourceLoader.h"
@@ -653,13 +653,13 @@
 	"SFML/System.hpp"
 	"Bullet.h"
 
-1389128924 c:\users\xaychru04\desktop\infected pipes\waterfield.h
+1391276480 c:\users\xaychru04\desktop\infected pipes\waterfield.h
 	<vector>
 	<SFML/System.hpp>
 	<SFML/Graphics.hpp>
 	<SFML/Window.hpp>
 
-1390499624 source:c:\users\xaychru04\desktop\infected pipes\waterfield.cpp
+1391276652 source:c:\users\xaychru04\desktop\infected pipes\waterfield.cpp
 	"WaterField.h"
 	"IP.h"
 	"Renderer.h"
@@ -852,7 +852,7 @@
 	"SFML/System.hpp"
 	"GameEntity.h"
 
-1391272940 source:c:\users\xaychru04\desktop\infected pipes\entities\character.cpp
+1391289372 source:c:\users\xaychru04\desktop\infected pipes\entities\character.cpp
 	"Character.h"
 	"IP.h"
 	"Animation.h"
@@ -879,6 +879,7 @@
 	"HealingFly.h"
 	"HealingParticle.h"
 	"Bubble.h"
+	"WaterField.h"
 
 1390501827 source:c:\users\xaychru04\desktop\infected pipes\entities\ennemies\bat.cpp
 	"Bat.h"
@@ -1082,7 +1083,7 @@
 	"ParticleManager.h"
 	"BulletManager.h"
 
-1391025795 source:c:\users\xaychru04\desktop\infected pipes\entities\gameentity.cpp
+1391285282 source:c:\users\xaychru04\desktop\infected pipes\entities\gameentity.cpp
 	"GameEntity.h"
 	"Level.h"
 	"Map.h"
@@ -1262,7 +1263,7 @@
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 
-1391112161 source:c:\users\xaychru04\desktop\infected pipes\bullets\gunbullet.cpp
+1391289082 source:c:\users\xaychru04\desktop\infected pipes\bullets\gunbullet.cpp
 	"GunBullet.h"
 	"IP.h"
 	"Character.h"
@@ -2115,7 +2116,7 @@
 	"Renderer.h"
 	"MathHelper.h"
 
-1391273077 source:c:\users\xaychru04\desktop\infected pipes\bubble.cpp
+1391278353 source:c:\users\xaychru04\desktop\infected pipes\bubble.cpp
 	"Bubble.h"
 	"IP.h"
 	"Level.h"

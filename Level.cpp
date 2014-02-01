@@ -34,7 +34,7 @@ Level::Level(IP& ip, Player& player, ParticleManager& pManager) {
     _levelInfos["miniBoss2"] = LevelInfo{"miniBoss2", "rockyBackground", 0.2f, false, false, false};
     _levelInfos["miniBoss3"] = LevelInfo{"miniBoss3", "lavaBackground", 0.3f, true, false, false};
     _levelInfos["wetCave"] = LevelInfo{"level2", "rockyBackground", 0.2f, true, true, false};
-    _levelInfos["waterCave"] = LevelInfo{"waterLevel", "rockyBackground", 0.2f, false, false, false};
+    _levelInfos["waterCave"] = LevelInfo{"waterLevel", "waterBackground", 0.3f, false, false, false};
     _levelInfos["lavaCave"] = LevelInfo{"level3", "lavaBackground", 0.3f, true, false, true};
     _levelInfos["iceCave"] = LevelInfo{"level4", "iceBackground", 0.3f, false, false, false};
     _map = 0;
@@ -239,6 +239,7 @@ void Level::Load(IP& ip, std::string name, Player& player, ParticleManager& pMan
         _bubbles[i] = 0;
     }
     _bubbles.clear();
+    _backSprites.clear();
 
     sf::Vector2f charPos;
     //first pass to load single tiles
@@ -287,6 +288,12 @@ void Level::Load(IP& ip, std::string name, Player& player, ParticleManager& pMan
                 } else if(c == sf::Color(204, 220, 224)) {
                     Stalactite *s = new Stalactite(pos);
                     _stalactites.push_back(s);
+                } else if(c == sf::Color(99, 40, 40)) {
+                    //water plant
+                    sf::Sprite s(ResourceLoader::GetTexture("waterPlants"));
+                    s.setTextureRect(sf::IntRect(rand()%3*16, 0, 16, 16));
+                    s.setPosition(sf::Vector2f(sf::Vector2i(sf::Vector2f(pos*16) + sf::Vector2f(0, 2))));
+                    _backSprites.push_back(s);
                 } else if(c == sf::Color(106, 129, 193)) {
                     _map->SetTile(pos, 0, l);
                 } else if(c == sf::Color(255, 255, 255)) {
@@ -334,7 +341,7 @@ void Level::Load(IP& ip, std::string name, Player& player, ParticleManager& pMan
                     isLimited = false;
                     fluidRect.height = 12*16;
                 }
-                _waterFields.push_back(new WaterField(fluidRect, isLava?4:2, true, isLava, isLimited));
+                _waterFields.push_back(new WaterField(fluidRect, isLava?4:2, true, isLava, isLimited, false));
                 if(_levelInfos[name]._addDucks) {
                     sf::FloatRect rect(_waterFields[GetNbWaterFields()-1]->GetRect());
                     int nbDucks = (int)(MathHelper::RandFloat(0, 1)*MathHelper::RandFloat(0, 1)*((float)s.x/3.f));
@@ -353,7 +360,7 @@ void Level::Load(IP& ip, std::string name, Player& player, ParticleManager& pMan
                         offsets[i] = 2;
                     }
                 }
-                _waterFields.push_back(new WaterField(sf::FloatRect(i*16-offsets[0], j*16-offsets[2], 16+offsets[0]+offsets[1], 16+offsets[2]+offsets[3]), 2, false, _levelImages[1].getPixel(i, j)==lavaC, true));
+                _waterFields.push_back(new WaterField(sf::FloatRect(i*16-offsets[0], j*16-offsets[2], 16+offsets[0]+offsets[1], 16+offsets[2]+offsets[3]), 2, false, _levelImages[1].getPixel(i, j)==lavaC, true, _curLevel=="waterCave"));
             }
             //falls
             if(_levelImages[0].getPixel(i, j) == waterFallC) {
@@ -469,6 +476,8 @@ void Level::NextLevel(IP& ip, EntityManager& eManager, BulletManager& bManager, 
     } else if(_curLevel == "wetCave") {
         toLoad = "miniBoss2";
     } else if(_curLevel == "miniBoss2") {
+        toLoad = "waterCave";
+    } else if(_curLevel == "waterCave") {
         toLoad = "lavaCave";
     } else if(_curLevel == "lavaCave") {
         toLoad = "miniBoss3";

@@ -24,6 +24,7 @@
 #include "HealingFly.h"
 #include "HealingParticle.h"
 #include "Bubble.h"
+#include "WaterField.h"
 
 Character::Character(IP& ip) : GameEntity(ip, "character", sf::IntRect(4, 3, 7, 26), 20) {
     _arms[EMPTY] = Arm {sf::IntRect(0, 0, 6, 9), sf::Vector2f(2, 1), sf::Vector2f(5, 6), 0};
@@ -217,7 +218,7 @@ void Character::Update(IP& ip, float eTime, Level& level, EntityManager& eManage
         if(_bubbleTimer.getElapsedTime().asMilliseconds() >= _bubbleTime) {
             _bubbleTimer.restart();
             _bubbleTime = MathHelper::RandFloat(400, 900);
-            level.AddBubble(new Bubble(ip, level.GetMap(), getPosition()+sf::Vector2f(4 * (GetDir() ? 1 : -1), -10), MathHelper::RandFloat(2000, 3000), MathHelper::RandFloat(2, 5), -MathHelper::RandFloat(.009, .013)));
+            level.AddBubble(new Bubble(ip, level.GetMap(), getPosition()+sf::Vector2f(4 * (GetDir() ? 1 : -1), -10), (rand()%2 ? -1 : 1)*MathHelper::RandFloat(2000, 3000), MathHelper::RandFloat(2, 5), -MathHelper::RandFloat(.013, .016)));
         }
     }
 }
@@ -255,8 +256,24 @@ void Character::GoRight(float eTime) {
 }
 
 void Character::Jump(Level& level, float eTime) {
-    if(GameEntity::Jump(level)) {
-        _canContinueJump = true;
+    bool jump = true;
+    if(_inWater) {
+        //see if top out of water
+        sf::Vector2f tp(getPosition().x, GetGlobalUpperLeftPos().y);
+        for(int i=0 ; i<level.GetNbWaterFields() ; i++) {
+            WaterField& wf(level.GetWaterField(i));
+            if(wf.GetRect().contains(tp)) {
+                jump = false;
+                break;
+            }
+        }
+    }
+    if(jump) {
+        if(GameEntity::Jump(level)) {
+            _canContinueJump = true;
+        }
+    } else {
+        Accelerate(sf::Vector2f(0, -.006f), eTime);
     }
 }
 

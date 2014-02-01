@@ -63,6 +63,9 @@ Background::Background(IP& ip, std::string name, float zoom, Map& map) {
         _forest.setTexture(ResourceLoader::GetTexture("forestBackground"));
         _mountains.setTexture(ResourceLoader::GetTexture("mountainBackground"));
     }
+    if(_name == "waterBackground") {
+        _back2.setTexture(ResourceLoader::GetTexture("waterBackground2"));
+    }
 }
 
 Background::~Background() {
@@ -91,7 +94,7 @@ void Background::Draw(sf::RenderTexture& rt, const sf::View& prevView) {
     _view = sf::View(sf::FloatRect(0, 0, rt.getSize().x, rt.getSize().y));
 
     _view.setCenter(prevView.getCenter()*_zoom + sf::Vector2f(rt.getSize().x, rt.getSize().y)/2.f);
-    if(_name == "lavaBackground" || _name == "iceBackground") {
+    if(_name == "lavaBackground" || _name == "iceBackground" || _name == "waterBackground") {
         _view.setCenter(sf::Vector2f(_view.getCenter().x / 2.f, _view.getCenter().y / 2.f));
         rt.setView(_view);
         sf::FloatRect r2 = MathHelper::View2Rect(_view);

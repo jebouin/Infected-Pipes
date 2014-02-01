@@ -20,7 +20,7 @@ Bubble::Bubble(IP& ip, Map& map)
     _timer = MathHelper::RandFloat(0, 2000);
     _period = 3000;
     _amp = 4;
-    _yspd = -.01;
+    _yspd = -.015;
     _xspd = MathHelper::RandFloat(-.005, .005);
 }
 
