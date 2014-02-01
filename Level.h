@@ -25,6 +25,7 @@ class Stalactite;
 class SnowFlakes;
 class Player;
 class WaterGrass;
+class Bubble;
 
 struct LevelInfo {
     std::string _imageName;
@@ -58,6 +59,7 @@ class Level {
 
     private:
     sf::Clock _timer;
+    sf::Clock _bubbleTimer;
     sf::Vector2i GetRectSizeInImageAt(sf::Image& img, sf::Vector2i pos, sf::Color c);
 
     Map *_map;
@@ -76,6 +78,7 @@ class Level {
     std::vector<GameEntity*> _passiveEntities;
     std::vector<sf::Sprite> _backSprites;
     std::vector<Stalactite*> _stalactites;
+    std::vector<Bubble*> _bubbles;
     SnowFlakes *_flakes;
 
     sf::RenderTexture _lavaTexture;

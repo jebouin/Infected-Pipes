@@ -230,6 +230,7 @@ void IP::LoadResources() {
     ResourceLoader::LoadTexture("gfx/littleImpact.png", "littleImpact");
     ResourceLoader::LoadTexture("gfx/missileSmoke.png", "missileSmoke");
     ResourceLoader::LoadTexture("gfx/groundAttackParticle.png", "groundAttackParticle");
+    ResourceLoader::LoadTexture("gfx/bubble.png", "bubble");
 
     ResourceLoader::LoadTexture("gfx/fir.png", "fir");
     ResourceLoader::LoadTexture("gfx/moon.png", "moon");

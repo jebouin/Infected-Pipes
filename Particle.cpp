@@ -6,7 +6,7 @@
 #include "Spawner.h"
 #include "Renderer.h"
 
-Particle::Particle(IP& ip, std::string name, sf::Vector2f pos, sf::Vector2f velocity, float rotVel, float lifeTime, sf::Vector2f startScale, sf::Vector2f endScale, float startAlpha, float endAlpha, bool gravity, bool collision, bool animated, sf::IntRect hitbox, bool zFront)
+Particle::Particle(IP& ip, std::string name, sf::Vector2f pos, sf::Vector2f velocity, float rotVel, float lifeTime, sf::Vector2f startScale, sf::Vector2f endScale, float startAlpha, float endAlpha, bool gravity, bool collision, bool animated, sf::IntRect hitbox, bool zFront, bool dieOnWall)
     : MovingSprite(ip, name, hitbox, animated) {
     _alive = true;
     _gravity = gravity;
@@ -21,6 +21,7 @@ Particle::Particle(IP& ip, std::string name, sf::Vector2f pos, sf::Vector2f velo
     _startAlpha = startAlpha;
     _endAlpha = endAlpha;
     setOrigin(sf::Vector2f(getTextureRect().width, getTextureRect().height)/2.f);
+    _dieOnWall = dieOnWall;
 }
 
 Particle::~Particle() {
@@ -74,6 +75,12 @@ void Particle::Update(IP& ip, float eTime, Level& level, ParticleManager& pManag
             SetVel(sf::Vector2f(GetVel().x, -GetVel().y));
         }
     }*/
+
+    if(_dieOnWall) {
+        if(level.GetMap().IsCollided(*this, Map::WALL)) {
+            _alive = false;
+        }
+    }
 }
 
 void Particle::Draw(IP& ip) {

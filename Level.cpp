@@ -24,6 +24,7 @@
 #include "Snowflakes.h"
 #include "Player.h"
 #include "WaterGrass.h"
+#include "Bubble.h"
 
 Level::Level(IP& ip, Player& player, ParticleManager& pManager) {
     Character& character(player.GetCharacter());
@@ -86,6 +87,11 @@ Level::~Level() {
         _stalactites[i] = 0;
     }
     _stalactites.clear();
+    for(int i=0 ; i<_bubbles.size() ; i++) {
+        delete _bubbles[i];
+        _bubbles[i] = 0;
+    }
+    _bubbles.clear();
     delete _flakes;
     _flakes = 0;
 }
@@ -111,6 +117,15 @@ void Level::Update(IP& ip, EntityManager& eManager, Player& player, float eTime,
     for(int i=0 ; i<_stalactites.size() ; i++) {
         _stalactites[i]->Update(ip, eTime, *this, character, pManager, eManager);
     }
+    for(int i=0 ; i<_bubbles.size() ; i++) {
+        _bubbles[i]->Update(ip, eTime, *this);
+        if(!_bubbles[i]->IsAlive()) {
+            delete _bubbles[i];
+            _bubbles[i] = 0;
+            _bubbles.erase(_bubbles.begin() + i);
+            i--;
+        }
+    }
     if((_curLevel == "miniBoss1" || _curLevel == "miniBoss2" || _curLevel == "miniBoss3") && _spawner->IsFinished()) {
         NextLevel(ip, eManager, bManager, player, pManager);
         character.LeavePipe();
@@ -119,6 +134,13 @@ void Level::Update(IP& ip, EntityManager& eManager, Player& player, float eTime,
     //snow!
     if(_curLevel == "iceCave") {
         _flakes->Update(ip, eTime, *this, pManager, prevView);
+    }
+
+    //bubbles!
+    float bTime(10000.f / _map->GetSize().x);
+    if(_bubbleTimer.getElapsedTime().asMilliseconds() >= bTime) {
+        _bubbleTimer.restart();
+        _bubbles.push_back(new Bubble(ip, *_map));
     }
 }
 
@@ -140,6 +162,9 @@ void Level::DrawBack(IP& ip, sf::View& prevView) {
     }
     for(int i=0 ; i<_backSprites.size() ; i++) {
         ip._renderer->Draw(_backSprites[i]);
+    }
+    for(int i=0 ; i<_bubbles.size() ; i++) {
+        _bubbles[i]->Draw(ip);
     }
     for(int i=0 ; i<_stalactites.size() ; i++) {
         _stalactites[i]->Draw(ip);
@@ -204,6 +229,16 @@ void Level::Load(IP& ip, std::string name, Player& player, ParticleManager& pMan
         _passiveEntities[i] = 0;
     }
     _passiveEntities.clear();
+    for(int i=0 ; i<_stalactites.size() ; i++) {
+        delete _stalactites[i];
+        _stalactites[i] = 0;
+    }
+    _stalactites.clear();
+    for(int i=0 ; i<_bubbles.size() ; i++) {
+        delete _bubbles[i];
+        _bubbles[i] = 0;
+    }
+    _bubbles.clear();
 
     sf::Vector2f charPos;
     //first pass to load single tiles

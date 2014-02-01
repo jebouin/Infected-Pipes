@@ -11,7 +11,7 @@ class ParticleManager;
 
 class Particle : public MovingSprite {
     public:
-    Particle(IP& ip, std::string name, sf::Vector2f pos, sf::Vector2f velocity, float rotVel, float lifeTime, sf::Vector2f startScale, sf::Vector2f endScale, float startAlpha, float endAlpha, bool gravity, bool collision, bool animated, sf::IntRect hitbox, bool zFront);
+    Particle(IP& ip, std::string name, sf::Vector2f pos, sf::Vector2f velocity, float rotVel, float lifeTime, sf::Vector2f startScale, sf::Vector2f endScale, float startAlpha, float endAlpha, bool gravity, bool collision, bool animated, sf::IntRect hitbox, bool zFront, bool dieOnWall=false);
     virtual ~Particle();
     virtual void Update(IP& ip, float eTime, Level& level, ParticleManager& pManager);
     virtual void Draw(IP& ip);
@@ -29,6 +29,7 @@ class Particle : public MovingSprite {
     bool _gravity;
     bool _collision;
     bool _front;
+    bool _dieOnWall;
 };
 
 #endif // PARTICLE_H_INCLUDED
