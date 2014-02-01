@@ -18,6 +18,23 @@ Bubble::Bubble(IP& ip, Map& map)
     setColor(sf::Color(255, 255, 255, MathHelper::RandFloat(80, 120)));
     _relPos = getPosition();
     _timer = MathHelper::RandFloat(0, 2000);
+    _period = 3000;
+    _amp = 4;
+    _yspd = -.01;
+    _xspd = MathHelper::RandFloat(-.005, .005);
+}
+
+Bubble::Bubble(IP& ip, Map& map, sf::Vector2f pos, float period, float amp, float yspd)
+    : sf::Sprite(ResourceLoader::GetTexture("bubble")) {
+    _alive = true;
+    setOrigin(sf::Vector2f(2, 2));
+    setColor(sf::Color(255, 255, 255, MathHelper::RandFloat(80, 120)));
+    _relPos = pos;
+    _timer = 0; //sin 0 = 0
+    _period = period;
+    _amp = amp;
+    _yspd = yspd;
+    _xspd = MathHelper::RandFloat(-.005, .005);
 }
 
 Bubble::~Bubble() {
@@ -26,12 +43,12 @@ Bubble::~Bubble() {
 
 void Bubble::Update(IP& ip, float eTime, Level& level) {
     _timer += eTime;
-    _relPos += sf::Vector2f(0, -.01*eTime);
+    _relPos += sf::Vector2f(_xspd*eTime, _yspd*eTime);
     setPosition(_relPos);
     if(level.GetMap().GetTileType(sf::Vector2i(getPosition()/16.f), Map::FRONT) == Map::WALL) {
         _alive = false;
     }
-    setPosition(_relPos + sf::Vector2f(sin(_timer/3000.f*PI*2)*4, 0));
+    setPosition(_relPos + sf::Vector2f(sin(_timer/_period*PI*2)*_amp, 0));
 }
 
 void Bubble::Draw(IP& ip) {

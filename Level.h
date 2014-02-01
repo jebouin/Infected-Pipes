@@ -56,6 +56,7 @@ class Level {
     int GetNbPassiveEntities();
     GameEntity* GetPassiveEntity(int id);
     std::string GetName();
+    void AddBubble(Bubble* b);
 
     private:
     sf::Clock _timer;

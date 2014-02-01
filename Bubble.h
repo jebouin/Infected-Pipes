@@ -11,6 +11,7 @@ class Map;
 class Bubble : public sf::Sprite {
     public:
     Bubble(IP& ip, Map& map);
+    Bubble(IP& ip, Map& map, sf::Vector2f pos, float period, float amp, float yspd);
     ~Bubble();
     void Update(IP& ip, float eTime, Level& level);
     void Draw(IP& ip);
@@ -19,6 +20,10 @@ class Bubble : public sf::Sprite {
     private:
     bool _alive;
     float _timer;
+    float _period;
+    float _yspd;
+    float _xspd;
+    float _amp;
     sf::Vector2f _relPos;
 };
 

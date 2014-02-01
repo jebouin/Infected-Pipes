@@ -72,6 +72,8 @@ class Character : public GameEntity {
     sf::Clock _enterTimer;
     sf::Clock _regenTimer;
     sf::Clock _groundAttackTimer;
+    sf::Clock _bubbleTimer;
+    float _bubbleTime;
     ArmType _curArmType;
     float _prevVelY;
 

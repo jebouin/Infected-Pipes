@@ -137,7 +137,7 @@ void Level::Update(IP& ip, EntityManager& eManager, Player& player, float eTime,
     }
 
     //bubbles!
-    float bTime(10000.f / _map->GetSize().x);
+    float bTime(64000.f / _map->GetSize().x);
     if(_bubbleTimer.getElapsedTime().asMilliseconds() >= bTime) {
         _bubbleTimer.restart();
         _bubbles.push_back(new Bubble(ip, *_map));
@@ -523,4 +523,8 @@ GameEntity* Level::GetPassiveEntity(int id) {
 
 std::string Level::GetName() {
     return _curLevel;
+}
+
+void Level::AddBubble(Bubble* b) {
+    _bubbles.push_back(b);
 }

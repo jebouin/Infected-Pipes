@@ -172,7 +172,7 @@
 	"IP.h"
 	"Renderer.h"
 
-1391271935 source:c:\users\xaychru04\desktop\infected pipes\level.cpp
+1391273136 source:c:\users\xaychru04\desktop\infected pipes\level.cpp
 	"Level.h"
 	"IP.h"
 	"Map.h"
@@ -201,7 +201,7 @@
 	"WaterGrass.h"
 	"Bubble.h"
 
-1391271535 c:\users\xaychru04\desktop\infected pipes\level.h
+1391272812 c:\users\xaychru04\desktop\infected pipes\level.h
 	<map>
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
@@ -829,7 +829,7 @@
 	"BulletManager.h"
 	"Renderer.h"
 
-1391114726 c:\users\xaychru04\desktop\infected pipes\entities\character.h
+1391272812 c:\users\xaychru04\desktop\infected pipes\entities\character.h
 	<vector>
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
@@ -852,7 +852,7 @@
 	"SFML/System.hpp"
 	"GameEntity.h"
 
-1391186465 source:c:\users\xaychru04\desktop\infected pipes\entities\character.cpp
+1391272940 source:c:\users\xaychru04\desktop\infected pipes\entities\character.cpp
 	"Character.h"
 	"IP.h"
 	"Animation.h"
@@ -878,6 +878,7 @@
 	"Map.h"
 	"HealingFly.h"
 	"HealingParticle.h"
+	"Bubble.h"
 
 1390501827 source:c:\users\xaychru04\desktop\infected pipes\entities\ennemies\bat.cpp
 	"Bat.h"
@@ -2114,7 +2115,7 @@
 	"Renderer.h"
 	"MathHelper.h"
 
-1391271857 source:c:\users\xaychru04\desktop\infected pipes\bubble.cpp
+1391273077 source:c:\users\xaychru04\desktop\infected pipes\bubble.cpp
 	"Bubble.h"
 	"IP.h"
 	"Level.h"
@@ -2123,7 +2124,7 @@
 	"Renderer.h"
 	"MathHelper.h"
 
-1391272087 c:\users\xaychru04\desktop\infected pipes\bubble.h
+1391273035 c:\users\xaychru04\desktop\infected pipes\bubble.h
 	"SFML/Graphics.hpp"
 	"SFML/System.hpp"
 	"MovingSprite.h"

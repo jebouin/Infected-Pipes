@@ -23,6 +23,7 @@
 #include "Map.h"
 #include "HealingFly.h"
 #include "HealingParticle.h"
+#include "Bubble.h"
 
 Character::Character(IP& ip) : GameEntity(ip, "character", sf::IntRect(4, 3, 7, 26), 20) {
     _arms[EMPTY] = Arm {sf::IntRect(0, 0, 6, 9), sf::Vector2f(2, 1), sf::Vector2f(5, 6), 0};
@@ -60,6 +61,7 @@ Character::Character(IP& ip) : GameEntity(ip, "character", sf::IntRect(4, 3, 7, 
 
     SetAutoDir(false);
     SetCollisionPrecision(.05);
+    _bubbleTime = 200;
 }
 
 Character::~Character() {
@@ -211,6 +213,13 @@ void Character::Update(IP& ip, float eTime, Level& level, EntityManager& eManage
     }
 
     _prevVelY = GetVel().y;
+    if(_inWater) {
+        if(_bubbleTimer.getElapsedTime().asMilliseconds() >= _bubbleTime) {
+            _bubbleTimer.restart();
+            _bubbleTime = MathHelper::RandFloat(400, 900);
+            level.AddBubble(new Bubble(ip, level.GetMap(), getPosition()+sf::Vector2f(4 * (GetDir() ? 1 : -1), -10), MathHelper::RandFloat(2000, 3000), MathHelper::RandFloat(2, 5), -MathHelper::RandFloat(.009, .013)));
+        }
+    }
 }
 
 void Character::Draw(IP& ip) {
