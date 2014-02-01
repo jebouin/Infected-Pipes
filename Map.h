@@ -6,8 +6,6 @@
 #include "SFML/Graphics.hpp"
 #include "SFML/System.hpp"
 
-
-
 class IP;
 class MovingSprite;
 
@@ -25,7 +23,7 @@ class Map {
     int GetTileType(sf::Vector2i pos, Layer layer);
     sf::Vector2i GetSize();
     int GetNbNeighbours(sf::Vector2i pos, Layer layer);
-    int GetNbDirNeigboursCode(sf::Vector2i pos, Layer layer);
+    int GetNbDirNeighboursCode(sf::Vector2i pos, Layer layer, bool diagonal);
     void SetTile(sf::Vector2i pos, int id, Layer layer);
     bool IsCollided(sf::FloatRect rect, TileType type);
     bool IsCollided(MovingSprite& sprite, sf::Vector2f pos, TileType type);

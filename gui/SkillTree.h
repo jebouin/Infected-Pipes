@@ -21,6 +21,7 @@ class SkillTree {
     private:
     vector<Skill*> _skills;
     sf::Vector2f _ssize;
+    sf::VertexArray _links;
 };
 
 #endif // SKILLICON_H_INCLUDED

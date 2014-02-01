@@ -32,6 +32,7 @@ Level::Level(IP& ip, Player& player, ParticleManager& pManager) {
     _levelInfos["miniBoss2"] = LevelInfo{"miniBoss2", "rockyBackground", 0.2f, false, false, false};
     _levelInfos["miniBoss3"] = LevelInfo{"miniBoss3", "lavaBackground", 0.3f, true, false, false};
     _levelInfos["wetCave"] = LevelInfo{"level2", "rockyBackground", 0.2f, true, true, false};
+    _levelInfos["waterCave"] = LevelInfo{"waterLevel", "rockyBackground", 0.2f, false, false, false};
     _levelInfos["lavaCave"] = LevelInfo{"level3", "lavaBackground", 0.3f, true, false, true};
     _levelInfos["iceCave"] = LevelInfo{"level4", "iceBackground", 0.3f, false, false, false};
     _map = 0;
@@ -39,7 +40,7 @@ Level::Level(IP& ip, Player& player, ParticleManager& pManager) {
     _grass = 0;
     _background = 0;
     _difficulty = 2;
-    Load(ip, "rockyCave", player, pManager);
+    Load(ip, "waterCave", player, pManager);
     //character.setPosition(character.getPosition() + sf::Vector2f(0, 50));
     character.LeavePipe();
     _lavaTexture.create(/*_map->GetSize().x*/64*16, /*_map->GetSize().y*/38*16);
@@ -234,6 +235,8 @@ void Level::Load(IP& ip, std::string name, Player& player, ParticleManager& pMan
                     _map->SetTile(pos, 13, l);
                 } else if(c == sf::Color(81, 73, 61)) {
                     _map->SetTile(pos, 14, l);
+                } else if(c == sf::Color(53, 14, 45)) {
+                    _map->SetTile(pos, 15, l);
                 } else if(c == sf::Color(145, 165, 173)) {
                     //igloo
                     sf::Sprite s(ResourceLoader::GetTexture("igloo"));
@@ -251,7 +254,7 @@ void Level::Load(IP& ip, std::string name, Player& player, ParticleManager& pMan
                     _map->SetTile(pos, 0, l);
                 }
 
-                if(c.r == 127 && c.g == 127 && c.b == 127 && c.a != 0) {
+                if((c.r == 127 && c.g == 127 && c.b == 127 && c.a != 0) || (c.r == 127 && c.g == 127 && c.b == 255 && c.a != 0)) {
                     Pipe *p = new Pipe(ip, sf::Vector2f(pos)*16.f, c.a*2.f);
                     _spawner->AddPipe(p);
                 }
@@ -264,6 +267,7 @@ void Level::Load(IP& ip, std::string name, Player& player, ParticleManager& pMan
     int h = _levelImages[0].getSize().y;
     sf::Color waterSufaceC(106, 129, 193);
     sf::Color waterC(70, 94, 160);
+    sf::Color waterC2(127, 127, 255); //if pipe
     sf::Color waterFallC(70, 94, 160, 130);
     sf::Color bigWaterFallC(70, 94, 160, 180);
     sf::Color lavaSufaceC(255, 159, 43);
@@ -299,16 +303,16 @@ void Level::Load(IP& ip, std::string name, Player& player, ParticleManager& pMan
                         _passiveEntities.push_back(duck);
                     }
                 }
-            } else if(_levelImages[1].getPixel(i, j) == waterC || _levelImages[1].getPixel(i, j) == lavaC) {
-                sf::Vector2i s(1, 1);
+            } else if(_levelImages[1].getPixel(i, j) == waterC || _levelImages[1].getPixel(i, j) == waterC2 || _levelImages[1].getPixel(i, j) == lavaC) {
+                //sf::Vector2i s(1, 1);
                 float offsets[4]{0};
-                sf::Vector2i testPos[4] = {sf::Vector2i(i-1, j), sf::Vector2i(i+s.x, j), sf::Vector2i(i, j-1), sf::Vector2i(i, j+1)};
+                sf::Vector2i testPos[4] = {sf::Vector2i(i-1, j), sf::Vector2i(i+1, j), sf::Vector2i(i, j-1), sf::Vector2i(i, j+1)};
                 for(int i=0 ; i<4 ; i++) {
                     if(_map->GetTileType(testPos[i], Map::FRONT) != Map::VOID) {
                         offsets[i] = 2;
                     }
                 }
-                _waterFields.push_back(new WaterField(sf::FloatRect(i*16-offsets[0], j*16-offsets[2], s.x*16+offsets[0]+offsets[1], s.y*16+offsets[2]+offsets[3]), 2, false, _levelImages[1].getPixel(i, j)==lavaC, true));
+                _waterFields.push_back(new WaterField(sf::FloatRect(i*16-offsets[0], j*16-offsets[2], 16+offsets[0]+offsets[1], 16+offsets[2]+offsets[3]), 2, false, _levelImages[1].getPixel(i, j)==lavaC, true));
             }
             //falls
             if(_levelImages[0].getPixel(i, j) == waterFallC) {

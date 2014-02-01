@@ -17,9 +17,9 @@
 #include "SkillsMenu.h"
 
 IP::IP() {
-    //_window = new sf::RenderWindow(sf::VideoMode(1600, 900, 32), "Infected Pipes");
+    _window = new sf::RenderWindow(sf::VideoMode(1600, 900, 32), "Infected Pipes");
     //_window = new sf::RenderWindow(sf::VideoMode(1024, 768, 32), "Infected Pipes");
-    _window = new sf::RenderWindow(sf::VideoMode::getFullscreenModes()[0], "Infected Pipes", sf::Style::None);
+    //_window = new sf::RenderWindow(sf::VideoMode::getFullscreenModes()[0], "Infected Pipes", sf::Style::None);
     _window->setVerticalSyncEnabled(true);
     _window->setFramerateLimit(60);
     _window->setMouseCursorVisible(false);
@@ -49,7 +49,7 @@ IP::IP() {
     while(_window->isOpen()) {
         sf::Event e;
         while(_window->pollEvent(e)) {
-            if(e.type == sf::Event::Closed/* || sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)*/) {
+            if(e.type == sf::Event::Closed || sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
                 _window->close();
             }
             if(e.type == sf::Event::LostFocus) {
@@ -125,6 +125,8 @@ void IP::LoadResources() {
     ResourceLoader::LoadTexture("gfx/level3front.png", "level3front");
     ResourceLoader::LoadTexture("gfx/level4back.png", "level4back");
     ResourceLoader::LoadTexture("gfx/level4front.png", "level4front");
+    ResourceLoader::LoadTexture("gfx/waterLevelfront.png", "waterLevelfront");
+    ResourceLoader::LoadTexture("gfx/waterLevelback.png", "waterLevelback");
 
     ResourceLoader::LoadTexture("gfx/spiderock.png", "spiderock");
     ResourceLoader::LoadTexture("gfx/rockWorm.png", "rockWorm");

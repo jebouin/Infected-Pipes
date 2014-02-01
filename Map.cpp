@@ -24,6 +24,7 @@ Map::Map(IP& ip, sf::Vector2i size) {
     _tileTypes.push_back(PLATFORM);
     _tileTypes.push_back(VOID);
     _tileTypes.push_back(VOID);
+    _tileTypes.push_back(WALL);
 }
 
 Map::~Map() {
@@ -51,8 +52,8 @@ void Map::DrawLayer(sf::RenderTexture& rt, Layer l) {
                 }
             }
 
-            if(tileId == 2 || tileId == 3 || tileId == 6 || tileId == 9 || tileId == 10 || tileId == 11) {
-                tileX = GetNbDirNeigboursCode(pos, l);
+            if(tileId == 2 || tileId == 3 || tileId == 6 || tileId == 9 || tileId == 10 || tileId == 11 || tileId == 15) {
+                tileX = GetNbDirNeighboursCode(pos, l, false);
             }
 
             if(tileId == 4 || tileId == 12) {
@@ -62,6 +63,12 @@ void Map::DrawLayer(sf::RenderTexture& rt, Layer l) {
                     tileX = 0;
                 } else {
                     tileX = 1;
+                }
+            }
+
+            if(tileId == 15) {
+                if(tileX == 15) {
+                    tileX = 16+GetNbDirNeighboursCode(pos, l, true);
                 }
             }
 
@@ -106,12 +113,21 @@ int Map::GetNbNeighbours(sf::Vector2i pos, Layer layer) {
     return nb;
 }
 
-int Map::GetNbDirNeigboursCode(sf::Vector2i pos, Layer layer) {
-    static sf::Vector2i dirs[4] = {sf::Vector2i(0, -1), sf::Vector2i(1, 0), sf::Vector2i(0, 1), sf::Vector2i(-1, 0)};
+int Map::GetNbDirNeighboursCode(sf::Vector2i pos, Layer layer, bool diagonal) {
     int nb=0, id=_tileTypes[GetTile(pos, layer)];
-    for(int i=0 ; i<4 ; i++) {
-        if(_tileTypes[GetTile(pos+dirs[i], layer)] == id) {
-            nb+=pow(2, i);
+    if(!diagonal) {
+        static sf::Vector2i dirs[4] = {sf::Vector2i(0, -1), sf::Vector2i(1, 0), sf::Vector2i(0, 1), sf::Vector2i(-1, 0)};
+        for(int i=0 ; i<4 ; i++) {
+            if(_tileTypes[GetTile(pos+dirs[i], layer)] == id) {
+                nb+=pow(2, i);
+            }
+        }
+    } else {
+        static sf::Vector2i dirs[4] = {sf::Vector2i(1, -1), sf::Vector2i(1, 1), sf::Vector2i(-1, 1), sf::Vector2i(-1, -1)};
+        for(int i=0 ; i<4 ; i++) {
+            if(_tileTypes[GetTile(pos+dirs[i], layer)] == id) {
+                nb+=pow(2, i);
+            }
         }
     }
     return nb;

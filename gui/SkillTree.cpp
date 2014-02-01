@@ -32,6 +32,15 @@ SkillTree::SkillTree(IP& ip) {
             _skills.push_back(skill);
         }
     }
+    _links.setPrimitiveType(sf::Lines);
+    for(int j=0 ; j<2 ; j++) {
+        for(int i=0 ; i<3 ; i++) {
+            Skill* sbot(_skills[j*3+i]);
+            Skill* stop(_skills[j*3+i+3]);
+            _links.append(sf::Vertex(sbot->GetIcon().getPosition(), sf::Color(53, 40, 33)));
+            _links.append(sf::Vertex(stop->GetIcon().getPosition(), sf::Color(53, 40, 33)));
+        }
+    }
 }
 
 SkillTree::~SkillTree() {
@@ -60,6 +69,7 @@ void SkillTree::Draw(IP& ip) {
     for(int i=_skills.size()-1 ; i>=0; i--) {
         _skills[i]->DrawBack(ip);
     }
+    //ip._renderer->Draw(_links);
     for(int i=_skills.size()-1 ; i>=0; i--) {
         _skills[i]->DrawTop(ip);
     }
