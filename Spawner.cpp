@@ -25,6 +25,7 @@
 #include "Fist.h"
 #include "FlyingSkull.h"
 #include "MissileBall.h"
+#include "Jellyfish.h"
 
 Spawner::Spawner(IP& ip, int nbWaves, Level& l) {
     _curWave = 0;
@@ -118,6 +119,34 @@ void Spawner::Spawn(IP& ip, EntityManager& eManager, Level& level, Character& ch
         }
 
         _difToSpawn -= d[et];
+    } else if(levelName == "waterCave") {
+        int pipeId = rand()%_pipes.size();
+        /*int et(0);
+        static int d[2] = {200, 500};
+        for(int i=1 ; i>=0 ; i--) {
+            if(d[i] <= _difToSpawn) {
+                et = i;
+                break;
+            }
+        }
+        switch(et) {
+            case 0: {
+                FireBall *f = new FireBall(ip, level);
+                if(!f->AutoSpawn(ip, level, eManager, character)) {
+                    delete f;
+                    f = 0;
+                    return;
+                }
+                eManager.Add(f);
+                break;
+            } case 1: {
+                _pipes[pipeId]->Spawn(ip, eManager, new Turtle(ip, level));
+                break;
+            }
+        }
+        _difToSpawn -= d[et];*/
+        _difToSpawn = 0;
+        //_pipes[pipeId]->Spawn(ip, eManager, new Jellyfish(ip, level));
     } else if(levelName == "lavaCave") {
         int pipeId = rand()%_pipes.size();
         /*int et(0);

@@ -123,7 +123,7 @@ void MovingSprite::MoveCollidingMap(sf::Vector2f delta, Level& level) {
         /*if(_bounce) {
             SetVel(-GetVel());
         }*/
-        for(float i=p ; i<MathHelper::ABS(delta.x)-p ; i+=p) {
+        /*for(float i=p ; i<MathHelper::ABS(delta.x)-p ; i+=p) {
             if(!TryMove(sf::Vector2f(MathHelper::SGN(delta.x)/(1./p), 0), level)) {
                 SetVel(sf::Vector2f(0, GetVel().y));
                 SetRotVel(GetRotVel()/2.f);
@@ -136,8 +136,8 @@ void MovingSprite::MoveCollidingMap(sf::Vector2f delta, Level& level) {
                 SetRotVel(GetRotVel()/2.f);
                 break;
             }
-        }
-        /*for(float i=0. ; i<MathHelper::ABS(delta.x) ; i++) {
+        }*/
+        for(float i=0. ; i<MathHelper::ABS(delta.x) ; i++) {
             if(!TryMove(sf::Vector2f(MathHelper::SuperSGN(delta.x), 0), level)) {
                 SetVel(sf::Vector2f(0, GetVel().y));
                 SetRotVel(GetRotVel()/2.f);
@@ -150,7 +150,7 @@ void MovingSprite::MoveCollidingMap(sf::Vector2f delta, Level& level) {
                 SetRotVel(GetRotVel()/2.f);
                 break;
             }
-        }*/
+        }
     }
 }
 
@@ -183,10 +183,7 @@ void MovingSprite::WaterCollision(Level& level, sf::Vector2f deltaPos, ParticleM
 
 bool MovingSprite::IsInWater(Level& level) {
     for(int i=0 ; i<level.GetNbWaterFields() ; i++) {
-        WaterField& w(level.GetWaterField(i));
-        sf::FloatRect r(w.GetRect());
-
-        if(/*r.intersects(GetGlobalHitbox())*/r.contains(getPosition())) {
+        if(level.GetWaterField(i).GetRect().contains(getPosition())) {
             return true;
         }
     }

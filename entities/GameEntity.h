@@ -53,6 +53,7 @@ class GameEntity : public MovingSprite {
     bool IsPushable();
     bool IsInvincible();
     bool HasPhysics() const;
+    void SetWaterFriction(float f);
 
     bool _inWater;
 
@@ -74,6 +75,7 @@ class GameEntity : public MovingSprite {
     int _hpMax;
     int _hp;
     float _lastTimeHit;
+    float _waterFriction;
     sf::Clock _hitTimer;
 };
 

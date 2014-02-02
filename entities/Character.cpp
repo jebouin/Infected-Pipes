@@ -116,6 +116,10 @@ void Character::Update(IP& ip, float eTime, Level& level, EntityManager& eManage
         Damage(GetHP(), ip, pManager, sf::Color(255, 0, 0), sf::Vector2f(0, 0), sf::Vector2f(0, -.1), eManager, level);
     }
 
+    /*for(int i=0 ; i<20 ; i++) {
+        Damage(10, ip, pManager, sf::Color(255, 255, 255), getPosition(), sf::Vector2f(0, -1), eManager, level);
+    }*/
+
     sf::Vector2f framed(0, 0);
     if(t.GetAnimationName() == "idle") {
         framed = sf::Vector2f(0, 0);
@@ -331,7 +335,7 @@ void Character::Damage(int dmg, IP& ip, ParticleManager& pManager, sf::Color col
     GameEntity::Damage(dmg, ip, pManager, color, pos, dir, eManager, level);
 
     //some blood
-    float ang = MathHelper::Rad2Deg(MathHelper::Vec2Ang(dir));
+    /*float ang = MathHelper::Rad2Deg(MathHelper::Vec2Ang(dir));
     float spd = MathHelper::GetVecLength(dir);
     for(int i=0 ; i<5 ; i++) {
         Particle *p = new Particle(ip, "blood1",
@@ -371,7 +375,7 @@ void Character::Damage(int dmg, IP& ip, ParticleManager& pManager, sf::Color col
         p->GetAnims().SetAnimation("base");
         pManager.AddParticle(p);
         p = 0;
-    }
+    }*/
 }
 
 void Character::EarnXP(int amount) {

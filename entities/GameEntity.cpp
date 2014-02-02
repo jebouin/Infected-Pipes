@@ -29,6 +29,7 @@ GameEntity::GameEntity(IP& ip, std::string name, sf::IntRect hitbox, int hp) : M
     _friction = .008;
     _havePhysics = true;
     _lastTimeHit = -10000;
+    _waterFriction = 1;
 
     if(!_hitShader.loadFromFile("shaders/hit.frag", sf::Shader::Fragment)) {
         cout << "Could not load hit shader..." << endl;
@@ -65,7 +66,7 @@ void GameEntity::Update(IP& ip, float elapsedTime, Level& level, EntityManager& 
     Accelerate(sf::Vector2f(-_friction*GetVel().x, 0), elapsedTime);
 
     if(_inWater && GetCollidesWithWater()) {
-        Accelerate(sf::Vector2f(-0.02*GetVel().x, -0.02*GetVel().y), elapsedTime);
+        Accelerate(sf::Vector2f(-0.02*GetVel().x*_waterFriction, -0.02*GetVel().y*_waterFriction), elapsedTime);
     }
 
     //collides with enemies
@@ -302,4 +303,8 @@ bool GameEntity::IsInvincible() {
 
 bool GameEntity::HasPhysics() const {
     return _havePhysics;
+}
+
+void GameEntity::SetWaterFriction(float f) {
+    _waterFriction = f;
 }
