@@ -137,10 +137,12 @@ void Level::Update(IP& ip, EntityManager& eManager, Player& player, float eTime,
     }
 
     //bubbles!
-    float bTime(64000.f / _map->GetSize().x);
-    if(_bubbleTimer.getElapsedTime().asMilliseconds() >= bTime) {
-        _bubbleTimer.restart();
-        _bubbles.push_back(new Bubble(ip, *_map));
+    if(_curLevel == "waterLevel") {
+        float bTime(64000.f / _map->GetSize().x);
+        if(_bubbleTimer.getElapsedTime().asMilliseconds() >= bTime) {
+            _bubbleTimer.restart();
+            _bubbles.push_back(new Bubble(ip, *_map));
+        }
     }
 }
 
@@ -351,7 +353,7 @@ void Level::Load(IP& ip, std::string name, Player& player, ParticleManager& pMan
                         _passiveEntities.push_back(duck);
                     }
                 }
-            } else if(_levelImages[1].getPixel(i, j) == waterC || _levelImages[1].getPixel(i, j) == waterC2 || _levelImages[1].getPixel(i, j) == lavaC) {
+            } else if(_levelImages[1].getPixel(i, j) == waterC || _levelImages[1].getPixel(i, j) == lavaC || (_levelImages[1].getPixel(i, j).r == waterC2.r && _levelImages[1].getPixel(i, j).g == waterC2.g && _levelImages[1].getPixel(i, j).b == waterC2.b)) {
                 //sf::Vector2i s(1, 1);
                 float offsets[4]{0};
                 sf::Vector2i testPos[4] = {sf::Vector2i(i-1, j), sf::Vector2i(i+1, j), sf::Vector2i(i, j-1), sf::Vector2i(i, j+1)};

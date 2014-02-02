@@ -37,6 +37,7 @@ Character::Character(IP& ip) : GameEntity(ip, "character", sf::IntRect(4, 3, 7, 
     AnimationTable& t(GetAnims());
     t.AddAnimation("walk", Animation(8, 100, sf::Vector2i(0, 0), sf::Vector2i(15, 31), true));
     t.AddAnimation("idle", Animation(1, 50, sf::Vector2i(0, 31), sf::Vector2i(15, 31), false));
+    t.AddAnimation("swim", Animation(4, 100, sf::Vector2i(0, 62), sf::Vector2i(15, 31), true));
     t.SetAnimation("walk");
     _enteringPipe = false;
     _leavingPipe = false;
@@ -243,15 +244,27 @@ void Character::LoadArm(ArmType t) {
 
 void Character::GoLeft(float eTime) {
     GameEntity::GoLeft(eTime);
-    if(GetAnims().GetAnimationName() == "idle") {
-        GetAnims().SetAnimation("walk");
+    if(_inWater) {
+        if(GetAnims().GetAnimationName() == "idle") {
+            GetAnims().SetAnimation("swim");
+        }
+    } else {
+        if(GetAnims().GetAnimationName() == "idle") {
+            GetAnims().SetAnimation("walk");
+        }
     }
 }
 
 void Character::GoRight(float eTime) {
     GameEntity::GoRight(eTime);
-    if(GetAnims().GetAnimationName() == "idle") {
-        GetAnims().SetAnimation("walk");
+    if(_inWater) {
+        if(GetAnims().GetAnimationName() == "idle") {
+            GetAnims().SetAnimation("swim");
+        }
+    } else {
+        if(GetAnims().GetAnimationName() == "idle") {
+            GetAnims().SetAnimation("walk");
+        }
     }
 }
 
@@ -274,6 +287,9 @@ void Character::Jump(Level& level, float eTime) {
         }
     } else {
         Accelerate(sf::Vector2f(0, -.006f), eTime);
+        if(GetAnims().GetAnimationName() == "idle") {
+            GetAnims().SetAnimation("swim");
+        }
     }
 }
 

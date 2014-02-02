@@ -54,8 +54,9 @@ class GameEntity : public MovingSprite {
     bool IsInvincible();
     bool HasPhysics() const;
 
-    protected:
     bool _inWater;
+
+    protected:
     sf::Shader _hitShader;
 
     private:

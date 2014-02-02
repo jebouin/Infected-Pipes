@@ -39,7 +39,13 @@ void Player::Update(IP& ip, float eTime, Level& level, EntityManager& eManager, 
             _character->GoLeft(eTime);
             _camera->GoLeft();
         } else {
-            _character->GetAnims().SetAnimation("idle");
+            if(_character->_inWater) {
+                if(!sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+                    _character->GetAnims().SetAnimation("idle");
+                }
+            } else {
+                _character->GetAnims().SetAnimation("idle");
+            }
             _camera->GoCenter();
         }
 
