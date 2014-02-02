@@ -517,6 +517,19 @@ WaterField& Level::GetWaterField(int id) {
     return *_waterFields[id];
 }
 
+bool Level::IsInWater(sf::Sprite spt, bool lava) {
+    for(int i=0 ; i<GetNbWaterFields() ; i++) {
+        WaterField& wf(*_waterFields[i]);
+        if(wf.IsLava() != lava) {
+            continue;
+        }
+        if(spt.getGlobalBounds().intersects(wf.GetRect())) {
+            return true;
+        }
+    }
+    return false;
+}
+
 void Level::AddWaterFall(IP& ip, sf::Vector2i tilePos, bool big, bool lava) {
     _waterFalls.push_back(new WaterFall(ip, tilePos, big, lava));
 }

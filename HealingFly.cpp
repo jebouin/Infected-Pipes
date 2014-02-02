@@ -6,11 +6,13 @@
 #include "Animation.h"
 #include "Character.h"
 #include "MathHelper.h"
+#include "Level.h"
 
 HealingFly::HealingFly(IP& ip)
     : sf::Sprite(ResourceLoader::GetTexture("healingFly")) {
     _anims = new AnimationTable();
     _anims->AddAnimation("c", Animation(2, 1, sf::Vector2i(0, 0), sf::Vector2i(10, 8), true));
+    _anims->AddAnimation("j", Animation(2, MathHelper::RandFloat(100, 200), sf::Vector2i(0, 0), sf::Vector2i(10, 8), true));
     _anims->SetAnimation("c");
     setOrigin(sf::Vector2f(5, 4));
     _vel = sf::Vector2f(0, 0);
@@ -51,11 +53,22 @@ void HealingFly::Update(IP& ip, float eTime, Level& level, ParticleManager& pMan
         _moveTimer.restart();
         _vel += eTime*MathHelper::Ang2Vec(MathHelper::Deg2Rad(MathHelper::RandFloat(0, 360)))*MathHelper::RandFloat(.1, 2.)*.01f;
     }
-    _vel -= _vel*.1f;
+
+    if(level.GetName() == "waterCave") {
+        _vel -= _vel*.5f;
+        if(_anims->GetAnimationName() == "c") {
+            _anims->SetAnimation("j");
+        }
+    } else {
+        _vel -= _vel*.1f;
+        if(_anims->GetAnimationName() == "j") {
+            _anims->SetAnimation("c");
+        }
+    }
 
     float healingTime(_healingTimer.getElapsedTime().asMilliseconds());
     if(!_healing) {
-        if(healingTime > _nextHealingTime && dist<=200) {
+        if(healingTime > _nextHealingTime && dist<=150) {
             _healing = true;
             _healingProgress = 0;
             _healingTimer.restart();
