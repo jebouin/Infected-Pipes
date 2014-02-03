@@ -146,7 +146,7 @@ void Spawner::Spawn(IP& ip, EntityManager& eManager, Level& level, Character& ch
         }
         _difToSpawn -= d[et];*/
         _difToSpawn = 0;
-        //_pipes[pipeId]->Spawn(ip, eManager, new Jellyfish(ip, level));
+        _pipes[0]->Spawn(ip, eManager, new Jellyfish(ip, level));
     } else if(levelName == "lavaCave") {
         int pipeId = rand()%_pipes.size();
         /*int et(0);

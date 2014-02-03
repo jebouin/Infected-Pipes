@@ -12,6 +12,11 @@ class EntityManager;
 class ParticleManager;
 class BulletManager;
 
+struct TentaclePoint {
+    sf::Vector2f pos;
+    sf::Vector2f vel;
+};
+
 class Jellyfish : public Ennemy {
     public:
     Jellyfish(IP& ip, Level& level);
@@ -21,10 +26,14 @@ class Jellyfish : public Ennemy {
     void Die(IP& ip, ParticleManager& pManager, EntityManager& eManager, Level& level);
 
     private:
+    bool _initTentacles;
     sf::Clock _attackTimer;
     sf::Clock _moveTimer;
+    sf::Clock _perlinTimer;
     float _moveTime;
-
+    vector<vector<TentaclePoint> > _tentacles;
+    vector<float> _tentaclesMovement;
+    sf::VertexArray _tentaclesLines;
 };
 
 #endif // JELLYFISH_H_INCLUDED

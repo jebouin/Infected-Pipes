@@ -129,7 +129,7 @@ void WormBoss::Update(IP& ip, float eTime, Level& level, Character& character, E
         if(curL > maxL) {
             sf::Vector2f forceDir(MathHelper::Normalize(getPosition()-p->getPosition()));
             p->setPosition(getPosition() - forceDir*maxL);
-            p->Accelerate(forceDir*tension, eTime);
+            //p->Accelerate(forceDir*tension, eTime);
         }
 
         for(int i=1 ; i<_parts.size() ; i++) {
@@ -139,7 +139,7 @@ void WormBoss::Update(IP& ip, float eTime, Level& level, Character& character, E
             if(curL > maxL) {
                 sf::Vector2f forceDir(MathHelper::Normalize(pp->getPosition()-p->getPosition()));
                 p->setPosition(pp->getPosition() - forceDir*maxL);
-                p->Accelerate(forceDir*tension, eTime);
+                //p->Accelerate(forceDir*tension, eTime);
             }
         }
 
