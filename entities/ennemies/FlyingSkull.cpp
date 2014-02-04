@@ -20,6 +20,7 @@ FlyingSkull::FlyingSkull(IP& ip, Level& level)
     t.AddAnimation("idle", Animation(4, 80, sf::Vector2i(0, 0), sf::Vector2i(64, 28), true));
     t.SetAnimation("idle");
     _boneTime = MathHelper::RandFloat(2600, 3500);
+    _hitShaderAmp = 42.f;   //because this enemy is really bright...!
 }
 
 FlyingSkull::~FlyingSkull() {

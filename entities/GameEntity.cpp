@@ -30,6 +30,7 @@ GameEntity::GameEntity(IP& ip, std::string name, sf::IntRect hitbox, int hp) : M
     _havePhysics = true;
     _lastTimeHit = -10000;
     _waterFriction = 1;
+    _hitShaderAmp = 1.f;
 
     if(!_hitShader.loadFromFile("shaders/hit.frag", sf::Shader::Fragment)) {
         cout << "Could not load hit shader..." << endl;
@@ -47,6 +48,7 @@ void GameEntity::Update(IP& ip, float elapsedTime, Level& level, EntityManager& 
     _hitShader.setParameter("texture", sf::Shader::CurrentTexture);
     _hitShader.setParameter("time", _hitTimer.getElapsedTime().asMilliseconds());
     _hitShader.setParameter("lastTimeHit", _lastTimeHit);
+    _hitShader.setParameter("amp", _hitShaderAmp);
 
     if(!_havePhysics) {
         MovingSprite::Update(ip, elapsedTime);
@@ -206,7 +208,7 @@ void GameEntity::Damage(int dmg, IP& ip, ParticleManager& pManager, sf::Color co
                                             color,
                                             true,
                                             true));
-    _lastTimeHit = _hitTimer.getElapsedTime().asMilliseconds();
+    ResetHitShader();
 }
 
 void GameEntity::Die(IP& ip, ParticleManager& pManager, EntityManager& eManager, Level& level) {
@@ -307,4 +309,8 @@ bool GameEntity::HasPhysics() const {
 
 void GameEntity::SetWaterFriction(float f) {
     _waterFriction = f;
+}
+
+void GameEntity::ResetHitShader() {
+    _lastTimeHit = _hitTimer.getElapsedTime().asMilliseconds();
 }

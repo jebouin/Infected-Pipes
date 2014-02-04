@@ -54,13 +54,16 @@ class GameEntity : public MovingSprite {
     bool IsInvincible();
     bool HasPhysics() const;
     void SetWaterFriction(float f);
+    void ResetHitShader();
 
     bool _inWater;
 
     protected:
     sf::Shader _hitShader;
+    float _hitShaderAmp;
 
     private:
+    sf::Clock _hitTimer;
     bool _dir;
     float _jumpPower;
     float _speed;
@@ -74,9 +77,8 @@ class GameEntity : public MovingSprite {
     bool _havePhysics;
     int _hpMax;
     int _hp;
-    float _lastTimeHit;
     float _waterFriction;
-    sf::Clock _hitTimer;
+    float _lastTimeHit;
 };
 
 #endif // GAMEENTITY_H_INCLUDED

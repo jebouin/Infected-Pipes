@@ -29,11 +29,13 @@ class Jellyfish : public Ennemy {
     bool _initTentacles;
     sf::Clock _attackTimer;
     sf::Clock _moveTimer;
-    sf::Clock _perlinTimer;
+    sf::Clock _deathTimer;
+    sf::Clock _explosionTimer;
     float _moveTime;
     vector<vector<TentaclePoint> > _tentacles;
     vector<float> _tentaclesMovement;
     sf::VertexArray _tentaclesLines;
+    bool _dying;
 };
 
 #endif // JELLYFISH_H_INCLUDED
