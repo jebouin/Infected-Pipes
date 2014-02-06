@@ -12,22 +12,21 @@
 #include "AnimationTable.h"
 #include "Animation.h"
 #include "BulletManager.h"
-#include "RockBullet.h"
+#include "SandBullet.h"
 
-RockWorm::RockWorm(IP& ip, Level& level) : Ennemy(ip, "rockWorm", sf::IntRect(1, 0, 7, 19), 7, 2, 2, level) {
-    _littleHitBox = sf::IntRect(1, 0, 7, 19);
-    _bigHitBox = sf::IntRect(3, 0, 9, 20);
-
+RockWorm::RockWorm(IP& ip, Level& level) : Ennemy(ip, "rockWorm", sf::IntRect(2, 2, 8, 28), 7, 2, 2, level) {
     AnimationTable& t(GetAnims());
-    t.AddAnimation("spawn", Animation(4, 60, sf::Vector2i(0, 0), sf::Vector2i(9, 20), false));
-    t.AddAnimation("idle", Animation(4, 200, sf::Vector2i(0, 20), sf::Vector2i(9, 20), true));
-    t.AddAnimation("attack", Animation(4, 80, sf::Vector2i(0, 40), sf::Vector2i(15, 20), false));
-    t.AddAnimation("despawn", Animation(4, 60, sf::Vector2i(0, 60), sf::Vector2i(9, 20), false));
-    t.SetAnimation("spawn");
-    SetSpeed(0);
+    t.AddAnimation("idle", Animation(4, 200, sf::Vector2i(0, 0), sf::Vector2i(12, 30), true));
+    t.AddAnimation("static", Animation(1, 80, sf::Vector2i(0, 30), sf::Vector2i(12, 30), false));
+    t.AddAnimation("attack", Animation(7, 60, sf::Vector2i(0, 30), sf::Vector2i(12, 30), false));
+    t.SetAnimation("static");
     SetPushable(false);
-    _outTime = MathHelper::RandFloat(3000, 8000);
-    _shot = false;
+    SetFlying(true);
+    SetPhysics(false);
+    SetSpeed(0);
+    _curState = SDOWN;
+    _stateTime = 300;
+    _attacked = false;
 }
 
 RockWorm::~RockWorm() {
@@ -35,118 +34,139 @@ RockWorm::~RockWorm() {
 }
 
 bool RockWorm::AutoSpawn(IP& ip, Level& level, EntityManager& eManager, Character& character) {
-    _outTime = MathHelper::RandFloat(3000, 8000);
-    _outTimer.restart();
-
     Map& map(level.GetMap());
-    bool possible = false;
-    for(int i=0 ; i<map.GetSize().x ; i++) {
+    vector<sf::Vector2i> correctPos;
+    //list all correct positions   .
+    //                             P
+    //                             #
+    //                             #
+    for(int i=0 ; i<map.GetSize().x-1 ; i++) {
         for(int j=0 ; j<map.GetSize().y ; j++) {
-            if(map.GetTileType(sf::Vector2i(i, j), Map::FRONT) == Map::VOID && map.GetTileType(sf::Vector2i(i, j+1), Map::FRONT) == Map::WALL) {
-                possible = true;
+            sf::Vector2i curPos(i, j);
+            if(map.GetTileType(curPos+UP, Map::FRONT) == Map::VOID &&
+               map.GetTileType(curPos, Map::FRONT) == Map::VOID &&
+               map.GetTileType(curPos+DOWN, Map::FRONT) == Map::WALL &&
+               map.GetTileType(curPos+2*DOWN, Map::FRONT) == Map::WALL) {
+                correctPos.push_back(curPos);
             }
         }
     }
-    if(!possible) {
-        return false;
+    if(correctPos.size() == 0) {
+        return false; //no correct pos...
     }
-
-    bool correctPos = false;
-    int tries = 0;
-    while(!correctPos) {
-        tries++;
-        correctPos = true;
-        sf::Vector2i curPos(-1, -1);
-        while(!(map.GetTileType(curPos, Map::FRONT) == Map::VOID && map.GetTileType(curPos + sf::Vector2i(0, 1), Map::FRONT) == Map::WALL)) {
-            curPos = sf::Vector2i(MathHelper::RandInt(0, map.GetSize().x), MathHelper::RandInt(0, map.GetSize().y));
-        }
-        SetUpperLeftCorner(sf::Vector2f(curPos.x*16+MathHelper::RandInt(1, 8), curPos.y*16+16-GetGlobalHitbox().height));
-        sf::Vector2f rc = MathHelper::GetCenter(GetGlobalHitbox());
-
-        if(level.GetSpawner().IsCollided(*this)) {  //in pipe?
-            correctPos = false;
-        }
-        for(int i=0 ; i<eManager.GetNbEnnemies() ; i++) {  //in ennemy?
-            if(eManager.GetEnnemy(i) == this) {
-                continue;
-            }
-            if(GetGlobalHitbox().intersects(eManager.GetEnnemy(i)->GetGlobalHitbox())) {
-                correctPos = false;
-                break;
-            }
-        }
-        float distFromCharacter = MathHelper::GetVecLength(rc-MathHelper::GetCenter(character.GetGlobalHitbox()));
-        if(distFromCharacter < 42 || distFromCharacter > 300) {   //near to player?
-            correctPos = false;
-        }
-
-        if(tries > 1000) {
-            return false;
+    //keep the pos with a correct distance from player
+    static const float minL = 48;
+    static const float maxL = 160;
+    for(int i=0 ; i<correctPos.size() ; i++) {
+        sf::Vector2i curPos(correctPos[i]);
+        sf::Vector2f relPos(sf::Vector2f(curPos*16) + sf::Vector2f(8, 16));
+        float dist(MathHelper::GetVecLength(relPos-character.getPosition()));
+        if(dist > maxL || dist < minL) {
+            correctPos.erase(correctPos.begin() + i);
+            i--;
         }
     }
+    //remove positions colliding with a pipe
+    for(int i=0 ; i<correctPos.size() ; i++) {
+        sf::Vector2i curPos(correctPos[i]);
+        if(level.GetSpawner().IsCollided(sf::FloatRect(curPos.x*16, curPos.y*16-16, 16, 32))) {
+            correctPos.erase(correctPos.begin() + i);
+            i--;
+        }
+    }
+    //and pick a random one
+    sf::Vector2i finPos(correctPos[rand()%correctPos.size()]);
+    float xOff(MathHelper::RandFloat(-2, 2));
+    _upPos = sf::Vector2f(sf::Vector2f(finPos*16) + sf::Vector2f(8+xOff, 3));
+    setPosition(_upPos + sf::Vector2f(0, 30));
+    _downPos = getPosition();
+    SetHitbox(sf::IntRect(0, 0, 0, 0));
+    _attacked = false;
     return true;
 }
 
 void RockWorm::Update(IP& ip, float eTime, Level& level, Character& character, EntityManager& eManager, ParticleManager& pManager, BulletManager& bManager) {
     AnimationTable& anims(GetAnims());
-    if(anims.GetAnimationName() == "spawn" && anims.GetAnimation().IsFinished()) {
-        anims.SetAnimation("idle");
-    }
-    if(anims.GetAnimationName() == "despawn" && anims.GetAnimation().IsFinished()) {
-        AutoSpawn(ip, level, eManager, character);
-        anims.SetAnimation("spawn");
-    } else if(anims.GetAnimationName() == "idle") {
-        if(_outTimer.getElapsedTime().asMilliseconds() >= _outTime) {
-            anims.SetAnimation("despawn");
+    sf::Vector2f charPos(character.getPosition());
+
+    if(charPos.x > getPosition().x) {
+        if(!GetDir()) {
+            ChangeDir();
+        }
+    } else {
+        if(GetDir()) {
+            ChangeDir();
         }
     }
 
-    if(anims.GetAnimationName() == "idle") { //start attack
-        if(_attackTimer.getElapsedTime().asMilliseconds() > 1200) {
-            _attackTimer.restart();
-            SetHitbox(_bigHitBox);
-            move(sf::Vector2f(GetDir() ? -3 : 3, 0));
-            anims.SetAnimation("attack");
-        }
-    }
-
-    if(anims.GetAnimationName() == "attack") { //attack
-        if(anims.GetAnimation("attack").GetCurFrame() == 3 && !_shot) { //frame 3, shoot the rock
-            bManager.AddBullet(new RockBullet(ip,
-                                              MathHelper::GetCenter(GetGlobalHitbox()) + sf::Vector2f(0, -6),
-                                              MathHelper::Ang2Vec(MathHelper::Deg2Rad((GetDir() ? -30 : 210) + MathHelper::RandFloat(-10, 10)))*MathHelper::RandFloat(0.2, 0.3),
-                                              true));
-            _shot = true;
-        }
-
-        if(anims.GetAnimation().IsFinished()) { //finished
-            _attackTimer.restart();
+    switch(_curState) {
+    case SGOINGUP:
+        SetVel(sf::Vector2f(0, -.1f));
+        if(getPosition().y < _upPos.y) {
+            setPosition(sf::Vector2f(getPosition().x, _upPos.y));
+            SetVel(sf::Vector2f(0, 0));
+            _curState = SUP;
+            _stateTimer.restart();
+            _stateTime = 1000;
             anims.SetAnimation("idle");
-            SetHitbox(_littleHitBox);
-            move(sf::Vector2f(GetDir() ? 3 : -3, 0));
-            _shot = false;
         }
-    }
-
-    sf::FloatRect r(GetGlobalHitbox());
-    sf::Vector2f c(MathHelper::GetCenter(r));
-    sf::Vector2f cc(MathHelper::GetCenter(character.GetGlobalHitbox()));
-    if(anims.GetAnimationName() != "attack") {
-        if(abs(c.x - cc.x) > 10) {
-            if(c.x < cc.x) {
-                GoRight(eTime);
-            } else if(c.x > cc.x) {
-                GoLeft(eTime);
+        break;
+    case SGOINGDOWN:
+        SetVel(sf::Vector2f(0, .1f));
+        if(getPosition().y > _downPos.y) {
+            setPosition(sf::Vector2f(getPosition().x, _downPos.y));
+            SetVel(sf::Vector2f(0, 0));
+            _curState = SDOWN;
+            _stateTimer.restart();
+            _stateTime = 1000;
+            AutoSpawn(ip, level, eManager, character);
+        }
+        break;
+    case SUP:
+        if(_stateTimer.getElapsedTime().asMilliseconds() >= _stateTime) {
+            if(_attacked) {
+                _curState = SGOINGDOWN;
+            } else {
+                anims.SetAnimation("attack");
+                _curState = SATTACKING;
+                _attacked = false;
             }
+            _stateTimer.restart();
         }
+        break;
+    case SDOWN:
+        if(_stateTimer.getElapsedTime().asMilliseconds() >= _stateTime) {
+            _stateTimer.restart();
+            _curState = SGOINGUP;
+            SetHitbox(sf::IntRect(2, 2, 8, 28));
+        }
+        break;
+    case SATTACKING:
+        if(!_attacked && anims.GetAnimation().GetCurFrame() == 1) {
+            SandBullet *b = new SandBullet(ip, getPosition()+sf::Vector2f(0, -5), sf::Vector2f((GetDir() ? .15 : -.15), 0), true);
+            b->setScale(GetDir() ? 1 : -1, 1);
+            bManager.AddBullet(b);
+            _attacked = true;
+        }
+        if(anims.GetAnimation().IsFinished()) {
+            _curState = SUP;
+            anims.SetAnimation("idle");
+        }
+        break;
     }
 
     Ennemy::Update(ip, eTime, level, character, eManager, pManager, bManager);
 }
 
+void RockWorm::Draw(IP& ip) {
+    if(_curState != SDOWN) {
+        Ennemy::Draw(ip);
+    }
+}
+
 void RockWorm::Die(IP& ip, ParticleManager& pManager, EntityManager& eManager, Level& level) {
     Ennemy::Die(ip, pManager, eManager, level);
-    for(int i=0 ; i<20 ; i++) {
+    /*for(int i=0 ; i<20 ; i++) {
         Particle *p = new Particle(ip, "rockWormBlood",
                                    sf::Vector2f(GetGlobalHitbox().left+MathHelper::RandFloat(0, GetGlobalHitbox().width), GetGlobalHitbox().top+MathHelper::RandFloat(0, GetGlobalHitbox().height)),
                                    MathHelper::Ang2Vec(MathHelper::Deg2Rad(MathHelper::RandFloat(-160, -20))) * MathHelper::RandFloat(.02, .05),
@@ -176,5 +196,5 @@ void RockWorm::Die(IP& ip, ParticleManager& pManager, EntityManager& eManager, L
                                       true,
                                       true,
                                       false,
-                                      sf::IntRect(0, 0, 6, 5), false));
+                                      sf::IntRect(0, 0, 6, 5), false));*/
 }

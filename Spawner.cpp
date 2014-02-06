@@ -89,9 +89,10 @@ void Spawner::Spawn(IP& ip, EntityManager& eManager, Level& level, Character& ch
         _difToSpawn = 0;
     } else if(levelName == "rockyCave" || levelName == "wetCave") {
         int pipeId = rand()%_pipes.size();
-        int et;
+        //int et;
         static int d[4] = {1, 10, 20, 50};
-        for(int i=3 ; i>=0 ; i--) {
+        int et = 1;
+        /*for(int i=3 ; i>=0 ; i--) {
             if(d[i] <= _difToSpawn) {
                 et = i;
                 break;
@@ -116,8 +117,14 @@ void Spawner::Spawn(IP& ip, EntityManager& eManager, Level& level, Character& ch
                 _pipes[pipeId]->Spawn(ip, eManager, new Snail(ip, level));
                 break;
             }
-        }
+        }*/
 
+        RockWorm *r = new RockWorm(ip, level);
+        if(!r->AutoSpawn(ip, level, eManager, character)) {
+            delete r;
+            return;
+        }
+        eManager.Add(r);
         _difToSpawn -= d[et];
     } else if(levelName == "waterCave") {
         int pipeId = rand()%_pipes.size();

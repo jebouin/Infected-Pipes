@@ -5,8 +5,6 @@
 #include "SFML/System.hpp"
 #include "Ennemy.h"
 
-
-
 class IP;
 class Level;
 class Character;

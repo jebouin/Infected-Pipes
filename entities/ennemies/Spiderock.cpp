@@ -47,17 +47,19 @@ void Spiderock::Update(IP& ip, float eTime, Level& level, Character& character, 
         }
     }
 
+    bool jump = true;
     if(level.GetMap().IsOnTileType(*this, Map::PLATFORM)) {
         if(c.y - cc.y < -10.f) {
             PlatformDrop(level);
+            jump = false;
         }
     }
 
-    /*if(abs(GetVel().x) < 0.05 && MathHelper::GetVecLength(c-cc) > 16) {
-        Jump(level);
-    }*/
-
     Ennemy::Update(ip, eTime, level, character, eManager, pManager, bManager);
+
+    if(abs(GetVel().x) < 0.05 && MathHelper::GetVecLength(c-cc) > 16 && jump) {
+        Jump(level);
+    }
 }
 
 void Spiderock::Die(IP& ip, ParticleManager& pManager, EntityManager& eManager, Level& level) {
