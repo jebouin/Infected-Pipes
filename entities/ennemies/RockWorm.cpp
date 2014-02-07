@@ -143,7 +143,7 @@ void RockWorm::Update(IP& ip, float eTime, Level& level, Character& character, E
         break;
     case SATTACKING:
         if(!_attacked && anims.GetAnimation().GetCurFrame() == 1) {
-            SandBullet *b = new SandBullet(ip, getPosition()+sf::Vector2f(0, -5), sf::Vector2f((GetDir() ? .15 : -.15), 0), true);
+            SandBullet *b = new SandBullet(ip, getPosition()+sf::Vector2f(0, -7), sf::Vector2f((GetDir() ? .2 : -.2), 0), true);
             b->setScale(GetDir() ? 1 : -1, 1);
             bManager.AddBullet(b);
             _attacked = true;
@@ -166,10 +166,10 @@ void RockWorm::Draw(IP& ip) {
 
 void RockWorm::Die(IP& ip, ParticleManager& pManager, EntityManager& eManager, Level& level) {
     Ennemy::Die(ip, pManager, eManager, level);
-    /*for(int i=0 ; i<20 ; i++) {
+    for(int i=0 ; i<20 ; i++) {
         Particle *p = new Particle(ip, "rockWormBlood",
                                    sf::Vector2f(GetGlobalHitbox().left+MathHelper::RandFloat(0, GetGlobalHitbox().width), GetGlobalHitbox().top+MathHelper::RandFloat(0, GetGlobalHitbox().height)),
-                                   MathHelper::Ang2Vec(MathHelper::Deg2Rad(MathHelper::RandFloat(-160, -20))) * MathHelper::RandFloat(.02, .05),
+                                   MathHelper::Ang2Vec(MathHelper::Deg2Rad(MathHelper::RandFloat(70, 110))) * MathHelper::RandFloat(.2, .5),
                                    0,
                                    480,
                                    sf::Vector2f(1, 1),
@@ -185,16 +185,16 @@ void RockWorm::Die(IP& ip, ParticleManager& pManager, EntityManager& eManager, L
         pManager.AddParticle(p);
     }
     pManager.AddParticle(new Particle(ip, "rockWormHead",
-                                      getPosition()+sf::Vector2f(3, 2),
+                                      sf::Vector2f(getGlobalBounds().left, getGlobalBounds().top)+sf::Vector2f(6, 5),
                                       sf::Vector2f(0., -MathHelper::RandFloat(.3, .6)),
                                       MathHelper::RandFloat(-.2, .2),
-                                      MathHelper::RandFloat(1000, 2000),
+                                      MathHelper::RandFloat(7000, 8000),
                                       sf::Vector2f(1., 1.),
-                                      sf::Vector2f(2., 2.),
+                                      sf::Vector2f(1., 1.),
                                       255,
                                       0,
                                       true,
                                       true,
                                       false,
-                                      sf::IntRect(0, 0, 6, 5), false));*/
+                                      sf::IntRect(0, 0, 10, 10), false));
 }

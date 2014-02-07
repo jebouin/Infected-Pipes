@@ -43,7 +43,7 @@ Level::Level(IP& ip, Player& player, ParticleManager& pManager) {
     _waterGrass = 0;
     _background = 0;
     _difficulty = 20;
-    Load(ip, "rockyCave", player, pManager);
+    Load(ip, "wetCave", player, pManager);
     //character.setPosition(character.getPosition() + sf::Vector2f(0, 50));
     character.LeavePipe();
     _lavaTexture.create(/*_map->GetSize().x*/64*16, /*_map->GetSize().y*/38*16);

@@ -17,9 +17,9 @@
 #include "SkillsMenu.h"
 
 IP::IP() {
-    _window = new sf::RenderWindow(sf::VideoMode(1600, 900, 32), "Infected Pipes");
+    //_window = new sf::RenderWindow(sf::VideoMode(1600, 900, 32), "Infected Pipes");
     //_window = new sf::RenderWindow(sf::VideoMode(1024, 768, 32), "Infected Pipes");
-    //_window = new sf::RenderWindow(sf::VideoMode::getFullscreenModes()[0], "Infected Pipes", sf::Style::None);
+    _window = new sf::RenderWindow(sf::VideoMode::getFullscreenModes()[0], "Infected Pipes", sf::Style::None);
     _window->setVerticalSyncEnabled(true);
     _window->setFramerateLimit(60);
     _window->setMouseCursorVisible(false);
@@ -237,6 +237,7 @@ void IP::LoadResources() {
     ResourceLoader::LoadTexture("gfx/groundAttackParticle.png", "groundAttackParticle");
     ResourceLoader::LoadTexture("gfx/bubble.png", "bubble");
     ResourceLoader::LoadTexture("gfx/jellyfishParticle.png", "jellyfishParticle");
+    ResourceLoader::LoadTexture("gfx/sandParticle.png", "sandParticle");
 
     ResourceLoader::LoadTexture("gfx/fir.png", "fir");
     ResourceLoader::LoadTexture("gfx/moon.png", "moon");

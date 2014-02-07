@@ -1,6 +1,7 @@
 uniform sampler2D texture;
 uniform float time;
 uniform float lastTimeHit;
+uniform float amp;
 
 void main() {
 	vec4 col = texture2D(texture, gl_TexCoord[0].xy);
@@ -11,6 +12,6 @@ void main() {
 	} else {
 		x = 1.-x;
 		float y = x;
-		gl_FragColor = vec4(y*(maxCol-col) + col);
+		gl_FragColor = vec4(y*amp*(maxCol-col) + col);
 	}
 }
